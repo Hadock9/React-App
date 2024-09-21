@@ -1,0 +1,107 @@
+.ProfileBg {
+	height: 50vh;
+	width: 100%;
+	margin-top: 10px;
+	background-image: url('../img/4879447.jpg');
+	background-repeat: repeat-x;
+	background-size: cover;
+
+	display: flex;
+	justify-content: center;
+}
+
+.ProfileBlock {
+	margin-top: 130px;
+	height: 550px;
+	width: 600px;
+	border-radius: 10px;
+	background-color: #000c24;
+	display: flex;
+
+	align-items: center;
+	flex-direction: column;
+}
+.ProfileDivImg {
+	margin-top: -80px;
+	margin-bottom: 30px;
+	border: 2px white solid;
+	border-radius: 50%;
+	height: 170px;
+	width: 170px;
+	overflow: hidden;
+	display: flex;
+
+	align-items: center;
+}
+.ProfileImg {
+	max-height: 100%;
+	max-width: 100%;
+	height: 170px;
+	width: 170px;
+}
+
+.ProfileBlockInfo {
+	display: flex;
+	justify-content: space-around;
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.ProfileBlockText {
+	margin-top: 10px;
+	height: 50px;
+	width: 45%;
+	background-color: #263045;
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+}
+.ProfileBlockTextFirst {
+	margin-top: 10px;
+	height: 50px;
+	width: 95%;
+	background-color: #263045;
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+}
+.ProfileBlockTextLast {
+	margin-top: 10px;
+	height: 50px;
+	width: 45%;
+}
+.form {
+	width: 100%;
+	height: 100%;
+}
+
+.CustomButtonSubmit {
+	margin-top: 20px;
+	height: 50px;
+	width: 95%;
+	border-radius: 5px;
+	background-color: #f5ba1a;
+	border: none;
+	color: white;
+	cursor: pointer;
+}
+.CustomLabel {
+	color: #7c828e;
+}
+.LabelInput {
+	margin-left: 10px;
+}
+.CustomInput::placeholder {
+	color: white;
+}
+.CustomInput {
+	width: 100%;
+
+	color: white;
+	background-color: #263045;
+	box-sizing: border-box;
+	border: none;
+}
+.CustomInput:focus {
+	outline: none;
+}

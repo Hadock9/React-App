@@ -1,0 +1,65 @@
+.Container {
+	display: flex;
+}
+.Main {
+	width: 75%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	margin-top: 10px;
+}
+
+.MatchesBlock {
+	padding: 5px 5px 0px 5px;
+	width: 100%;
+	height: 100%;
+	background-color: grey;
+}
+.MatchesBlockCountry {
+	margin: 10px 10px;
+}
+.MatchesBlockInfo {
+	width: 100%;
+	height: 120px;
+	display: flex;
+
+	align-items: center;
+}
+.MatchesBlockTeam {
+	width: 20%;
+	max-width: 20%;
+	height: 120px;
+	display: flex;
+}
+.MatchesBlockTeam2 {
+	width: 20%;
+	max-width: 20%;
+	height: 120px;
+	display: flex;
+	flex-direction: row-reverse;
+}
+.MatchesBlockImgCountry {
+	height: 20px;
+	width: 20px;
+}
+
+.MatchesBlockImgLogo {
+	width: 100px;
+	height: 100px;
+}
+.MatchesBlockVs {
+	width: 10%;
+	justify-content: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.MatchesBlockTeam2 {
+	width: 35%;
+}
+.MatchesBlockTeam1Country {
+	max-width: 10%;
+}
+.MatchesBlockTeam1Logo {
+	max-width: 25%;
+}

@@ -1,0 +1,18 @@
+.CustomButtonSubmit {
+	width: 100%;
+	height: 44px;
+	background-color: #f5ba1a;
+	border: none;
+	color: white;
+	cursor: pointer;
+}
+.CustomInput {
+	width: 100%;
+	margin-left: 10px;
+	box-sizing: border-box;
+	border: none;
+	border-bottom: 2px solid grey;
+}
+.CustomInput:focus {
+	outline: none;
+}
