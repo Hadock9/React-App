@@ -1,3 +1,4 @@
+version node version 20.17.0
 npx create-react-app my-app | version 5.0.1
 npm install lucide-react | version 0.445.0
 npm install @react-oauth/google@latest | version 0.12.1
