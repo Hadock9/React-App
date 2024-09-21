@@ -10,7 +10,7 @@ export function Matches() {
 				<BurgerMenu />
 				<main className={style.Main}>
 					<MySearch />
-					<h1>Matches</h1>
+					<h1>Matches 1</h1>
 					<div className={style.MatchesBlock}>
 						<div className={style.MatchesBlockInfo}>
 							<div className={style.MatchesBlockTeam}>
