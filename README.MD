@@ -9,4 +9,9 @@ Client ID
 Client secret
 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
 
-This
+Color palette
+https://colorhunt.co/palette/222831393e4600adb5eeeeee
+#222831
+#393E46
+#00ADB5
+#EEEEEE

@@ -7,6 +7,9 @@ export function Erorpage() {
 			<div className={ErorStyle.ContainerBlock}>
 				<h1 className={ErorStyle.ContainerBlockText}>404</h1>
 				<p className={ErorStyle.ContainerBlockText}>Page not found</p>
+				<p className={ErorStyle.ContainerBlockText}>
+					Your search has ventured beyond the known universe.
+				</p>
 
 				<Link to='/Home'>
 					<div className={ErorStyle.GoBack}>Go back to Home </div>
