@@ -59,7 +59,7 @@ const MatchInfo = [
 		Team1Country: country,
 		Team1Coef: 1.34,
 
-		Team2Name: 'Navi',
+		Team2Name: 'G2',
 		Team2Logo: TeamLogo1,
 		Team2Country: country1,
 		Team2Coef: 3.32,
@@ -94,10 +94,16 @@ const MatchInfo = [
 	},
 ]
 
-export function Match() {
+export function Match({ value }) {
+	const filterMatches = MatchInfo.filter(Match => {
+		return (
+			Match.Team1Name.toLowerCase().includes(value.toLowerCase()) ||
+			Match.Team2Name.toLowerCase().includes(value.toLowerCase())
+		)
+	})
 	return (
 		<>
-			{MatchInfo.map(Match => {
+			{filterMatches.map(Match => {
 				return (
 					<Link to={Match.Team1Name + 'Vs' + Match.Team1Name}>
 						<div className={style.MatchesBlock}>
