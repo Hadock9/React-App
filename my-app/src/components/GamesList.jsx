@@ -55,14 +55,16 @@ const Games = [
 		id: 4,
 	},
 ]
-//<button onClick={() => setCount(count => count + 1)}>sad</button>
-//const [count, setCount] = useState(0)
-export function GamesList() {
+//
+export function GamesList({ value }) {
+	const filterGames = Games.filter(Game => {
+		return Game.name.toLowerCase().includes(value.toLowerCase())
+	})
 	return (
 		<>
-			<h1 className={styles.FirstCLASS}> Games </h1>
+			<h1 className={styles.FirstCLASS}> {value} </h1>
 			<div className={styles.GameBlockRoot}>
-				{Games.map(game => {
+				{filterGames.map(game => {
 					return (
 						<Link
 							to={

@@ -1,7 +1,13 @@
 import { Search } from 'lucide-react'
 import style from '../styles/Search.module.css'
 
-export function MySearch() {
+//передаєм значення вище
+export function MySearch({ onChange }) {
+	//Кожен раз при зміні HandleNameChange оновлюєм знаення
+	const HandleNameChange = event => {
+		onChange(event.target.value)
+	}
+
 	return (
 		<div className={style.SearchBlock}>
 			<form action=''>
@@ -11,6 +17,8 @@ export function MySearch() {
 						placeholder='Search'
 						name='Search'
 						className={style.CustomInput}
+						//При зміні беремо створюємо функцію HandleNameChange
+						onChange={HandleNameChange}
 					/>
 					<button className={style.CustomButton}>
 						<Search />
