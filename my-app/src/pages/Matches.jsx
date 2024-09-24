@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { BurgerMenu } from '../components/BurgerMenu'
-import { Match } from '../components/Match'
+import { Match } from '../components/MatchBlock'
 import { MySearch } from '../components/Search'
 import style from '../styles/Matches.module.css'
 export function Matches() {
@@ -9,6 +9,7 @@ export function Matches() {
 	const handleValueChange = value => {
 		Setvalue(value)
 	}
+
 	return (
 		<>
 			<div className={style.Container}>

@@ -1,6 +1,6 @@
 import { Facebook, Instagram, Twitter } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import LogoImg from '../img/logo192.png'
+import LogoImg from '../img/logo512.png'
 import ProfileImg from '../img/profile.jpg'
 import HeaderStyle from '../styles/NavBar.module.css'
 

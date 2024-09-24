@@ -34,25 +34,25 @@ const Games = [
 		name: 'Grand Theft Auto V',
 		views: 244,
 		ImageSrc: imgGTA,
-		id: 1,
+		id: 5,
 	},
 	{
 		name: 'Minecraft',
 		views: 123,
 		ImageSrc: imgMine,
-		id: 2,
+		id: 6,
 	},
 	{
 		name: 'Counter-Strike 2',
 		views: 167,
 		ImageSrc: imgCS,
-		id: 3,
+		id: 7,
 	},
 	{
 		name: 'Free Fire',
 		views: 43,
 		ImageSrc: imgFree_Fire,
-		id: 4,
+		id: 8,
 	},
 ]
 //
@@ -62,7 +62,7 @@ export function GamesList({ value }) {
 	})
 	return (
 		<>
-			<h1 className={styles.FirstCLASS}> {value} </h1>
+			<h1 className={styles.FirstCLASS}> Games </h1>
 			<div className={styles.GameBlockRoot}>
 				{filterGames.map(game => {
 					return (
@@ -72,8 +72,9 @@ export function GamesList({ value }) {
 								game.name.replaceAll(' ', '_').replaceAll('-', '_') +
 								'/Matches'
 							}
+							key={game.id}
 						>
-							<div className={styles.GameBlock} key={game.id}>
+							<div className={styles.GameBlock}>
 								<img
 									className={styles.GamesImg}
 									src={game.ImageSrc}
