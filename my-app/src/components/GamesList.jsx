@@ -34,35 +34,37 @@ const Games = [
 		name: 'Grand Theft Auto V',
 		views: 244,
 		ImageSrc: imgGTA,
-		id: 1,
+		id: 5,
 	},
 	{
 		name: 'Minecraft',
 		views: 123,
 		ImageSrc: imgMine,
-		id: 2,
+		id: 6,
 	},
 	{
 		name: 'Counter-Strike 2',
 		views: 167,
 		ImageSrc: imgCS,
-		id: 3,
+		id: 7,
 	},
 	{
 		name: 'Free Fire',
 		views: 43,
 		ImageSrc: imgFree_Fire,
-		id: 4,
+		id: 8,
 	},
 ]
-//<button onClick={() => setCount(count => count + 1)}>sad</button>
-//const [count, setCount] = useState(0)
-export function GamesList() {
+//
+export function GamesList({ value }) {
+	const filterGames = Games.filter(Game => {
+		return Game.name.toLowerCase().includes(value.toLowerCase())
+	})
 	return (
 		<>
 			<h1 className={styles.FirstCLASS}> Games </h1>
 			<div className={styles.GameBlockRoot}>
-				{Games.map(game => {
+				{filterGames.map(game => {
 					return (
 						<Link
 							to={
@@ -70,8 +72,9 @@ export function GamesList() {
 								game.name.replaceAll(' ', '_').replaceAll('-', '_') +
 								'/Matches'
 							}
+							key={game.id}
 						>
-							<div className={styles.GameBlock} key={game.id}>
+							<div className={styles.GameBlock}>
 								<img
 									className={styles.GamesImg}
 									src={game.ImageSrc}
