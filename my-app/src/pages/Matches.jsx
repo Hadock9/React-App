@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { BurgerMenu } from '../components/BurgerMenu'
-import { Match } from '../components/MatchBlock'
+import { MatchBlock } from '../components/MatchBlock'
 import { MySearch } from '../components/Search'
 import style from '../styles/Matches.module.css'
 export function Matches() {
@@ -17,7 +17,7 @@ export function Matches() {
 				<main className={style.Main}>
 					<MySearch onChange={handleValueChange} />
 					<h1>Matches</h1>
-					<Match value={value} />
+					<MatchBlock value={value} />
 				</main>
 			</div>
 		</>

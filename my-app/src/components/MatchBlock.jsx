@@ -100,7 +100,7 @@ const MatchInfo = [
 	},
 ]
 
-export function Match({ value }) {
+export function MatchBlock({ value }) {
 	const filterMatches = MatchInfo.filter(Match => {
 		return (
 			Match.Team1Name.toLowerCase().includes(value.toLowerCase()) ||
