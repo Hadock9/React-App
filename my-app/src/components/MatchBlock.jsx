@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { NoResultDisclaimer } from './NoResultDisclaimer'
 import TeamLogo from '../img//TeamsLogo/egamersworld (3).png'
 import TeamLogo1 from '../img//TeamsLogo/egamersworld (6).png'
 import country1 from '../img/Countries/cz.svg'
@@ -109,7 +110,8 @@ export function MatchBlock({ value }) {
 	})
 	return (
 		<>
-			{filterMatches.map(Match => {
+			{filterMatches.length > 0 ? (
+				filterMatches.map(Match => {
 				return (
 					<Link to={Match.Team1Name + 'Vs' + Match.Team1Name} key={Match.id}>
 						<div className={style.MatchesBlock}>
@@ -189,7 +191,9 @@ export function MatchBlock({ value }) {
 						</div>
 					</Link>
 				)
-			})}
+			})) : (
+				<NoResultDisclaimer value = {value}/>
+			)}
 		</>
 	)
 }
