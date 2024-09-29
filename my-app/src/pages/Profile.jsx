@@ -1,9 +1,10 @@
+import { NavBar } from '../components/NavBar'
 import ProfileImg from '../img/profile.jpg'
 import style from '../styles/Profile.module.css'
-
 export function Profile() {
 	return (
 		<>
+			<NavBar />
 			<div className={style.ProfileBg}>
 				<div className={style.ProfileBlock}>
 					<div className={style.ProfileDivImg}>

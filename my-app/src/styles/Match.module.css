@@ -1,14 +1,3 @@
-.Container {
-	display: flex;
-}
-.Main {
-	width: 75%;
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	margin-top: 10px;
-}
-
 .MatchesBlock {
 	width: 100%;
 	height: 100%;
@@ -16,14 +5,11 @@
 	display: flex;
 	justify-content: space-between;
 	margin-bottom: 10px;
-	 
 }
 .MatchesBlockCountry {
 	margin: 10px 10px;
 }
 
-
- 
 .MatchesBlockTeam {
 	width: 40%;
 	position: relative;
@@ -31,15 +17,19 @@
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
-	background: linear-gradient( rgba(60, 62, 65, 0.856), rgba(58, 55, 55, 0.897)), url('../img/Countries/cz.svg');background-repeat: no-repeat;  background-position: center;
-
+	background: linear-gradient(rgba(60, 62, 65, 0.856), rgba(58, 55, 55, 0.897)),
+		url('../img/Countries/cz.svg');
+	background-repeat: no-repeat;
+	background-position: center;
 }
 .MatchesBlockTeam2 {
 	flex-direction: row-reverse;
-	background: linear-gradient( rgba(65, 60, 60, 0.856), rgba(58, 55, 55, 0.897)), url('../img/Countries/cz.svg');background-repeat: no-repeat;  background-position: center;
-
+	background: linear-gradient(rgba(65, 60, 60, 0.856), rgba(58, 55, 55, 0.897)),
+		url('../img/Countries/cz.svg');
+	background-repeat: no-repeat;
+	background-position: center;
 }
-.MatchesBlockTeamText{
+.MatchesBlockTeamText {
 	font-size: 22px;
 	color: white;
 	font-weight: 700;
@@ -47,8 +37,6 @@
 	flex-direction: column;
 	justify-content: flex-end;
 }
-
- 
 
 .MatchesBlockImgLogo {
 	width: auto;
@@ -68,16 +56,15 @@
 }
 .MatchesBlockVsDateTime {
 	text-align: center;
-	 
+
 	font-weight: 600;
 }
 .MatchesBlockVs {
 	font-weight: 700;
-	
 }
-.MatchesBlockTime{
+.MatchesBlockTime {
 	font-weight: 700;
-	font-size:24px;
+	font-size: 24px;
 }
 .MatchesBlockSide {
 	width: 30%;
@@ -95,64 +82,54 @@
 	height: 28px;
 }
 
-
 /* ... */
-.Title{
+.Title {
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
 }
 
-.MapBlock{
+.MapBlock {
 	width: 33%;
 	height: 170px;
-	background: linear-gradient( rgba(60, 62, 65, 0.856), rgba(58, 55, 55, 0.897)),
-	url('../img/dota2_map.webp');
-	background-repeat: no-repeat; 
+	background: linear-gradient(rgba(60, 62, 65, 0.856), rgba(58, 55, 55, 0.897)),
+		url('../img/dota2_map.webp');
+	background-repeat: no-repeat;
 	background-position: center;
 	color: white;
-	
 }
 /* ... */
-.StatsBlock{
+.StatsBlock {
 	width: 100%;
 	display: flex;
 }
-.StatsBlockTeam{
+.StatsBlockTeam {
 	width: 50%;
-	 
 }
 
 .table_component {
-   
-    width: 100%;
+	width: 100%;
 }
 
 .table_component table {
-  
-    
-    width: 100%;
-    table-layout: fixed;
-    border-collapse: collapse;
-    border-spacing: 1px;
-    text-align: left;
+	width: 100%;
+	table-layout: fixed;
+	border-collapse: collapse;
+	border-spacing: 1px;
+	text-align: left;
 }
 
 .table_component caption {
-    caption-side: top;
-    text-align: left;
+	caption-side: top;
+	text-align: left;
 }
 
 .table_component th {
-    
-   
 	color: white;
-    padding: 5px;
+	padding: 5px;
 }
 
 .table_component td {
-     
-    
 	color: white;
-    padding: 5px;
+	padding: 5px;
 }

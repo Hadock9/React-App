@@ -57,36 +57,3 @@ header {
 	height: 100%;
 	width: 100%;
 }
-
-
-.SaveUkraine{
-	 
-	width: 120px;
-	height: 70px;
-	bottom: 0;
-     
-    padding: 70px 10px ;
-	
-    position: fixed;
-    right: 0;
-    text-align: left;
-    z-index: 99;
-	margin: 0px;
-	text-align: center;
-}
-.SaveUkraineBottomBlock{
- background-color: #f5c142;
- height: 50%;
- width: 100%;
- display: flex;
- justify-content: center;
- align-items: center;
-}
-.SaveUkraineTopBlock{
-	background-color: #0292c4;;
-	height: 50%;
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}

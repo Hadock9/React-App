@@ -1,16 +1,19 @@
 import { Map } from 'lucide-react'
+import { UkrainianWar } from '../components/BlockSaveUkraine'
+import { BurgerMenu } from '../components/BurgerMenu'
+import { NavBar } from '../components/NavBar'
 import TeamLogo from '../img//TeamsLogo/egamersworld (3).png'
 import TeamLogo1 from '../img//TeamsLogo/egamersworld (6).png'
-
-import { BurgerMenu } from '../components/BurgerMenu'
 import style from '../styles/Match.module.css'
-
+import rootstyle from '../styles/root.module.css'
 export function Match() {
 	return (
 		<>
-			<div className={style.Container}>
+			<NavBar />
+			<UkrainianWar />
+			<div className={rootstyle.Container}>
 				<BurgerMenu />
-				<main className={style.Main}>
+				<main className={rootstyle.Main}>
 					<div className={style.MatchesBlock}>
 						<div className={style.MatchesBlockTeam}>
 							<img

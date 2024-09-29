@@ -1,8 +1,11 @@
 import { useState } from 'react'
+import { UkrainianWar } from '../components/BlockSaveUkraine'
 import { BurgerMenu } from '../components/BurgerMenu'
 import { MatchBlock } from '../components/MatchBlock'
+import { NavBar } from '../components/NavBar'
 import { MySearch } from '../components/Search'
-import style from '../styles/Matches.module.css'
+import rootstyle from '../styles/root.module.css'
+
 export function Matches() {
 	const [value, Setvalue] = useState('')
 	//  Оновлюєм значення із MySearch
@@ -12,9 +15,11 @@ export function Matches() {
 
 	return (
 		<>
-			<div className={style.Container}>
+			<NavBar />
+			<UkrainianWar />
+			<div className={rootstyle.Container}>
 				<BurgerMenu />
-				<main className={style.Main}>
+				<main className={rootstyle.Main}>
 					<MySearch onChange={handleValueChange} />
 					<h1>Matches</h1>
 					<MatchBlock value={value} />
