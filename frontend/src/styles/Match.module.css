@@ -1,0 +1,139 @@
+.MatchesBlock {
+	width: 100%;
+	height: 100%;
+	background-color: #393e46;
+	display: flex;
+	justify-content: space-between;
+}
+.MatchesBlockCountry {
+	margin: 10px 10px;
+}
+
+.MatchesBlockTeam {
+	width: 40%;
+	position: relative;
+	height: 160px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	background: linear-gradient(rgba(60, 62, 65, 0.856), rgba(58, 55, 55, 0.897)),
+		url('../img/Countries/cz.svg');
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.MatchesBlockTeam2 {
+	flex-direction: row-reverse;
+	background: linear-gradient(rgba(65, 60, 60, 0.856), rgba(58, 55, 55, 0.897)),
+		url('../img/Countries/cz.svg');
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.MatchesBlockTeamText {
+	font-size: 22px;
+	color: white;
+	font-weight: 700;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+}
+
+.MatchesBlockImgLogo {
+	width: auto;
+	height: 140px;
+}
+.MatchesBlockCenter {
+	width: 20%;
+	justify-content: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 140px;
+	color: white;
+	line-height: 5px;
+	margin: 0px;
+	font-size: 18px;
+}
+.MatchesBlockVsDateTime {
+	text-align: center;
+
+	font-weight: 600;
+}
+.MatchesBlockVs {
+	font-weight: 700;
+}
+.MatchesBlockTime {
+	font-weight: 700;
+	font-size: 24px;
+}
+.MatchesBlockSide {
+	width: 30%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	border-radius: 10px 0px 0px 10px;
+	background-color: #545961;
+}
+.MatchesSideBlockImg1 {
+	margin-left: -30px;
+}
+.MatchesSideImg {
+	width: auto;
+	height: 28px;
+}
+.MatchesBlockStake {
+	display: flex;
+	width: 100%;
+	height: 30px;
+	background-color: #393e46;
+}
+/* ... */
+.Title {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.MapBlock {
+	width: 33%;
+	height: 170px;
+	background: linear-gradient(rgba(60, 62, 65, 0.856), rgba(58, 55, 55, 0.897)),
+		url('../img/dota2_map.webp');
+	background-repeat: no-repeat;
+	background-position: center;
+	color: white;
+}
+/* ... */
+.StatsBlock {
+	width: 100%;
+	display: flex;
+}
+.StatsBlockTeam {
+	width: 50%;
+}
+
+.table_component {
+	width: 100%;
+}
+
+.table_component table {
+	width: 100%;
+	table-layout: fixed;
+	border-collapse: collapse;
+	border-spacing: 1px;
+	text-align: left;
+}
+
+.table_component caption {
+	caption-side: top;
+	text-align: left;
+}
+
+.table_component th {
+	color: white;
+	padding: 5px;
+}
+
+.table_component td {
+	color: white;
+	padding: 5px;
+}
