@@ -41,6 +41,25 @@
 	width: auto;
 	height: 140px;
 }
+.MatchesBlockCoef {
+	border-radius: 50%;
+	background-color: #5f646d;
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
+}
+.MatchesBlockTeam1Coef {
+	right: 25px;
+}
+.MatchesBlockTeam2Coef {
+	left: 25px;
+}
+
 .MatchesBlockCenter {
 	width: 20%;
 	justify-content: center;

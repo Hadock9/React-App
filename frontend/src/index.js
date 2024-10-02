@@ -11,6 +11,8 @@ import { Erorpage } from './pages/404'
 import { Home } from './pages/Home'
 import { Login } from './pages/Login'
 import { Match } from './pages/Match'
+import { Test } from './pages/Test'
+
 import { Matches } from './pages/Matches'
 import { Profile } from './pages/Profile'
 import { Registration } from './pages/Registr'
@@ -25,6 +27,8 @@ root.render(
 					<Route path='/Registration' element={<Registration />} />
 					<Route path='/Login' element={<Login />} />
 					<Route path='/Home' element={<Home />} />
+					<Route path='/test' element={<Test />} />
+
 					<Route path='/Profile' element={<Profile />} />
 					<Route path={'Home/:Game/Matches'} element={<Matches />} />
 					<Route path={'Home/:Game/Matches/:Match'} element={<Match />} />

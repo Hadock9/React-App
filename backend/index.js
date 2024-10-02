@@ -2,7 +2,7 @@ const express = require('express')
 const mysql = require('mysql')
 const cors = require('cors')
 
-const port = 5000
+const port = 4000
 const app = express()
 app.use(cors())
 // Middleware
@@ -26,6 +26,15 @@ db.connect(err => {
 // Routes
 app.get('/api/users', (req, res) => {
 	const sql = 'SELECT * FROM users'
+	db.query(sql, (err, result) => {
+		if (err) {
+			return res.status(500).json({ error: err.message })
+		}
+		res.json(result)
+	})
+})
+app.get('/api/Games_List', (req, res) => {
+	const sql = 'SELECT * FROM Games_List'
 	db.query(sql, (err, result) => {
 		if (err) {
 			return res.status(500).json({ error: err.message })
