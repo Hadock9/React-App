@@ -1,18 +1,25 @@
 import { Map } from 'lucide-react'
+import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { UkrainianWar } from '../components/BlockSaveUkraine'
 import { BurgerMenu } from '../components/BurgerMenu'
 import { NavBar } from '../components/NavBar'
-import TeamLogo1 from '../img//TeamsLogo/egamersworld (6).png'
 import style from '../styles/Match.module.css'
 import rootstyle from '../styles/root.module.css'
 
 export function Match() {
 	const location = useLocation()
 	const { idMatch } = location.state
-	const { Matcheslist } = location.state
 
-	console.log(idMatch, Matcheslist)
+	const [matches, setData] = useState([])
+
+	// Fetch users from the backends
+	useEffect(() => {
+		fetch(`http://localhost:4000/api/Match_List/Match/${idMatch}`)
+			.then(res => res.json())
+			.then(data => setData(data))
+	}, [])
+
 	return (
 		<>
 			<NavBar />
@@ -20,49 +27,55 @@ export function Match() {
 			<div className={rootstyle.Container}>
 				<BurgerMenu />
 				<main className={rootstyle.Main}>
-					<div className={style.MatchesBlock}>
-						<div className={style.MatchesBlockTeam}>
-							<img
-								draggable='false'
-								className={style.MatchesBlockImgLogo}
-								src={Matcheslist[idMatch].Team1Logo}
-								alt=''
-							/>
+					{matches.map((match, index) => (
+						<div className={style.MatchesBlock} key={index}>
+							<div className={style.MatchesBlockTeam}>
+								<img
+									draggable='false'
+									className={style.MatchesBlockImgLogo}
+									src={'/' + match.Team1Logo}
+									alt={match.Team1Name}
+								/>
+								<div
+									className={`${style.MatchesBlockCoef} ${style.MatchesBlockTeam1Coef}`}
+								>
+									<p>{match.Team1Coef}</p> {/* Replace with actual property */}
+								</div>
+								<div className={style.MatchesBlockTeamText}>
+									<p>{match.Team1Name}</p>
+									<p>0</p>
+								</div>
+							</div>
+							<div className={style.MatchesBlockCenter}>
+								<p className={style.MatchesBlockVsDateTime}>
+									{match.VsDateTime}
+								</p>
+								<p className={style.MatchesBlockVs}>Vs</p>
+								<p className={style.MatchesBlockTime}>09:30</p>{' '}
+								{/* Replace with actual time if available */}
+							</div>
 							<div
-								className={`${style.MatchesBlockCoef} ${style.MatchesBlockTeam1Coef}`}
+								className={`${style.MatchesBlockTeam} ${style.MatchesBlockTeam2}`}
 							>
-								<p>{Matcheslist[idMatch].Team1Coef}</p>
-							</div>
-							<div className={style.MatchesBlockTeamText}>
-								<p>{Matcheslist[idMatch].Team1Name}</p>
-								<p>0</p>
-							</div>
-						</div>
-						<div className={style.MatchesBlockCenter}>
-							<p className={style.MatchesBlockVsDateTime}>25.09.24</p>
-							<p className={style.MatchesBlockVs}>Vs</p>
-							<p className={style.MatchesBlockTime}> 09:30 </p>
-						</div>
-						<div
-							className={`${style.MatchesBlockTeam} ${style.MatchesBlockTeam2}`}
-						>
-							<img
-								draggable='false'
-								className={style.MatchesBlockImgLogo}
-								src={TeamLogo1}
-								alt=''
-							/>
-							<div
-								className={`${style.MatchesBlockCoef} ${style.MatchesBlockTeam2Coef}`}
-							>
-								<p>{Matcheslist[idMatch].Team2Coef}</p>
-							</div>
-							<div className={style.MatchesBlockTeamText}>
-								<p>Navi</p>
-								<p>0</p>
+								<img
+									draggable='false'
+									className={style.MatchesBlockImgLogo}
+									src={'/' + match.Team2Logo}
+									alt={match.Team2Name}
+								/>
+								<div
+									className={`${style.MatchesBlockCoef} ${style.MatchesBlockTeam2Coef}`}
+								>
+									<p>{match.Team2Coef}</p> {/* Replace with actual property */}
+								</div>
+								<div className={style.MatchesBlockTeamText}>
+									<p>{match.Team2Name}</p>
+									<p>0</p>
+								</div>
 							</div>
 						</div>
-					</div>
+					))}
+
 					<div className={style.MatchesBlockStake}>
 						<p>Зробити ставку із коефіцієнтом </p>
 					</div>

@@ -1,108 +1,30 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import TeamLogo from '../img//TeamsLogo/egamersworld (3).png'
-import TeamLogo1 from '../img//TeamsLogo/egamersworld (6).png'
-import country1 from '../img/Countries/cz.svg'
-import country from '../img/Countries/ua.png'
 import CsMiniLogo1 from '../img/GamesMiniLogo/counterstrike.png'
 import CsMiniLogo2 from '../img/GamesMiniLogo/counterstrikeminlogo.png'
 import style from '../styles/Matches.module.css'
 import { NoResultDisclaimer } from './NoResultDisclaimer'
 
-const MatchInfo = [
-	{
-		id: '1',
-		Place: 'European',
-		VsDateTime: '23.09.24 12:00',
+const formatDate = dateString => {
+	const date = new Date(dateString)
+	const year = date.getFullYear()
+	const month = String(date.getMonth() + 1).padStart(2, '0')
+	const day = String(date.getDate()).padStart(2, '0')
 
-		Team1Name: 'Navi1',
-		Team1Logo: TeamLogo,
-		Team1Country: country,
-		Team1Coef: 1.34,
-
-		Team2Name: 'Navi',
-		Team2Logo: TeamLogo1,
-		Team2Country: country1,
-		Team2Coef: 3.32,
-	},
-	{
-		id: '2',
-		Place: 'European',
-		VsDateTime: '23.09.24 12:00',
-
-		Team1Name: 'Navi2',
-		Team1Logo: TeamLogo,
-		Team1Country: country,
-		Team1Coef: 1.34,
-
-		Team2Name: 'Navi',
-		Team2Logo: TeamLogo1,
-		Team2Country: country1,
-		Team2Coef: 3.32,
-	},
-	{
-		id: '3',
-		Place: 'European',
-		VsDateTime: '23.09.24 12:00',
-
-		Team1Name: 'Navi3',
-		Team1Logo: TeamLogo,
-		Team1Country: country,
-		Team1Coef: 1.34,
-
-		Team2Name: 'Navi',
-		Team2Logo: TeamLogo1,
-		Team2Country: country1,
-		Team2Coef: 3.32,
-	},
-	{
-		id: '4',
-		Place: 'European',
-		VsDateTime: '23.09.24 12:00',
-
-		Team1Name: 'Navi4',
-		Team1Logo: TeamLogo,
-		Team1Country: country,
-		Team1Coef: 1.34,
-
-		Team2Name: 'G2',
-		Team2Logo: TeamLogo1,
-		Team2Country: country1,
-		Team2Coef: 3.32,
-	},
-	{
-		id: '5',
-		Place: 'European',
-		VsDateTime: '23.09.24 12:00',
-
-		Team1Name: 'Navi5',
-		Team1Logo: TeamLogo,
-		Team1Country: country,
-		Team1Coef: 1.34,
-
-		Team2Name: 'Navi',
-		Team2Logo: TeamLogo1,
-		Team2Country: country1,
-		Team2Coef: 3.32,
-	},
-	{
-		id: '6',
-		Place: 'European',
-		VsDateTime: '23.09.24 12:00',
-
-		Team1Name: 'Navi6',
-		Team1Logo: TeamLogo,
-		Team1Country: country,
-		Team1Coef: 1.34,
-
-		Team2Name: 'Navi',
-		Team2Logo: TeamLogo1,
-		Team2Country: country1,
-		Team2Coef: 3.32,
-	},
-]
+	return `${year}-${month}-${day}`
+}
 
 export function MatchBlock({ value }) {
-	const filterMatches = MatchInfo.filter(Match => {
+	const [Match, setData] = useState([])
+
+	// Fetch users from the backend
+	useEffect(() => {
+		fetch('http://localhost:4000/api/Match_List')
+			.then(res => res.json())
+			.then(data => setData(data))
+	}, [])
+	console.log(Match)
+	const filterMatches = Match.filter(Match => {
 		return (
 			Match.Team1Name.toLowerCase().includes(value.toLowerCase()) ||
 			Match.Team2Name.toLowerCase().includes(value.toLowerCase())
@@ -115,8 +37,8 @@ export function MatchBlock({ value }) {
 					return (
 						<Link
 							to={Match.Team1Name + 'Vs' + Match.Team1Name}
-							state={{ idMatch: Match.id, Matcheslist: MatchInfo }}
-							key={Match.id}
+							state={{ idMatch: Match.MatchID }}
+							key={Match.MatchID}
 						>
 							<div className={style.MatchesBlock}>
 								<div className={style.MatchesBlockInfo}>
@@ -125,16 +47,17 @@ export function MatchBlock({ value }) {
 											<img
 												draggable='false'
 												className={style.MatchesBlockImgCountry}
-												src={Match.Team1Country}
+												src={'/' + Match.Team1Country}
 												alt=''
 											/>
 										</div>
 										<img
 											draggable='false'
 											className={style.MatchesBlockImgLogo}
-											src={Match.Team1Logo}
+											src={'/' + Match.Team1Logo}
 											alt=''
 										/>
+										{console.log(Match.Team1Country)}
 										<div
 											className={`${style.MatchesBlockCoef} ${style.MatchesBlockTeam1Coef}`}
 										>
@@ -143,7 +66,7 @@ export function MatchBlock({ value }) {
 									</div>
 									<div className={style.MatchesBlockCenter}>
 										<p className={style.MatchesBlockVsDateTime}>
-											{Match.VsDateTime}
+											{formatDate(Match.VsDateTime)}
 										</p>
 										<p className={style.MatchesBlockVs}>Vs</p>
 										<p className={style.MatchesBlockPlace}> {Match.Place}</p>
@@ -153,7 +76,7 @@ export function MatchBlock({ value }) {
 											<img
 												draggable='false'
 												className={style.MatchesBlockImgCountry}
-												src={Match.Team2Country}
+												src={'/' + Match.Team2Country}
 												alt=''
 											/>
 										</div>
@@ -161,7 +84,7 @@ export function MatchBlock({ value }) {
 										<img
 											draggable='false'
 											className={style.MatchesBlockImgLogo}
-											src={Match.Team2Logo}
+											src={'/' + Match.Team2Logo}
 											alt=''
 										/>
 										<div
