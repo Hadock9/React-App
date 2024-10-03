@@ -1,0 +1,166 @@
+.MatchesBlock {
+	width: 100%;
+	height: 100%;
+	background-color: #393e46;
+	display: flex;
+	justify-content: space-between;
+}
+.MatchesBlockCountry {
+	margin: 10px 10px;
+}
+img {
+	width: 100%;
+	height: 100%;
+}
+.MatchesBlockTeam {
+	width: 40%;
+	position: relative;
+	height: 160px;
+}
+.MatchesBlockTeam::before {
+	content: '';
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+	background-color: rgba(0, 0, 0, 0.53);
+}
+
+.MatchesBlockAbsoluteTeam2 {
+	flex-direction: row-reverse;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.MatchesBlockAbsolute {
+	height: 160px;
+	width: 100%;
+	position: absolute;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.MatchesBlockTeamText {
+	font-size: 22px;
+	color: white;
+	font-weight: 700;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+}
+
+.MatchesBlockImgLogo {
+	width: auto;
+	height: 140px;
+	margin-right: 10%;
+	margin-left: 10%;
+}
+
+.MatchesBlockCoef {
+	border-radius: 50%;
+	background-color: #5f646d;
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
+}
+.MatchesBlockTeam1Coef {
+	right: 25px;
+}
+.MatchesBlockTeam2Coef {
+	left: 25px;
+}
+.Team1Country {
+	width: 100px;
+}
+
+.MatchesBlockCenter {
+	width: 20%;
+	height: 100%;
+	justify-content: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 160px;
+	color: white;
+	line-height: 5px;
+	margin: 0px;
+	font-size: 18px;
+}
+.MatchesBlockVsDateTime {
+	text-align: center;
+
+	font-weight: 600;
+}
+.MatchesBlockVs {
+	font-weight: 700;
+}
+.MatchesBlockTime {
+	font-weight: 700;
+	font-size: 24px;
+}
+
+.MatchesBlockStake {
+	display: flex;
+	width: 100%;
+	height: 30px;
+	background-color: #393e46;
+	color: white;
+}
+/* ... */
+.Title {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.MapBlock {
+	width: 33%;
+	height: 170px;
+	background: linear-gradient(rgba(60, 62, 65, 0.856), rgba(58, 55, 55, 0.897)),
+		url('../img/dota2_map.webp');
+	background-repeat: no-repeat;
+	background-position: center;
+	color: white;
+}
+/* ... */
+.StatsBlock {
+	width: 100%;
+	display: flex;
+}
+.StatsBlockTeam {
+	width: 50%;
+}
+
+.table_component {
+	width: 100%;
+}
+
+.table_component table {
+	width: 100%;
+	table-layout: fixed;
+	border-collapse: collapse;
+	border-spacing: 1px;
+	text-align: left;
+}
+
+.table_component caption {
+	caption-side: top;
+	text-align: left;
+}
+
+.table_component th {
+	color: white;
+	padding: 5px;
+}
+
+.table_component td {
+	color: white;
+	padding: 5px;
+}

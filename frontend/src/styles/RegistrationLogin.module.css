@@ -1,0 +1,82 @@
+body {
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+		'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+		sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-size: 14px;
+	background: #f2f2f2;
+}
+a {
+	text-decoration: none;
+	color: black;
+	cursor: pointer;
+}
+.Container {
+	width: 100%;
+	display: flex;
+	height: 100vh;
+}
+.ImgRight {
+	height: 60%;
+
+	object-fit: contain;
+}
+.RightBlock {
+	width: 60%;
+	color: white;
+	background-image: url('../img/Earth.jfif');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.LeftBlock {
+	width: 40%;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: white;
+}
+.RegForm {
+	background: white;
+	width: 400px;
+	height: 80vh;
+	border-radius: 5px;
+}
+.RegFormLine {
+	border-radius: 5px 5px 0px 0px;
+	background: #f7c94f;
+	width: 400px;
+	height: 10px;
+}
+.RegFormHeader {
+	align-items: center;
+	text-align: center;
+}
+
+.RegFormBlock {
+	display: flex;
+	margin: 0 auto;
+	width: 80%;
+	height: 24px;
+	margin-top: 20px;
+}
+.RegFormBlockNames {
+	display: flex;
+	margin: 0 auto;
+	width: 80%;
+	height: 44px;
+}
+
+.MarginNames {
+	margin-left: 10px;
+}
+
+.AfterForm {
+	margin-top: 30px;
+	display: flex;
+	text-align: center;
+	justify-content: center;
+}

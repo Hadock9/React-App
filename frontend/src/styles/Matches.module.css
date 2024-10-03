@@ -1,0 +1,97 @@
+.MatchesBlock {
+	width: 100%;
+	height: 100%;
+	background-color: #393e46;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 10px;
+	cursor: pointer;
+}
+.MatchesBlockCountry {
+	margin: 10px 10px;
+}
+.MatchesBlockCoef {
+	border-radius: 50%;
+	background-color: #5f646d;
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
+}
+.MatchesBlockTeam1Coef {
+	right: 25px;
+}
+.MatchesBlockTeam2Coef {
+	left: 25px;
+}
+img {
+	width: 100%;
+	height: 100%;
+}
+.MatchesBlockInfo {
+	width: 55%;
+	height: 120px;
+	display: flex;
+	padding-top: 10px;
+}
+.MatchesBlockTeam {
+	width: 40%;
+	position: relative;
+	height: 120px;
+	display: flex;
+}
+.MatchesBlockTeam2 {
+	width: 35%;
+	position: relative;
+	height: 120px;
+	display: flex;
+	flex-direction: row-reverse;
+}
+.MatchesBlockImgCountry {
+	height: 20px;
+	width: 20px;
+}
+
+.MatchesBlockImgLogo {
+	width: auto;
+	height: 100px;
+}
+.MatchesBlockCenter {
+	width: 20%;
+	justify-content: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 100px;
+	color: white;
+	line-height: 5px;
+	margin: 0px;
+}
+.MatchesBlockVsDateTime {
+	text-align: center;
+	line-height: 20px;
+	font-weight: 600;
+}
+.MatchesBlockVs {
+	font-weight: 700;
+}
+
+.MatchesBlockSide {
+	width: 40%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	border-radius: 10px 0px 0px 10px;
+	background-color: #545961;
+}
+.MatchesSideBlockImg1 {
+	margin-left: -30px;
+}
+.MatchesSideImg {
+	width: auto;
+	height: 28px;
+}
