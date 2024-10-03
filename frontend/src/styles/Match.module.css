@@ -16,18 +16,29 @@ img {
 	width: 40%;
 	position: relative;
 	height: 160px;
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-	background: linear-gradient(rgba(60, 62, 65, 0.856), rgba(58, 55, 55, 0.897)),
-		url('../img/Countries/cz.svg');
+}
+.MatchesBlockTeam::before {
+	content: '';
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+	background-color: rgba(0, 0, 0, 0.53);
+}
+
+.MatchesBlockAbsoluteTeam2 {
+	flex-direction: row-reverse;
 	background-repeat: no-repeat;
 	background-position: center;
 }
-.MatchesBlockTeam2 {
-	flex-direction: row-reverse;
-	background: linear-gradient(rgba(65, 60, 60, 0.856), rgba(58, 55, 55, 0.897)),
-		url('../img/Countries/cz.svg');
+.MatchesBlockAbsolute {
+	height: 160px;
+	width: 100%;
+	position: absolute;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
 	background-repeat: no-repeat;
 	background-position: center;
 }
@@ -43,7 +54,10 @@ img {
 .MatchesBlockImgLogo {
 	width: auto;
 	height: 140px;
+	margin-right: 10%;
+	margin-left: 10%;
 }
+
 .MatchesBlockCoef {
 	border-radius: 50%;
 	background-color: #5f646d;
@@ -65,13 +79,15 @@ img {
 .Team1Country {
 	width: 100px;
 }
+
 .MatchesBlockCenter {
 	width: 20%;
+	height: 100%;
 	justify-content: center;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	height: 140px;
+	height: 160px;
 	color: white;
 	line-height: 5px;
 	margin: 0px;
@@ -89,26 +105,13 @@ img {
 	font-weight: 700;
 	font-size: 24px;
 }
-.MatchesBlockSide {
-	width: 30%;
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-	border-radius: 10px 0px 0px 10px;
-	background-color: #545961;
-}
-.MatchesSideBlockImg1 {
-	margin-left: -30px;
-}
-.MatchesSideImg {
-	width: auto;
-	height: 28px;
-}
+
 .MatchesBlockStake {
 	display: flex;
 	width: 100%;
 	height: 30px;
 	background-color: #393e46;
+	color: white;
 }
 /* ... */
 .Title {

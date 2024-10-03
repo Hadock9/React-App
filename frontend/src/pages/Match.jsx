@@ -7,6 +7,20 @@ import { NavBar } from '../components/NavBar'
 import style from '../styles/Match.module.css'
 import rootstyle from '../styles/root.module.css'
 
+function extractHoursAndMinutes(timeString) {
+	// Split the time string by ':' and take the first two elements
+	const [hours, minutes] = timeString.split(':')
+	// Return the formatted result
+	return `${hours}:${minutes}`
+}
+const formatDate = dateString => {
+	const date = new Date(dateString)
+	const year = date.getFullYear()
+	const month = String(date.getMonth() + 1).padStart(2, '0')
+	const day = String(date.getDate()).padStart(2, '0')
+
+	return `${year}-${month}-${day}`
+}
 export function Match() {
 	const location = useLocation()
 	const { idMatch } = location.state
@@ -29,48 +43,74 @@ export function Match() {
 				<main className={rootstyle.Main}>
 					{matches.map((match, index) => (
 						<div className={style.MatchesBlock} key={index}>
-							<div className={style.MatchesBlockTeam}>
-								<img
-									draggable='false'
-									className={style.MatchesBlockImgLogo}
-									src={'/' + match.Team1Logo}
-									alt={match.Team1Name}
-								/>
-								<div
-									className={`${style.MatchesBlockCoef} ${style.MatchesBlockTeam1Coef}`}
-								>
-									<p>{match.Team1Coef}</p> {/* Replace with actual property */}
-								</div>
-								<div className={style.MatchesBlockTeamText}>
-									<p>{match.Team1Name}</p>
-									<p>0</p>
+							<div
+								className={style.MatchesBlockTeam}
+								style={{
+									background: `url(/${match.Team1Country})`,
+									backgroundSize: 'cover',
+									backgroundRepeat: 'no-repeat',
+									backgroundPosition: 'center',
+									minHeight: '160px',
+									width: '40%',
+								}}
+							>
+								<div className={style.MatchesBlockAbsolute}>
+									<img
+										draggable='false'
+										className={style.MatchesBlockImgLogo}
+										src={'/' + match.Team1Logo}
+										alt={match.Team1Name}
+									/>
+									<div
+										className={`${style.MatchesBlockCoef} ${style.MatchesBlockTeam1Coef}`}
+									>
+										<p>{match.Team1Coef}</p>
+									</div>
+									<div className={style.MatchesBlockTeamText}>
+										<p>{match.Team1Name}</p>
+										<p>{match.Team1Score}</p>
+									</div>
 								</div>
 							</div>
 							<div className={style.MatchesBlockCenter}>
 								<p className={style.MatchesBlockVsDateTime}>
-									{match.VsDateTime}
+									{formatDate(match.VsDateTime)}
 								</p>
+								{console.log(match)}
 								<p className={style.MatchesBlockVs}>Vs</p>
-								<p className={style.MatchesBlockTime}>09:30</p>{' '}
-								{/* Replace with actual time if available */}
+								<p className={style.MatchesBlockTime}>
+									{extractHoursAndMinutes(match.time)}
+								</p>
 							</div>
 							<div
-								className={`${style.MatchesBlockTeam} ${style.MatchesBlockTeam2}`}
+								className={style.MatchesBlockTeam}
+								style={{
+									background: `url(/${match.Team2Country})`,
+									backgroundSize: 'cover',
+									backgroundRepeat: 'no-repeat',
+									backgroundPosition: 'center',
+									minHeight: '160px',
+									width: '40%',
+								}}
 							>
-								<img
-									draggable='false'
-									className={style.MatchesBlockImgLogo}
-									src={'/' + match.Team2Logo}
-									alt={match.Team2Name}
-								/>
 								<div
-									className={`${style.MatchesBlockCoef} ${style.MatchesBlockTeam2Coef}`}
+									className={`${style.MatchesBlockAbsolute} ${style.MatchesBlockAbsoluteTeam2}`}
 								>
-									<p>{match.Team2Coef}</p> {/* Replace with actual property */}
-								</div>
-								<div className={style.MatchesBlockTeamText}>
-									<p>{match.Team2Name}</p>
-									<p>0</p>
+									<img
+										draggable='false'
+										className={style.MatchesBlockImgLogo}
+										src={'/' + match.Team2Logo}
+										alt={match.Team2Name}
+									/>
+									<div
+										className={`${style.MatchesBlockCoef} ${style.MatchesBlockTeam2Coef}`}
+									>
+										<p>{match.Team2Coef}</p>
+									</div>
+									<div className={style.MatchesBlockTeamText}>
+										<p>{match.Team2Name}</p>
+										<p>{match.Team2Score}</p>
+									</div>
 								</div>
 							</div>
 						</div>
