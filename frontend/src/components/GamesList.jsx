@@ -1,16 +1,29 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import styles from '../styles/VideoList.module.css'
+import styles from '../styles/GamesList.module.css'
+import { CheckFetch } from './BadFatchDisclaimer'
 import { NoResultDisclaimer } from './NoResultDisclaimer'
-
 export function GamesList({ value }) {
 	const [Games, setData] = useState([])
 
-	// Fetch users from the backend
+	const [failedToFetch, setFailedToFetch] = useState(false)
+
 	useEffect(() => {
 		fetch('http://localhost:4000/api/Games_List')
-			.then(res => res.json())
-			.then(data => setData(data))
+			.then(res => {
+				if (!res.ok) {
+					throw new Error('Network response was not ok')
+				}
+				return res.json()
+			})
+			.then(data => {
+				setData(data)
+				setFailedToFetch(false)
+			})
+			.catch(error => {
+				setFailedToFetch(true)
+				console.log('Failed to fetch: ', error)
+			})
 	}, [])
 
 	const filterGames = Games.filter(Game => {
@@ -20,6 +33,9 @@ export function GamesList({ value }) {
 	return (
 		<>
 			<h1 className={styles.FirstCLASS}> Games </h1>
+			{console.log(failedToFetch)}
+			{failedToFetch ? <CheckFetch /> : console.log('Successful Fetch')}
+
 			<div className={styles.GameBlockRoot}>
 				{filterGames.length > 0 ? (
 					filterGames.map(game => (
@@ -45,6 +61,8 @@ export function GamesList({ value }) {
 							</div>
 						</Link>
 					))
+				) : failedToFetch ? (
+					console.log('Failed Fatch No Results :)')
 				) : (
 					<NoResultDisclaimer value={value} />
 				)}

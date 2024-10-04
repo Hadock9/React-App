@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+//сторінка для ставок :)  в розробці
 export function Counter() {
 	const [likes, setLikes] = useState(0)
 	function increment() {
