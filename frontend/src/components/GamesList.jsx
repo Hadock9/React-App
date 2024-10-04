@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import styles from '../styles/VideoList.module.css'
+import styles from '../styles/GamesList.module.css'
 import { CheckFetch } from './BadFatchDisclaimer'
 import { NoResultDisclaimer } from './NoResultDisclaimer'
 export function GamesList({ value }) {

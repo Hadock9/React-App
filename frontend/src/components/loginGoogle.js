@@ -3,12 +3,10 @@ import { useState } from 'react'
 
 export default function Logon() {
 	const [showLogin, setShowLogin] = useState(false)
-	// const [showLogout, setShowLogout] = useState(false);
 
 	const responseSucess = () => {
 		console.log('login is  sucesss')
 		setShowLogin(true)
-		// setShowLogout(true);
 	}
 
 	const responseFailure = () => {
