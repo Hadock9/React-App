@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import CsMiniLogo1 from '../img/GamesMiniLogo/counterstrike.png'
 import CsMiniLogo2 from '../img/GamesMiniLogo/counterstrikeminlogo.png'
 import style from '../styles/Matches.module.css'
+import { CheckFetch } from './BadFatchDisclaimer'
 import { NoResultDisclaimer } from './NoResultDisclaimer'
 
 const formatDate = dateString => {
@@ -16,12 +17,19 @@ const formatDate = dateString => {
 
 export function MatchBlock({ value }) {
 	const [Match, setData] = useState([])
-
+	const [failedToFetch, setFailedToFetch] = useState(false)
 	// Fetch users from the backend
 	useEffect(() => {
 		fetch('http://localhost:4000/api/Match_List')
 			.then(res => res.json())
-			.then(data => setData(data))
+			.then(data => {
+				setFailedToFetch(false)
+				setData(data)
+			})
+			.catch(error => {
+				setFailedToFetch(true)
+				console.log('Failed to fetch: ', error)
+			})
 	}, [])
 	console.log(Match)
 	const filterMatches = Match.filter(Match => {
@@ -32,6 +40,7 @@ export function MatchBlock({ value }) {
 	})
 	return (
 		<>
+			{failedToFetch ? <CheckFetch /> : console.log('Successful Fetch')}
 			{filterMatches.length > 0 ? (
 				filterMatches.map(Match => {
 					return (
@@ -119,6 +128,8 @@ export function MatchBlock({ value }) {
 						</Link>
 					)
 				})
+			) : failedToFetch ? (
+				console.log('Failed Fatch No Results :)')
 			) : (
 				<NoResultDisclaimer value={value} />
 			)}

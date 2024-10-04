@@ -1,16 +1,14 @@
 import { Map } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
+import { CheckFetch } from '../components/BadFatchDisclaimer'
 import { UkrainianWar } from '../components/BlockSaveUkraine'
 import { BurgerMenu } from '../components/BurgerMenu'
 import { NavBar } from '../components/NavBar'
 import style from '../styles/Match.module.css'
 import rootstyle from '../styles/root.module.css'
-
 function extractHoursAndMinutes(timeString) {
-	// Split the time string by ':' and take the first two elements
 	const [hours, minutes] = timeString.split(':')
-	// Return the formatted result
 	return `${hours}:${minutes}`
 }
 const formatDate = dateString => {
@@ -26,18 +24,26 @@ export function Match() {
 	const { idMatch } = location.state
 
 	const [matches, setData] = useState([])
-
-	// Fetch users from the backends
+	const [failedToFetch, setFailedToFetch] = useState(false)
+	// Fetch 1 Match from the backends
 	useEffect(() => {
 		fetch(`http://localhost:4000/api/Match_List/Match/${idMatch}`)
 			.then(res => res.json())
-			.then(data => setData(data))
+			.then(data => {
+				setData(data)
+				setFailedToFetch(false)
+			})
+			.catch(error => {
+				setFailedToFetch(true)
+				console.log('Failed to fetch: ', error)
+			})
 	}, [])
 
 	return (
 		<>
 			<NavBar />
 			<UkrainianWar />
+
 			<div className={rootstyle.Container}>
 				<BurgerMenu />
 				<main className={rootstyle.Main}>
@@ -115,7 +121,7 @@ export function Match() {
 							</div>
 						</div>
 					))}
-
+					{failedToFetch ? <CheckFetch /> : console.log('Successful Fetch')}
 					<div className={style.MatchesBlockStake}>
 						<p>Зробити ставку із коефіцієнтом </p>
 					</div>
