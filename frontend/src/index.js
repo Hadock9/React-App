@@ -12,12 +12,11 @@ import { Erorpage } from './pages/404'
 import { Home } from './pages/Home'
 import { Login } from './pages/Login'
 import { Match } from './pages/Match'
-import { Test } from './pages/Test'
-
 import { Matches } from './pages/Matches'
 import { Profile } from './pages/Profile'
 import { Registration } from './pages/Registr'
 import { ResetPassword } from './pages/ResetPassword'
+import { Stake } from './pages/Stake'
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
 	<GoogleOAuthProvider clientId='500804855419-pms6km4isevbtq88rpgbpp02tdjq26fm.apps.googleusercontent.com'>
@@ -29,7 +28,7 @@ root.render(
 						<Route path='/Registration' element={<Registration />} />
 						<Route path='/Login' element={<Login />} />
 						<Route path='/Home' element={<Home />} />
-						<Route path='/test' element={<Test />} />
+						<Route path='/Stake' element={<Stake />} />
 
 						<Route path='/Profile' element={<Profile />} />
 						<Route path={'Home/:Game/Matches'} element={<Matches />} />

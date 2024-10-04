@@ -4,8 +4,8 @@ const cors = require('cors')
 
 const port = 4000
 const app = express()
+app.use(express.json())
 app.use(cors())
-// Middleware
 
 // MySQL connection
 const db = mysql.createConnection({
@@ -62,18 +62,33 @@ app.get('/api/Match_List/Match/:id', (req, res) => {
 		res.json(result)
 	})
 })
-
-app.post('/api/users', (req, res) => {
-	const { name, age } = req.body
-	const sql = 'INSERT INTO users (name, age) VALUES (?, ?)'
-	db.query(sql, [name, age], (err, result) => {
+app.get('/api/Stake1', (req, res) => {
+	const sql = 'SELECT * FROM Stake'
+	db.query(sql, (err, result) => {
 		if (err) {
 			return res.status(500).json({ error: err.message })
 		}
-		res.json({ id: result.insertId, name, age })
+		res.json(result)
 	})
 })
 
+app.post('/api/Stake', (req, res) => {
+	const { match_id, amount, Coef, status } = req.body
+
+	const sql = `
+			INSERT INTO Stake (match_id, amount, Coef, stake_time, status) 
+			VALUES (?, ?, ?, NOW(), ?);
+	`
+
+	db.query(sql, [match_id, amount, Coef, status], (err, result) => {
+		if (err) {
+			console.error('Error inserting stake:', err)
+			return res.status(500).json({ error: 'Database error' })
+		}
+		console.log('Stake inserted with ID:', result.insertId)
+		return res.status(201).json({ id: result.insertId })
+	})
+})
 app.listen(port, () => {
 	console.log(`Server running on http://localhost:${port}`)
 })
