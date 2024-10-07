@@ -8,10 +8,11 @@ import {
 import { Link } from 'react-router-dom'
 import LogoImg from '../img/logo512.png'
 import HeaderStyle from '../styles/NavBar.module.css'
-import { useRegUser } from './RegistrationContext'
+import { useAuth } from './AuthContext'
 
 export function NavBar() {
-	const { isRegUser, setisRegUser } = useRegUser()
+	const { user, isRegUser, logout } = useAuth()
+
 	return (
 		<>
 			<header>
@@ -42,12 +43,19 @@ export function NavBar() {
 							<p>Підтримати</p>
 						</div>
 					</Link>
-
-					<Link to='/Registration'>
-						<div className={HeaderStyle.HeaderText}>
-							<p>Зареєструватися</p>
-						</div>
-					</Link>
+					{isRegUser ? (
+						<Link to='/'>
+							<div onClick={logout} className={HeaderStyle.HeaderText}>
+								<p>Розлогінитися</p>
+							</div>
+						</Link>
+					) : (
+						<Link to='/Registration'>
+							<div className={HeaderStyle.HeaderText}>
+								<p>Зареєструватися</p>
+							</div>
+						</Link>
+					)}
 				</div>
 				<div className={HeaderStyle.HeaderIcons}>
 					<Link to='https://x.com/'>

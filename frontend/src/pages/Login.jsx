@@ -1,18 +1,20 @@
+// src/components/Login.js
+import { jwtDecode } from 'jwt-decode' // Іменований імпорт
 import { Lock, LockOpen, Mail } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../components/AuthContext'
 import {
 	validateEmail,
 	validatePassword,
 } from '../components/FormValidation.js'
 import Logon from '../components/loginGoogle.js'
-import { useRegUser } from '../components/RegistrationContext.jsx'
 import CustomForm from '../styles/CustomForm.module.css'
 import styles from '../styles/RegistrationLogin.module.css'
 
 export function Login() {
 	const navigate = useNavigate()
-	const { isRegUser, setisRegUser } = useRegUser(false)
+	const { setIsRegUser, setUser } = useAuth()
 	// Станові змінні для зберігання значень вводу форми
 	const [Email, setEmail] = useState('')
 	const [Password, setPassword] = useState('')
@@ -28,6 +30,9 @@ export function Login() {
 	const [PasswordError, setPasswordError] = useState(
 		'Password не може бути пустим'
 	)
+	// Повідомлення про загальні помилки
+	const [GeneralError, setGeneralError] = useState('')
+
 	// Обробник, щоб позначити ввід як "доторкнутий", коли він втрачає фокус
 	const blurHandler = e => {
 		switch (e.target.name) {
@@ -55,14 +60,14 @@ export function Login() {
 	}
 
 	// Обробник зміни типу паролю для видимості
-	const ChangeTypePassword = e => {
+	const ChangeTypePassword = () => {
 		setisVisiblePassword(!isVisiblePassword)
 		setTypePassword(isVisiblePassword ? 'password' : 'text')
 	}
 
 	// Хук ефекту для визначення дійсності форми на основі вводу та стану помилок
 	useEffect(() => {
-		setFormValid(!(EmailError, PasswordError))
+		setFormValid(!EmailError && !PasswordError)
 	}, [EmailError, PasswordError])
 
 	// Обробник відправлення форми
@@ -82,31 +87,43 @@ export function Login() {
 					},
 					body: JSON.stringify(LoginData),
 				})
-				console.log(response.ok)
+				console.log('Response OK:', response.ok)
+
+				let data
+				try {
+					data = await response.json()
+				} catch (err) {
+					console.error('Error parsing JSON:', err)
+					setGeneralError('Помилка обробки відповіді сервера.')
+					return
+				}
 
 				if (response.ok) {
-					console.log('Форма відправлена')
-
-					setisRegUser(true)
+					console.log('Успішний вхід')
+					localStorage.setItem('token', data.token)
+					console.log('Вхід успішний:', data.message)
+					const decoded = jwtDecode(data.token)
+					setIsRegUser(true)
+					setUser(decoded)
 					navigate('/Home')
 				} else {
-					const errorData = await response.json()
-					console.log(errorData.message)
-					if (
-						errorData.message &&
-						errorData.message.includes('Email not found')
-					) {
-						setEmailError('Email not found.')
+					console.log('Помилка:', data.message)
+					if (data.message && data.message.includes('Email not found')) {
+						setEmailError('Email не знайдено.')
 					} else if (
-						errorData.message &&
-						errorData.message.includes('Incorrect password')
+						data.message &&
+						data.message.includes('Incorrect password')
 					) {
-						setPasswordError('Incorrect password.')
+						setPasswordError('Неправильний пароль.')
 					} else {
-						console.error('Помилка на сервері:', errorData)
+						console.error('Помилка на сервері:', data)
+						setGeneralError('Помилка на сервері. Спробуйте пізніше.')
 					}
 				}
-			} catch (error) {}
+			} catch (error) {
+				console.error('Помилка при відправці форми:', error)
+				setGeneralError("Помилка з'єднання з сервером.")
+			}
 		}
 	}
 
@@ -118,7 +135,7 @@ export function Login() {
 				<div className={styles.RegForm}>
 					<div className={styles.RegFormLine}></div>
 					<form onSubmit={handleSubmit} noValidate>
-						<h1 className={styles.RegFormHeader}>Форма реєстрації</h1>
+						<h1 className={styles.RegFormHeader}>Форма входу</h1>
 
 						{/* Поле Email */}
 						<div className={styles.RegFormFullBlock}>
@@ -165,6 +182,11 @@ export function Login() {
 							</div>
 						</div>
 
+						{/* Загальні помилки */}
+						{GeneralError && (
+							<div className={styles.RegFormError}>{GeneralError}</div>
+						)}
+
 						{/* Кнопка відправлення */}
 						<div className={`${styles.RegFormBlock} ${styles.RegFormButton}`}>
 							<button
@@ -172,7 +194,7 @@ export function Login() {
 								disabled={!FormValid} // Вимкнути кнопку, якщо форма не дійсна
 								className={styles.CustomButtonSubmit}
 							>
-								Зареєструватися
+								Увійти
 							</button>
 						</div>
 					</form>
@@ -193,3 +215,5 @@ export function Login() {
 		</div>
 	)
 }
+
+export default Login

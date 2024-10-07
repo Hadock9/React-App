@@ -2,6 +2,10 @@ const db = require('./db.js')
 const express = require('express')
 const cors = require('cors')
 bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
+
+const secretKey =
+	'"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"'
 
 const app = express()
 app.use(express.json())
@@ -79,7 +83,7 @@ app.post('/api/Login', async (req, res) => {
 	const { Email, Password } = req.body
 
 	const sql = `
-			SELECT id, email, password FROM Users WHERE email = ?;
+			SELECT * FROM Users WHERE email = ?;
 	`
 
 	db.query(sql, [Email], async (err, result) => {
@@ -94,9 +98,19 @@ app.post('/api/Login', async (req, res) => {
 
 		const isMatch = await bcrypt.compare(Password, result[0].password)
 		if (isMatch) {
-			return res
-				.status(200)
-				.json({ message: 'Login successful', id: result[0].id })
+			const token = jwt.sign(
+				{
+					id: result[0].id,
+					email: result[0].email,
+					first_name: result[0].first_name,
+					last_name: result[0].last_name,
+					created_at: result[0].created_at,
+				},
+				secretKey,
+				{ expiresIn: '1h' }
+			)
+
+			return res.json({ token })
 		} else {
 			return res.status(401).json({ message: 'Incorrect password' })
 		}
