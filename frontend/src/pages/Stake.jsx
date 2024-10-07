@@ -8,7 +8,7 @@ export function Stake() {
 	const [Coef, setCoef] = useState(0)
 	const [status, setStatus] = useState('pending')
 
-	const handleSubmit = async e => {
+	const handleSubmit = e => {
 		e.preventDefault()
 
 		const stakeData = {
@@ -17,24 +17,27 @@ export function Stake() {
 			Coef: parseFloat(Coef),
 			status: status,
 		}
-		console.log(stakeData)
-		const response = fetch('http://localhost:4000/api/Stake', {
-			method: 'POST',
+
+		fetch('http://localhost:4000/api/Stake', {
+			method: 'POST', // Відправка POST-запиту
 			headers: {
-				'Content-Type': 'application/json',
+				'Content-Type': 'application/json', // Встановлення типу контенту на JSON
 			},
-			body: JSON.stringify(stakeData),
+			body: JSON.stringify(stakeData), // Відправка даних ставки у форматі JSON
 		})
 	}
-	// Fetch users from the backend
+
+	// Завантаження ставок з сервера
 	useEffect(() => {
 		fetch('http://localhost:4000/api/Stake1')
 			.then(res => res.json())
-			.then(data => setData(data))
+			.then(data => setData(data)) // Встановлення отриманих даних у стан
 	}, [])
+
 	return (
 		<>
 			<div>
+				{/* Відображення деталей кожної ставки */}
 				{Stakes.map(stake => (
 					<div key={stake.id}>
 						<p>stake id {stake.id}</p>
@@ -67,8 +70,7 @@ export function Stake() {
 						name='Coef'
 						onChange={e => setCoef(e.target.value)}
 					/>
-
-					<button>submit</button>
+					<button>submit</button> {/* Відправлення форми */}
 				</form>
 			</div>
 		</>

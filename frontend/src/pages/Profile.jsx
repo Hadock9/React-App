@@ -1,19 +1,25 @@
 import { NavBar } from '../components/NavBar'
 import ProfileImg from '../img/profile.jpg'
 import style from '../styles/Profile.module.css'
+
 export function Profile() {
 	return (
 		<>
-			<NavBar />
+			<NavBar /> {/* Навігаційна панель */}
 			<div className={style.ProfileBg}>
+				{/* Фон профілю */}
 				<div className={style.ProfileBlock}>
+					{/* Основний блок профілю */}
 					<div className={style.ProfileDivImg}>
+						{/* Блок зображення профілю */}
 						<div>
-							<img className={style.ProfileImg} src={ProfileImg} alt='' />
+							<img className={style.ProfileImg} src={ProfileImg} alt='' />{' '}
+							{/* Зображення профілю */}
 						</div>
 					</div>
-
 					<form className={style.form} action=''>
+						{' '}
+						{/* Форма редагування профілю */}
 						<div className={style.ProfileBlockInfo}>
 							<div className={style.ProfileBlockTextFirst}>
 								<div className={style.LabelInput}>
@@ -21,7 +27,7 @@ export function Profile() {
 									<input
 										className={style.CustomInput}
 										type='text'
-										value='139453138'
+										value='139453138' // ID користувача
 										placeholder='139453138'
 									/>
 								</div>
@@ -34,7 +40,7 @@ export function Profile() {
 									<input
 										className={style.CustomInput}
 										type='text'
-										placeholder='Василь'
+										placeholder='Василь' // Підказка для введення імені
 									/>
 								</div>
 							</div>
@@ -44,7 +50,7 @@ export function Profile() {
 									<input
 										className={style.CustomInput}
 										type='text'
-										placeholder='Фальовський'
+										placeholder='Фальовський' // Підказка для введення прізвища
 									/>
 								</div>
 							</div>
@@ -56,7 +62,7 @@ export function Profile() {
 									<input
 										className={style.CustomInput}
 										type='text'
-										placeholder='12.01.2004'
+										placeholder='12.01.2004' // Підказка для введення дати народження
 									/>
 								</div>
 							</div>
@@ -66,7 +72,7 @@ export function Profile() {
 									<input
 										className={style.CustomInput}
 										type='text'
-										placeholder='Чоловіча'
+										placeholder='Чоловіча' // Підказка для введення статі
 									/>
 								</div>
 							</div>
@@ -78,7 +84,7 @@ export function Profile() {
 									<input
 										className={style.CustomInput}
 										type='text'
-										placeholder='Ron.bartonzzz@gmail.com'
+										placeholder='Ron.bartonzzz@gmail.com' // Підказка для введення електронної пошти
 									/>
 								</div>
 							</div>
@@ -90,7 +96,7 @@ export function Profile() {
 									<input
 										className={style.CustomInput}
 										type='text'
-										placeholder=' '
+										placeholder=' ' // Підказка для введення номера документа
 									/>
 								</div>
 							</div>
@@ -102,7 +108,7 @@ export function Profile() {
 									<input
 										className={style.CustomInput}
 										type='text'
-										placeholder=' '
+										placeholder=' ' // Підказка для введення номера телефону
 									/>
 								</div>
 							</div>
@@ -112,7 +118,7 @@ export function Profile() {
 									<input
 										className={style.CustomInput}
 										type='text'
-										placeholder='Україна'
+										placeholder='Україна' // Підказка для введення країни
 									/>
 								</div>
 							</div>
@@ -125,7 +131,7 @@ export function Profile() {
 									</label>
 									<input
 										className={style.CustomInput}
-										type='password'
+										type='password' // Поле для введення пароля
 										placeholder=''
 									/>
 								</div>
@@ -133,7 +139,7 @@ export function Profile() {
 						</div>
 						<div className={style.ProfileBlockInfo}>
 							<button className={style.CustomButtonSubmit}>
-								Зберегти зміни
+								Зберегти зміни {/* Кнопка для збереження змін */}
 							</button>
 						</div>
 					</form>

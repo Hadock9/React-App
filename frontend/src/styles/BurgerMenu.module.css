@@ -1,25 +1,29 @@
+/* Контейнер для бокового меню */
 .AsideContainer {
 	width: 20%;
 	height: 100%;
 	background-color: white;
 	margin-top: 10px;
 	margin-right: 10px;
-
 	border-top-right-radius: 10px;
 	border-bottom-right-radius: 10px;
 }
+
+/* Секція, що прихована */
 .HiddenBlock {
 	display: none;
 }
+
+/* Блок елементів в боковому меню */
 .AsideBlock {
 	width: 100%;
 	height: 60px;
 	display: flex;
-
 	align-items: center;
 	cursor: pointer;
 }
 
+/* Іконка для перегляду в боковому меню */
 .AsideBlockIconBrowse {
 	cursor: pointer;
 	width: 60px;
@@ -28,11 +32,15 @@
 	align-items: center;
 	margin: 10px;
 }
+
+/* Стиль для блока при наведенні */
 .AsideBlock:hover {
 	background-color: rgb(202, 200, 200);
 	border-top-right-radius: 10px;
 	border-bottom-right-radius: 10px;
 }
+
+/* Загальна іконка в боковому меню */
 .AsideBlockIcon {
 	width: 60px;
 	height: 60px;
@@ -40,6 +48,8 @@
 	align-items: center;
 	margin: 10px;
 }
+
+/* Текстовий блок в боковому меню */
 .AsideBlockText {
 	width: 70%;
 	height: 60px;

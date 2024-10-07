@@ -1,10 +1,9 @@
+/* Кнопка для підтримки України */
 .SaveUkraine {
 	width: 120px;
 	height: 70px;
 	bottom: 0;
-
 	padding: 70px 10px;
-
 	position: fixed;
 	right: 0;
 	text-align: left;
@@ -12,6 +11,8 @@
 	margin: 0px;
 	text-align: center;
 }
+
+/* Нижня частина кнопки */
 .SaveUkraineBottomBlock {
 	background-color: #f5c142;
 	height: 50%;
@@ -20,6 +21,8 @@
 	justify-content: center;
 	align-items: center;
 }
+
+/* Верхня частина кнопки */
 .SaveUkraineTopBlock {
 	background-color: #0292c4;
 	height: 50%;

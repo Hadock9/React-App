@@ -1,9 +1,10 @@
-import { Lock, Mail, UserRound } from 'lucide-react'
+import { Lock, LockOpen, Mail, UserRound } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
 	validateConditions,
 	validateEmail,
+	validateLastName,
 	validateName,
 	validatePassword,
 	validateRePassword,
@@ -18,6 +19,8 @@ export function Registration() {
 	const [RePassword, setRePassword] = useState('')
 	const [First_Name, setFirst_Name] = useState('')
 	const [Last_Name, setLast_Name] = useState('')
+	const [isVisiblePassword, setisVisiblePassword] = useState(false)
+	const [TypePassword, setTypePassword] = useState('password')
 	const [Conditions, setConditions] = useState('') // Для зберігання згоди на умови
 	const [FormValid, setFormValid] = useState(false) // Для визначення, чи форма готова до відправлення
 
@@ -95,13 +98,22 @@ export function Registration() {
 	// Обробник зміни вводу для прізвища з валідацією
 	const Last_NameHandler = e => {
 		setLast_Name(e.target.value)
-		setLast_NameError(validateName(e.target.value))
+		setLast_NameError(validateLastName(e.target.value))
 	}
 
 	// Обробник зміни вводу для імені з валідацією
 	const First_NameHandler = e => {
 		setFirst_Name(e.target.value)
 		setFirst_NameError(validateName(e.target.value))
+	}
+	const ChangeTypePassword = () => {
+		if (!isVisiblePassword) {
+			setisVisiblePassword(!isVisiblePassword)
+			setTypePassword('text')
+		} else {
+			setisVisiblePassword(!isVisiblePassword)
+			setTypePassword('password')
+		}
 	}
 
 	// Хук ефекту для визначення дійсності форми на основі вводу та стану помилок
@@ -112,13 +124,7 @@ export function Registration() {
 			RePasswordError ||
 			First_NameError ||
 			Last_NameError ||
-			ConditionsError ||
-			!Email ||
-			!Password ||
-			!RePassword ||
-			!First_Name ||
-			!Last_Name ||
-			!Conditions
+			ConditionsError
 		) {
 			setFormValid(false)
 		} else {
@@ -131,17 +137,11 @@ export function Registration() {
 		First_NameError,
 		Last_NameError,
 		ConditionsError,
-		Email,
-		Password,
-		RePassword,
-		First_Name,
-		Last_Name,
-		Conditions,
 	])
 
 	// Обробник відправлення форми
 	const handleSubmit = e => {
-		e.preventDefault() // Запобігти стандартному поведінці відправлення форми
+		e.preventDefault()
 		if (FormValid) {
 			// Обробити реєстрацію тут
 			console.log('Форма відправлена') // Повідомлення для успішної відправки
@@ -184,10 +184,15 @@ export function Registration() {
 								<div className={styles.RegFormError}>{PasswordError}</div>
 							)}
 							<div className={styles.RegFormBlock}>
-								<Lock />
+								<div
+									onClick={ChangeTypePassword}
+									className={styles.RegFormBlockPassword}
+								>
+									{isVisiblePassword ? <LockOpen /> : <Lock />}
+								</div>
 								<input
 									className={CustomForm.CustomInput}
-									type='password'
+									type={TypePassword}
 									name='Password'
 									value={Password}
 									onBlur={blurHandler}
@@ -204,10 +209,15 @@ export function Registration() {
 								<div className={styles.RegFormError}>{RePasswordError}</div>
 							)}
 							<div className={styles.RegFormBlock}>
-								<Lock />
+								<div
+									onClick={ChangeTypePassword}
+									className={styles.RegFormBlockPassword}
+								>
+									{isVisiblePassword ? <LockOpen /> : <Lock />}
+								</div>
 								<input
 									className={CustomForm.CustomInput}
-									type='password'
+									type={TypePassword}
 									name='RePassword'
 									value={RePassword}
 									onBlur={blurHandler}
