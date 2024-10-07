@@ -21,7 +21,7 @@ export function Stake() {
 		fetch('http://localhost:4000/api/Stake', {
 			method: 'POST', // Відправка POST-запиту
 			headers: {
-				'Content-Type': 'application/json', // Встановлення типу контенту на JSON
+				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify(stakeData), // Відправка даних ставки у форматі JSON
 		})

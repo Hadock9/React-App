@@ -1,15 +1,18 @@
 import { Lock, LockOpen, Mail } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {
 	validateEmail,
 	validatePassword,
 } from '../components/FormValidation.js'
 import Logon from '../components/loginGoogle.js'
+import { useRegUser } from '../components/RegistrationContext.jsx'
 import CustomForm from '../styles/CustomForm.module.css'
 import styles from '../styles/RegistrationLogin.module.css'
 
 export function Login() {
+	const navigate = useNavigate()
+	const { isRegUser, setisRegUser } = useRegUser(false)
 	// Станові змінні для зберігання значень вводу форми
 	const [Email, setEmail] = useState('')
 	const [Password, setPassword] = useState('')
@@ -20,13 +23,11 @@ export function Login() {
 	// Змінні стану, щоб відстежувати, чи ввід було сфокусовано
 	const [EmailDirty, setEmailDirty] = useState(false)
 	const [PasswordDirty, setPasswordDirty] = useState(false)
-
 	// Повідомлення про помилки для валідації
 	const [EmailError, setEmailError] = useState('Email не може бути пустим')
 	const [PasswordError, setPasswordError] = useState(
 		'Password не може бути пустим'
 	)
-
 	// Обробник, щоб позначити ввід як "доторкнутий", коли він втрачає фокус
 	const blurHandler = e => {
 		switch (e.target.name) {
@@ -47,7 +48,7 @@ export function Login() {
 		setEmailError(validateEmail(e.target.value))
 	}
 
-	// Обробник зміни вводу для пароля з валідацією
+	// Обробник зміни вводу для пароля
 	const PasswordHandler = e => {
 		setPassword(e.target.value)
 		setPasswordError(validatePassword(e.target.value))
@@ -55,21 +56,57 @@ export function Login() {
 
 	// Обробник зміни типу паролю для видимості
 	const ChangeTypePassword = e => {
-		setisVisiblePassword(!isVisiblePassword) // Перемикає видимість паролю
-		setTypePassword(isVisiblePassword ? 'password' : 'text') // Змінює тип інпуту
+		setisVisiblePassword(!isVisiblePassword)
+		setTypePassword(isVisiblePassword ? 'password' : 'text')
 	}
 
 	// Хук ефекту для визначення дійсності форми на основі вводу та стану помилок
 	useEffect(() => {
-		setFormValid(!(EmailError || PasswordError)) // Визначає, чи форма є дійсною
+		setFormValid(!(EmailError, PasswordError))
 	}, [EmailError, PasswordError])
 
 	// Обробник відправлення форми
-	const handleSubmit = e => {
-		e.preventDefault() // Запобігає стандартній поведінці форми
+	const handleSubmit = async e => {
+		e.preventDefault()
+
+		const LoginData = {
+			Email: Email,
+			Password: Password,
+		}
 		if (FormValid) {
-			// Обробити реєстрацію тут
-			console.log('Форма відправлена') // Повідомлення для успішної відправки
+			try {
+				const response = await fetch('http://localhost:4000/api/Login', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(LoginData),
+				})
+				console.log(response.ok)
+
+				if (response.ok) {
+					console.log('Форма відправлена')
+
+					setisRegUser(true)
+					navigate('/Home')
+				} else {
+					const errorData = await response.json()
+					console.log(errorData.message)
+					if (
+						errorData.message &&
+						errorData.message.includes('Email not found')
+					) {
+						setEmailError('Email not found.')
+					} else if (
+						errorData.message &&
+						errorData.message.includes('Incorrect password')
+					) {
+						setPasswordError('Incorrect password.')
+					} else {
+						console.error('Помилка на сервері:', errorData)
+					}
+				}
+			} catch (error) {}
 		}
 	}
 

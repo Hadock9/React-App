@@ -1,8 +1,10 @@
+import { UserRound, UserRoundX } from 'lucide-react'
 import { NavBar } from '../components/NavBar'
-import ProfileImg from '../img/profile.jpg'
+import { useRegUser } from '../components/RegistrationContext'
 import style from '../styles/Profile.module.css'
-
 export function Profile() {
+	const { isRegUser, setisRegUser } = useRegUser()
+
 	return (
 		<>
 			<NavBar /> {/* Навігаційна панель */}
@@ -13,12 +15,13 @@ export function Profile() {
 					<div className={style.ProfileDivImg}>
 						{/* Блок зображення профілю */}
 						<div>
-							<img className={style.ProfileImg} src={ProfileImg} alt='' />{' '}
+							<div className={style.Profile}>
+								{isRegUser ? <UserRound /> : <UserRoundX />}
+							</div>
 							{/* Зображення профілю */}
 						</div>
 					</div>
 					<form className={style.form} action=''>
-						{' '}
 						{/* Форма редагування профілю */}
 						<div className={style.ProfileBlockInfo}>
 							<div className={style.ProfileBlockTextFirst}>

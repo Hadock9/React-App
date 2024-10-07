@@ -1,6 +1,7 @@
 import { Lock, LockOpen, Mail, UserRound } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+
 import {
 	validateConditions,
 	validateEmail,
@@ -13,6 +14,7 @@ import CustomForm from '../styles/CustomForm.module.css'
 import styles from '../styles/RegistrationLogin.module.css'
 
 export function Registration() {
+	const navigate = useNavigate()
 	// Станові змінні для зберігання значень вводу форми
 	const [Email, setEmail] = useState('')
 	const [Password, setPassword] = useState('')
@@ -21,7 +23,7 @@ export function Registration() {
 	const [Last_Name, setLast_Name] = useState('')
 	const [isVisiblePassword, setisVisiblePassword] = useState(false)
 	const [TypePassword, setTypePassword] = useState('password')
-	const [Conditions, setConditions] = useState('') // Для зберігання згоди на умови
+	const [Conditions, setConditions] = useState(false)
 	const [FormValid, setFormValid] = useState(false) // Для визначення, чи форма готова до відправлення
 
 	// Змінні стану, щоб відстежувати, чи ввід було сфокусовано
@@ -30,6 +32,7 @@ export function Registration() {
 	const [RePasswordDirty, setRePasswordDirty] = useState(false)
 	const [First_NameDirty, setFirst_NameDirty] = useState(false)
 	const [Last_NameDirty, setLast_NameDirty] = useState(false)
+	const [ConditionsDirty, setConditionsDirty] = useState(false)
 
 	// Повідомлення про помилки для валідації
 	const [EmailError, setEmailError] = useState('Email не може бути пустим')
@@ -45,7 +48,9 @@ export function Registration() {
 	const [Last_NameError, setLast_NameError] = useState(
 		'Last Name не може бути пустим'
 	)
-	const [ConditionsError, setConditionsError] = useState('')
+	const [ConditionsError, setConditionsError] = useState(
+		'Ви повинні погодитися з умовами.'
+	)
 
 	// Обробник, щоб позначити ввід як "доторкнутий", коли він втрачає фокус
 	const blurHandler = e => {
@@ -64,6 +69,9 @@ export function Registration() {
 				break
 			case 'Last_Name':
 				setLast_NameDirty(true)
+				break
+			case 'Conditions':
+				setConditionsDirty(true)
 				break
 			default:
 				break
@@ -140,11 +148,42 @@ export function Registration() {
 	])
 
 	// Обробник відправлення форми
-	const handleSubmit = e => {
+	const handleSubmit = async e => {
 		e.preventDefault()
 		if (FormValid) {
-			// Обробити реєстрацію тут
-			console.log('Форма відправлена') // Повідомлення для успішної відправки
+			const RegData = {
+				Email: Email,
+				Password: Password,
+				First_Name: First_Name,
+				Last_Name: Last_Name,
+			}
+
+			try {
+				const response = await fetch('http://localhost:4000/api/Registration', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(RegData),
+				})
+				console.log(response.ok)
+
+				if (response.ok) {
+					console.log('Форма відправлена')
+					navigate('/Login')
+				} else {
+					const errorData = await response.json()
+
+					if (
+						errorData.err.sqlMessage &&
+						errorData.err.sqlMessage.includes('Duplicate entry')
+					) {
+						setEmailError('Цей email вже зареєстровано. Спробуйте інший.')
+					} else {
+						console.error('Помилка на сервері:', errorData)
+					}
+				}
+			} catch (error) {}
 		}
 	}
 
@@ -272,7 +311,7 @@ export function Registration() {
 
 						{/* Умови та положення */}
 						<div className={styles.RegFormFullBlock}>
-							{ConditionsError && (
+							{ConditionsDirty && ConditionsError && (
 								<div className={styles.RegFormError}>{ConditionsError}</div>
 							)}
 							<div
@@ -283,7 +322,9 @@ export function Registration() {
 										type='checkbox'
 										id='conditions'
 										name='Conditions'
+										onBlur={blurHandler}
 										onChange={ConditionsHandler}
+										checked={Conditions}
 										required
 									/>
 									<label htmlFor='conditions'>Я погоджуюсь з умовами</label>

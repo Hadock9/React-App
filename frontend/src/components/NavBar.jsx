@@ -1,10 +1,17 @@
-import { Facebook, Instagram, Twitter } from 'lucide-react'
+import {
+	Facebook,
+	Instagram,
+	Twitter,
+	UserRound,
+	UserRoundX,
+} from 'lucide-react'
 import { Link } from 'react-router-dom'
 import LogoImg from '../img/logo512.png'
-import ProfileImg from '../img/profile.jpg'
 import HeaderStyle from '../styles/NavBar.module.css'
+import { useRegUser } from './RegistrationContext'
 
 export function NavBar() {
+	const { isRegUser, setisRegUser } = useRegUser()
 	return (
 		<>
 			<header>
@@ -54,7 +61,7 @@ export function NavBar() {
 					</Link>
 					<Link to='/profile'>
 						<div className={HeaderStyle.Profile}>
-							<img className={HeaderStyle.ProfileImg} src={ProfileImg} alt='' />
+							{isRegUser ? <UserRound /> : <UserRoundX />}
 						</div>
 					</Link>
 				</div>

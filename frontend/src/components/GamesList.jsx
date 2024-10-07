@@ -29,11 +29,11 @@ export function GamesList({ value }) {
 	const filterGames = Games.filter(Game => {
 		return Game.name.toLowerCase().includes(value.toLowerCase())
 	})
-	console.log({ Games })
+
 	return (
 		<>
 			<h1 className={styles.FirstCLASS}> Games </h1>
-			{console.log(failedToFetch)}
+
 			{failedToFetch ? <CheckFetch /> : console.log('Successful Fetch')}
 
 			<div className={styles.GameBlockRoot}>
@@ -47,7 +47,6 @@ export function GamesList({ value }) {
 							}
 							key={game.id}
 						>
-							{console.log(game.ImageSrc)}
 							<div className={styles.GameBlock}>
 								<img
 									className={styles.GamesImg}
