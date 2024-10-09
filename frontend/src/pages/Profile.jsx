@@ -57,15 +57,14 @@ export function Profile() {
 			documentNumber: formData.documentNumber,
 			phone: formData.phone,
 			country: formData.country,
-			// Пароль не рекомендується передавати у відкритому вигляді
 		}
 
 		try {
 			const response = await fetch('http://localhost:4000/api/updateProfile', {
-				method: 'PUT', // або PATCH
+				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json',
-					Authorization: `Bearer ${localStorage.getItem('token')}`, // Додайте токен, якщо використовуєте JWT
+					Authorization: `Bearer ${localStorage.getItem('token')}`,
 				},
 				body: JSON.stringify(updatedData),
 			})
@@ -74,10 +73,8 @@ export function Profile() {
 				const data = await response.json()
 				console.log('Профіль успішно оновлено:', data)
 				setMessage('Профіль успішно оновлено!')
-				// Оновіть стан користувача, якщо сервер повертає нові дані
+
 				setUserProfile(data)
-				// Якщо використовуєте контекст, також оновіть user через setUser
-				// setUser(data);
 			} else {
 				const errorData = await response.json()
 				console.error('Помилка оновлення профілю:', errorData.message)
