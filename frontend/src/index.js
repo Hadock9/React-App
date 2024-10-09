@@ -7,7 +7,9 @@ import {
 	BrowserRouter as Router,
 	Routes,
 } from 'react-router-dom'
+import { AuthProvider } from './components/AuthContext'
 import { MenuProvider } from './components/MenuContext'
+
 import { Erorpage } from './pages/404'
 import { Home } from './pages/Home'
 import { Login } from './pages/Login'
@@ -20,7 +22,7 @@ import { Stake } from './pages/Stake'
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
 	<GoogleOAuthProvider clientId='500804855419-pms6km4isevbtq88rpgbpp02tdjq26fm.apps.googleusercontent.com'>
-		<React.StrictMode>
+		<AuthProvider>
 			<MenuProvider>
 				<Router>
 					<Routes>
@@ -36,9 +38,11 @@ root.render(
 						<Route path='/404' element={<Erorpage />} />
 						<Route path='/ResetPassword' element={<ResetPassword />} />
 						<Route path='*' element={<Navigate to='/404' replace />} />
+
+						<Route path='/terms' element={<Terms/>} />
 					</Routes>
 				</Router>
 			</MenuProvider>
-		</React.StrictMode>
+		</AuthProvider>
 	</GoogleOAuthProvider>
 )
