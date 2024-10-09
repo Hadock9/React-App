@@ -327,10 +327,17 @@ export function Registration() {
 										checked={Conditions}
 										required
 									/>
-									<label htmlFor='conditions'>Я погоджуюсь з умовами</label>
+									<label htmlFor='conditions'>Я погоджуюсь з умовами реєстрації</label>
 								</div>
 							</div>
 						</div>
+
+						{/* Перехід на сторінку з положеннями */}
+						<Link to={'/Terms'}>
+							<div className={styles.RegFormFullBlock}>
+								Переглянути умови реєстрації
+							</div>
+						</Link>
 
 						{/* Підписка на новини */}
 						<div className={`${styles.RegFormBlock} ${styles.RegFormCheckbox}`}>
