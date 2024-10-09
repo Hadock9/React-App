@@ -18,7 +18,8 @@ export function BurgerMenu() {
 	const toggleMenu = () => {
 		setIsOpen(prev => !prev)
 	}
-
+	{
+	}
 	return (
 		<aside
 			className={isOpen ? style.AsideContainer : style.AsideContainerHidden}

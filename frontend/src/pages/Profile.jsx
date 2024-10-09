@@ -86,10 +86,6 @@ export function Profile() {
 		}
 	}
 
-	if (loading) {
-		return <div>Loading...</div>
-	}
-
 	if (!isRegUser) {
 		return <div>Ви не увійшли у систему.</div>
 	}
