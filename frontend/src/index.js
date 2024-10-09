@@ -19,6 +19,7 @@ import { Profile } from './pages/Profile'
 import { Registration } from './pages/Registr'
 import { ResetPassword } from './pages/ResetPassword'
 import { Stake } from './pages/Stake'
+import {Terms} from './pages/Terms'
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
 	<GoogleOAuthProvider clientId='500804855419-pms6km4isevbtq88rpgbpp02tdjq26fm.apps.googleusercontent.com'>
@@ -40,9 +41,11 @@ root.render(
 						<Route path='*' element={<Navigate to='/404' replace />} />
 
 						<Route path='/terms' element={<Terms/>} />
+
 					</Routes>
 				</Router>
 			</MenuProvider>
 		</AuthProvider>
 	</GoogleOAuthProvider>
 )
+//<Route path='/terms' element={<Terms/>} />
