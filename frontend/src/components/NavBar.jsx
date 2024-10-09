@@ -1,10 +1,18 @@
-import { Facebook, Instagram, Twitter } from 'lucide-react'
+import {
+	Facebook,
+	Instagram,
+	Twitter,
+	UserRound,
+	UserRoundX,
+} from 'lucide-react'
 import { Link } from 'react-router-dom'
 import LogoImg from '../img/logo512.png'
-import ProfileImg from '../img/profile.jpg'
 import HeaderStyle from '../styles/NavBar.module.css'
+import { useAuth } from './AuthContext'
 
 export function NavBar() {
+	const { user, isRegUser, logout } = useAuth()
+
 	return (
 		<>
 			<header>
@@ -35,12 +43,19 @@ export function NavBar() {
 							<p>Підтримати</p>
 						</div>
 					</Link>
-
-					<Link to='/Registration'>
-						<div className={HeaderStyle.HeaderText}>
-							<p>Зареєструватися</p>
-						</div>
-					</Link>
+					{isRegUser ? (
+						<Link to='/'>
+							<div onClick={logout} className={HeaderStyle.HeaderText}>
+								<p>Розлогінитися</p>
+							</div>
+						</Link>
+					) : (
+						<Link to='/Registration'>
+							<div className={HeaderStyle.HeaderText}>
+								<p>Зареєструватися</p>
+							</div>
+						</Link>
+					)}
 				</div>
 				<div className={HeaderStyle.HeaderIcons}>
 					<Link to='https://x.com/'>
@@ -54,7 +69,7 @@ export function NavBar() {
 					</Link>
 					<Link to='/profile'>
 						<div className={HeaderStyle.Profile}>
-							<img className={HeaderStyle.ProfileImg} src={ProfileImg} alt='' />
+							{isRegUser ? <UserRound /> : <UserRoundX />}
 						</div>
 					</Link>
 				</div>

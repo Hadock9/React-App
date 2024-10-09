@@ -1,3 +1,4 @@
+/* Блок для відображення матчів */
 .MatchesBlock {
 	width: 100%;
 	height: 100%;
@@ -5,18 +6,20 @@
 	display: flex;
 	justify-content: space-between;
 }
+
+/* Відображення країни в матчах */
 .MatchesBlockCountry {
 	margin: 10px 10px;
 }
-img {
-	width: 100%;
-	height: 100%;
-}
+
+/* Блок команди в матчах */
 .MatchesBlockTeam {
 	width: 40%;
 	position: relative;
 	height: 160px;
 }
+
+/* Накладення напівпрозорого фону на блок команди */
 .MatchesBlockTeam::before {
 	content: '';
 	position: absolute;
@@ -27,11 +30,14 @@ img {
 	background-color: rgba(0, 0, 0, 0.53);
 }
 
+/* Блок для другої команди з правим розташуванням */
 .MatchesBlockAbsoluteTeam2 {
 	flex-direction: row-reverse;
 	background-repeat: no-repeat;
 	background-position: center;
 }
+
+/* Абсолютно позиціонований блок для матчу */
 .MatchesBlockAbsolute {
 	height: 160px;
 	width: 100%;
@@ -42,6 +48,8 @@ img {
 	background-repeat: no-repeat;
 	background-position: center;
 }
+
+/* Текст команди в матчах */
 .MatchesBlockTeamText {
 	font-size: 22px;
 	color: white;
@@ -51,6 +59,7 @@ img {
 	justify-content: flex-end;
 }
 
+/* Логотип команди */
 .MatchesBlockImgLogo {
 	width: auto;
 	height: 140px;
@@ -58,6 +67,7 @@ img {
 	margin-left: 10%;
 }
 
+/* Коефіцієнт для ставок */
 .MatchesBlockCoef {
 	border-radius: 50%;
 	background-color: #5f646d;
@@ -70,16 +80,23 @@ img {
 	align-items: center;
 	color: white;
 }
+
+/* Позиція коефіцієнта для першої команди */
 .MatchesBlockTeam1Coef {
 	right: 25px;
 }
+
+/* Позиція коефіцієнта для другої команди */
 .MatchesBlockTeam2Coef {
 	left: 25px;
 }
+
+/* Блок країни для першої команди */
 .Team1Country {
 	width: 100px;
 }
 
+/* Центрування контенту в блоці матчів */
 .MatchesBlockCenter {
 	width: 20%;
 	height: 100%;
@@ -93,19 +110,25 @@ img {
 	margin: 0px;
 	font-size: 18px;
 }
+
+/* Дата та час матчу */
 .MatchesBlockVsDateTime {
 	text-align: center;
-
 	font-weight: 600;
 }
+
+/* Відображення "VS" в матчах */
 .MatchesBlockVs {
 	font-weight: 700;
 }
+
+/* Час матчу */
 .MatchesBlockTime {
 	font-weight: 700;
 	font-size: 24px;
 }
 
+/* Блок для ставок */
 .MatchesBlockStake {
 	display: flex;
 	width: 100%;
@@ -113,13 +136,15 @@ img {
 	background-color: #393e46;
 	color: white;
 }
-/* ... */
+
+/* Заголовок блоку */
 .Title {
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
 }
 
+/* Блок карти з градієнтом */
 .MapBlock {
 	width: 33%;
 	height: 170px;
@@ -129,19 +154,24 @@ img {
 	background-position: center;
 	color: white;
 }
-/* ... */
+
+/* Блок для статистики */
 .StatsBlock {
 	width: 100%;
 	display: flex;
 }
+
+/* Командний блок для статистики */
 .StatsBlockTeam {
 	width: 50%;
 }
 
+/* Основний контейнер для таблиці */
 .table_component {
 	width: 100%;
 }
 
+/* Стили для таблиці */
 .table_component table {
 	width: 100%;
 	table-layout: fixed;
@@ -150,16 +180,19 @@ img {
 	text-align: left;
 }
 
+/* Заголовок таблиці */
 .table_component caption {
 	caption-side: top;
 	text-align: left;
 }
 
+/* Стили для заголовків таблиці */
 .table_component th {
 	color: white;
 	padding: 5px;
 }
 
+/* Стили для клітинок таблиці */
 .table_component td {
 	color: white;
 	padding: 5px;

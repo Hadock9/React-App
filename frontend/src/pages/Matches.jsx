@@ -7,10 +7,11 @@ import { MySearch } from '../components/Search'
 import rootstyle from '../styles/root.module.css'
 
 export function Matches() {
-	const [value, Setvalue] = useState('')
-	//  Оновлюєм значення із MySearch
+	const [value, Setvalue] = useState('') // Стан для зберігання значення пошуку
+
+	// Оновлюємо значення із MySearch
 	const handleValueChange = value => {
-		Setvalue(value)
+		Setvalue(value) // Оновлення стану при зміні значення
 	}
 
 	return (

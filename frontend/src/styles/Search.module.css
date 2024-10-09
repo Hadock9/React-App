@@ -1,27 +1,33 @@
+/* Блок для пошуку */
 .SearchBlock {
 	width: 100%;
 	display: flex;
 	justify-content: center;
 }
+
+/* Контейнер для поля пошуку */
 .Search {
 	width: 500px;
 	display: flex;
 }
 
+/* Поле вводу для пошуку */
 .CustomInput {
 	width: 100%;
 	height: 40px;
 	margin-left: 10px;
 	box-sizing: border-box;
 	border: none;
-
 	border-radius: 10px 0px 0px 10px;
 	border-bottom: 2px solid grey;
 }
 
+/* Стиль для активного поля вводу */
 .CustomInput:focus {
 	outline: none;
 }
+
+/* Кнопка для пошуку */
 .CustomButton {
 	height: 40px;
 	cursor: pointer;
@@ -32,9 +38,13 @@
 	border-bottom: 2px solid grey;
 	border-left: 2px solid grey;
 }
+
+/* Контейнер для основного контенту */
 .Container {
 	display: flex;
 }
+
+/* Головний блок контенту */
 .Main {
 	width: 75%;
 	height: 100%;
