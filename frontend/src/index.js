@@ -7,8 +7,8 @@ import {
 	BrowserRouter as Router,
 	Routes,
 } from 'react-router-dom'
-import { AuthProvider } from './components/AuthContext'
-import { MenuProvider } from './components/MenuContext'
+import { AuthProvider } from './context/AuthContext'
+import { MenuProvider } from './context/MenuContext'
 
 import { Erorpage } from './pages/404'
 import { Home } from './pages/Home'
@@ -19,7 +19,7 @@ import { Profile } from './pages/Profile'
 import { Registration } from './pages/Registr'
 import { ResetPassword } from './pages/ResetPassword'
 import { Stake } from './pages/Stake'
-import {Terms} from './pages/Terms'
+import { Terms } from './pages/Terms'
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
 	<GoogleOAuthProvider clientId='500804855419-pms6km4isevbtq88rpgbpp02tdjq26fm.apps.googleusercontent.com'>
@@ -32,7 +32,6 @@ root.render(
 						<Route path='/Login' element={<Login />} />
 						<Route path='/Home' element={<Home />} />
 						<Route path='/Stake' element={<Stake />} />
-
 						<Route path='/Profile' element={<Profile />} />
 						<Route path={'Home/:Game/Matches'} element={<Matches />} />
 						<Route path={'Home/:Game/Matches/:Match'} element={<Match />} />
@@ -40,8 +39,7 @@ root.render(
 						<Route path='/ResetPassword' element={<ResetPassword />} />
 						<Route path='*' element={<Navigate to='/404' replace />} />
 
-						<Route path='/terms' element={<Terms/>} />
-
+						<Route path='/terms' element={<Terms />} />
 					</Routes>
 				</Router>
 			</MenuProvider>

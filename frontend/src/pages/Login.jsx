@@ -3,12 +3,9 @@ import { jwtDecode } from 'jwt-decode' // Іменований імпорт
 import { Lock, LockOpen, Mail } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useAuth } from '../components/AuthContext'
-import {
-	validateEmail,
-	validatePassword,
-} from '../components/FormValidation.js'
-import Logon from '../components/loginGoogle.js'
+import { useAuth } from '../context/AuthContext'
+import { validateEmail, validatePassword } from '../js/FormValidation.js'
+import Logon from '../js/loginGoogle.js'
 import CustomForm from '../styles/CustomForm.module.css'
 import styles from '../styles/RegistrationLogin.module.css'
 

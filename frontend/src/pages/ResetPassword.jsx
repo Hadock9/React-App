@@ -1,6 +1,6 @@
 import { Mail } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { validateEmail } from '../components/FormValidation.js'
+import { validateEmail } from '../js/FormValidation.js'
 import CustomForm from '../styles/CustomForm.module.css'
 import styles from '../styles/RegistrationLogin.module.css'
 

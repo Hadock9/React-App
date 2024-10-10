@@ -1,26 +1,22 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import CsMiniLogo1 from '../img/GamesMiniLogo/counterstrike.png'
 import CsMiniLogo2 from '../img/GamesMiniLogo/counterstrikeminlogo.png'
+import { formatDate } from '../js/TimeValidation'
 import style from '../styles/Matches.module.css'
 import { CheckFetch } from './BadFatchDisclaimer'
 import { NoResultDisclaimer } from './NoResultDisclaimer'
 
-const formatDate = dateString => {
-	const date = new Date(dateString)
-	const year = date.getFullYear()
-	const month = String(date.getMonth() + 1).padStart(2, '0')
-	const day = String(date.getDate()).padStart(2, '0')
-
-	return `${year}-${month}-${day}`
-}
-
 export function MatchBlock({ value }) {
 	const [Match, setData] = useState([])
 	const [failedToFetch, setFailedToFetch] = useState(false)
-	// Fetch users from the backend
+
+	const [searchParams] = useSearchParams()
+	const game_id = searchParams.get('game_id')
+	console.log(game_id)
+	// Fetch Match_List${game_id} from the backend
 	useEffect(() => {
-		fetch('http://localhost:4000/api/Match_List')
+		fetch(`http://localhost:4000/api/Match_List/${game_id}`)
 			.then(res => res.json())
 			.then(data => {
 				setFailedToFetch(false)
@@ -31,6 +27,7 @@ export function MatchBlock({ value }) {
 				console.log('Failed to fetch: ', error)
 			})
 	}, [])
+
 	console.log(Match)
 	const filterMatches = Match.filter(Match => {
 		return (
@@ -45,10 +42,9 @@ export function MatchBlock({ value }) {
 				filterMatches.map(Match => {
 					return (
 						<Link
-							to={Match.Team1Name + 'Vs' + Match.Team1Name}
-							state={{ idMatch: Match.MatchID }}
-							key={Match.MatchID}
+							to={`${Match.Team1Name}_Vs_${Match.Team2Name}?idMatch=${Match.MatchID}`}
 						>
+							{console.log(Match)}
 							<div className={style.MatchesBlock}>
 								<div className={style.MatchesBlockInfo}>
 									<div className={style.MatchesBlockTeam}>

@@ -23,15 +23,17 @@
 }
 
 /* Блок зображення профілю */
-.ProfileDivImg {
+.ProfileDivUser {
 	margin-top: -80px;
 	margin-bottom: 30px;
 	border: 2px white solid;
+	background-color: #f2f2f2;
 	border-radius: 50%;
 	height: 170px;
 	width: 170px;
 	overflow: hidden;
 	display: flex;
+	justify-content: center;
 	align-items: center;
 }
 

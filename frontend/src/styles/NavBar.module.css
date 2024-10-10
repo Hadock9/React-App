@@ -9,13 +9,19 @@ header {
 	box-shadow: -1px 9px 13px -7px rgba(48, 41, 41, 0.76);
 	position: relative;
 }
-
+.BlockLogin {
+	display: flex;
+	padding-right: 10px;
+	justify-content: center;
+	align-items: center;
+}
 /* Логотип заголовка */
 .HeaderLogo {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	height: 60px;
+	width: 5%;
 }
 
 /* Блок тексту заголовка */
@@ -38,7 +44,7 @@ header {
 
 /* Іконки заголовка */
 .HeaderIcons {
-	width: 10%;
+	width: 15%;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;

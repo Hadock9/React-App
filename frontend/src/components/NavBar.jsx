@@ -1,17 +1,11 @@
-import {
-	Facebook,
-	Instagram,
-	Twitter,
-	UserRound,
-	UserRoundX,
-} from 'lucide-react'
+import { UserRound, UserRoundX } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 import LogoImg from '../img/logo512.png'
 import HeaderStyle from '../styles/NavBar.module.css'
-import { useAuth } from './AuthContext'
 
 export function NavBar() {
-	const { user, isRegUser, logout } = useAuth()
+	const { isRegUser, logout } = useAuth()
 
 	return (
 		<>
@@ -40,33 +34,40 @@ export function NavBar() {
 
 					<Link to='/Home'>
 						<div className={HeaderStyle.HeaderText}>
+							<p>Контакти</p>
+						</div>
+					</Link>
+
+					<Link to='/Home'>
+						<div className={HeaderStyle.HeaderText}>
 							<p>Підтримати</p>
 						</div>
 					</Link>
+				</div>
+				<div className={HeaderStyle.HeaderIcons}>
 					{isRegUser ? (
-						<Link to='/'>
+						<Link to='/Home'>
 							<div onClick={logout} className={HeaderStyle.HeaderText}>
 								<p>Розлогінитися</p>
 							</div>
 						</Link>
 					) : (
-						<Link to='/Registration'>
-							<div className={HeaderStyle.HeaderText}>
-								<p>Зареєструватися</p>
+						<div className={HeaderStyle.BlockLogin}>
+							<Link to='/Login'>
+								<div className={HeaderStyle.BlockLoginText}>
+									<p>Вхід </p>
+								</div>
+							</Link>
+							<div className={HeaderStyle.BlockLoginText}>
+								<p>&nbsp;/&nbsp;</p>
 							</div>
-						</Link>
+							<Link to='/Registration'>
+								<div className={HeaderStyle.BlockLoginText}>
+									<p> Зареєструватися</p>
+								</div>
+							</Link>
+						</div>
 					)}
-				</div>
-				<div className={HeaderStyle.HeaderIcons}>
-					<Link to='https://x.com/'>
-						<Twitter />
-					</Link>
-					<Link to='https://www.facebook.com/'>
-						<Facebook />
-					</Link>
-					<Link to='https://www.instagram.com/'>
-						<Instagram />
-					</Link>
 					<Link to='/profile'>
 						<div className={HeaderStyle.Profile}>
 							{isRegUser ? <UserRound /> : <UserRoundX />}

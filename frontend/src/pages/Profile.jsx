@@ -1,15 +1,18 @@
+import { UserRound } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
-import { useAuth } from '../components/AuthContext'
 import { NavBar } from '../components/NavBar'
+import { NotAuthorized } from '../components/NotAuthorized'
+import { useAuth } from '../context/AuthContext'
+import { formatDate } from '../js/TimeValidation'
 import style from '../styles/Profile.module.css'
 
 export function Profile() {
-	const { user, isRegUser, loading } = useAuth()
+	const { user, isRegUser } = useAuth()
 	const [UserProfile, setUserProfile] = useState(null)
 	const [formData, setFormData] = useState({
 		firstName: '',
 		lastName: '',
-		dob: '',
+		date_of_birth: '',
 		gender: '',
 		email: '',
 		documentNumber: '',
@@ -19,6 +22,9 @@ export function Profile() {
 	})
 	const [message, setMessage] = useState('')
 
+	const [date_of_birthDirty, setdate_of_birthDirty] = useState(false)
+	const [gender, setgenderDirty] = useState(false)
+
 	// Оновлюємо UserProfile, коли user змінюється
 	useEffect(() => {
 		if (user) {
@@ -26,17 +32,28 @@ export function Profile() {
 			setFormData({
 				firstName: user.first_name,
 				lastName: user.last_name,
-				dob: user.birthDate,
+				date_of_birth: formatDate(user.date_of_birth),
 				gender: user.gender,
 				email: user.email,
-				documentNumber: user.documentNumber,
-				phone: user.phone,
+				created_at: user.created_at,
+				phone: user.phone_number,
 				country: user.country,
 				password: '',
 			})
 		}
 	}, [user])
-
+	const handleBlur = e => {
+		switch (e.target.name) {
+			case 'gender':
+				setgenderDirty(true)
+				break
+			case 'date_of_birth':
+				setdate_of_birthDirty(true)
+				break
+			default:
+				break
+		}
+	}
 	const handleChange = e => {
 		const { name, value } = e.target
 		setFormData(prevState => ({
@@ -47,14 +64,14 @@ export function Profile() {
 
 	const handleSave = async e => {
 		e.preventDefault()
-		// Логіка для збереження змін, наприклад, відправка на сервер
+		// Логіка для збереження змін
 		const updatedData = {
 			first_name: formData.firstName,
 			last_name: formData.lastName,
-			birthDate: formData.dob,
+			date_of_birth: formData.date_of_birth,
 			gender: formData.gender,
 			email: formData.email,
-			documentNumber: formData.documentNumber,
+			created_at: formData.created_at,
 			phone: formData.phone,
 			country: formData.country,
 		}
@@ -87,7 +104,7 @@ export function Profile() {
 	}
 
 	if (!isRegUser) {
-		return <div>Ви не увійшли у систему.</div>
+		return <NotAuthorized />
 	}
 
 	if (!UserProfile) {
@@ -101,8 +118,9 @@ export function Profile() {
 				{/* Фон профілю */}
 				<div className={style.ProfileBlock}>
 					{/* Основний блок профілю */}
-					<div className={style.ProfileDivImg}>
+					<div className={style.ProfileDivUser}>
 						{/* Зображення профілю */}
+						<UserRound width={46} height={46} />
 						<div>{/* Зображення профілю */}</div>
 					</div>
 					{message && <div className={style.Message}>{message}</div>}
@@ -115,7 +133,7 @@ export function Profile() {
 									<input
 										className={style.CustomInput}
 										type='text'
-										value={UserProfile.id || ''}
+										value={UserProfile.id}
 										readOnly
 									/>
 								</div>
@@ -131,7 +149,7 @@ export function Profile() {
 										name='firstName'
 										value={formData.firstName}
 										onChange={handleChange}
-										placeholder='Василь'
+										placeholder=' '
 										required
 									/>
 								</div>
@@ -145,7 +163,7 @@ export function Profile() {
 										name='lastName'
 										value={formData.lastName}
 										onChange={handleChange}
-										placeholder='Фальовський'
+										placeholder=' '
 										required
 									/>
 								</div>
@@ -158,10 +176,10 @@ export function Profile() {
 									<input
 										className={style.CustomInput}
 										type='date'
-										name='dob'
-										value={formData.dob}
+										name='date_of_birth'
+										value={formData.date_of_birth}
 										onChange={handleChange}
-										placeholder='12.01.2004'
+										placeholder=' '
 										required
 									/>
 								</div>
@@ -174,6 +192,7 @@ export function Profile() {
 										name='gender'
 										value={formData.gender}
 										onChange={handleChange}
+										onBlur={handleBlur}
 										required
 									>
 										<option value=''>Виберіть стать</option>
@@ -194,24 +213,21 @@ export function Profile() {
 										name='email'
 										value={formData.email}
 										onChange={handleChange}
-										placeholder='Ron.bartonzzz@gmail.com'
+										placeholder=''
 										required
 									/>
 								</div>
 							</div>
 							<div className={style.ProfileBlockText}>
 								<div className={style.LabelInput}>
-									<label className={style.CustomLabel}>
-										Номер основного документа
-									</label>
+									<label className={style.CustomLabel}>Дата реєстрації</label>
 									<input
 										className={style.CustomInput}
 										type='text'
-										name='documentNumber'
-										value={formData.documentNumber}
+										name='created_at'
+										value={formatDate(formData.created_at)}
 										onChange={handleChange}
-										placeholder=' '
-										required
+										readOnly
 									/>
 								</div>
 							</div>
@@ -240,7 +256,7 @@ export function Profile() {
 										name='country'
 										value={formData.country}
 										onChange={handleChange}
-										placeholder='Україна'
+										placeholder=''
 										required
 									/>
 								</div>

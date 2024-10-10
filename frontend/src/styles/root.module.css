@@ -20,6 +20,7 @@ a {
 /* Контейнер для основного контенту */
 .Container {
 	display: flex;
+	flex: 1;
 }
 
 /* Головний блок контенту */
@@ -30,4 +31,10 @@ a {
 	flex-direction: column;
 	margin: 0 auto;
 	margin-top: 10px;
+}
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
 }

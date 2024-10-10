@@ -8,7 +8,7 @@ import {
 	Menu,
 	Wallet,
 } from 'lucide-react'
-import { useMenu } from '../components/MenuContext'
+import { useMenu } from '../context/MenuContext'
 
 import style from '../styles/BurgerMenu.module.css'
 

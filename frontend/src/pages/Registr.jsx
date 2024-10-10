@@ -9,7 +9,7 @@ import {
 	validateName,
 	validatePassword,
 	validateRePassword,
-} from '../components/FormValidation.js'
+} from '../js/FormValidation.js'
 import CustomForm from '../styles/CustomForm.module.css'
 import styles from '../styles/RegistrationLogin.module.css'
 
@@ -327,7 +327,9 @@ export function Registration() {
 										checked={Conditions}
 										required
 									/>
-									<label htmlFor='conditions'>Я погоджуюсь з умовами реєстрації</label>
+									<label htmlFor='conditions'>
+										Я погоджуюсь з умовами реєстрації
+									</label>
 								</div>
 							</div>
 						</div>

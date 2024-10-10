@@ -43,7 +43,7 @@ export function GamesList({ value }) {
 							to={
 								'/Home/' +
 								game.name.replaceAll(' ', '_').replaceAll('-', '_') +
-								'/Matches'
+								`/Matches?game_id=${game.id}`
 							}
 							key={game.id}
 						>

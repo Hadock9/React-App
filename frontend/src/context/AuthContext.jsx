@@ -1,4 +1,4 @@
-import { jwtDecode } from 'jwt-decode' // Іменований імпорт
+import { jwtDecode } from 'jwt-decode'
 import React, { createContext, useContext, useEffect, useState } from 'react'
 
 export const AuthContext = createContext()
