@@ -65,8 +65,8 @@
 
 /* Зображення країни */
 .MatchesBlockImgCountry {
-	height: 20px;
-	width: 20px;
+	height: auto;
+	width: 25px;
 }
 
 /* Логотип команди */
@@ -104,18 +104,21 @@
 .MatchesBlockSide {
 	width: 40%;
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 	align-items: center;
 	border-radius: 10px 0px 0px 10px;
 	background-color: #545961;
+	padding-right: 10px;
+	text-align: center;
+	color: white;
+	font-weight: 600;
 }
 
 /* Зображення для сторони 1 */
 .MatchesSideBlockImg1 {
-	margin-left: -30px;
+	margin: 0 30px;
 }
 
-/* Зображення для команд */
 .MatchesSideImg {
 	width: auto;
 	height: 28px;

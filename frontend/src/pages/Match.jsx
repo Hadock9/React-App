@@ -75,7 +75,7 @@ export function Match() {
 							{/* Блок для відображення результату матчу */}
 							<div className={style.MatchesBlockCenter}>
 								<p className={style.MatchesBlockVsDateTime}>
-									{formatDate(match.VsDateTime)} {/* Форматована дата матчу */}
+									{formatDate(match.VsDate)} {/* Форматована дата матчу */}
 								</p>
 								<p className={style.MatchesBlockVs}>Vs</p>
 								<p className={style.MatchesBlockTime}>

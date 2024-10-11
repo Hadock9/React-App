@@ -29,7 +29,7 @@ export function Matches() {
 					<BurgerMenu />
 					<main className={rootstyle.Main}>
 						<MySearch onChange={handleValueChange} />
-						<h1>Matches</h1>
+
 						<MatchBlock value={value} />
 					</main>
 				</div>

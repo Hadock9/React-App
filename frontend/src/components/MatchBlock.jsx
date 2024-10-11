@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import CsMiniLogo1 from '../img/GamesMiniLogo/counterstrike.png'
-import CsMiniLogo2 from '../img/GamesMiniLogo/counterstrikeminlogo.png'
 import { formatDate } from '../js/TimeValidation'
 import style from '../styles/Matches.module.css'
 import { CheckFetch } from './BadFatchDisclaimer'
@@ -37,12 +35,14 @@ export function MatchBlock({ value }) {
 	})
 	return (
 		<>
+			<h1>Matches</h1>
 			{failedToFetch ? <CheckFetch /> : console.log('Successful Fetch')}
 			{filterMatches.length > 0 ? (
 				filterMatches.map(Match => {
 					return (
 						<Link
 							to={`${Match.Team1Name}_Vs_${Match.Team2Name}?idMatch=${Match.MatchID}`}
+							key={Match.MatchID}
 						>
 							{console.log(Match)}
 							<div className={style.MatchesBlock}>
@@ -71,7 +71,7 @@ export function MatchBlock({ value }) {
 									</div>
 									<div className={style.MatchesBlockCenter}>
 										<p className={style.MatchesBlockVsDateTime}>
-											{formatDate(Match.VsDateTime)}
+											{formatDate(Match.VsDate)}
 										</p>
 										<p className={style.MatchesBlockVs}>Vs</p>
 										<p className={style.MatchesBlockPlace}> {Match.Place}</p>
@@ -104,18 +104,18 @@ export function MatchBlock({ value }) {
 										<img
 											draggable='false'
 											className={style.MatchesSideImg}
-											src={CsMiniLogo1}
+											src={'/' + Match.GameMinLogo}
 											alt=''
 										/>
 									</div>
 									<div className={style.MatchesSideText}>
-										<p>European Pro League Season 19</p>
+										<p>{Match.season}</p>
 									</div>
 									<div className={style.MatchesSideBlockImg}>
 										<img
 											draggable='false'
 											className={style.MatchesSideImg}
-											src={CsMiniLogo2}
+											src={'/' + Match.GameMinLogo}
 											alt=''
 										/>
 									</div>
