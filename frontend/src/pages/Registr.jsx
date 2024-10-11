@@ -12,6 +12,7 @@ import {
 } from '../js/FormValidation.js'
 import CustomForm from '../styles/CustomForm.module.css'
 import styles from '../styles/RegistrationLogin.module.css'
+import rootstyles from '../styles/root.module.css'
 
 export function Registration() {
 	const navigate = useNavigate()
@@ -327,19 +328,14 @@ export function Registration() {
 										checked={Conditions}
 										required
 									/>
-									<label htmlFor='conditions'>
-										Я погоджуюсь з умовами реєстрації
-									</label>
+									<Link className={rootstyles.link} to={'/Terms'}>
+										<label htmlFor='conditions'>
+											Я погоджуюсь з умовами реєстрації
+										</label>
+									</Link>
 								</div>
 							</div>
 						</div>
-
-						{/* Перехід на сторінку з положеннями */}
-						<Link to={'/Terms'}>
-							<div className={styles.RegFormFullBlock}>
-								Переглянути умови реєстрації
-							</div>
-						</Link>
 
 						{/* Підписка на новини */}
 						<div className={`${styles.RegFormBlock} ${styles.RegFormCheckbox}`}>
