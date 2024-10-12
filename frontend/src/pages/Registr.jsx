@@ -2,6 +2,7 @@ import { Lock, LockOpen, Mail, UserRound } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
+import { Terms } from '../components/Terms.jsx'
 import {
 	validateConditions,
 	validateEmail,
@@ -27,6 +28,7 @@ export function Registration() {
 	const [Conditions, setConditions] = useState(false)
 	const [FormValid, setFormValid] = useState(false) // Для визначення, чи форма готова до відправлення
 
+	const [ReadTerms, setReadTerms] = useState(false)
 	// Змінні стану, щоб відстежувати, чи ввід було сфокусовано
 	const [EmailDirty, setEmailDirty] = useState(false)
 	const [PasswordDirty, setPasswordDirty] = useState(false)
@@ -187,7 +189,12 @@ export function Registration() {
 			} catch (error) {}
 		}
 	}
-
+	const handleReadTerms = () => {
+		setReadTerms(true)
+	}
+	if (ReadTerms) {
+		return <Terms setReadTerms={setReadTerms} />
+	}
 	return (
 		<div className={styles.Container}>
 			<div className={styles.RightBlock}></div>
@@ -328,7 +335,7 @@ export function Registration() {
 										checked={Conditions}
 										required
 									/>
-									<Link className={rootstyles.link} to={'/Terms'}>
+									<Link onClick={handleReadTerms} className={rootstyles.link}>
 										<label htmlFor='conditions'>
 											Я погоджуюсь з умовами реєстрації
 										</label>

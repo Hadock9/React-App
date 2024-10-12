@@ -7,6 +7,7 @@
 	justify-content: space-between;
 	margin-bottom: 10px;
 	cursor: pointer;
+	border-radius: 10px;
 }
 
 /* Країна матчів */
@@ -106,7 +107,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	border-radius: 10px 0px 0px 10px;
+	border-radius: 10px;
 	background-color: #545961;
 	padding-right: 10px;
 	text-align: center;
