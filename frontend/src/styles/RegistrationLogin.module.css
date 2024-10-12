@@ -98,7 +98,9 @@ a {
 	display: flex;
 	justify-content: space-between;
 }
-
+.RegFormBlockPassword {
+	cursor: pointer;
+}
 /* Блок для введення даних */
 .RegFormBlock {
 	display: flex;
@@ -173,6 +175,8 @@ a {
 
 /* Блок після форми */
 .AfterForm {
+	display: flex;
+	justify-content: center;
 	margin-top: 20px;
 	text-align: center;
 	font-size: 14px;

@@ -1,46 +1,38 @@
 import { Map } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import { CheckFetch } from '../components/BadFatchDisclaimer'
 import { UkrainianWar } from '../components/BlockSaveUkraine'
 import { BurgerMenu } from '../components/BurgerMenu'
+import { Footer } from '../components/Footer'
 import { NavBar } from '../components/NavBar'
+import { extractHoursAndMinutes, formatDate } from '../js/TimeValidation'
 import style from '../styles/Match.module.css'
 import rootstyle from '../styles/root.module.css'
-function extractHoursAndMinutes(timeString) {
-	const [hours, minutes] = timeString.split(':')
-	return `${hours}:${minutes}`
-}
-const formatDate = dateString => {
-	const date = new Date(dateString)
-	const year = date.getFullYear()
-	const month = String(date.getMonth() + 1).padStart(2, '0')
-	const day = String(date.getDate()).padStart(2, '0')
 
-	return `${year}-${month}-${day}`
-}
 export function Match() {
-	const location = useLocation()
-	const { idMatch } = location.state
+	const [searchParams] = useSearchParams()
+	const idMatch = searchParams.get('idMatch')
+	console.log(idMatch)
+	const [matches, setData] = useState([]) // Стан для зберігання матчів
+	const [failedToFetch, setFailedToFetch] = useState(false) // Стан для відслідковування помилки запиту
 
-	const [matches, setData] = useState([])
-	const [failedToFetch, setFailedToFetch] = useState(false)
-	// Fetch 1 Match from the backends
+	// Fetch 1 Match from the backend
 	useEffect(() => {
 		fetch(`http://localhost:4000/api/Match_List/Match/${idMatch}`)
 			.then(res => res.json())
 			.then(data => {
-				setData(data)
-				setFailedToFetch(false)
+				setData(data) // Оновлення стану з отриманими даними
+				setFailedToFetch(false) // Скидання помилки
 			})
 			.catch(error => {
-				setFailedToFetch(true)
+				setFailedToFetch(true) // Встановлення помилки у разі невдачі
 				console.log('Failed to fetch: ', error)
 			})
 	}, [])
 
 	return (
-		<>
+		<div className={rootstyle.wrapper}>
 			<NavBar />
 			<UkrainianWar />
 
@@ -49,6 +41,7 @@ export function Match() {
 				<main className={rootstyle.Main}>
 					{matches.map((match, index) => (
 						<div className={style.MatchesBlock} key={index}>
+							{/* Блок для команди 1 */}
 							<div
 								className={style.MatchesBlockTeam}
 								style={{
@@ -78,16 +71,19 @@ export function Match() {
 									</div>
 								</div>
 							</div>
+
+							{/* Блок для відображення результату матчу */}
 							<div className={style.MatchesBlockCenter}>
 								<p className={style.MatchesBlockVsDateTime}>
-									{formatDate(match.VsDateTime)}
+									{formatDate(match.VsDate)} {/* Форматована дата матчу */}
 								</p>
-								{console.log(match)}
 								<p className={style.MatchesBlockVs}>Vs</p>
 								<p className={style.MatchesBlockTime}>
-									{extractHoursAndMinutes(match.time)}
+									{extractHoursAndMinutes(match.time)} {/* Час матчу */}
 								</p>
 							</div>
+
+							{/* Блок для команди 2 */}
 							<div
 								className={style.MatchesBlockTeam}
 								style={{
@@ -121,16 +117,23 @@ export function Match() {
 							</div>
 						</div>
 					))}
+
+					{/* Відображення повідомлення про помилку при невдалому запиті */}
 					{failedToFetch ? <CheckFetch /> : console.log('Successful Fetch')}
+
 					<div className={style.MatchesBlockStake}>
-						<p>Зробити ставку із коефіцієнтом </p>
+						<p>Зробити ставку із коефіцієнтом </p> {/* Блок для ставок */}
 					</div>
 
+					{/* Заголовок для карт */}
 					<div className={style.Title}>
 						<Map />
 						<h3>Карти</h3>
 					</div>
+
+					{/* Блок для відображення таблиць карт */}
 					<div className={style.MatchesBlock}>
+						{/* Map 1 */}
 						<div className={`${style.table_component} ${style.MapBlock}`}>
 							<table>
 								<caption>
@@ -162,6 +165,7 @@ export function Match() {
 								</tbody>
 							</table>
 						</div>
+						{/* Map 2 */}
 						<div className={`${style.table_component} ${style.MapBlock}`}>
 							<table>
 								<caption>
@@ -193,6 +197,7 @@ export function Match() {
 								</tbody>
 							</table>
 						</div>
+						{/* Map 3 */}
 						<div className={`${style.table_component} ${style.MapBlock}`}>
 							<table>
 								<caption>
@@ -225,186 +230,71 @@ export function Match() {
 							</table>
 						</div>
 					</div>
+
+					{/* Заголовок для статистики гравців */}
 					<div className={style.Title}>
 						<Map />
 						<h3>Статистика Гравців</h3>
 					</div>
+
+					{/* Блок для відображення таблиць статистики гравців */}
 					<div className={style.MatchesBlock}>
-						<div className={style.StatsBlock}>
-							<div
-								className={`${style.table_component} ${style.StatsBlockTeam}`}
-							>
-								<table>
-									<caption>
-										<p>Team1 </p>
-									</caption>
-									<thead>
-										<tr>
-											<th></th>
-											<th></th>
-											<th>K</th>
-											<th>D</th>
-											<th>A</th>
-											<th>NET</th>
-											<th>LH/DN</th>
-											<th>GMP / XMP</th>
-											<th>GOLD</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td></td>
-											<td>player1</td>
-											<td>3 </td>
-											<td>3</td>
-											<td>5</td>
-											<td>4.7K</td>
-											<td>44 / 2</td>
-											<td>
-												<div>239 / 344</div>
-											</td>
-											<td>327</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td>player2</td>
-											<td>2</td>
-											<td>4</td>
-											<td>3</td>
-											<td>10.7K</td>
-											<td>
-												<div>32 / 2</div>
-											</td>
-											<td>534 / 650</td>
-											<td>127</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td>player3</td>
-											<td>1</td>
-											<td>2</td>
-											<td>5</td>
-											<td>14.7K</td>
-											<td>44 / 2</td>
-											<td>519 / 534</td>
-											<td>427</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td>player4</td>
-											<td>1</td>
-											<td>4</td>
-											<td>2</td>
-											<td>13.7K</td>
-											<td>
-												<div>107 / 5</div>
-											</td>
-											<td>360 / 370</td>
-											<td>237</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td>player5</td>
-											<td>2</td>
-											<td>5</td>
-											<td>4</td>
-											<td>9.7K</td>
-											<td>32 / 2</td>
-											<td>220 / 290</td>
-											<td>423</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-							<div
-								className={`${style.table_component} ${style.StatsBlockTeam}`}
-							>
-								<table>
-									<caption>
-										<p>Team1 </p>
-									</caption>
-									<thead>
-										<tr>
-											<th></th>
-											<th></th>
-											<th>K</th>
-											<th>D</th>
-											<th>A</th>
-											<th>NET</th>
-											<th>LH/DN</th>
-											<th>GMP / XMP</th>
-											<th>GOLD</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td></td>
-											<td>player1</td>
-											<td>3 </td>
-											<td>3</td>
-											<td>5</td>
-											<td>4.7K</td>
-											<td>44 / 2</td>
-											<td>
-												<div>239 / 344</div>
-											</td>
-											<td>327</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td>player2</td>
-											<td>2</td>
-											<td>4</td>
-											<td>3</td>
-											<td>10.7K</td>
-											<td>
-												<div>32 / 2</div>
-											</td>
-											<td>534 / 650</td>
-											<td>127</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td>player3</td>
-											<td>1</td>
-											<td>2</td>
-											<td>5</td>
-											<td>14.7K</td>
-											<td>44 / 2</td>
-											<td>519 / 534</td>
-											<td>427</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td>player4</td>
-											<td>1</td>
-											<td>4</td>
-											<td>2</td>
-											<td>13.7K</td>
-											<td>
-												<div>107 / 5</div>
-											</td>
-											<td>360 / 370</td>
-											<td>237</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td>player5</td>
-											<td>2</td>
-											<td>5</td>
-											<td>4</td>
-											<td>9.7K</td>
-											<td>32 / 2</td>
-											<td>220 / 290</td>
-											<td>423</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
+						{/* Гравець 1 */}
+						<div className={`${style.table_component} ${style.MapBlock}`}>
+							<table>
+								<caption>
+									<p>Player 1: </p>
+								</caption>
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Score</th>
+										<th>Kill</th>
+										<th>Death</th>
+										<th>Assists</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Bruv123</td>
+										<td>3</td>
+										<td>10</td>
+										<td>4</td>
+										<td>5</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						{/* Гравець 2 */}
+						<div className={`${style.table_component} ${style.MapBlock}`}>
+							<table>
+								<caption>
+									<p>Player 2: </p>
+								</caption>
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Score</th>
+										<th>Kill</th>
+										<th>Death</th>
+										<th>Assists</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Kukuys</td>
+										<td>4</td>
+										<td>12</td>
+										<td>5</td>
+										<td>6</td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</main>
 			</div>
-		</>
+			<Footer />
+		</div>
 	)
 }

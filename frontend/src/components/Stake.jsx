@@ -67,7 +67,7 @@ export function Stake() {
 						name='Coef'
 						onChange={e => setCoef(e.target.value)}
 					/>
-
+					{}
 					<button>submit</button>
 				</form>
 			</div>

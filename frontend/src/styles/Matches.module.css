@@ -1,3 +1,4 @@
+/* Контейнер для блоку матчів */
 .MatchesBlock {
 	width: 100%;
 	height: 100%;
@@ -6,10 +7,15 @@
 	justify-content: space-between;
 	margin-bottom: 10px;
 	cursor: pointer;
+	border-radius: 10px;
 }
+
+/* Країна матчів */
 .MatchesBlockCountry {
 	margin: 10px 10px;
 }
+
+/* Коефіцієнт ставки */
 .MatchesBlockCoef {
 	border-radius: 50%;
 	background-color: #5f646d;
@@ -22,28 +28,34 @@
 	align-items: center;
 	color: white;
 }
+
+/* Коефіцієнт для команди 1 */
 .MatchesBlockTeam1Coef {
 	right: 25px;
 }
+
+/* Коефіцієнт для команди 2 */
 .MatchesBlockTeam2Coef {
 	left: 25px;
 }
-img {
-	width: 100%;
-	height: 100%;
-}
+
+/* Інформація про матч */
 .MatchesBlockInfo {
 	width: 55%;
 	height: 120px;
 	display: flex;
 	padding-top: 10px;
 }
+
+/* Команда 1 */
 .MatchesBlockTeam {
 	width: 40%;
 	position: relative;
 	height: 120px;
 	display: flex;
 }
+
+/* Команда 2 */
 .MatchesBlockTeam2 {
 	width: 35%;
 	position: relative;
@@ -51,15 +63,20 @@ img {
 	display: flex;
 	flex-direction: row-reverse;
 }
+
+/* Зображення країни */
 .MatchesBlockImgCountry {
-	height: 20px;
-	width: 20px;
+	height: auto;
+	width: 25px;
 }
 
+/* Логотип команди */
 .MatchesBlockImgLogo {
 	width: auto;
 	height: 100px;
 }
+
+/* Центр блоку матчів */
 .MatchesBlockCenter {
 	width: 20%;
 	justify-content: center;
@@ -71,26 +88,38 @@ img {
 	line-height: 5px;
 	margin: 0px;
 }
+
+/* Дата та час матчу */
 .MatchesBlockVsDateTime {
 	text-align: center;
 	line-height: 20px;
 	font-weight: 600;
 }
+
+/* Порівняння команд */
 .MatchesBlockVs {
 	font-weight: 700;
 }
 
+/* Сторона блоку матчів */
 .MatchesBlockSide {
 	width: 40%;
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 	align-items: center;
-	border-radius: 10px 0px 0px 10px;
+	border-radius: 10px;
 	background-color: #545961;
+	padding-right: 10px;
+	text-align: center;
+	color: white;
+	font-weight: 600;
 }
+
+/* Зображення для сторони 1 */
 .MatchesSideBlockImg1 {
-	margin-left: -30px;
+	margin: 0 30px;
 }
+
 .MatchesSideImg {
 	width: auto;
 	height: 28px;

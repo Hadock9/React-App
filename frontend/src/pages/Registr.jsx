@@ -1,32 +1,41 @@
-import { Lock, Mail, UserRound } from 'lucide-react'
+import { Lock, LockOpen, Mail, UserRound } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+
+import { Terms } from '../components/Terms.jsx'
 import {
 	validateConditions,
 	validateEmail,
+	validateLastName,
 	validateName,
 	validatePassword,
 	validateRePassword,
-} from '../components/FormValidation.js'
+} from '../js/FormValidation.js'
 import CustomForm from '../styles/CustomForm.module.css'
 import styles from '../styles/RegistrationLogin.module.css'
+import rootstyles from '../styles/root.module.css'
 
 export function Registration() {
+	const navigate = useNavigate()
 	// Станові змінні для зберігання значень вводу форми
 	const [Email, setEmail] = useState('')
 	const [Password, setPassword] = useState('')
 	const [RePassword, setRePassword] = useState('')
 	const [First_Name, setFirst_Name] = useState('')
 	const [Last_Name, setLast_Name] = useState('')
-	const [Conditions, setConditions] = useState('') // Для зберігання згоди на умови
+	const [isVisiblePassword, setisVisiblePassword] = useState(false)
+	const [TypePassword, setTypePassword] = useState('password')
+	const [Conditions, setConditions] = useState(false)
 	const [FormValid, setFormValid] = useState(false) // Для визначення, чи форма готова до відправлення
 
+	const [ReadTerms, setReadTerms] = useState(false)
 	// Змінні стану, щоб відстежувати, чи ввід було сфокусовано
 	const [EmailDirty, setEmailDirty] = useState(false)
 	const [PasswordDirty, setPasswordDirty] = useState(false)
 	const [RePasswordDirty, setRePasswordDirty] = useState(false)
 	const [First_NameDirty, setFirst_NameDirty] = useState(false)
 	const [Last_NameDirty, setLast_NameDirty] = useState(false)
+	const [ConditionsDirty, setConditionsDirty] = useState(false)
 
 	// Повідомлення про помилки для валідації
 	const [EmailError, setEmailError] = useState('Email не може бути пустим')
@@ -42,7 +51,9 @@ export function Registration() {
 	const [Last_NameError, setLast_NameError] = useState(
 		'Last Name не може бути пустим'
 	)
-	const [ConditionsError, setConditionsError] = useState('')
+	const [ConditionsError, setConditionsError] = useState(
+		'Ви повинні погодитися з умовами.'
+	)
 
 	// Обробник, щоб позначити ввід як "доторкнутий", коли він втрачає фокус
 	const blurHandler = e => {
@@ -61,6 +72,9 @@ export function Registration() {
 				break
 			case 'Last_Name':
 				setLast_NameDirty(true)
+				break
+			case 'Conditions':
+				setConditionsDirty(true)
 				break
 			default:
 				break
@@ -95,13 +109,22 @@ export function Registration() {
 	// Обробник зміни вводу для прізвища з валідацією
 	const Last_NameHandler = e => {
 		setLast_Name(e.target.value)
-		setLast_NameError(validateName(e.target.value))
+		setLast_NameError(validateLastName(e.target.value))
 	}
 
 	// Обробник зміни вводу для імені з валідацією
 	const First_NameHandler = e => {
 		setFirst_Name(e.target.value)
 		setFirst_NameError(validateName(e.target.value))
+	}
+	const ChangeTypePassword = () => {
+		if (!isVisiblePassword) {
+			setisVisiblePassword(!isVisiblePassword)
+			setTypePassword('text')
+		} else {
+			setisVisiblePassword(!isVisiblePassword)
+			setTypePassword('password')
+		}
 	}
 
 	// Хук ефекту для визначення дійсності форми на основі вводу та стану помилок
@@ -112,13 +135,7 @@ export function Registration() {
 			RePasswordError ||
 			First_NameError ||
 			Last_NameError ||
-			ConditionsError ||
-			!Email ||
-			!Password ||
-			!RePassword ||
-			!First_Name ||
-			!Last_Name ||
-			!Conditions
+			ConditionsError
 		) {
 			setFormValid(false)
 		} else {
@@ -131,23 +148,53 @@ export function Registration() {
 		First_NameError,
 		Last_NameError,
 		ConditionsError,
-		Email,
-		Password,
-		RePassword,
-		First_Name,
-		Last_Name,
-		Conditions,
 	])
 
 	// Обробник відправлення форми
-	const handleSubmit = e => {
-		e.preventDefault() // Запобігти стандартному поведінці відправлення форми
+	const handleSubmit = async e => {
+		e.preventDefault()
 		if (FormValid) {
-			// Обробити реєстрацію тут
-			console.log('Форма відправлена') // Повідомлення для успішної відправки
+			const RegData = {
+				Email: Email,
+				Password: Password,
+				First_Name: First_Name,
+				Last_Name: Last_Name,
+			}
+
+			try {
+				const response = await fetch('http://localhost:4000/api/Registration', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(RegData),
+				})
+				console.log(response.ok)
+
+				if (response.ok) {
+					console.log('Форма відправлена')
+					navigate('/Login')
+				} else {
+					const errorData = await response.json()
+
+					if (
+						errorData.err.sqlMessage &&
+						errorData.err.sqlMessage.includes('Duplicate entry')
+					) {
+						setEmailError('Цей email вже зареєстровано. Спробуйте інший.')
+					} else {
+						console.error('Помилка на сервері:', errorData)
+					}
+				}
+			} catch (error) {}
 		}
 	}
-
+	const handleReadTerms = () => {
+		setReadTerms(true)
+	}
+	if (ReadTerms) {
+		return <Terms setReadTerms={setReadTerms} />
+	}
 	return (
 		<div className={styles.Container}>
 			<div className={styles.RightBlock}></div>
@@ -184,10 +231,15 @@ export function Registration() {
 								<div className={styles.RegFormError}>{PasswordError}</div>
 							)}
 							<div className={styles.RegFormBlock}>
-								<Lock />
+								<div
+									onClick={ChangeTypePassword}
+									className={styles.RegFormBlockPassword}
+								>
+									{isVisiblePassword ? <LockOpen /> : <Lock />}
+								</div>
 								<input
 									className={CustomForm.CustomInput}
-									type='password'
+									type={TypePassword}
 									name='Password'
 									value={Password}
 									onBlur={blurHandler}
@@ -204,10 +256,15 @@ export function Registration() {
 								<div className={styles.RegFormError}>{RePasswordError}</div>
 							)}
 							<div className={styles.RegFormBlock}>
-								<Lock />
+								<div
+									onClick={ChangeTypePassword}
+									className={styles.RegFormBlockPassword}
+								>
+									{isVisiblePassword ? <LockOpen /> : <Lock />}
+								</div>
 								<input
 									className={CustomForm.CustomInput}
-									type='password'
+									type={TypePassword}
 									name='RePassword'
 									value={RePassword}
 									onBlur={blurHandler}
@@ -262,7 +319,7 @@ export function Registration() {
 
 						{/* Умови та положення */}
 						<div className={styles.RegFormFullBlock}>
-							{ConditionsError && (
+							{ConditionsDirty && ConditionsError && (
 								<div className={styles.RegFormError}>{ConditionsError}</div>
 							)}
 							<div
@@ -273,10 +330,16 @@ export function Registration() {
 										type='checkbox'
 										id='conditions'
 										name='Conditions'
+										onBlur={blurHandler}
 										onChange={ConditionsHandler}
+										checked={Conditions}
 										required
 									/>
-									<label htmlFor='conditions'>Я погоджуюсь з умовами</label>
+									<Link onClick={handleReadTerms} className={rootstyles.link}>
+										<label htmlFor='conditions'>
+											Я погоджуюсь з умовами реєстрації
+										</label>
+									</Link>
 								</div>
 							</div>
 						</div>

@@ -7,7 +7,9 @@ import {
 	BrowserRouter as Router,
 	Routes,
 } from 'react-router-dom'
-import { MenuProvider } from './components/MenuContext'
+import { AuthProvider } from './context/AuthContext'
+import { MenuProvider } from './context/MenuContext'
+
 import { Erorpage } from './pages/404'
 import { Home } from './pages/Home'
 import { Login } from './pages/Login'
@@ -20,7 +22,7 @@ import { Stake } from './pages/Stake'
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
 	<GoogleOAuthProvider clientId='500804855419-pms6km4isevbtq88rpgbpp02tdjq26fm.apps.googleusercontent.com'>
-		<React.StrictMode>
+		<AuthProvider>
 			<MenuProvider>
 				<Router>
 					<Routes>
@@ -29,7 +31,6 @@ root.render(
 						<Route path='/Login' element={<Login />} />
 						<Route path='/Home' element={<Home />} />
 						<Route path='/Stake' element={<Stake />} />
-
 						<Route path='/Profile' element={<Profile />} />
 						<Route path={'Home/:Game/Matches'} element={<Matches />} />
 						<Route path={'Home/:Game/Matches/:Match'} element={<Match />} />
@@ -39,6 +40,7 @@ root.render(
 					</Routes>
 				</Router>
 			</MenuProvider>
-		</React.StrictMode>
+		</AuthProvider>
 	</GoogleOAuthProvider>
 )
+//<Route path='/terms' element={<Terms/>} />

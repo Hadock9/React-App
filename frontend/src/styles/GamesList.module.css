@@ -1,3 +1,4 @@
+/* Контейнер для гри, що використовує сітку */
 .GameBlockRoot {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
@@ -5,19 +6,24 @@
 	grid-auto-rows: minmax(100px, auto);
 }
 
+/* Блок окремої гри */
 .GameBlock {
 	width: 210px;
 	height: 380px;
 }
+
+/* Зображення гри */
 .GamesImg {
 	width: 210px;
 	height: 290px;
 }
 
+/* Назва гри */
 .GameName {
 	margin: 0px;
 }
 
+/* Опис гри */
 .GameDescription {
 	color: #606060;
 	font-family: 'Roboto', 'Arial', sans-serif;

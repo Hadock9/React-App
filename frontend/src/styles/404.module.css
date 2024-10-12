@@ -1,6 +1,6 @@
+/* Основний контейнер, що містить елементи */
 .Container {
 	display: flex;
-
 	align-items: center;
 	font-family: arial;
 	font-size: 24px;
@@ -9,6 +9,8 @@
 	width: 100%;
 	height: 100vh;
 }
+
+/* Блок контейнера для центрування вмісту */
 .ContainerBlock {
 	padding: 0px 10px;
 	width: 500px;
@@ -20,15 +22,16 @@
 	flex-direction: column;
 }
 
+/* Текст всередині блоку контейнера */
 .ContainerBlockText {
 	margin-top: 2px;
 	color: white;
 }
 
+/* Кнопка для повернення назад */
 .GoBack {
 	margin-top: 30px;
 	border: rgb(34, 40, 49) 3px solid;
-
 	color: white;
 	border-image: linear-gradient(
 		90deg,
@@ -37,7 +40,6 @@
 		rgba(0, 0, 0, 1) 55%,
 		rgba(0, 173, 181, 1) 100%
 	);
-
 	border-width: 4px;
 	border-style: solid;
 }

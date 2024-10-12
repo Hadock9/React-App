@@ -29,11 +29,11 @@ export function GamesList({ value }) {
 	const filterGames = Games.filter(Game => {
 		return Game.name.toLowerCase().includes(value.toLowerCase())
 	})
-	console.log({ Games })
+
 	return (
 		<>
 			<h1 className={styles.FirstCLASS}> Games </h1>
-			{console.log(failedToFetch)}
+
 			{failedToFetch ? <CheckFetch /> : console.log('Successful Fetch')}
 
 			<div className={styles.GameBlockRoot}>
@@ -43,11 +43,10 @@ export function GamesList({ value }) {
 							to={
 								'/Home/' +
 								game.name.replaceAll(' ', '_').replaceAll('-', '_') +
-								'/Matches'
+								`/Matches?game_id=${game.id}`
 							}
 							key={game.id}
 						>
-							{console.log(game.ImageSrc)}
 							<div className={styles.GameBlock}>
 								<img
 									className={styles.GamesImg}
