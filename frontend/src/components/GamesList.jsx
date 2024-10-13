@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import styles from '../styles/GamesList.module.css'
+
 import { CheckFetch } from './BadFatchDisclaimer'
 import { NoResultDisclaimer } from './NoResultDisclaimer'
 export function GamesList({ value }) {
@@ -9,7 +10,7 @@ export function GamesList({ value }) {
 	const [failedToFetch, setFailedToFetch] = useState(false)
 
 	useEffect(() => {
-		fetch('http://localhost:4000/api/Games_List')
+		fetch('http://localhost:4000/api/games/Games_List')
 			.then(res => {
 				if (!res.ok) {
 					throw new Error('Network response was not ok')
@@ -32,7 +33,7 @@ export function GamesList({ value }) {
 
 	return (
 		<>
-			<h1 className={styles.FirstCLASS}> Games </h1>
+			<h1> Games </h1>
 
 			{failedToFetch ? <CheckFetch /> : console.log('Successful Fetch')}
 

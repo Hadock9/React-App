@@ -19,11 +19,9 @@ export function Profile() {
 		phone: '',
 		country: '',
 		password: '',
+		pictureSrc: '',
 	})
 	const [message, setMessage] = useState('')
-
-	const [date_of_birthDirty, setdate_of_birthDirty] = useState(false)
-	const [gender, setgenderDirty] = useState(false)
 
 	// Оновлюємо UserProfile, коли user змінюється
 	useEffect(() => {
@@ -38,22 +36,12 @@ export function Profile() {
 				created_at: user.created_at,
 				phone: user.phone_number,
 				country: user.country,
+				pictureSrc: user.picture,
 				password: '',
 			})
 		}
 	}, [user])
-	const handleBlur = e => {
-		switch (e.target.name) {
-			case 'gender':
-				setgenderDirty(true)
-				break
-			case 'date_of_birth':
-				setdate_of_birthDirty(true)
-				break
-			default:
-				break
-		}
-	}
+
 	const handleChange = e => {
 		const { name, value } = e.target
 		setFormData(prevState => ({
@@ -118,9 +106,18 @@ export function Profile() {
 				{/* Фон профілю */}
 				<div className={style.ProfileBlock}>
 					{/* Основний блок профілю */}
-					<div className={style.ProfileDivUser}>
+					<div className='mt-[-60px] mb-8 h-[96px] w-[96px] flex justify-center items-center bg-white rounded-[50%]'>
 						{/* Зображення профілю */}
-						<UserRound width={46} height={46} />
+						{formData.pictureSrc ? (
+							<img
+								className='max-w-full h-auto rounded-full'
+								src={formData.pictureSrc}
+								alt=''
+							/>
+						) : (
+							<UserRound width={46} height={46} />
+						)}
+
 						<div>{/* Зображення профілю */}</div>
 					</div>
 					{message && <div className={style.Message}>{message}</div>}
@@ -192,7 +189,6 @@ export function Profile() {
 										name='gender'
 										value={formData.gender}
 										onChange={handleChange}
-										onBlur={handleBlur}
 										required
 									>
 										<option value=''>Виберіть стать</option>

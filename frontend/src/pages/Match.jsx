@@ -19,7 +19,7 @@ export function Match() {
 
 	// Fetch 1 Match from the backend
 	useEffect(() => {
-		fetch(`http://localhost:4000/api/Match_List/Match/${idMatch}`)
+		fetch(`http://localhost:4000/api/games/match/Match/${idMatch}`)
 			.then(res => res.json())
 			.then(data => {
 				setData(data) // Оновлення стану з отриманими даними

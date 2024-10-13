@@ -18,7 +18,7 @@ export function Stake() {
 			status: status,
 		}
 
-		fetch('http://localhost:4000/api/Stake', {
+		fetch('http://localhost:4000/api/stake/', {
 			method: 'POST', // Відправка POST-запиту
 			headers: {
 				'Content-Type': 'application/json',
@@ -29,7 +29,7 @@ export function Stake() {
 
 	// Завантаження ставок з сервера
 	useEffect(() => {
-		fetch('http://localhost:4000/api/Stake1')
+		fetch('http://localhost:4000/api/stake/')
 			.then(res => res.json())
 			.then(data => setData(data)) // Встановлення отриманих даних у стан
 	}, [])
