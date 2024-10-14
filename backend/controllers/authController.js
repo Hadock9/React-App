@@ -102,7 +102,7 @@ exports.googleLogin = async (req, res) => {
 			}
 		)
 	} catch (error) {
-		console.error('Error:', error) // Логування помилки
+		console.error('Error:', error)  
 		return res.status(400).json({ error: 'Invalid token' })
 	}
 }
@@ -160,3 +160,48 @@ exports.registration = (req, res) => {
 		return res.status(201).json({ id: result.insertId })
 	})
 }
+
+exports.updateProfile = async (req, res) => {
+	const { id, first_name, last_name, date_of_birth, gender, phone, country,password } = req.body;
+	 
+	
+	const sqlUpdate = `UPDATE Users SET first_name = ?, last_name = ?, date_of_birth = ?, gender = ?, phone_number = ?, country = ? WHERE id = ?`;
+
+	db.query(sqlUpdate, [first_name, last_name, date_of_birth, gender, phone, country, id], (err, result) => {
+			if (err) {
+					console.error('Error updating user:', err);
+					return res.status(500).json({ error: 'Database error' });
+			}
+
+			const sql = 'SELECT * FROM Users WHERE id = ?';
+			db.query(sql, [id], async (err, result) => {
+					if (err) {
+							console.error('Error querying database:', err);
+							return res.status(500).json({ error: 'Database error' });
+					}
+
+				
+					const user = result[0];
+
+					// Створення токена
+					const token = jwt.sign(
+							{
+									id: user.id,
+									email: user.email,
+									first_name: user.first_name,
+									last_name: user.last_name,
+									date_of_birth: user.date_of_birth,
+									country: user.country,
+									gender: user.gender,
+									phone_number: user.phone_number,
+									picture: user.picture,
+									created_at: user.created_at,
+							},
+							secretKey,
+							{ expiresIn: '1h' }
+					);
+
+					return res.json({ token });
+			});
+	});
+};
