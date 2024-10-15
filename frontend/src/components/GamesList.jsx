@@ -33,7 +33,7 @@ export function GamesList({ value }) {
 
 	return (
 		<>
-			<h1> Games </h1>
+			<h1 className='font-bold my-3 text-xl'> Games </h1>
 
 			{failedToFetch ? <CheckFetch /> : console.log('Successful Fetch')}
 

@@ -13,3 +13,15 @@ export const formatDate = dateString => {
 
 	return `${year}-${month}-${day}`
 }
+
+export const NewsDate = dateString => {
+	const date = new Date(dateString)
+
+	return date.toLocaleString('uk-UA', {
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric',
+		hour: '2-digit',
+		minute: '2-digit',
+	})
+}

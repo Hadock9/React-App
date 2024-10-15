@@ -4,7 +4,9 @@ module.exports = {
 	theme: {
 		theme: {
 			extend: {
-			 
+				fontFamily: {
+					roboto: ['Roboto', 'sans-serif'],
+				},
 				typography: {
 					DEFAULT: {
 						css: {

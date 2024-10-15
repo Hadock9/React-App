@@ -35,13 +35,13 @@ export function MatchBlock({ value }) {
 	})
 	return (
 		<>
-			<h1>Matches</h1>
+			<h1 className='font-bold my-3 text-xl'>Matches</h1>
 			{failedToFetch ? <CheckFetch /> : console.log('Successful Fetch')}
 			{filterMatches.length > 0 ? (
 				filterMatches.map(Match => {
 					return (
 						<Link
-							to={`${Match.Team1Name}_Vs_${Match.Team2Name}?idMatch=${Match.MatchID}`}
+							to={`${Match.Team1Name}Vs${Match.Team2Name}?idMatch=${Match.MatchID}`}
 							key={Match.MatchID}
 						>
 							{console.log(Match)}

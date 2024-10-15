@@ -37,7 +37,7 @@ root.render(
 						<Route path='/Login' element={<Login />} />
 						<Route path='/Home' element={<Home />} />
 						<Route path='/News' element={<News />} />
-						<Route path='/News/Content' element={<NewsContent />} />
+						<Route path='/News/:Content' element={<NewsContent />} />
 						<Route path='/Stake' element={<Stake />} />
 						<Route path='/Profile' element={<Profile />} />
 						<Route path={'Home/:Game/Matches'} element={<Matches />} />

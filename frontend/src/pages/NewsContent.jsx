@@ -1,13 +1,53 @@
-import { Heart } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { MessageSquareMore } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { Link, useSearchParams } from 'react-router-dom'
 import { UkrainianWar } from '../components/BlockSaveUkraine'
 import { BurgerMenu } from '../components/BurgerMenu'
 import { Footer } from '../components/Footer'
 import { NavBar } from '../components/NavBar'
 
+import Comments from '../components/Comments'
+import NewsLastAside from '../components/NewsLastAside'
+import NewsPopAside from '../components/NewsPopAside'
+import { NewsDate } from '../js/TimeValidation'
 import rootstyle from '../styles/root.module.css'
 
 export function NewsContent() {
+	const [OneNews, SetOneNews] = useState(null)
+	const [failedToFetch, setFailedToFetch] = useState(false)
+
+	const [searchParams] = useSearchParams()
+	const id = searchParams.get('OneNews')
+
+	useEffect(() => {
+		fetch(`http://localhost:4000/api/news/news_list/${id}`)
+			.then(response => {
+				if (!response.ok) {
+					throw new Error('Network response was not ok')
+				}
+				return response.json()
+			})
+			.then(data => {
+				if (data.length > 0) {
+					SetOneNews(data[0])
+				}
+				setFailedToFetch(false)
+			})
+			.catch(err => {
+				console.error(err)
+				setFailedToFetch(true)
+			})
+	}, [id])
+
+	// Якщо новини немає, показуємо повідомлення про помилку
+	if (!OneNews && !failedToFetch) {
+		return <p>Завантаження...</p>
+	}
+
+	if (failedToFetch) {
+		return <p>Не вдалося завантажити новину.</p>
+	}
+	const parsedContent = JSON.parse(OneNews.content)
 	return (
 		<>
 			<div className={rootstyle.wrapper}>
@@ -17,70 +57,53 @@ export function NewsContent() {
 					<BurgerMenu />
 
 					<main className={rootstyle.Main}>
-						{/* News block*/}
-						<div className=' w-[80%]  my-5'>
-							<div className='ml-5'>
-								<p className='text-xl   underline'>
-									NAVI – MOUZ. Фінал IEM Rio. Дивитись онлайн. LIVE трансляція
+						{/* News block */}
+						<div className='News my-5 ml-5'>
+							<div className=' '>
+								<p className='text-[28px] font-sans  underline'>
+									{OneNews.title}
 								</p>
 								<div className='flex my-4'>
-									<Link to='#' className='text-xl'>
-										CS2
+									<Link to='#' className='text-sm'>
+										{OneNews.gameName}
 									</Link>
-									<span class='ml-3 w-px h-7 bg-gray-400 mr-4 '></span>
-									<p className='mr-4 text-gray-400 text-xl'>
-										13 жовтня 2024, 12:14
+									<span className='ml-3 w-px h-5 bg-gray-400 mr-4 '></span>
+									<p className='mr-4 text-gray-400 text-sm'>
+										{NewsDate(OneNews.publish_date)}
 									</p>
-									<Heart className='text-gray-400  pt-1' />
-									<p className='text-gray-400 text-xl  '> 0</p>
-									<p className='text-gray-400 text-xl ml-2'> Лайків</p>
+									<MessageSquareMore className='text-gray-400  h-4  ' />
+									<p className='text-gray-600 text-xs  '>{OneNews.likes}</p>
 								</div>
 								<img
-									src='../img/BgErrorPage.jpg'
-									className='w-auto h-90 rounded-md'
-									alt=''
+									src={'/' + OneNews.image_url}
+									className='w-[80%]  rounded-md'
+									alt='Новинне зображення'
 								/>
 
-								<div className='my-3  '>
-									<p className='text-sm mt-4'>
-										У фіналі престижного турніру IEM Rio 2024 команди Natus
-										Vincere та MOUZ готові битися у форматі BO5. Цей матч обіцяє
-										бути захоплюючим протистоянням між двома командами, які
-										продемонстрували високий рівень гри на шляху до фіналу.
-										Більше новин з кіберспорту в Telegram Sport.ua b1t (NAVI)
-										має сильні показники у кілах на раунд (0.77) та загальний
-										рейтинг 1.22, що робить його основним претендентом на
-										домінування в матчі. jimpphat (MOUZ) також демонструє високу
-										ефективність з рейтингом 1.18 та середньою шкодою 78.9 на
-										раунд. Статистика карт: NAVI має перевагу на картах Mirage
-										(87%), Ancient (79%) та Dust2 (83%). MOUZ показує сильні
-										результати на Inferno (71%) та Nuke (57%). Матч обіцяє бути
-										напруженим з урахуванням таких різних переваг на різних
-										картах. Фанати обох команд чекають, хто ж з них підніме
-										трофей.
-									</p>
+								<div className='my-3'>
+									<div className='news-details'>
+										<h2 className='text-xl  font-bold'>Деталі новини</h2>
+										{parsedContent && parsedContent.questions.length > 0 ? (
+											parsedContent.questions.map((item, index) => (
+												<div key={index} className='question-answer mb-4'>
+													<p className='text-lg font-sans  font-bold'>
+														{item.question}
+													</p>
+													<p className='text-lg font-sans'>{item.answer}</p>
+												</div>
+											))
+										) : (
+											<p>Немає даних для відображення.</p>
+										)}
+									</div>
+									<Comments id={id} />
 								</div>
 							</div>
 						</div>
 					</main>
-					<aside className='mr-4 my-5 w-[25%] rounded-xl  '>
-						<h3 className='font-bold my-5'>Останні новини</h3>
-						<div className=''>
-							<div className='flex'>
-								<Link to='#' className='text-xs'>
-									CS2
-								</Link>
-								<span class='ml-3 w-px h-4 bg-gray-400 mr-4 '></span>
-								<p className='mr-4 text-gray-400 text-xs'>
-									13 жовтня 2024, 12:14
-								</p>
-							</div>
-							<div className=' '>
-								<Link className='text-base  underline'>
-									NAVI – MOUZ. Фінал IEM Rio. Дивитись онлайн. LIVE трансляція
-								</Link>
-							</div>
-						</div>
+					<aside className='w-[25%]'>
+						<NewsLastAside />
+						<NewsPopAside />
 					</aside>
 				</div>
 				<Footer />
