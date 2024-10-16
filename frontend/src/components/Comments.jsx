@@ -67,7 +67,7 @@ const Comments = ({ id }) => {
 			<div className='My comment my-3 flex'>
 				<div className='w-[10%] flex justify-center   items-center'>
 					<img
-						src={user.picture}
+						src={'/' + user.picture}
 						className='w-[40px] h-[40px] rounded-full'
 						alt=''
 					/>
@@ -96,7 +96,7 @@ const Comments = ({ id }) => {
 				<div className='comment-block flex  my-3 w-[80] ' key={OneComment.id}>
 					<div className='w-[100px] flex justify-center   items-center'>
 						<img
-							src={OneComment.picture}
+							src={'/' + OneComment.picture}
 							className='w-[40px] h-[40px] rounded-full'
 							alt=''
 						/>

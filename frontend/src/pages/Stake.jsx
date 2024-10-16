@@ -3,7 +3,7 @@ import { UkrainianWar } from '../components/BlockSaveUkraine'
 import { BurgerMenu } from '../components/BurgerMenu'
 import { Footer } from '../components/Footer'
 import { NavBar } from '../components/NavBar'
-import { extractHoursAndMinutes, formatDate } from '../js/TimeValidation'
+import { formatTime, formatDate } from '../js/TimeValidation'
 
 import MyLoader from '../components/Loader'
 import useFetchGet from '../hooks/fetch/useFetchGet'
@@ -73,7 +73,7 @@ export function Stake() {
 							</div>
 							<div className={style.DateStatusBlock}>
 								<div className={style.block}>
-									{extractHoursAndMinutes(stake.stake_time)}
+									{formatTime(stake.stake_time)}
 								</div>
 								<div className={style.block}>
 									{formatDate(stake.stake_time)}

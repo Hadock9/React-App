@@ -14,6 +14,16 @@ export const formatDate = dateString => {
 	return `${year}-${month}-${day}`
 }
 
+// Функція для форматування дати у час hh:mm:ss
+export const formatTime = dateString => {
+	const date = new Date(dateString);
+	const hours = date.getUTCHours(); 
+	const minutes = date.getUTCMinutes(); 
+	const seconds = date.getUTCSeconds();
+
+	return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+}
+
 export const NewsDate = dateString => {
 	const date = new Date(dateString)
 
