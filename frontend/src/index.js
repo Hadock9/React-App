@@ -1,3 +1,5 @@
+import './index.css'
+
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
@@ -15,10 +17,14 @@ import { Home } from './pages/Home'
 import { Login } from './pages/Login'
 import { Match } from './pages/Match'
 import { Matches } from './pages/Matches'
+import { News } from './pages/News'
+import { NewsContent } from './pages/NewsContent'
+
 import { Profile } from './pages/Profile'
 import { Registration } from './pages/Registr'
 import { ResetPassword } from './pages/ResetPassword'
 import { Stake } from './pages/Stake'
+
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
 	<GoogleOAuthProvider clientId='500804855419-pms6km4isevbtq88rpgbpp02tdjq26fm.apps.googleusercontent.com'>
@@ -30,6 +36,8 @@ root.render(
 						<Route path='/Registration' element={<Registration />} />
 						<Route path='/Login' element={<Login />} />
 						<Route path='/Home' element={<Home />} />
+						<Route path='/News' element={<News />} />
+						<Route path='/News/Content' element={<NewsContent />} />
 						<Route path='/Stake' element={<Stake />} />
 						<Route path='/Profile' element={<Profile />} />
 						<Route path={'Home/:Game/Matches'} element={<Matches />} />

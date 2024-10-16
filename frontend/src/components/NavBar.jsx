@@ -11,10 +11,14 @@ export function NavBar() {
 		<>
 			<header>
 				<div className={HeaderStyle.HeaderLogo}>
-					<img className={HeaderStyle.ImgLogo} src={LogoImg} alt='logo512 px' />
+					<img
+						className={`${HeaderStyle.ImgLogo} animate-slow-spin `}
+						src={LogoImg}
+						alt='logo512 px'
+					/>
 				</div>
 				<div className={HeaderStyle.HeaderBlockText}>
-					<Link to='/Home'>
+					<Link to='/News'>
 						<div className={HeaderStyle.HeaderText}>
 							<p>Новини</p>
 						</div>

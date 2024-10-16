@@ -1,5 +1,7 @@
+import { jwtDecode } from 'jwt-decode'
 import { UserRound } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { NavBar } from '../components/NavBar'
 import { NotAuthorized } from '../components/NotAuthorized'
 import { useAuth } from '../context/AuthContext'
@@ -7,9 +9,12 @@ import { formatDate } from '../js/TimeValidation'
 import style from '../styles/Profile.module.css'
 
 export function Profile() {
-	const { user, isRegUser } = useAuth()
+	const navigate = useNavigate()
+ 
+	const {setIsRegUser, setUser, user, isRegUser } = useAuth()
 	const [UserProfile, setUserProfile] = useState(null)
 	const [formData, setFormData] = useState({
+		id: '',
 		firstName: '',
 		lastName: '',
 		date_of_birth: '',
@@ -19,17 +24,16 @@ export function Profile() {
 		phone: '',
 		country: '',
 		password: '',
+		pictureSrc: '',
 	})
-	const [message, setMessage] = useState('')
-
-	const [date_of_birthDirty, setdate_of_birthDirty] = useState(false)
-	const [gender, setgenderDirty] = useState(false)
+	 
 
 	// Оновлюємо UserProfile, коли user змінюється
 	useEffect(() => {
 		if (user) {
 			setUserProfile(user)
 			setFormData({
+				id: user.id,
 				firstName: user.first_name,
 				lastName: user.last_name,
 				date_of_birth: formatDate(user.date_of_birth),
@@ -38,22 +42,12 @@ export function Profile() {
 				created_at: user.created_at,
 				phone: user.phone_number,
 				country: user.country,
+				pictureSrc: user.picture,
 				password: '',
 			})
 		}
 	}, [user])
-	const handleBlur = e => {
-		switch (e.target.name) {
-			case 'gender':
-				setgenderDirty(true)
-				break
-			case 'date_of_birth':
-				setdate_of_birthDirty(true)
-				break
-			default:
-				break
-		}
-	}
+
 	const handleChange = e => {
 		const { name, value } = e.target
 		setFormData(prevState => ({
@@ -64,20 +58,20 @@ export function Profile() {
 
 	const handleSave = async e => {
 		e.preventDefault()
-		// Логіка для збереження змін
+		 
 		const updatedData = {
+			id :formData.id,
 			first_name: formData.firstName,
 			last_name: formData.lastName,
 			date_of_birth: formData.date_of_birth,
 			gender: formData.gender,
-			email: formData.email,
-			created_at: formData.created_at,
 			phone: formData.phone,
 			country: formData.country,
+			password:formData.password,
 		}
 
-		try {
-			const response = await fetch('http://localhost:4000/api/updateProfile', {
+		 
+			fetch('http://localhost:4000/api/auth/updateProfile', {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json',
@@ -85,22 +79,27 @@ export function Profile() {
 				},
 				body: JSON.stringify(updatedData),
 			})
-
-			if (response.ok) {
-				const data = await response.json()
-				console.log('Профіль успішно оновлено:', data)
-				setMessage('Профіль успішно оновлено!')
-
-				setUserProfile(data)
-			} else {
-				const errorData = await response.json()
-				console.error('Помилка оновлення профілю:', errorData.message)
-				setMessage('Помилка оновлення профілю.')
+			.then(response => response.json())
+			.then(data => {
+				if (data.error) {
+					console.log('Error:', data.error); 
+					alert(data.error);
+					return;  
 			}
-		} catch (error) {
-			console.error("Помилка з'єднання:", error)
-			setMessage("Помилка з'єднання з сервером.")
-		}
+				console.log('Login successful:', data)
+				localStorage.setItem('token', data.token)
+				console.log('Оновлення даних пройшло успішно:', data.message)
+				const decoded = jwtDecode(data.token)
+				setIsRegUser(true)
+				setUser(decoded)
+				navigate(0);
+			})
+			.catch(error => {
+				console.error('Error during login:', error)
+				 
+			})
+			 
+		 
 	}
 
 	if (!isRegUser) {
@@ -118,12 +117,21 @@ export function Profile() {
 				{/* Фон профілю */}
 				<div className={style.ProfileBlock}>
 					{/* Основний блок профілю */}
-					<div className={style.ProfileDivUser}>
+					<div className='mt-[-60px] mb-8 h-[96px] w-[96px] flex justify-center items-center bg-white rounded-[50%]'>
 						{/* Зображення профілю */}
-						<UserRound width={46} height={46} />
+						{formData.pictureSrc ? (
+							<img
+								className='max-w-full h-auto rounded-full'
+								src={formData.pictureSrc}
+								alt=''
+							/>
+						) : (
+							<UserRound width={46} height={46} />
+						)}
+
 						<div>{/* Зображення профілю */}</div>
 					</div>
-					{message && <div className={style.Message}>{message}</div>}
+					 
 					<form className={style.form} onSubmit={handleSave}>
 						{/* Форма редагування профілю */}
 						<div className={style.ProfileBlockInfo}>
@@ -133,7 +141,7 @@ export function Profile() {
 									<input
 										className={style.CustomInput}
 										type='text'
-										value={UserProfile.id}
+										value={formData.id}
 										readOnly
 									/>
 								</div>
@@ -192,7 +200,6 @@ export function Profile() {
 										name='gender'
 										value={formData.gender}
 										onChange={handleChange}
-										onBlur={handleBlur}
 										required
 									>
 										<option value=''>Виберіть стать</option>
@@ -212,9 +219,8 @@ export function Profile() {
 										type='email'
 										name='email'
 										value={formData.email}
-										onChange={handleChange}
 										placeholder=''
-										required
+										readOnly
 									/>
 								</div>
 							</div>

@@ -77,7 +77,7 @@ export function Login() {
 		}
 		if (FormValid) {
 			try {
-				const response = await fetch('http://localhost:4000/api/Login', {
+				const response = await fetch('http://localhost:4000/api/auth/login', {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',

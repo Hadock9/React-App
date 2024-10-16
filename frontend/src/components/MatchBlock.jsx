@@ -14,7 +14,7 @@ export function MatchBlock({ value }) {
 	console.log(game_id)
 	// Fetch Match_List${game_id} from the backend
 	useEffect(() => {
-		fetch(`http://localhost:4000/api/Match_List/${game_id}`)
+		fetch(`http://localhost:4000/api/games/match/${game_id}`)
 			.then(res => res.json())
 			.then(data => {
 				setFailedToFetch(false)
