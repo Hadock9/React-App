@@ -5,9 +5,10 @@ import { Footer } from '../components/Footer'
 import { NavBar } from '../components/NavBar'
 import { extractHoursAndMinutes, formatDate } from '../js/TimeValidation'
 
+import MyLoader from '../components/Loader'
+import useFetchGet from '../hooks/fetch/useFetchGet'
 import rootstyle from '../styles/root.module.css'
 import style from '../styles/Stake.module.css'
-
 
 export function Stake() {
 	const [Stakes, setData] = useState([])
@@ -36,13 +37,19 @@ export function Stake() {
 		})
 	}
 
-	// Завантаження ставок з сервера
-	useEffect(() => {
-		fetch('http://localhost:4000/api/stake/')
-			.then(res => res.json())
-			.then(data => setData(data)) // Встановлення отриманих даних у стан
-	}, [])
+	const { Data, isLoading, failedToFetch } = useFetchGet({
+		url: 'http://localhost:4000/api/stake/',
+	})
 
+	useEffect(() => {
+		if (Data) {
+			setData(Data)
+		}
+	}, [Data])
+
+	if (isLoading) {
+		return <MyLoader />
+	}
 	return (
 		<div className={rootstyle.wrapper}>
 			<NavBar />
@@ -50,28 +57,32 @@ export function Stake() {
 			<div className={rootstyle.Container}>
 				<BurgerMenu />
 				<div className={rootstyle.Main}>
-					
-						{/* Відображення деталей кожної ставки */}
-						{Stakes.map(stake => (
-							<div className={style.StakeBlock} key={stake.id}>
-								<div className={style.block}>{stake.id}</div>
-								<div className={style.block}>{stake.match_id}</div>
-								<div className={style.AmountBlock}>
-									<div className={style.WinAmount}>${stake.amount * stake.Coef}</div>
-									<div className={style.AmountInfoBlock}>
-										<div className={style.block}>${stake.amount}</div>
-										<div className={style.block}>x{stake.Coef}</div>
-									</div>
-								</div>	
-								<div className={style.DateStatusBlock}>
-									<div className={style.block}>{extractHoursAndMinutes(stake.stake_time)}</div>
-									<div className={style.block}>{formatDate(stake.stake_time)}</div>
-									<div className={style.block}>Status: {stake.status}</div>
+					{/* Відображення деталей кожної ставки */}
+					{Stakes.map(stake => (
+						<div className={style.StakeBlock} key={stake.id}>
+							<div className={style.block}>{stake.id}</div>
+							<div className={style.block}>{stake.match_id}</div>
+							<div className={style.AmountBlock}>
+								<div className={style.WinAmount}>
+									${stake.amount * stake.Coef}
 								</div>
-								
+								<div className={style.AmountInfoBlock}>
+									<div className={style.block}>${stake.amount}</div>
+									<div className={style.block}>x{stake.Coef}</div>
+								</div>
 							</div>
-						))}
-					
+							<div className={style.DateStatusBlock}>
+								<div className={style.block}>
+									{extractHoursAndMinutes(stake.stake_time)}
+								</div>
+								<div className={style.block}>
+									{formatDate(stake.stake_time)}
+								</div>
+								<div className={style.block}>Status: {stake.status}</div>
+							</div>
+						</div>
+					))}
+
 					<div>
 						<form action='' onSubmit={handleSubmit}>
 							<label htmlFor=''>match_id</label>

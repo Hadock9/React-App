@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 15, 2024 at 03:30 PM
+-- Generation Time: Oct 16, 2024 at 12:50 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -34,16 +34,45 @@ CREATE TABLE `comments` (
   `content` text DEFAULT NULL,
   `publish_date` datetime DEFAULT current_timestamp(),
   `likes` int(11) DEFAULT 0,
-  `dislikes` int(11) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `dislikes` int(11) DEFAULT 0,
+  `picture` varchar(255) DEFAULT '/img/User-Default.svg'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `comments`
 --
 
-INSERT INTO `comments` (`id`, `news_id`, `author`, `content`, `publish_date`, `likes`, `dislikes`) VALUES
-(1, 1, 'Іван', 'Дуже цікава стаття! Дякую за інформацію.', '2024-10-15 13:31:29', 10, 2),
-(2, 1, 'Олена', 'Не погоджуюсь з автором, але гарний аналіз.', '2024-10-15 13:31:29', 5, 3);
+INSERT INTO `comments` (`id`, `news_id`, `author`, `content`, `publish_date`, `likes`, `dislikes`, `picture`) VALUES
+(1, 1, 'Іван', 'Дуже цікава стаття! Дякую за інформацію.', '2024-10-15 13:31:29', 19, 4, '/img/User-Default.svg'),
+(2, 1, 'Олена', 'Не погоджуюсь з автором, але гарний аналіз.', '2024-10-15 13:31:29', 12, 3, '/img/User-Default.svg'),
+(11, 1, 'Василь', 'khdskjahdkjas', '2024-10-15 20:27:17', 1, 0, 'https://lh3.googleusercontent.com/a/ACg8ocIFmlbl16I4QHytC3Tk2v9JoFWWJzIeK2UGXxbQdrTFy_lH8qY=s96-c'),
+(12, 1, 'Василь', 'fsad', '2024-10-15 20:28:26', 1, 0, 'https://lh3.googleusercontent.com/a/ACg8ocIFmlbl16I4QHytC3Tk2v9JoFWWJzIeK2UGXxbQdrTFy_lH8qY=s96-c'),
+(13, 1, 'Василь', 'fasd', '2024-10-15 20:28:30', 0, 0, 'https://lh3.googleusercontent.com/a/ACg8ocIFmlbl16I4QHytC3Tk2v9JoFWWJzIeK2UGXxbQdrTFy_lH8qY=s96-c'),
+(14, 1, 'Василь', 'аіфв', '2024-10-15 20:29:31', 0, 0, 'https://lh3.googleusercontent.com/a/ACg8ocIFmlbl16I4QHytC3Tk2v9JoFWWJzIeK2UGXxbQdrTFy_lH8qY=s96-c'),
+(15, 1, 'Василь', 'аві', '2024-10-15 20:29:41', 0, 0, 'https://lh3.googleusercontent.com/a/ACg8ocIFmlbl16I4QHytC3Tk2v9JoFWWJzIeK2UGXxbQdrTFy_lH8qY=s96-c'),
+(16, 1, 'Василь', 'аві', '2024-10-15 20:30:33', 0, 0, 'https://lh3.googleusercontent.com/a/ACg8ocIFmlbl16I4QHytC3Tk2v9JoFWWJzIeK2UGXxbQdrTFy_lH8qY=s96-c'),
+(17, 1, 'Василь', 'авіаві', '2024-10-15 20:30:34', 0, 0, 'https://lh3.googleusercontent.com/a/ACg8ocIFmlbl16I4QHytC3Tk2v9JoFWWJzIeK2UGXxbQdrTFy_lH8qY=s96-c'),
+(18, 1, 'Василь', 'авіаві', '2024-10-15 20:30:38', 0, 0, 'https://lh3.googleusercontent.com/a/ACg8ocIFmlbl16I4QHytC3Tk2v9JoFWWJzIeK2UGXxbQdrTFy_lH8qY=s96-c'),
+(19, 1, 'Василь', 'авіаві', '2024-10-15 20:30:39', 0, 0, 'https://lh3.googleusercontent.com/a/ACg8ocIFmlbl16I4QHytC3Tk2v9JoFWWJzIeK2UGXxbQdrTFy_lH8qY=s96-c'),
+(20, 1, 'Василь', 'авіаві', '2024-10-15 20:30:39', 0, 0, 'https://lh3.googleusercontent.com/a/ACg8ocIFmlbl16I4QHytC3Tk2v9JoFWWJzIeK2UGXxbQdrTFy_lH8qY=s96-c'),
+(21, 1, 'Василь', 'авіфіва', '2024-10-15 20:30:46', 0, 0, 'https://lh3.googleusercontent.com/a/ACg8ocIFmlbl16I4QHytC3Tk2v9JoFWWJzIeK2UGXxbQdrTFy_lH8qY=s96-c'),
+(22, 1, 'Василь', 'sdaasd', '2024-10-15 20:39:28', 0, 0, 'https://lh3.googleusercontent.com/a/ACg8ocIFmlbl16I4QHytC3Tk2v9JoFWWJzIeK2UGXxbQdrTFy_lH8qY=s96-c'),
+(23, 1, 'Василь', 'dsfasd', '2024-10-15 20:39:35', 0, 0, 'https://lh3.googleusercontent.com/a/ACg8ocIFmlbl16I4QHytC3Tk2v9JoFWWJzIeK2UGXxbQdrTFy_lH8qY=s96-c'),
+(24, 1, 'Василь', 'fsad', '2024-10-15 20:39:39', 0, 0, 'https://lh3.googleusercontent.com/a/ACg8ocIFmlbl16I4QHytC3Tk2v9JoFWWJzIeK2UGXxbQdrTFy_lH8qY=s96-c'),
+(25, 1, 'Василь', 'fsdsda', '2024-10-15 20:39:45', 0, 0, 'https://lh3.googleusercontent.com/a/ACg8ocIFmlbl16I4QHytC3Tk2v9JoFWWJzIeK2UGXxbQdrTFy_lH8qY=s96-c'),
+(26, 1, 'Василь', 'перший комент', '2024-10-15 20:39:59', 0, 0, 'https://lh3.googleusercontent.com/a/ACg8ocIFmlbl16I4QHytC3Tk2v9JoFWWJzIeK2UGXxbQdrTFy_lH8qY=s96-c'),
+(27, 1, 'Василь213', 'другий комент', '2024-10-15 20:40:28', 0, 0, 'https://lh3.googleusercontent.com/a/ACg8ocLLn3GWDom55ZxMFFfwYn4M6cnYr2cesYygzgm-SPmj2Kmi8hv2=s96-c'),
+(28, 2, 'Василь213', '123', '2024-10-15 20:40:49', 1, 2, 'https://lh3.googleusercontent.com/a/ACg8ocLLn3GWDom55ZxMFFfwYn4M6cnYr2cesYygzgm-SPmj2Kmi8hv2=s96-c'),
+(29, 1, 'Василь', 'soidjlkasjdlkasjdlkasjdlask', '2024-10-15 20:52:19', 0, 0, 'https://lh3.googleusercontent.com/a/ACg8ocLLn3GWDom55ZxMFFfwYn4M6cnYr2cesYygzgm-SPmj2Kmi8hv2=s96-c'),
+(30, 1, 'Василь', '', '2024-10-15 21:04:01', 0, 0, 'https://lh3.googleusercontent.com/a/ACg8ocLLn3GWDom55ZxMFFfwYn4M6cnYr2cesYygzgm-SPmj2Kmi8hv2=s96-c'),
+(31, 1, 'Василь', '[object Object]undefinedfassdfsad', '2024-10-15 21:07:50', 0, 0, 'https://lh3.googleusercontent.com/a/ACg8ocLLn3GWDom55ZxMFFfwYn4M6cnYr2cesYygzgm-SPmj2Kmi8hv2=s96-c'),
+(32, 1, 'Василь', 'hkjkhj', '2024-10-15 22:12:42', 1, 1, 'https://lh3.googleusercontent.com/a/ACg8ocIFmlbl16I4QHytC3Tk2v9JoFWWJzIeK2UGXxbQdrTFy_lH8qY=s96-c'),
+(33, 1, 'Ron', 'xzc', '2024-10-15 22:41:41', 0, 0, 'https://lh3.googleusercontent.com/a/ACg8ocLLn3GWDom55ZxMFFfwYn4M6cnYr2cesYygzgm-SPmj2Kmi8hv2=s96-c'),
+(34, 2, 'Василь', 'fbvxcv', '2024-10-15 22:50:37', 1, 2, 'https://lh3.googleusercontent.com/a/ACg8ocIFmlbl16I4QHytC3Tk2v9JoFWWJzIeK2UGXxbQdrTFy_lH8qY=s96-c'),
+(35, 10, 'Василь', 'vcxzxc', '2024-10-15 22:52:00', 0, 0, 'https://lh3.googleusercontent.com/a/ACg8ocIFmlbl16I4QHytC3Tk2v9JoFWWJzIeK2UGXxbQdrTFy_lH8qY=s96-c'),
+(36, 1, 'Василь', 'fdvxcvcx', '2024-10-15 22:53:26', 0, 0, 'https://lh3.googleusercontent.com/a/ACg8ocIFmlbl16I4QHytC3Tk2v9JoFWWJzIeK2UGXxbQdrTFy_lH8qY=s96-c'),
+(37, 1, 'Ron', 'dsa', '2024-10-16 12:48:11', 0, 1, 'https://lh3.googleusercontent.com/a/ACg8ocLLn3GWDom55ZxMFFfwYn4M6cnYr2cesYygzgm-SPmj2Kmi8hv2=s96-c'),
+(38, 1, 'Ron', 'sad', '2024-10-16 13:18:20', 0, 0, 'https://lh3.googleusercontent.com/a/ACg8ocLLn3GWDom55ZxMFFfwYn4M6cnYr2cesYygzgm-SPmj2Kmi8hv2=s96-c');
 
 -- --------------------------------------------------------
 
@@ -479,7 +508,7 @@ CREATE TABLE `Users` (
   `country` varchar(50) DEFAULT NULL,
   `date_of_birth` date DEFAULT NULL,
   `googleId` varchar(50) DEFAULT NULL,
-  `picture` varchar(100) DEFAULT NULL
+  `picture` varchar(255) DEFAULT 'img/User-Default.svg'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -488,8 +517,23 @@ CREATE TABLE `Users` (
 
 INSERT INTO `Users` (`id`, `email`, `password`, `first_name`, `last_name`, `created_at`, `gender`, `phone_number`, `country`, `date_of_birth`, `googleId`, `picture`) VALUES
 (48, 'vasya.falyovskij@gmail.com', '$2a$04$p31on3TCSp14fPLPjRuqnelgT69WmkAVy2PBb5beiSEvYyeR5i8Qa', 'Василь', 'Фальовський', '2024-10-13', 'Чоловіча', '0956555110', 'Ukraine213', '2004-12-01', '117198055959106867405', 'https://lh3.googleusercontent.com/a/ACg8ocIFmlbl16I4QHytC3Tk2v9JoFWWJzIeK2UGXxbQdrTFy_lH8qY=s96-c'),
-(49, 'ron.bartonzzz@gmail.com', '$2a$04$r94z/sUrKaSyycWoSztnfexwJaHlCyBK02IW/.7if3YalL9Mfftsm', 'Василь213', 'Фальовський432', '2024-10-13', 'Інша', '0956555110', 'Ukraine', '1111-11-11', '107720322142409920200', 'https://lh3.googleusercontent.com/a/ACg8ocLLn3GWDom55ZxMFFfwYn4M6cnYr2cesYygzgm-SPmj2Kmi8hv2=s96-c'),
-(50, '1vasya.falyovskij@gmail.com', '$2a$07$DUdwN80EaTRzYIsG5uAXouvS6pKO9LKzurahm1AVq4N2kTvrBykr.', 'Василь', 'Фальовський', '2024-10-14', 'Чоловіча', '0956555110213', 'Ukraine', '2222-01-12', NULL, NULL);
+(50, '1vasya.falyovskij@gmail.com', '$2a$07$DUdwN80EaTRzYIsG5uAXouvS6pKO9LKzurahm1AVq4N2kTvrBykr.', 'Василь', 'Фальовський', '2024-10-14', 'Чоловіча', '0956555110213', 'Ukraine', '2222-01-12', NULL, NULL),
+(51, 'vasya.falyovskij22@gmail.com', '$2a$07$qenqAmtMMpbv9PEp3bDG3e6PvYC1uSBG1RJ9LbDWFAaoOnIb407oW', 'Василь', 'Фальовський', '2024-10-15', NULL, NULL, NULL, NULL, NULL, 'img/User-Default.svg'),
+(52, 'ron.bartonzzz@gmail.com', '$2a$04$jVGI96TKUdL9mI7gG6cN9e4jYUUh../HDr550.rz7DeUnNJvdqJR2', 'Ron', 'Barton', '2024-10-15', NULL, NULL, NULL, NULL, '107720322142409920200', 'https://lh3.googleusercontent.com/a/ACg8ocLLn3GWDom55ZxMFFfwYn4M6cnYr2cesYygzgm-SPmj2Kmi8hv2=s96-c');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_likes_dislikes`
+--
+
+CREATE TABLE `user_likes_dislikes` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `comment_id` int(11) NOT NULL,
+  `action` enum('like','dislike') NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Indexes for dumped tables
@@ -545,6 +589,14 @@ ALTER TABLE `Users`
   ADD UNIQUE KEY `email` (`email`);
 
 --
+-- Indexes for table `user_likes_dislikes`
+--
+ALTER TABLE `user_likes_dislikes`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_like_dislike` (`user_id`,`comment_id`),
+  ADD KEY `comment_id` (`comment_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -552,7 +604,7 @@ ALTER TABLE `Users`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `Games_List`
@@ -588,7 +640,13 @@ ALTER TABLE `Teams`
 -- AUTO_INCREMENT for table `Users`
 --
 ALTER TABLE `Users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+
+--
+-- AUTO_INCREMENT for table `user_likes_dislikes`
+--
+ALTER TABLE `user_likes_dislikes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -619,6 +677,13 @@ ALTER TABLE `news`
 --
 ALTER TABLE `Stake`
   ADD CONSTRAINT `stake_ibfk_1` FOREIGN KEY (`match_id`) REFERENCES `Matches` (`MatchID`);
+
+--
+-- Constraints for table `user_likes_dislikes`
+--
+ALTER TABLE `user_likes_dislikes`
+  ADD CONSTRAINT `user_likes_dislikes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `user_likes_dislikes_ibfk_2` FOREIGN KEY (`comment_id`) REFERENCES `comments` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
