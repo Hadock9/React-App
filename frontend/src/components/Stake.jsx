@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import useFetchGet from '../hooks/fetch/useFetchGet'
 
 export function Stake() {
 	const [Stakes, setData] = useState([])
@@ -17,7 +18,7 @@ export function Stake() {
 			Coef: parseFloat(Coef),
 			status: status,
 		}
-		console.log(stakeData)
+
 		const response = fetch('http://localhost:4000/api/Stake', {
 			method: 'POST',
 			headers: {
@@ -26,12 +27,23 @@ export function Stake() {
 			body: JSON.stringify(stakeData),
 		})
 	}
-	// Fetch users from the backend
+	const { Data, isLoading, failedToFetch } = useFetchGet({
+		url: 'http://localhost:4000/api/stake/',
+	})
 	useEffect(() => {
-		fetch('http://localhost:4000/api/Stake1')
-			.then(res => res.json())
-			.then(data => setData(data))
-	}, [])
+		if (Data) {
+			setData(Data)
+		}
+	}, [Data])
+
+	if (isLoading) {
+		return <Loader />
+	}
+
+	if (failedToFetch) {
+		return <p>Помилка: {failedToFetch}</p>
+	}
+
 	return (
 		<>
 			<div>

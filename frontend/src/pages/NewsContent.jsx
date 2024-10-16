@@ -7,41 +7,31 @@ import { Footer } from '../components/Footer'
 import { NavBar } from '../components/NavBar'
 
 import Comments from '../components/Comments'
+import MyLoader from '../components/Loader'
 import NewsLastAside from '../components/NewsLastAside'
 import NewsPopAside from '../components/NewsPopAside'
+import useFetchGet from '../hooks/fetch/useFetchGet'
 import { NewsDate } from '../js/TimeValidation'
 import rootstyle from '../styles/root.module.css'
 
 export function NewsContent() {
 	const [OneNews, SetOneNews] = useState(null)
-	const [failedToFetch, setFailedToFetch] = useState(false)
 
 	const [searchParams] = useSearchParams()
 	const id = searchParams.get('OneNews')
+	const { Data, isLoading, failedToFetch } = useFetchGet({
+		url: 'http://localhost:4000/api/news/news_list',
+		id: id,
+	})
 
 	useEffect(() => {
-		fetch(`http://localhost:4000/api/news/news_list/${id}`)
-			.then(response => {
-				if (!response.ok) {
-					throw new Error('Network response was not ok')
-				}
-				return response.json()
-			})
-			.then(data => {
-				if (data.length > 0) {
-					SetOneNews(data[0])
-				}
-				setFailedToFetch(false)
-			})
-			.catch(err => {
-				console.error(err)
-				setFailedToFetch(true)
-			})
-	}, [id])
+		if (Data) {
+			SetOneNews(Data[0])
+		}
+	}, [Data])
 
-	// Якщо новини немає, показуємо повідомлення про помилку
 	if (!OneNews && !failedToFetch) {
-		return <p>Завантаження...</p>
+		return <MyLoader />
 	}
 
 	if (failedToFetch) {
@@ -72,12 +62,12 @@ export function NewsContent() {
 										{NewsDate(OneNews.publish_date)}
 									</p>
 									<MessageSquareMore className='text-gray-400  h-4  ' />
-									<p className='text-gray-600 text-xs  '>{OneNews.likes}</p>
+									<p className='text-gray-600 text-xs  '>0</p>
 								</div>
 								<img
 									src={'/' + OneNews.image_url}
 									className='w-[80%]  rounded-md'
-									alt='Новинне зображення'
+									alt=' зображення'
 								/>
 
 								<div className='my-3'>

@@ -5,7 +5,9 @@ import { CheckFetch } from '../components/BadFatchDisclaimer'
 import { UkrainianWar } from '../components/BlockSaveUkraine'
 import { BurgerMenu } from '../components/BurgerMenu'
 import { Footer } from '../components/Footer'
+import MyLoader from '../components/Loader'
 import { NavBar } from '../components/NavBar'
+import useFetchGet from '../hooks/fetch/useFetchGet'
 import { extractHoursAndMinutes, formatDate } from '../js/TimeValidation'
 import style from '../styles/Match.module.css'
 import rootstyle from '../styles/root.module.css'
@@ -15,22 +17,21 @@ export function Match() {
 	const idMatch = searchParams.get('idMatch')
 	console.log(idMatch)
 	const [matches, setData] = useState([]) // Стан для зберігання матчів
-	const [failedToFetch, setFailedToFetch] = useState(false) // Стан для відслідковування помилки запиту
 
-	// Fetch 1 Match from the backend
+	const { Data, isLoading, failedToFetch } = useFetchGet({
+		url: 'http://localhost:4000/api/games/match/Match',
+		id: idMatch,
+	})
+
 	useEffect(() => {
-		fetch(`http://localhost:4000/api/games/match/Match/${idMatch}`)
-			.then(res => res.json())
-			.then(data => {
-				setData(data) // Оновлення стану з отриманими даними
-				setFailedToFetch(false) // Скидання помилки
-			})
-			.catch(error => {
-				setFailedToFetch(true) // Встановлення помилки у разі невдачі
-				console.log('Failed to fetch: ', error)
-			})
-	}, [])
+		if (Data) {
+			setData(Data)
+		}
+	}, [Data])
 
+	if (isLoading) {
+		return <MyLoader />
+	}
 	return (
 		<div className={rootstyle.wrapper}>
 			<NavBar />

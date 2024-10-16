@@ -21,7 +21,7 @@ header {
 	justify-content: space-between;
 	align-items: center;
 	height: 60px;
-	width: 5%;
+	width: 60px;
 }
 
 /* Блок тексту заголовка */
@@ -44,7 +44,6 @@ header {
 
 /* Іконки заголовка */
 .HeaderIcons {
-	width: 15%;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;

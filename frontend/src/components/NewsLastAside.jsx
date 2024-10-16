@@ -1,37 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import useFetchGet from '../hooks/fetch/useFetchGet'
 import { NewsDate } from '../js/TimeValidation'
+import MyLoader from './Loader'
 
 const NewsLastAside = () => {
 	const [News, SetNews] = useState(null)
-	const [failedToFetch, setFailedToFetch] = useState(false)
+
+	const { Data, isLoading, failedToFetch } = useFetchGet({
+		url: 'http://localhost:4000/api/news/news_last',
+	})
 
 	useEffect(() => {
-		fetch(`http://localhost:4000/api/news/news_last`)
-			.then(response => {
-				if (!response.ok) {
-					throw new Error('Network response was not ok')
-				}
-				return response.json()
-			})
-			.then(data => {
-				if (data.length > 0) {
-					SetNews(data)
-				}
-				setFailedToFetch(false)
-			})
-			.catch(err => {
-				console.error(err)
-				setFailedToFetch(true)
-			})
-	}, [])
+		if (Data) {
+			SetNews(Data)
+		}
+	}, [Data])
+
 	if (!News && !failedToFetch) {
-		return <p>Завантаження...</p>
+		return <MyLoader />
 	}
 
-	if (failedToFetch) {
-		return <p>Не вдалося завантажити новину.</p>
-	}
 	return (
 		<div className='mr-4 my-5   rounded-xl'>
 			<h3 className='font-bold my-5 text-xl'>Останні новини</h3>

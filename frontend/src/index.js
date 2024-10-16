@@ -20,6 +20,7 @@ import { Matches } from './pages/Matches'
 import { News } from './pages/News'
 import { NewsContent } from './pages/NewsContent'
 
+import Notifications from './pages/Notifications'
 import { Profile } from './pages/Profile'
 import { Registration } from './pages/Registr'
 import { ResetPassword } from './pages/ResetPassword'
@@ -43,6 +44,8 @@ root.render(
 						<Route path={'Home/:Game/Matches'} element={<Matches />} />
 						<Route path={'Home/:Game/Matches/:Match'} element={<Match />} />
 						<Route path='/404' element={<Erorpage />} />
+						<Route path='/Notifications' element={<Notifications />} />
+
 						<Route path='/ResetPassword' element={<ResetPassword />} />
 						<Route path='*' element={<Navigate to='/404' replace />} />
 					</Routes>

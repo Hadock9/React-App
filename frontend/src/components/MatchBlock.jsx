@@ -1,38 +1,39 @@
 import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
+import useFetchGet from '../hooks/fetch/useFetchGet'
 import { formatDate } from '../js/TimeValidation'
 import style from '../styles/Matches.module.css'
 import { CheckFetch } from './BadFatchDisclaimer'
+import MyLoader from './Loader'
 import { NoResultDisclaimer } from './NoResultDisclaimer'
 
 export function MatchBlock({ value }) {
 	const [Match, setData] = useState([])
-	const [failedToFetch, setFailedToFetch] = useState(false)
 
 	const [searchParams] = useSearchParams()
 	const game_id = searchParams.get('game_id')
-	console.log(game_id)
-	// Fetch Match_List${game_id} from the backend
-	useEffect(() => {
-		fetch(`http://localhost:4000/api/games/match/${game_id}`)
-			.then(res => res.json())
-			.then(data => {
-				setFailedToFetch(false)
-				setData(data)
-			})
-			.catch(error => {
-				setFailedToFetch(true)
-				console.log('Failed to fetch: ', error)
-			})
-	}, [])
 
-	console.log(Match)
+	const { Data, isLoading, failedToFetch } = useFetchGet({
+		url: 'http://localhost:4000/api/games/match',
+		id: game_id,
+	})
+
+	useEffect(() => {
+		if (Data) {
+			setData(Data)
+		}
+	}, [Data])
+
 	const filterMatches = Match.filter(Match => {
 		return (
 			Match.Team1Name.toLowerCase().includes(value.toLowerCase()) ||
 			Match.Team2Name.toLowerCase().includes(value.toLowerCase())
 		)
 	})
+
+	if (isLoading) {
+		return <MyLoader />
+	}
 	return (
 		<>
 			<h1 className='font-bold my-3 text-xl'>Matches</h1>

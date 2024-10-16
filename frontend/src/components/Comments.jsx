@@ -1,52 +1,107 @@
-import { ThumbsDown, ThumbsUp, UserRound } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
+import useFetchGet from '../hooks/fetch/useFetchGet'
 import { NewsDate } from '../js/TimeValidation'
+import LikesDisslikes from './LikesDisslikes'
+import MyLoader from './Loader'
 
 const Comments = ({ id }) => {
+	const navigate = useNavigate()
+
 	const [Comments, SetComments] = useState([])
-	const [failedToFetch, setFailedToFetch] = useState(false)
+	const { user } = useAuth()
+
+	const { Data, isLoading, failedToFetch } = useFetchGet({
+		url: 'http://localhost:4000/api/comments/news_comments',
+		id: id,
+	})
+
 	useEffect(() => {
-		fetch(`http://localhost:4000/api/comments/news_comments/${id}`)
-			.then(response => {
-				if (!response.ok) {
-					throw new Error('Network response was not ok')
-				}
-				return response.json()
-			})
-			.then(data => {
-				SetComments(data)
+		if (Data) {
+			SetComments(Data)
+		}
+	}, [Data])
 
-				setFailedToFetch(false)
-			})
-			.catch(err => {
-				console.error(err)
-				setFailedToFetch(true)
-			})
-	}, [id])
+	const [CommentText, SetCommentText] = useState('')
+	const handleSubmit = async e => {
+		e.preventDefault()
 
-	// Якщо Comments немає, показуємо повідомлення про помилку
-	if (!Comments && !failedToFetch) {
-		return <p>Завантаження...</p>
+		const CommentData = {
+			news_id: id,
+			author: user.first_name,
+			content: CommentText,
+			picture: user.picture,
+		}
+
+		const response = await fetch(
+			'http://localhost:4000/api/comments/news_comments/comment',
+			{
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(CommentData),
+			}
+		)
+
+		if (response.ok) {
+			console.log('Комент вставлений успішно ')
+			navigate(0)
+		} else {
+			const errorData = await response.json()
+			console.log('Помилка:', errorData)
+		}
 	}
 
-	if (failedToFetch) {
-		return <p>Не вдалося завантажити новину.</p>
+	if (isLoading) {
+		return <MyLoader />
 	}
-
 	return (
 		<div className='Comments'>
 			<div className='flex'>
 				<h1 className='text-xl text-black font-semibold'>
-					Коментарі {Comments.comment_count}
+					Коментарі {Comments.length}
 				</h1>
 			</div>
+			<div className='My comment my-3 flex'>
+				<div className='w-[10%] flex justify-center   items-center'>
+					<img
+						src={user.picture}
+						className='w-[40px] h-[40px] rounded-full'
+						alt=''
+					/>
+				</div>
+				<div className='w-[100%]'>
+					<form onSubmit={handleSubmit} className='flex flex-col justify-start'>
+						<textarea
+							id='textarea'
+							value={CommentText}
+							onChange={e => SetCommentText(e.target.value)}
+							className='resize-y min-h-[80px] max-h-[300px] overflow-auto w-[90%] h-[100px] p-2 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5ba1a] focus:border-[#f5ba1a] text-gray-700 placeholder-gray-500'
+							placeholder='Введіть свій коментар...'
+						></textarea>
+
+						<button
+							type='submit'
+							className='mt-4 w-[100px] h-[44px] bg-[#f5ba1a] text-white border-none cursor-pointer rounded-md'
+						>
+							Submit
+						</button>
+					</form>
+				</div>
+			</div>
+
 			{Comments.map(OneComment => (
 				<div className='comment-block flex  my-3 w-[80] ' key={OneComment.id}>
-					{console.log(OneComment)}
-					<div className='w-[10%] flex justify-center   items-center'>
-						<UserRound className='w-[70%] h-[50%] ' />
+					<div className='w-[100px] flex justify-center   items-center'>
+						<img
+							src={OneComment.picture}
+							className='w-[40px] h-[40px] rounded-full'
+							alt=''
+						/>
 					</div>
-					<div>
+					<div className=' w-[80%]'>
 						<div className='flex justify-start items-center h-auto'>
 							<p className='text-lg text-black font-semibold'>
 								{OneComment.author}
@@ -55,19 +110,10 @@ const Comments = ({ id }) => {
 								{NewsDate(OneComment.publish_date)}
 							</p>
 						</div>
-						<div className='Content mt-2'>
-							<p>{OneComment.content}</p>
+						<div className='  mt-2'>
+							<p className='w-[90%]'>{OneComment.content}</p>
 						</div>
-						<div className='likes-dislikes flex mt-2'>
-							<div className='flex      '>
-								<ThumbsUp className='ml-2 text-gray-400   h-4 mt-[2px]' />
-								{OneComment.likes}
-							</div>
-							<div className='flex '>
-								<ThumbsDown className='ml-2 text-gray-400  h-4 mt-1' />
-								{OneComment.dislikes}
-							</div>
-						</div>
+						<LikesDisslikes OneComment={OneComment} />
 					</div>
 				</div>
 			))}

@@ -1,38 +1,28 @@
 import { MessageSquareMore } from 'lucide-react'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
+import useFetchGet from '../hooks/fetch/useFetchGet'
 import { NewsDate } from '../js/TimeValidation'
+import MyLoader from './Loader'
 
-const NewsList = () => {
-	const [News, SetNews] = useState([])
-	const [failedToFetch, setFailedToFetch] = useState(false)
+const NewsList = ({ value }) => {
+	const { Data, isLoading, failedToFetch } = useFetchGet({
+		url: 'http://localhost:4000/api/news/news_list',
+	})
 
-	useEffect(() => {
-		fetch(`http://localhost:4000/api/news/news_list`)
-			.then(response => {
-				if (!response.ok) {
-					throw new Error('Network response was not ok')
-				}
-				return response.json() // Перетворюємо відповідь на JSON
-			})
-			.then(data => {
-				SetNews(data)
-				setFailedToFetch(false)
-			})
-			.catch(err => {
-				console.error(err)
-				setFailedToFetch(true) // Встановлюємо true, якщо сталася помилка
-			})
-	}, [])
+	const filterNews = Data.filter(News => {
+		return News.title.toLowerCase().includes(value.toLowerCase())
+	})
 
-	console.log(News)
-
+	if (isLoading) {
+		return <MyLoader />
+	}
 	return (
 		<>
 			{failedToFetch ? (
 				<p>Не вдалося завантажити новини. Спробуйте ще раз пізніше.</p>
 			) : (
-				News.map(OneNews => (
+				filterNews.map(OneNews => (
 					<div className='flex   h-[120px] my-5' key={OneNews.id}>
 						<img
 							src={'/' + OneNews.image_url}

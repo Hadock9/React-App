@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 11, 2024 at 01:53 PM
+-- Generation Time: Oct 15, 2024 at 03:30 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,6 +20,30 @@ SET time_zone = "+00:00";
 --
 -- Database: `React_app`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comments`
+--
+
+CREATE TABLE `comments` (
+  `id` int(11) NOT NULL,
+  `news_id` int(11) DEFAULT NULL,
+  `author` varchar(70) DEFAULT NULL,
+  `content` text DEFAULT NULL,
+  `publish_date` datetime DEFAULT current_timestamp(),
+  `likes` int(11) DEFAULT 0,
+  `dislikes` int(11) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`id`, `news_id`, `author`, `content`, `publish_date`, `likes`, `dislikes`) VALUES
+(1, 1, 'Іван', 'Дуже цікава стаття! Дякую за інформацію.', '2024-10-15 13:31:29', 10, 2),
+(2, 1, 'Олена', 'Не погоджуюсь з автором, але гарний аналіз.', '2024-10-15 13:31:29', 5, 3);
 
 -- --------------------------------------------------------
 
@@ -81,145 +105,189 @@ CREATE TABLE `Matches` (
 --
 
 INSERT INTO `Matches` (`MatchID`, `Place`, `Team1ID`, `Team1Coef`, `Team2ID`, `Team2Coef`, `VsDate`, `time`, `Team1Score`, `Team2Score`, `game_id`, `season`) VALUES
-(14, 'New York', 20, 1.50, 26, 2.50, '2024-10-12', '15:00:00.000000', NULL, NULL, 1, '2024 Natus Vincere vs Astralis'),
-(15, 'Berlin', 7, 1.80, 9, 2.00, '2024-10-13', '16:30:00.000000', NULL, NULL, 1, '2024 G2 Esports vs FaZe Clan'),
-(16, 'Kyiv', 9, 1.70, 7, 1.90, '2024-10-14', '17:45:00.000000', NULL, NULL, 1, '2024 Team Vitality vs Ninjas in Pyjamas'),
-(17, 'Los Angeles', 19, 1.60, 18, 2.10, '2024-10-15', '18:15:00.000000', NULL, NULL, 1, '2024 Fnatic vs Cloud9'),
-(18, 'Tokyo', 5, 1.40, 22, 2.30, '2024-10-16', '19:00:00.000000', NULL, NULL, 1, '2024 BIG vs Team Liquid'),
-(19, 'Paris', 16, 1.30, 8, 2.60, '2024-10-17', '20:30:00.000000', NULL, NULL, 1, '2024 OpTic Gaming vs Atlanta FaZe'),
-(20, 'London', 17, 1.90, 16, 1.70, '2024-10-18', '14:00:00.000000', NULL, NULL, 1, '2024 Toronto Ultra vs Dallas Empire'),
-(21, 'Moscow', 14, 1.50, 15, 2.40, '2024-10-19', '15:00:00.000000', NULL, NULL, 1, '2024 New York Subliners vs Minnesota RØKKR'),
-(22, 'Seoul', NULL, 1.20, 14, 3.00, '2024-10-20', '17:00:00.000000', NULL, NULL, 1, '2024 Paris Legion vs London Royal Ravens'),
-(23, 'Toronto', 25, 1.80, 23, 2.10, '2024-10-21', '19:00:00.000000', NULL, NULL, 1, '2024 Los Angeles Thieves vs Florida Mutineers'),
-(24, 'Los Angeles', 12, 1.55, 8, 2.45, '2024-10-22', '18:00:00.000000', NULL, NULL, 2, '2024 Team A vs Team B'),
-(25, 'Miami', 15, 1.65, 4, 1.85, '2024-10-23', '19:30:00.000000', NULL, NULL, 2, '2024 Team C vs Team D'),
-(26, 'London', 20, 1.70, 3, 1.90, '2024-10-24', '20:00:00.000000', NULL, NULL, 2, '2024 Team E vs Team F'),
-(27, 'Tokyo', 23, 1.80, NULL, 2.00, '2024-10-25', '15:30:00.000000', NULL, NULL, 2, '2024 Team G vs Team H'),
-(28, 'Berlin', 24, 1.40, 17, 2.30, '2024-10-26', '16:45:00.000000', NULL, NULL, 2, '2024 Team I vs Team J'),
-(29, 'Paris', 22, 1.30, 16, 2.60, '2024-10-27', '17:00:00.000000', NULL, NULL, 2, '2024 Team K vs Team L'),
-(30, 'Seoul', 23, 1.90, 26, 1.70, '2024-10-28', '18:15:00.000000', NULL, NULL, 2, '2024 Team M vs Team N'),
-(31, 'Toronto', 17, 1.55, 26, 2.45, '2024-10-29', '19:30:00.000000', NULL, NULL, 2, '2024 Team O vs Team P'),
-(32, 'Chicago', 9, 1.80, 9, 2.00, '2024-10-30', '20:00:00.000000', NULL, NULL, 2, '2024 Team Q vs Team R'),
-(33, 'New York', 4, 1.75, 15, 1.85, '2024-10-31', '21:00:00.000000', NULL, NULL, 2, '2024 Team S vs Team T'),
-(34, 'Shanghai', 3, 1.60, 22, 2.40, '2024-10-22', '15:00:00.000000', NULL, NULL, 3, '2024 Team A vs Team B'),
-(35, 'Kuala Lumpur', 8, 1.75, 25, 1.95, '2024-10-23', '16:30:00.000000', NULL, NULL, 3, '2024 Team C vs Team D'),
-(36, 'Moscow', 16, 1.50, 18, 2.20, '2024-10-24', '17:45:00.000000', NULL, NULL, 3, '2024 Team E vs Team F'),
-(37, 'Berlin', 21, 1.85, 7, 1.90, '2024-10-25', '18:15:00.000000', NULL, NULL, 3, '2024 Team G vs Team H'),
-(38, 'Tokyo', 20, 1.45, 12, 2.55, '2024-10-26', '19:00:00.000000', NULL, NULL, 3, '2024 Team I vs Team J'),
-(39, 'Dubai', 19, 1.70, 11, 1.85, '2024-10-27', '20:30:00.000000', NULL, NULL, 3, '2024 Team K vs Team L'),
-(40, 'Singapore', 22, 1.80, 4, 2.00, '2024-10-28', '14:00:00.000000', NULL, NULL, 3, '2024 Team M vs Team N'),
-(41, 'Hanoi', NULL, 1.90, 25, 2.10, '2024-10-29', '15:00:00.000000', NULL, NULL, 3, '2024 Team O vs Team P'),
-(42, 'Manila', 5, 1.60, 9, 2.40, '2024-10-30', '16:00:00.000000', NULL, NULL, 3, '2024 Team Q vs Team R'),
-(43, 'Bangkok', 9, 1.70, 25, 2.30, '2024-10-31', '17:00:00.000000', NULL, NULL, 3, '2024 Team S vs Team T'),
-(44, 'London', 26, 1.50, 12, 2.50, '2024-10-22', '15:00:00.000000', NULL, NULL, 4, '2024 Team A vs Team B'),
-(45, 'Madrid', 22, 1.80, 21, 2.00, '2024-10-23', '16:30:00.000000', NULL, NULL, 4, '2024 Team C vs Team D'),
-(46, 'Rome', 14, 1.70, 8, 1.90, '2024-10-24', '17:45:00.000000', NULL, NULL, 4, '2024 Team E vs Team F'),
-(47, 'Berlin', 3, 1.60, 16, 2.10, '2024-10-25', '18:15:00.000000', NULL, NULL, 4, '2024 Team G vs Team H'),
-(48, 'Paris', 7, 1.40, 21, 2.30, '2024-10-26', '19:00:00.000000', NULL, NULL, 4, '2024 Team I vs Team J'),
-(49, 'Buenos Aires', 23, 1.30, 7, 2.60, '2024-10-27', '20:30:00.000000', NULL, NULL, 4, '2024 Team K vs Team L'),
-(50, 'Sao Paulo', 19, 1.90, 22, 1.70, '2024-10-28', '14:00:00.000000', NULL, NULL, 4, '2024 Team M vs Team N'),
-(51, 'Sydney', 4, 1.50, 19, 2.40, '2024-10-29', '15:00:00.000000', NULL, NULL, 4, '2024 Team O vs Team P'),
-(52, 'Cape Town', 11, 1.20, 3, 3.00, '2024-10-30', '17:00:00.000000', NULL, NULL, 4, '2024 Team Q vs Team R'),
-(53, 'Los Angeles', 23, 1.80, 10, 2.10, '2024-10-31', '19:00:00.000000', NULL, NULL, 4, '2024 Team S vs Team T'),
-(54, 'Los Angeles', 4, 1.50, 19, 2.50, '2024-10-22', '15:00:00.000000', NULL, NULL, 5, '2024 Team SoloMid vs Cloud9'),
-(55, 'San Francisco', 8, 1.65, 17, 1.85, '2024-10-23', '16:30:00.000000', NULL, NULL, 5, '2024 Fnatic vs G2 Esports'),
-(56, 'Berlin', 12, 1.70, 5, 1.90, '2024-10-24', '17:45:00.000000', NULL, NULL, 5, '2024 G2 Esports vs Rogue'),
-(57, 'Tokyo', 3, 1.80, 11, 2.00, '2024-10-25', '18:15:00.000000', NULL, NULL, 5, '2024 Gen.G vs T1'),
-(58, 'Seoul', 14, 1.40, 26, 2.30, '2024-10-26', '19:00:00.000000', NULL, NULL, 5, '2024 T1 vs DWG KIA'),
-(59, 'Bangkok', 17, 1.30, 10, 2.60, '2024-10-27', '20:30:00.000000', NULL, NULL, 5, '2024 EDward Gaming vs FunPlus Phoenix'),
-(60, 'Singapore', 21, 1.90, 25, 1.70, '2024-10-28', '14:00:00.000000', NULL, NULL, 5, '2024 Royal Never Give Up vs Invictus Gaming'),
-(61, 'Paris', 25, 1.55, 4, 2.45, '2024-10-29', '15:00:00.000000', NULL, NULL, 5, '2024 MAD Lions vs Excel Esports'),
-(62, 'Moscow', 26, 1.80, 20, 2.00, '2024-10-30', '16:00:00.000000', NULL, NULL, 5, '2024 Team Vitality vs Misfits Gaming'),
-(63, 'Madrid', 14, 1.75, 15, 1.85, '2024-10-31', '17:00:00.000000', NULL, NULL, 5, '2024 SK Telecom T1 vs Gen.G'),
-(64, 'Los Angeles', 21, 1.60, 4, 2.40, '2024-10-22', '15:00:00.000000', NULL, NULL, 6, '2024 Cloud9 vs FaZe Clan'),
-(65, 'San Francisco', 8, 1.75, 14, 1.95, '2024-10-23', '16:30:00.000000', NULL, NULL, 6, '2024 OpTic Gaming vs Team Envy'),
-(66, 'London', 11, 1.50, 13, 2.20, '2024-10-24', '17:45:00.000000', NULL, NULL, 6, '2024 Sentinels vs G2 Esports'),
-(67, 'New York', 5, 1.85, 5, 1.90, '2024-10-25', '18:15:00.000000', NULL, NULL, 6, '2024 TSM vs Fnatic'),
-(68, 'Toronto', 6, 1.45, 12, 2.55, '2024-10-26', '19:00:00.000000', NULL, NULL, 6, '2024 Team Liquid vs Natus Vincere'),
-(69, 'Paris', 7, 1.70, 9, 1.85, '2024-10-27', '20:30:00.000000', NULL, NULL, 6, '2024 Evil Geniuses vs FaZe Clan'),
-(70, 'Berlin', 10, 1.80, 24, 2.00, '2024-10-28', '14:00:00.000000', NULL, NULL, 6, '2024 Luminosity Gaming vs T1'),
-(71, 'Tokyo', 7, 1.90, 5, 2.10, '2024-10-29', '15:00:00.000000', NULL, NULL, 6, '2024 100 Thieves vs Dignitas'),
-(72, 'Moscow', 22, 1.60, 5, 2.40, '2024-10-30', '16:00:00.000000', NULL, NULL, 6, '2024 Splyce vs G2 Esports'),
-(73, 'Shanghai', 17, 1.70, 18, 2.30, '2024-10-31', '17:00:00.000000', NULL, NULL, 6, '2024 NRG Esports vs Team Secret'),
-(74, 'Dallas', 17, 1.50, 22, 2.50, '2024-10-22', '15:00:00.000000', NULL, NULL, 7, '2024 Dallas Fuel vs San Francisco Shock'),
-(75, 'Los Angeles', 7, 1.80, 4, 2.00, '2024-10-23', '16:30:00.000000', NULL, NULL, 7, '2024 Atlanta Reign vs Houston Outlaws'),
-(76, 'Toronto', 18, 1.70, 25, 1.90, '2024-10-24', '17:45:00.000000', NULL, NULL, 7, '2024 New York Excelsior vs Florida Mayhem'),
-(77, 'Seattle', 24, 1.85, 19, 1.90, '2024-10-25', '18:15:00.000000', NULL, NULL, 7, '2024 Philadelphia Fusion vs Boston Uprising'),
-(78, 'Vancouver', 22, 1.45, 10, 2.55, '2024-10-26', '19:00:00.000000', NULL, NULL, 7, '2024 Los Angeles Valiant vs Paris Eternal'),
-(79, 'Chicago', 17, 1.70, 17, 1.85, '2024-10-27', '20:30:00.000000', NULL, NULL, 7, '2024 Washington Justice vs Toronto Defiant'),
-(80, 'Boston', 12, 1.80, 19, 2.00, '2024-10-28', '14:00:00.000000', NULL, NULL, 7, '2024 Chengdu Hunters vs Hangzhou Spark'),
-(81, 'Shanghai', 16, 1.90, 21, 2.10, '2024-10-29', '15:00:00.000000', NULL, NULL, 7, '2024 Guangzhou Charge vs Kwangdong Freecs'),
-(82, 'Seoul', 17, 1.60, 18, 2.40, '2024-10-30', '16:00:00.000000', NULL, NULL, 7, '2024 Seoul Dynasty vs Vancouver Titans'),
-(83, 'Paris', 17, 1.70, 20, 2.30, '2024-10-31', '17:00:00.000000', NULL, NULL, 7, '2024 Shanghai Dragons vs Philadelphia Fusion'),
-(84, 'Los Angeles', 18, 1.50, 21, 2.50, '2024-10-22', '15:00:00.000000', NULL, NULL, 8, '2024 Sentinels vs Cloud9'),
-(85, 'San Francisco', 22, 1.65, 15, 1.85, '2024-10-23', '16:30:00.000000', NULL, NULL, 8, '2024 100 Thieves vs Team Envy'),
-(86, 'London', 8, 1.70, 26, 1.90, '2024-10-24', '17:45:00.000000', NULL, NULL, 8, '2024 FaZe Clan vs G2 Esports'),
-(87, 'Tokyo', 22, 1.80, 19, 2.00, '2024-10-25', '18:15:00.000000', NULL, NULL, 8, '2024 Fnatic vs Team Liquid'),
-(88, 'Berlin', 12, 1.40, 11, 2.30, '2024-10-26', '19:00:00.000000', NULL, NULL, 8, '2024 NAVI vs Gambit'),
-(89, 'Moscow', 10, 1.30, 17, 2.60, '2024-10-27', '20:30:00.000000', NULL, NULL, 8, '2024 KRÜ Esports vs Team Secret'),
-(90, 'Dubai', 17, 1.90, 9, 1.70, '2024-10-28', '14:00:00.000000', NULL, NULL, 8, '2024 Loud vs KRU Esports'),
-(91, 'Paris', 11, 1.55, 8, 2.45, '2024-10-29', '15:00:00.000000', NULL, NULL, 8, '2024 Team Liquid vs OpTic Gaming'),
-(92, 'Singapore', 11, 1.80, 15, 2.00, '2024-10-30', '16:00:00.000000', NULL, NULL, 8, '2024 T1 vs NRG Esports'),
-(93, 'São Paulo', 5, 1.75, 4, 1.85, '2024-10-31', '17:00:00.000000', NULL, NULL, 8, '2024 FURIA vs LOUD'),
-(94, 'Toronto', 26, 1.50, 23, 2.50, '2024-10-22', '15:00:00.000000', NULL, NULL, 9, '2024 TSM vs FaZe Clan'),
-(95, 'San Francisco', NULL, 1.65, 9, 1.85, '2024-10-23', '16:30:00.000000', NULL, NULL, 9, '2024 Team Liquid vs DarkZero'),
-(96, 'New York', 7, 1.70, 7, 1.90, '2024-10-24', '17:45:00.000000', NULL, NULL, 9, '2024 G2 Esports vs Rogue'),
-(97, 'Moscow', 20, 1.80, 13, 2.00, '2024-10-25', '18:15:00.000000', NULL, NULL, 9, '2024 Soniqs vs Elevate'),
-(98, 'London', 9, 1.40, 18, 2.30, '2024-10-26', '19:00:00.000000', NULL, NULL, 9, '2024 Ninjas in Pyjamas vs Team Empire'),
-(99, 'Berlin', 17, 1.30, 23, 2.60, '2024-10-27', '20:30:00.000000', NULL, NULL, 9, '2024 Fnatic vs Vitality'),
-(100, 'Tokyo', 23, 1.90, NULL, 1.70, '2024-10-28', '14:00:00.000000', NULL, NULL, 9, '2024 BDS vs Mkers'),
-(101, 'Paris', 10, 1.55, NULL, 2.45, '2024-10-29', '15:00:00.000000', NULL, NULL, 9, '2024 Oxygen vs Natus Vincere'),
-(102, 'Berlin', 8, 1.80, 6, 2.00, '2024-10-30', '16:00:00.000000', NULL, NULL, 9, '2024 Team Secret vs Team Liquid'),
-(103, 'São Paulo', 17, 1.75, 6, 1.85, '2024-10-31', '17:00:00.000000', NULL, NULL, 9, '2024 FURIA vs MIBR'),
-(104, 'Los Angeles', 11, 1.50, 20, 2.50, '2024-12-01', '15:00:00.000000', NULL, NULL, 10, '2024 TSM vs FaZe Clan'),
-(105, 'Berlin', 15, 1.65, 26, 1.85, '2024-12-02', '16:30:00.000000', NULL, NULL, 10, '2024 Natus Vincere vs G2 Esports'),
-(106, 'Toronto', 22, 1.70, 14, 1.90, '2024-12-03', '17:45:00.000000', NULL, NULL, 10, '2024 100 Thieves vs Cloud9'),
-(107, 'Tokyo', 25, 1.80, 10, 2.00, '2024-12-04', '18:15:00.000000', NULL, NULL, 10, '2024 Team Liquid vs OpTic Gaming'),
-(108, 'London', 21, 1.40, 16, 2.30, '2024-12-05', '19:00:00.000000', NULL, NULL, 10, '2024 FaZe Clan vs Team Secret'),
-(109, 'Paris', 14, 1.30, 6, 2.60, '2024-12-06', '20:30:00.000000', NULL, NULL, 10, '2024 Evil Geniuses vs NRG Esports'),
-(110, 'San Francisco', 19, 1.90, 13, 1.70, '2024-12-07', '14:00:00.000000', NULL, NULL, 10, '2024 T1 vs Team SoloMid'),
-(111, 'São Paulo', 7, 1.55, 25, 2.45, '2024-12-08', '15:00:00.000000', NULL, NULL, 10, '2024 Gen.G vs FURIA'),
-(112, 'Moscow', 4, 1.80, 11, 2.00, '2024-12-09', '16:00:00.000000', NULL, NULL, 10, '2024 Liquid vs NAVI'),
-(113, 'Dublin', 19, 1.75, 13, 1.85, '2024-12-10', '17:00:00.000000', NULL, NULL, 10, '2024 Misfits vs Spacestation Gaming'),
-(114, 'Tokyo', 13, 1.50, 6, 2.50, '2024-12-11', '15:00:00.000000', NULL, NULL, 11, '2024 Team D vs Team A'),
-(115, 'Los Angeles', 26, 1.65, 16, 1.85, '2024-12-12', '16:30:00.000000', NULL, NULL, 11, '2024 Team B vs Team C'),
-(116, 'Paris', 17, 1.70, 22, 1.90, '2024-12-13', '17:45:00.000000', NULL, NULL, 11, '2024 Team E vs Team F'),
-(117, 'London', 19, 1.80, 16, 2.00, '2024-12-14', '18:15:00.000000', NULL, NULL, 11, '2024 Team G vs Team H'),
-(118, 'Berlin', 12, 1.40, 25, 2.30, '2024-12-15', '19:00:00.000000', NULL, NULL, 11, '2024 Team I vs Team J'),
-(119, 'Toronto', 22, 1.30, NULL, 2.60, '2024-12-16', '20:30:00.000000', NULL, NULL, 11, '2024 Team K vs Team L'),
-(120, 'São Paulo', 16, 1.90, 3, 1.70, '2024-12-17', '14:00:00.000000', NULL, NULL, 11, '2024 Team M vs Team N'),
-(121, 'Moscow', 18, 1.55, 6, 2.45, '2024-12-18', '15:00:00.000000', NULL, NULL, 11, '2024 Team O vs Team P'),
-(122, 'Dublin', 9, 1.80, 13, 2.00, '2024-12-19', '16:00:00.000000', NULL, NULL, 11, '2024 Team Q vs Team R'),
-(123, 'Tokyo', 8, 1.75, 16, 1.85, '2024-12-20', '17:00:00.000000', NULL, NULL, 11, '2024 Team S vs Team T'),
-(124, 'Los Angeles', 7, 1.50, 17, 2.50, '2024-12-21', '15:00:00.000000', NULL, NULL, 12, '2024 G2 Esports vs NRG Esports'),
-(125, 'Berlin', 24, 1.65, 10, 1.85, '2024-12-22', '16:30:00.000000', NULL, NULL, 12, '2024 Team Liquid vs SpaceStation Gaming'),
-(126, 'Toronto', 9, 1.70, 23, 1.90, '2024-12-23', '17:45:00.000000', NULL, NULL, 12, '2024 Dignitas vs FURIA'),
-(127, 'Tokyo', 17, 1.80, 18, 2.00, '2024-12-24', '18:15:00.000000', NULL, NULL, 12, '2024 FaZe Clan vs Version1'),
-(128, 'London', 23, 1.40, 15, 2.30, '2024-12-25', '19:00:00.000000', NULL, NULL, 12, '2024 Gen.G vs Pittsburgh Knights'),
-(129, 'Paris', 23, 1.30, 12, 2.60, '2024-12-26', '20:30:00.000000', NULL, NULL, 12, '2024 Team Envy vs Rogue'),
-(130, 'São Paulo', NULL, 1.90, NULL, 1.70, '2024-12-27', '14:00:00.000000', NULL, NULL, 12, '2024 Kansas City Pioneers vs Knights'),
-(131, 'Moscow', 17, 1.55, 18, 2.45, '2024-12-28', '15:00:00.000000', NULL, NULL, 12, '2024 Team Endpoint vs Team Queso'),
-(132, 'Dublin', 16, 1.80, NULL, 2.00, '2024-12-29', '16:00:00.000000', NULL, NULL, 12, '2024 Pioneers vs Barcelona'),
-(133, 'Los Angeles', 16, 1.50, 6, 2.50, '2024-12-30', '15:00:00.000000', NULL, NULL, 13, '2024 TSM vs Soniqs'),
-(134, 'Paris', 14, 1.65, 4, 1.85, '2024-12-31', '16:30:00.000000', NULL, NULL, 13, '2024 G2 Esports vs FaZe Clan'),
-(135, 'Berlin', 26, 1.70, 25, 1.90, '2025-01-01', '17:45:00.000000', NULL, NULL, 13, '2024 Team Liquid vs Spacestation Gaming'),
-(136, 'Toronto', 7, 1.80, 12, 2.00, '2025-01-02', '18:15:00.000000', NULL, NULL, 13, '2024 T1 vs DarkZero'),
-(137, 'Tokyo', 21, 1.40, 22, 2.30, '2025-01-03', '19:00:00.000000', NULL, NULL, 13, '2024 Elevate vs 100 Thieves'),
-(138, 'London', 10, 1.30, 22, 2.60, '2025-01-04', '20:30:00.000000', NULL, NULL, 13, '2024 Team Vitality vs Rogue'),
-(139, 'São Paulo', 15, 1.90, 12, 1.70, '2025-01-05', '14:00:00.000000', NULL, NULL, 13, '2024 XSET vs Atheris'),
-(140, 'Dublin', NULL, 1.55, 20, 2.45, '2025-01-06', '15:00:00.000000', NULL, NULL, 13, '2024 FURIA vs Black Dragons'),
-(141, 'Moscow', 18, 1.80, 20, 2.00, '2025-01-07', '16:00:00.000000', NULL, NULL, 13, '2024 MIBR vs Team 1'),
-(142, 'Toronto', 7, 1.75, 5, 1.85, '2025-01-08', '17:00:00.000000', NULL, NULL, 13, '2024 Ninjas in Pyjamas vs Soniqs'),
-(143, 'Los Angeles', 4, 1.50, 11, 2.50, '2025-01-09', '15:00:00.000000', NULL, NULL, 14, '2024 Cloud9 vs FaZe Clan'),
-(144, 'Tokyo', 3, 1.65, 17, 1.85, '2025-01-10', '16:30:00.000000', NULL, NULL, 14, '2024 Fnatic vs Team Liquid'),
-(145, 'Berlin', 9, 1.70, 12, 1.90, '2025-01-11', '17:45:00.000000', NULL, NULL, 14, '2024 G2 Esports vs 100 Thieves'),
-(146, 'London', 9, 1.80, 13, 2.00, '2025-01-12', '18:15:00.000000', NULL, NULL, 14, '2024 Natus Vincere vs Team Secret'),
-(147, 'Madrid', 4, 1.40, 26, 2.30, '2025-01-13', '19:00:00.000000', NULL, NULL, 14, '2024 Evil Geniuses vs FaZe Clan'),
-(148, 'San Francisco', 10, 1.30, 8, 2.60, '2025-01-14', '20:30:00.000000', NULL, NULL, 14, '2024 OpTic Gaming vs KRU Esports'),
-(149, 'São Paulo', 7, 1.90, 9, 1.70, '2025-01-15', '14:00:00.000000', NULL, NULL, 14, '2024 Leviatan vs ZETA Division'),
-(150, 'Moscow', 16, 1.55, 5, 2.45, '2025-01-16', '15:00:00.000000', NULL, NULL, 14, '2024 Team Vitality vs Team Heretics'),
-(151, 'Paris', 7, 1.80, 20, 2.00, '2025-01-17', '16:00:00.000000', NULL, NULL, 14, '2024 FURIA vs LOUD'),
-(152, 'Toronto', 4, 1.75, 20, 1.85, '2025-01-18', '17:00:00.000000', NULL, NULL, 14, '2024 MIBR vs Team Secret');
+(14, 'New York', 20, 1.50, 26, 2.50, '2024-10-12', '15:00:00.000000', NULL, NULL, 1, 'CS:GO Major Championships 2024'),
+(15, 'Berlin', 7, 1.80, 9, 2.00, '2024-10-13', '16:30:00.000000', NULL, NULL, 1, 'CS:GO Major Championships 2024'),
+(16, 'Kyiv', 9, 1.70, 7, 1.90, '2024-10-14', '17:45:00.000000', NULL, NULL, 1, 'CS:GO Major Championships 2024'),
+(17, 'Los Angeles', 19, 1.60, 18, 2.10, '2024-10-15', '18:15:00.000000', NULL, NULL, 1, 'CS:GO Major Championships 2024'),
+(18, 'Tokyo', 5, 1.40, 22, 2.30, '2024-10-16', '19:00:00.000000', NULL, NULL, 1, 'CS:GO Major Championships 2024'),
+(19, 'Paris', 16, 1.30, 8, 2.60, '2024-10-17', '20:30:00.000000', NULL, NULL, 1, 'CS:GO Major Championships 2024'),
+(20, 'London', 17, 1.90, 16, 1.70, '2024-10-18', '14:00:00.000000', NULL, NULL, 1, 'CS:GO Major Championships 2024'),
+(21, 'Moscow', 14, 1.50, 15, 2.40, '2024-10-19', '15:00:00.000000', NULL, NULL, 1, 'CS:GO Major Championships 2024'),
+(22, 'Seoul', NULL, 1.20, 14, 3.00, '2024-10-20', '17:00:00.000000', NULL, NULL, 1, 'CS:GO Major Championships 2024'),
+(23, 'Toronto', 25, 1.80, 23, 2.10, '2024-10-21', '19:00:00.000000', NULL, NULL, 1, 'CS:GO Major Championships 2024'),
+(24, 'Los Angeles', 12, 1.55, 8, 2.45, '2024-10-22', '18:00:00.000000', NULL, NULL, 2, 'The International 2024'),
+(25, 'Miami', 15, 1.65, 4, 1.85, '2024-10-23', '19:30:00.000000', NULL, NULL, 2, 'The International 2024'),
+(26, 'London', 20, 1.70, 3, 1.90, '2024-10-24', '20:00:00.000000', NULL, NULL, 2, 'The International 2024'),
+(27, 'Tokyo', 23, 1.80, NULL, 2.00, '2024-10-25', '15:30:00.000000', NULL, NULL, 2, 'The International 2024'),
+(28, 'Berlin', 24, 1.40, 17, 2.30, '2024-10-26', '16:45:00.000000', NULL, NULL, 2, 'The International 2024'),
+(29, 'Paris', 22, 1.30, 16, 2.60, '2024-10-27', '17:00:00.000000', NULL, NULL, 2, 'The International 2024'),
+(30, 'Seoul', 23, 1.90, 26, 1.70, '2024-10-28', '18:15:00.000000', NULL, NULL, 2, 'The International 2024'),
+(31, 'Toronto', 17, 1.55, 26, 2.45, '2024-10-29', '19:30:00.000000', NULL, NULL, 2, 'The International 2024'),
+(32, 'Chicago', 9, 1.80, 9, 2.00, '2024-10-30', '20:00:00.000000', NULL, NULL, 2, 'The International 2024'),
+(33, 'New York', 4, 1.75, 15, 1.85, '2024-10-31', '21:00:00.000000', NULL, NULL, 2, 'The International 2024'),
+(34, 'Shanghai', 3, 1.60, 22, 2.40, '2024-10-22', '15:00:00.000000', NULL, NULL, 3, 'Dota 2 The International 2024'),
+(35, 'Kuala Lumpur', 8, 1.75, 25, 1.95, '2024-10-23', '16:30:00.000000', NULL, NULL, 3, 'Dota 2 The International 2024'),
+(36, 'Moscow', 16, 1.50, 18, 2.20, '2024-10-24', '17:45:00.000000', NULL, NULL, 3, 'Dota 2 The International 2024'),
+(37, 'Berlin', 21, 1.85, 7, 1.90, '2024-10-25', '18:15:00.000000', NULL, NULL, 3, 'Dota 2 The International 2024'),
+(38, 'Tokyo', 20, 1.45, 12, 2.55, '2024-10-26', '19:00:00.000000', NULL, NULL, 3, 'Dota 2 The International 2024'),
+(39, 'Dubai', 19, 1.70, 11, 1.85, '2024-10-27', '20:30:00.000000', NULL, NULL, 3, 'Dota 2 The International 2024'),
+(40, 'Singapore', 22, 1.80, 4, 2.00, '2024-10-28', '14:00:00.000000', NULL, NULL, 3, 'Dota 2 The International 2024'),
+(41, 'Hanoi', NULL, 1.90, 25, 2.10, '2024-10-29', '15:00:00.000000', NULL, NULL, 3, 'Dota 2 The International 2024'),
+(42, 'Manila', 5, 1.60, 9, 2.40, '2024-10-30', '16:00:00.000000', NULL, NULL, 3, 'Dota 2 The International 2024'),
+(43, 'Bangkok', 9, 1.70, 25, 2.30, '2024-10-31', '17:00:00.000000', NULL, NULL, 3, 'Dota 2 The International 2024'),
+(44, 'London', 26, 1.50, 12, 2.50, '2024-10-22', '15:00:00.000000', NULL, NULL, 4, 'FIFA eWorld Cup 2024'),
+(45, 'Madrid', 22, 1.80, 21, 2.00, '2024-10-23', '16:30:00.000000', NULL, NULL, 4, 'FIFA eWorld Cup 2024'),
+(46, 'Rome', 14, 1.70, 8, 1.90, '2024-10-24', '17:45:00.000000', NULL, NULL, 4, 'FIFA eWorld Cup 2024'),
+(47, 'Berlin', 3, 1.60, 16, 2.10, '2024-10-25', '18:15:00.000000', NULL, NULL, 4, 'FIFA eWorld Cup 2024'),
+(48, 'Paris', 7, 1.40, 21, 2.30, '2024-10-26', '19:00:00.000000', NULL, NULL, 4, 'FIFA eWorld Cup 2024'),
+(49, 'Buenos Aires', 23, 1.30, 7, 2.60, '2024-10-27', '20:30:00.000000', NULL, NULL, 4, 'FIFA eWorld Cup 2024'),
+(50, 'Sao Paulo', 19, 1.90, 22, 1.70, '2024-10-28', '14:00:00.000000', NULL, NULL, 4, 'FIFA eWorld Cup 2024'),
+(51, 'Sydney', 4, 1.50, 19, 2.40, '2024-10-29', '15:00:00.000000', NULL, NULL, 4, 'FIFA eWorld Cup 2024'),
+(52, 'Cape Town', 11, 1.20, 3, 3.00, '2024-10-30', '17:00:00.000000', NULL, NULL, 4, 'FIFA eWorld Cup 2024'),
+(53, 'Los Angeles', 23, 1.80, 10, 2.10, '2024-10-31', '19:00:00.000000', NULL, NULL, 4, 'FIFA eWorld Cup 2024'),
+(54, 'Los Angeles', 4, 1.50, 19, 2.50, '2024-10-22', '15:00:00.000000', NULL, NULL, 5, 'Halo Infinite Championship 2024'),
+(55, 'San Francisco', 8, 1.65, 17, 1.85, '2024-10-23', '16:30:00.000000', NULL, NULL, 5, 'Halo Infinite Championship 2024'),
+(56, 'Berlin', 12, 1.70, 5, 1.90, '2024-10-24', '17:45:00.000000', NULL, NULL, 5, 'Halo Infinite Championship 2024'),
+(57, 'Tokyo', 3, 1.80, 11, 2.00, '2024-10-25', '18:15:00.000000', NULL, NULL, 5, 'Halo Infinite Championship 2024'),
+(58, 'Seoul', 14, 1.40, 26, 2.30, '2024-10-26', '19:00:00.000000', NULL, NULL, 5, 'Halo Infinite Championship 2024'),
+(59, 'Bangkok', 17, 1.30, 10, 2.60, '2024-10-27', '20:30:00.000000', NULL, NULL, 5, 'Halo Infinite Championship 2024'),
+(60, 'Singapore', 21, 1.90, 25, 1.70, '2024-10-28', '14:00:00.000000', NULL, NULL, 5, 'Halo Infinite Championship 2024'),
+(61, 'Paris', 25, 1.55, 4, 2.45, '2024-10-29', '15:00:00.000000', NULL, NULL, 5, 'Halo Infinite Championship 2024'),
+(62, 'Moscow', 26, 1.80, 20, 2.00, '2024-10-30', '16:00:00.000000', NULL, NULL, 5, 'Halo Infinite Championship 2024'),
+(63, 'Madrid', 14, 1.75, 15, 1.85, '2024-10-31', '17:00:00.000000', NULL, NULL, 5, 'Halo Infinite Championship 2024'),
+(64, 'Los Angeles', 21, 1.60, 4, 2.40, '2024-10-22', '15:00:00.000000', NULL, NULL, 6, 'League of Legends Worlds 2024'),
+(65, 'San Francisco', 8, 1.75, 14, 1.95, '2024-10-23', '16:30:00.000000', NULL, NULL, 6, 'League of Legends Worlds 2024'),
+(66, 'London', 11, 1.50, 13, 2.20, '2024-10-24', '17:45:00.000000', NULL, NULL, 6, 'League of Legends Worlds 2024'),
+(67, 'New York', 5, 1.85, 5, 1.90, '2024-10-25', '18:15:00.000000', NULL, NULL, 6, 'League of Legends Worlds 2024'),
+(68, 'Toronto', 6, 1.45, 12, 2.55, '2024-10-26', '19:00:00.000000', NULL, NULL, 6, 'League of Legends Worlds 2024'),
+(69, 'Paris', 7, 1.70, 9, 1.85, '2024-10-27', '20:30:00.000000', NULL, NULL, 6, 'League of Legends Worlds 2024'),
+(70, 'Berlin', 10, 1.80, 24, 2.00, '2024-10-28', '14:00:00.000000', NULL, NULL, 6, 'League of Legends Worlds 2024'),
+(71, 'Tokyo', 7, 1.90, 5, 2.10, '2024-10-29', '15:00:00.000000', NULL, NULL, 6, 'League of Legends Worlds 2024'),
+(72, 'Moscow', 22, 1.60, 5, 2.40, '2024-10-30', '16:00:00.000000', NULL, NULL, 6, 'League of Legends Worlds 2024'),
+(73, 'Shanghai', 17, 1.70, 18, 2.30, '2024-10-31', '17:00:00.000000', NULL, NULL, 6, 'League of Legends Worlds 2024'),
+(74, 'Dallas', 17, 1.50, 22, 2.50, '2024-10-22', '15:00:00.000000', NULL, NULL, 7, 'LEC Summer Split 2024'),
+(75, 'Los Angeles', 7, 1.80, 4, 2.00, '2024-10-23', '16:30:00.000000', NULL, NULL, 7, 'LEC Summer Split 2024'),
+(76, 'Toronto', 18, 1.70, 25, 1.90, '2024-10-24', '17:45:00.000000', NULL, NULL, 7, 'LEC Summer Split 2024'),
+(77, 'Seattle', 24, 1.85, 19, 1.90, '2024-10-25', '18:15:00.000000', NULL, NULL, 7, 'LEC Summer Split 2024'),
+(78, 'Vancouver', 22, 1.45, 10, 2.55, '2024-10-26', '19:00:00.000000', NULL, NULL, 7, 'LEC Summer Split 2024'),
+(79, 'Chicago', 15, 1.70, 17, 1.85, '2024-10-27', '20:30:00.000000', NULL, NULL, 7, 'LEC Summer Split 2024'),
+(80, 'Boston', 12, 1.80, 19, 2.00, '2024-10-28', '14:00:00.000000', NULL, NULL, 7, 'LEC Summer Split 2024'),
+(81, 'Shanghai', 16, 1.90, 21, 2.10, '2024-10-29', '15:00:00.000000', NULL, NULL, 7, 'LEC Summer Split 2024'),
+(82, 'Seoul', 17, 1.60, 18, 2.40, '2024-10-30', '16:00:00.000000', NULL, NULL, 7, 'LEC Summer Split 2024'),
+(83, 'Paris', 17, 1.70, 20, 2.30, '2024-10-31', '17:00:00.000000', NULL, NULL, 7, 'LEC Summer Split 2024'),
+(84, 'Los Angeles', 18, 1.50, 21, 2.50, '2024-10-22', '15:00:00.000000', NULL, NULL, 8, 'Overwatch League Season 2024'),
+(85, 'San Francisco', 22, 1.65, 15, 1.85, '2024-10-23', '16:30:00.000000', NULL, NULL, 8, 'Overwatch League Season 2024'),
+(86, 'London', 8, 1.70, 26, 1.90, '2024-10-24', '17:45:00.000000', NULL, NULL, 8, 'Overwatch League Season 2024'),
+(87, 'Tokyo', 22, 1.80, 19, 2.00, '2024-10-25', '18:15:00.000000', NULL, NULL, 8, 'Overwatch League Season 2024'),
+(88, 'Berlin', 12, 1.40, 11, 2.30, '2024-10-26', '19:00:00.000000', NULL, NULL, 8, 'Overwatch League Season 2024'),
+(89, 'Moscow', 10, 1.30, 17, 2.60, '2024-10-27', '20:30:00.000000', NULL, NULL, 8, 'Overwatch League Season 2024'),
+(90, 'Dubai', 17, 1.90, 9, 1.70, '2024-10-28', '14:00:00.000000', NULL, NULL, 8, 'Overwatch League Season 2024'),
+(91, 'Paris', 11, 1.55, 8, 2.45, '2024-10-29', '15:00:00.000000', NULL, NULL, 8, 'Overwatch League Season 2024'),
+(92, 'Singapore', 11, 1.80, 15, 2.00, '2024-10-30', '16:00:00.000000', NULL, NULL, 8, 'Overwatch League Season 2024'),
+(93, 'São Paulo', 5, 1.75, 4, 1.85, '2024-10-31', '17:00:00.000000', NULL, NULL, 8, 'Overwatch League Season 2024'),
+(94, 'Toronto', 26, 1.50, 23, 2.50, '2024-10-22', '15:00:00.000000', NULL, NULL, 9, 'PUBG Global Championship 2024'),
+(95, 'San Francisco', NULL, 1.65, 9, 1.85, '2024-10-23', '16:30:00.000000', NULL, NULL, 9, 'PUBG Global Championship 2024'),
+(96, 'New York', 7, 1.70, 7, 1.90, '2024-10-24', '17:45:00.000000', NULL, NULL, 9, 'PUBG Global Championship 2024'),
+(97, 'Moscow', 20, 1.80, 13, 2.00, '2024-10-25', '18:15:00.000000', NULL, NULL, 9, 'PUBG Global Championship 2024'),
+(98, 'London', 9, 1.40, 18, 2.30, '2024-10-26', '19:00:00.000000', NULL, NULL, 9, 'PUBG Global Championship 2024'),
+(99, 'Berlin', 17, 1.30, 23, 2.60, '2024-10-27', '20:30:00.000000', NULL, NULL, 9, 'PUBG Global Championship 2024'),
+(100, 'Tokyo', 23, 1.90, NULL, 1.70, '2024-10-28', '14:00:00.000000', NULL, NULL, 9, 'PUBG Global Championship 2024'),
+(101, 'Paris', 10, 1.55, NULL, 2.45, '2024-10-29', '15:00:00.000000', NULL, NULL, 9, 'PUBG Global Championship 2024'),
+(102, 'Berlin', 8, 1.80, 6, 2.00, '2024-10-30', '16:00:00.000000', NULL, NULL, 9, 'PUBG Global Championship 2024'),
+(103, 'São Paulo', 17, 1.75, 6, 1.85, '2024-10-31', '17:00:00.000000', NULL, NULL, 9, 'PUBG Global Championship 2024'),
+(104, 'Los Angeles', 11, 1.50, 20, 2.50, '2024-12-01', '15:00:00.000000', NULL, NULL, 10, 'Pokkén Tournament Championship 2024'),
+(105, 'Berlin', 15, 1.65, 26, 1.85, '2024-12-02', '16:30:00.000000', NULL, NULL, 10, 'Pokkén Tournament Championship 2024'),
+(106, 'Toronto', 22, 1.70, 14, 1.90, '2024-12-03', '17:45:00.000000', NULL, NULL, 10, 'Pokkén Tournament Championship 2024'),
+(107, 'Tokyo', 25, 1.80, 10, 2.00, '2024-12-04', '18:15:00.000000', NULL, NULL, 10, 'Pokkén Tournament Championship 2024'),
+(108, 'London', 21, 1.40, 16, 2.30, '2024-12-05', '19:00:00.000000', NULL, NULL, 10, 'Pokkén Tournament Championship 2024'),
+(109, 'Paris', 14, 1.30, 6, 2.60, '2024-12-06', '20:30:00.000000', NULL, NULL, 10, 'Pokkén Tournament Championship 2024'),
+(110, 'San Francisco', 19, 1.90, 13, 1.70, '2024-12-07', '14:00:00.000000', NULL, NULL, 10, 'Pokkén Tournament Championship 2024'),
+(111, 'São Paulo', 7, 1.55, 25, 2.45, '2024-12-08', '15:00:00.000000', NULL, NULL, 10, 'Pokkén Tournament Championship 2024'),
+(112, 'Moscow', 4, 1.80, 11, 2.00, '2024-12-09', '16:00:00.000000', NULL, NULL, 10, 'Pokkén Tournament Championship 2024'),
+(113, 'Dublin', 19, 1.75, 13, 1.85, '2024-12-10', '17:00:00.000000', NULL, NULL, 10, 'Pokkén Tournament Championship 2024'),
+(114, 'Tokyo', 13, 1.50, 6, 2.50, '2024-12-11', '15:00:00.000000', NULL, NULL, 11, 'Rocket League Championship Series 2024'),
+(115, 'Los Angeles', 26, 1.65, 16, 1.85, '2024-12-12', '16:30:00.000000', NULL, NULL, 11, 'Rocket League Championship Series 2024'),
+(116, 'Paris', 17, 1.70, 22, 1.90, '2024-12-13', '17:45:00.000000', NULL, NULL, 11, 'Rocket League Championship Series 2024'),
+(117, 'London', 19, 1.80, 16, 2.00, '2024-12-14', '18:15:00.000000', NULL, NULL, 11, 'Rocket League Championship Series 2024'),
+(118, 'Berlin', 12, 1.40, 25, 2.30, '2024-12-15', '19:00:00.000000', NULL, NULL, 11, 'Rocket League Championship Series 2024'),
+(119, 'Toronto', 22, 1.30, NULL, 2.60, '2024-12-16', '20:30:00.000000', NULL, NULL, 11, 'Rocket League Championship Series 2024'),
+(120, 'São Paulo', 16, 1.90, 3, 1.70, '2024-12-17', '14:00:00.000000', NULL, NULL, 11, 'Rocket League Championship Series 2024'),
+(121, 'Moscow', 18, 1.55, 6, 2.45, '2024-12-18', '15:00:00.000000', NULL, NULL, 11, 'Rocket League Championship Series 2024'),
+(122, 'Dublin', 9, 1.80, 13, 2.00, '2024-12-19', '16:00:00.000000', NULL, NULL, 11, 'Rocket League Championship Series 2024'),
+(123, 'Tokyo', 8, 1.75, 16, 1.85, '2024-12-20', '17:00:00.000000', NULL, NULL, 11, 'Rocket League Championship Series 2024'),
+(124, 'Los Angeles', 7, 1.50, 17, 2.50, '2024-12-21', '15:00:00.000000', NULL, NULL, 12, 'Rainbow Six Siege Six Invitational 2024'),
+(125, 'Berlin', 24, 1.65, 10, 1.85, '2024-12-22', '16:30:00.000000', NULL, NULL, 12, 'Rainbow Six Siege Six Invitational 2024'),
+(126, 'Toronto', 9, 1.70, 23, 1.90, '2024-12-23', '17:45:00.000000', NULL, NULL, 12, 'Rainbow Six Siege Six Invitational 2024'),
+(127, 'Tokyo', 17, 1.80, 18, 2.00, '2024-12-24', '18:15:00.000000', NULL, NULL, 12, 'Rainbow Six Siege Six Invitational 2024'),
+(128, 'London', 23, 1.40, 15, 2.30, '2024-12-25', '19:00:00.000000', NULL, NULL, 12, 'Rainbow Six Siege Six Invitational 2024'),
+(129, 'Paris', 23, 1.30, 12, 2.60, '2024-12-26', '20:30:00.000000', NULL, NULL, 12, 'Rainbow Six Siege Six Invitational 2024'),
+(130, 'São Paulo', NULL, 1.90, NULL, 1.70, '2024-12-27', '14:00:00.000000', NULL, NULL, 12, 'Rainbow Six Siege Six Invitational 2024'),
+(131, 'Moscow', 17, 1.55, 18, 2.45, '2024-12-28', '15:00:00.000000', NULL, NULL, 12, 'Rainbow Six Siege Six Invitational 2024'),
+(132, 'Dublin', 16, 1.80, NULL, 2.00, '2024-12-29', '16:00:00.000000', NULL, NULL, 12, 'Rainbow Six Siege Six Invitational 2024'),
+(133, 'Los Angeles', 16, 1.50, 6, 2.50, '2024-12-30', '15:00:00.000000', NULL, NULL, 13, 'Valorant Champions Tour 2024'),
+(134, 'Paris', 14, 1.65, 4, 1.85, '2024-12-31', '16:30:00.000000', NULL, NULL, 13, 'Valorant Champions Tour 2024'),
+(135, 'Berlin', 26, 1.70, 25, 1.90, '2025-01-01', '17:45:00.000000', NULL, NULL, 13, 'Valorant Champions Tour 2024'),
+(136, 'Toronto', 7, 1.80, 12, 2.00, '2025-01-02', '18:15:00.000000', NULL, NULL, 13, 'Valorant Champions Tour 2024'),
+(137, 'Tokyo', 21, 1.40, 22, 2.30, '2025-01-03', '19:00:00.000000', NULL, NULL, 13, 'Valorant Champions Tour 2024'),
+(138, 'London', 10, 1.30, 22, 2.60, '2025-01-04', '20:30:00.000000', NULL, NULL, 13, 'Valorant Champions Tour 2024'),
+(139, 'São Paulo', 15, 1.90, 12, 1.70, '2025-01-05', '14:00:00.000000', NULL, NULL, 13, 'Valorant Champions Tour 2024'),
+(140, 'Dublin', NULL, 1.55, 20, 2.45, '2025-01-06', '15:00:00.000000', NULL, NULL, 13, 'Valorant Champions Tour 2024'),
+(141, 'Moscow', 18, 1.80, 20, 2.00, '2025-01-07', '16:00:00.000000', NULL, NULL, 13, 'Valorant Champions Tour 2024'),
+(142, 'Toronto', 7, 1.75, 5, 1.85, '2025-01-08', '17:00:00.000000', NULL, NULL, 13, 'Valorant Champions Tour 2024'),
+(143, 'Los Angeles', 4, 1.50, 11, 2.50, '2025-01-09', '15:00:00.000000', NULL, NULL, 14, 'Deadlock Championship 2024'),
+(144, 'Tokyo', 3, 1.65, 17, 1.85, '2025-01-10', '16:30:00.000000', NULL, NULL, 14, 'Deadlock Championship 2024'),
+(145, 'Berlin', 9, 1.70, 12, 1.90, '2025-01-11', '17:45:00.000000', NULL, NULL, 14, 'Deadlock Championship 2024'),
+(146, 'London', 9, 1.80, 13, 2.00, '2025-01-12', '18:15:00.000000', NULL, NULL, 14, 'Deadlock Championship 2024'),
+(147, 'Madrid', 4, 1.40, 26, 2.30, '2025-01-13', '19:00:00.000000', NULL, NULL, 14, 'Deadlock Championship 2024'),
+(148, 'San Francisco', 10, 1.30, 8, 2.60, '2025-01-14', '20:30:00.000000', NULL, NULL, 14, 'Deadlock Championship 2024'),
+(149, 'São Paulo', 7, 1.90, 9, 1.70, '2025-01-15', '14:00:00.000000', NULL, NULL, 14, 'Deadlock Championship 2024'),
+(150, 'Moscow', 16, 1.55, 5, 2.45, '2025-01-16', '15:00:00.000000', NULL, NULL, 14, 'Deadlock Championship 2024'),
+(151, 'Paris', 7, 1.80, 20, 2.00, '2025-01-17', '16:00:00.000000', NULL, NULL, 14, 'Deadlock Championship 2024'),
+(152, 'Toronto', 4, 1.75, 20, 1.85, '2025-01-18', '17:00:00.000000', NULL, NULL, 14, 'Deadlock Championship 2024');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `news`
+--
+
+CREATE TABLE `news` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `author` varchar(70) DEFAULT NULL,
+  `game_id` int(11) DEFAULT NULL,
+  `publish_date` datetime DEFAULT current_timestamp(),
+  `status` enum('draft','published','archived') DEFAULT 'draft',
+  `views` int(11) DEFAULT 0,
+  `likes` int(11) DEFAULT 0,
+  `image_url` varchar(255) DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `description` varchar(100) NOT NULL,
+  `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`content`)),
+  `messages` int(11) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `news`
+--
+
+INSERT INTO `news` (`id`, `title`, `author`, `game_id`, `publish_date`, `status`, `views`, `likes`, `image_url`, `updated_at`, `description`, `content`, `messages`) VALUES
+(1, 'Неймовірний вечір у Ріо. Natus Vincere виграли престижний турнір!', 'Автор', 1, '2024-10-12 17:24:25', 'published', 0, 0, 'img/NewsImg/news1.png', '2024-10-15 09:23:34', 'Знижено винагороди за сейв та налаштовано під нові реалії MR12 і 25-одиничні асисти', '{\n    \"questions\": [\n        {\n            \"question\": \"Що ви відчуваєте, коли перемагаєте колективи з росії або білорусі?\",\n            \"answer\": \"Я б не сказав, що коли ми перемагаємо російські колективи, ми відчуваємо щось особливе. Але все одно, відчуття приємніші, ніж просто перемогти когось.\"\n        },\n        {\n            \"question\": \"Команда Passion UA демонструє стабільний прогрес. Як ви вважаєте, що допомагає вам постійно тримати високий рівень гри?\",\n            \"answer\": \"Ми дуже багато працюємо та граємо. Усі віддаються на повну і намагаються виграти кожну гру. Наш капітан Родіон ніколи не дає розслабитися, тому я вважаю, що це і є причиною нашої стабільності.\"\n        },\n        {\n            \"question\": \"Команда була створена Олександром Зінченком. Чи допомагає його підтримка всій команді?\",\n            \"answer\": \"Так, він часто після наших перемог пише приємні слова підтримки в загальний чат команди.\"\n        },\n        {\n            \"question\": \"На другій мапі Dust2, яка була вибором ваших опонентів, ви показали видовищну гру і майже вирвали перемогу. Що допомогло вам так успішно виступити на цій карті?\",\n            \"answer\": \"Ми намагаємося зараз зробити Dust2 однією з наших основних карт і багато працюємо над нею, адже це дуже вдалий пік проти європейських команд. Так, ми вважаємо її більш-менш стандартною.\"\n        },\n        {\n            \"question\": \"На мою думку, графіки матчів і турнірів на Tier-2 сцені ще більш насичені, ніж на Tier-1. Як ви вважаєте, що виснажує більше?\",\n            \"answer\": \"Я не можу сказати на 100%, але, на мою думку, гра на Tier-2 сцені виснажує більше, ніж на Tier-1. На Tier-2 бувають дуже складні дні, як нещодавно сталося у нас. Ми зіграли 9 карт, якщо не помиляюсь: за один день у нас було Bo5, Bo3 та Bo3. Це був дуже складний і виснажливий день.\"\n        }\n    ],\n    \"note\": \"Нагадаємо, що 11 жовтня 2024 року, в рамках CCT Season 2 Europe Series 14 відбувся важливий матч між українською командою Passion UA та російським складом Cloud9, де Passion UA здобули перемогу з рахунком 2:1.\"\n}', 0),
+(2, 'Неймовірний вечір у Ріо. Natus Vincere виграли престижний турнір!', 'Автор', 1, '2024-10-12 17:24:25', 'published', 0, 0, 'img/NewsImg/news1.png', '2024-10-14 14:43:43', 'Знижено винагороди за сейв та налаштовано під нові реалії MR12 і 25-одиничні асисти', NULL, 0),
+(3, 'Неймовірний вечір у Ріо. Natus Vincere виграли престижний турнір!', 'Автор', 1, '2024-10-12 17:24:25', 'published', 0, 0, 'img/NewsImg/news1.png', '2024-10-14 14:43:43', 'Знижено винагороди за сейв та налаштовано під нові реалії MR12 і 25-одиничні асисти', NULL, 0),
+(4, 'Неймовірний вечір у Ріо. Natus Vincere виграли престижний турнір!', 'Автор', 1, '2024-10-12 17:24:25', 'published', 0, 0, 'img/NewsImg/news1.png', '2024-10-14 14:43:43', 'Знижено винагороди за сейв та налаштовано під нові реалії MR12 і 25-одиничні асисти', NULL, 0),
+(5, 'Неймовірний вечір у Ріо. Natus Vincere виграли престижний турнір!', 'Автор', 1, '2024-10-12 17:24:25', 'published', 0, 0, 'img/NewsImg/news1.png', '2024-10-15 09:23:34', 'Знижено винагороди за сейв та налаштовано під нові реалії MR12 і 25-одиничні асисти', '{\r\n    \"questions\": [\r\n        {\r\n            \"question\": \"Що ви відчуваєте, коли перемагаєте колективи з росії або білорусі?\",\r\n            \"answer\": \"Я б не сказав, що коли ми перемагаємо російські колективи, ми відчуваємо щось особливе. Але все одно, відчуття приємніші, ніж просто перемогти когось.\"\r\n        },\r\n        {\r\n            \"question\": \"Команда Passion UA демонструє стабільний прогрес. Як ви вважаєте, що допомагає вам постійно тримати високий рівень гри?\",\r\n            \"answer\": \"Ми дуже багато працюємо та граємо. Усі віддаються на повну і намагаються виграти кожну гру. Наш капітан Родіон ніколи не дає розслабитися, тому я вважаю, що це і є причиною нашої стабільності.\"\r\n        },\r\n        {\r\n            \"question\": \"Команда була створена Олександром Зінченком. Чи допомагає його підтримка всій команді?\",\r\n            \"answer\": \"Так, він часто після наших перемог пише приємні слова підтримки в загальний чат команди.\"\r\n        },\r\n        {\r\n            \"question\": \"На другій мапі Dust2, яка була вибором ваших опонентів, ви показали видовищну гру і майже вирвали перемогу. Що допомогло вам так успішно виступити на цій карті?\",\r\n            \"answer\": \"Ми намагаємося зараз зробити Dust2 однією з наших основних карт і багато працюємо над нею, адже це дуже вдалий пік проти європейських команд. Так, ми вважаємо її більш-менш стандартною.\"\r\n        },\r\n        {\r\n            \"question\": \"На мою думку, графіки матчів і турнірів на Tier-2 сцені ще більш насичені, ніж на Tier-1. Як ви вважаєте, що виснажує більше?\",\r\n            \"answer\": \"Я не можу сказати на 100%, але, на мою думку, гра на Tier-2 сцені виснажує більше, ніж на Tier-1. На Tier-2 бувають дуже складні дні, як нещодавно сталося у нас. Ми зіграли 9 карт, якщо не помиляюсь: за один день у нас було Bo5, Bo3 та Bo3. Це був дуже складний і виснажливий день.\"\r\n        }\r\n    ],\r\n    \"note\": \"Нагадаємо, що 11 жовтня 2024 року, в рамках CCT Season 2 Europe Series 14 відбувся важливий матч між українською командою Passion UA та російським складом Cloud9, де Passion UA здобули перемогу з рахунком 2:1.\"\r\n}', 0),
+(6, 'Неймовірний вечір у Ріо. Natus Vincere виграли престижний турнір!', 'Автор', 1, '2024-10-12 17:24:25', 'published', 0, 0, 'img/NewsImg/news1.png', '2024-10-14 14:43:43', 'Знижено винагороди за сейв та налаштовано під нові реалії MR12 і 25-одиничні асисти', NULL, 0),
+(7, 'Неймовірний вечір у Ріо. Natus Vincere виграли престижний турнір!', 'Автор', 1, '2024-10-12 17:24:25', 'published', 0, 0, 'img/NewsImg/news1.png', '2024-10-14 14:43:43', 'Знижено винагороди за сейв та налаштовано під нові реалії MR12 і 25-одиничні асисти', NULL, 0),
+(8, 'Неймовірний вечір у Ріо. Natus Vincere виграли престижний турнір!', 'Автор', 1, '2024-10-12 17:24:25', 'published', 0, 0, 'img/NewsImg/news1.png', '2024-10-14 14:43:43', 'Знижено винагороди за сейв та налаштовано під нові реалії MR12 і 25-одиничні асисти', NULL, 0),
+(9, 'Неймовірний вечір у Ріо. Natus Vincere виграли престижний турнір!', 'Автор', 1, '2024-10-12 17:24:25', 'published', 0, 0, 'img/NewsImg/news1.png', '2024-10-15 09:23:34', 'Знижено винагороди за сейв та налаштовано під нові реалії MR12 і 25-одиничні асисти', '{\r\n    \"questions\": [\r\n        {\r\n            \"question\": \"Що ви відчуваєте, коли перемагаєте колективи з росії або білорусі?\",\r\n            \"answer\": \"Я б не сказав, що коли ми перемагаємо російські колективи, ми відчуваємо щось особливе. Але все одно, відчуття приємніші, ніж просто перемогти когось.\"\r\n        },\r\n        {\r\n            \"question\": \"Команда Passion UA демонструє стабільний прогрес. Як ви вважаєте, що допомагає вам постійно тримати високий рівень гри?\",\r\n            \"answer\": \"Ми дуже багато працюємо та граємо. Усі віддаються на повну і намагаються виграти кожну гру. Наш капітан Родіон ніколи не дає розслабитися, тому я вважаю, що це і є причиною нашої стабільності.\"\r\n        },\r\n        {\r\n            \"question\": \"Команда була створена Олександром Зінченком. Чи допомагає його підтримка всій команді?\",\r\n            \"answer\": \"Так, він часто після наших перемог пише приємні слова підтримки в загальний чат команди.\"\r\n        },\r\n        {\r\n            \"question\": \"На другій мапі Dust2, яка була вибором ваших опонентів, ви показали видовищну гру і майже вирвали перемогу. Що допомогло вам так успішно виступити на цій карті?\",\r\n            \"answer\": \"Ми намагаємося зараз зробити Dust2 однією з наших основних карт і багато працюємо над нею, адже це дуже вдалий пік проти європейських команд. Так, ми вважаємо її більш-менш стандартною.\"\r\n        },\r\n        {\r\n            \"question\": \"На мою думку, графіки матчів і турнірів на Tier-2 сцені ще більш насичені, ніж на Tier-1. Як ви вважаєте, що виснажує більше?\",\r\n            \"answer\": \"Я не можу сказати на 100%, але, на мою думку, гра на Tier-2 сцені виснажує більше, ніж на Tier-1. На Tier-2 бувають дуже складні дні, як нещодавно сталося у нас. Ми зіграли 9 карт, якщо не помиляюсь: за один день у нас було Bo5, Bo3 та Bo3. Це був дуже складний і виснажливий день.\"\r\n        }\r\n    ],\r\n    \"note\": \"Нагадаємо, що 11 жовтня 2024 року, в рамках CCT Season 2 Europe Series 14 відбувся важливий матч між українською командою Passion UA та російським складом Cloud9, де Passion UA здобули перемогу з рахунком 2:1.\"\r\n}', 0),
+(10, 'Неймовірний вечір у Ріо. Natus Vincere виграли престижний турнір!', 'Автор', 1, '2024-10-12 17:24:25', 'published', 0, 0, 'img/NewsImg/news1.png', '2024-10-14 14:43:43', 'Знижено винагороди за сейв та налаштовано під нові реалії MR12 і 25-одиничні асисти', NULL, 0),
+(11, 'Неймовірний вечір у Ріо. Natus Vincere виграли престижний турнір!', 'Автор', 1, '2024-10-12 17:24:25', 'published', 0, 0, 'img/NewsImg/news1.png', '2024-10-14 14:43:43', 'Знижено винагороди за сейв та налаштовано під нові реалії MR12 і 25-одиничні асисти', NULL, 0),
+(12, 'Неймовірний вечір у Ріо. Natus Vincere виграли престижний турнір!', 'Автор', 1, '2024-10-12 17:24:25', 'published', 0, 0, 'img/NewsImg/news1.png', '2024-10-14 14:43:43', 'Знижено винагороди за сейв та налаштовано під нові реалії MR12 і 25-одиничні асисти', NULL, 0),
+(13, 'Неймовірний вечір у Ріо. Natus Vincere виграли престижний турнір!', 'Автор', 1, '2024-10-12 17:24:25', 'published', 0, 0, 'img/NewsImg/news1.png', '2024-10-15 09:23:34', 'Знижено винагороди за сейв та налаштовано під нові реалії MR12 і 25-одиничні асисти', '{\r\n    \"questions\": [\r\n        {\r\n            \"question\": \"Що ви відчуваєте, коли перемагаєте колективи з росії або білорусі?\",\r\n            \"answer\": \"Я б не сказав, що коли ми перемагаємо російські колективи, ми відчуваємо щось особливе. Але все одно, відчуття приємніші, ніж просто перемогти когось.\"\r\n        },\r\n        {\r\n            \"question\": \"Команда Passion UA демонструє стабільний прогрес. Як ви вважаєте, що допомагає вам постійно тримати високий рівень гри?\",\r\n            \"answer\": \"Ми дуже багато працюємо та граємо. Усі віддаються на повну і намагаються виграти кожну гру. Наш капітан Родіон ніколи не дає розслабитися, тому я вважаю, що це і є причиною нашої стабільності.\"\r\n        },\r\n        {\r\n            \"question\": \"Команда була створена Олександром Зінченком. Чи допомагає його підтримка всій команді?\",\r\n            \"answer\": \"Так, він часто після наших перемог пише приємні слова підтримки в загальний чат команди.\"\r\n        },\r\n        {\r\n            \"question\": \"На другій мапі Dust2, яка була вибором ваших опонентів, ви показали видовищну гру і майже вирвали перемогу. Що допомогло вам так успішно виступити на цій карті?\",\r\n            \"answer\": \"Ми намагаємося зараз зробити Dust2 однією з наших основних карт і багато працюємо над нею, адже це дуже вдалий пік проти європейських команд. Так, ми вважаємо її більш-менш стандартною.\"\r\n        },\r\n        {\r\n            \"question\": \"На мою думку, графіки матчів і турнірів на Tier-2 сцені ще більш насичені, ніж на Tier-1. Як ви вважаєте, що виснажує більше?\",\r\n            \"answer\": \"Я не можу сказати на 100%, але, на мою думку, гра на Tier-2 сцені виснажує більше, ніж на Tier-1. На Tier-2 бувають дуже складні дні, як нещодавно сталося у нас. Ми зіграли 9 карт, якщо не помиляюсь: за один день у нас було Bo5, Bo3 та Bo3. Це був дуже складний і виснажливий день.\"\r\n        }\r\n    ],\r\n    \"note\": \"Нагадаємо, що 11 жовтня 2024 року, в рамках CCT Season 2 Europe Series 14 відбувся важливий матч між українською командою Passion UA та російським складом Cloud9, де Passion UA здобули перемогу з рахунком 2:1.\"\r\n}', 0),
+(14, 'Неймовірний вечір у Ріо. Natus Vincere виграли престижний турнір!', 'Автор', 1, '2024-10-12 17:24:25', 'published', 0, 0, 'img/NewsImg/news1.png', '2024-10-14 14:43:43', 'Знижено винагороди за сейв та налаштовано під нові реалії MR12 і 25-одиничні асисти', NULL, 0),
+(15, 'Неймовірний вечір у Ріо. Natus Vincere виграли престижний турнір!', 'Автор', 1, '2024-10-12 17:24:25', 'published', 0, 0, 'img/NewsImg/news1.png', '2024-10-14 14:43:43', 'Знижено винагороди за сейв та налаштовано під нові реалії MR12 і 25-одиничні асисти', NULL, 0),
+(16, 'Неймовірний вечір у Ріо. Natus Vincere виграли престижний турнір!', 'Автор', 1, '2024-10-12 17:24:25', 'published', 0, 0, 'img/NewsImg/news1.png', '2024-10-14 14:43:43', 'Знижено винагороди за сейв та налаштовано під нові реалії MR12 і 25-одиничні асисти', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -235,6 +303,14 @@ CREATE TABLE `Stake` (
   `stake_time` datetime DEFAULT current_timestamp(),
   `status` enum('pending','won','lost') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `Stake`
+--
+
+INSERT INTO `Stake` (`id`, `match_id`, `amount`, `Coef`, `stake_time`, `status`) VALUES
+(24, 14, 1.00, 1.00, '2024-10-13 22:29:23', 'pending'),
+(25, 23, 21.00, 42.00, '2024-10-13 22:30:38', 'pending');
 
 -- --------------------------------------------------------
 
@@ -395,33 +471,36 @@ CREATE TABLE `Users` (
   `id` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `first_name` varchar(100) NOT NULL,
-  `last_name` varchar(100) NOT NULL,
+  `first_name` varchar(100) DEFAULT NULL,
+  `last_name` varchar(100) DEFAULT NULL,
   `created_at` date DEFAULT curdate(),
-  `gender` enum('Чоловіча','Жіноча','Інше') DEFAULT NULL,
+  `gender` enum('Чоловіча','Жіноча','Інша') DEFAULT NULL,
   `phone_number` varchar(20) DEFAULT NULL,
   `country` varchar(50) DEFAULT NULL,
-  `date_of_birth` date DEFAULT NULL
+  `date_of_birth` date DEFAULT NULL,
+  `googleId` varchar(50) DEFAULT NULL,
+  `picture` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `Users`
 --
 
-INSERT INTO `Users` (`id`, `email`, `password`, `first_name`, `last_name`, `created_at`, `gender`, `phone_number`, `country`, `date_of_birth`) VALUES
-(2, 'vasya.falyovskij@gmail.com', '$2a$07$4/tDcvX8K8gB7VhhOBlnk.BqJkTrV6fZpjM3/ox9ch8W5pF/TObIW', 'Василь', 'Фальовський', '2024-10-07', NULL, NULL, NULL, NULL),
-(25, 'vasya1.falyovskij@gmail.com', '$2a$07$At.jzzvQZZKPVPLqUQ5acOOr02OyCMLc1hME.M7udAlVWrhOvMzI6', 'Василь', 'Фальовський', '2024-10-07', NULL, NULL, NULL, NULL),
-(28, 'vasya2.falyovskij@gmail.com', '$2a$07$tAZ2NwsNEehAiOEscEMRreWaRvY.ZdUFPvXqPtCcjkGg9ZxliiAR6', 'Василь', 'Фальовський', '2024-10-07', NULL, NULL, NULL, NULL),
-(30, 'vasya3.falyovskij@gmail.com', '$2a$07$nZ5DflXQQsvnsvS/hIxyA.dloFb1blOJxk.mE7IQdiPX69MO02kHe', 'Василь', 'Фальовський', '2024-10-07', NULL, NULL, NULL, NULL),
-(31, 'vas1ya3.falyovskij@gmail.com', '$2a$07$M8ZUARp8XMWlFZmHAj8LFeyy8LPr3J66kLqzoag2mcBIB98PsKV2m', 'Василь', 'Фальовський', '2024-10-07', NULL, NULL, NULL, NULL),
-(32, 'vas1ya3.falyo2vskij@gmail.com', '$2a$07$UitfylWz.CncCr3vbCFVM.NCJuU/qWsPaJ7i6yDH4wexOgSaiB06y', 'Василь', 'Фальовський', '2024-10-07', NULL, NULL, NULL, NULL),
-(34, 'vasya.faly2ovskij@gmail.com', '$2a$07$vP6QVqfahiw2tAKan2I..uwAvXMBrtuOnIy.NQ3ivBIWkAby/I5AO', 'Василь', 'Фальовський', '2024-10-07', NULL, NULL, NULL, NULL),
-(35, 'vasya.falyov23skij@gmail.com', '$2a$07$eLb4hrD9OL58sXuYbf2LAeqCz1lmp7cAOVNLTocieJWONXnkW0wu6', 'Василь', 'Фальовський', '2024-10-07', NULL, NULL, NULL, NULL),
-(36, '1vasya.falyovskij@gmail.com', '$2a$07$9O0atI6ty3/A5jUrtVnCaeBRHgjnL4Afq2dbE69J5V8LX39e6yVmO', 'Василь', 'Фальовський', '2024-10-07', 'Чоловіча', '0956555110', 'Україна', '2004-01-12');
+INSERT INTO `Users` (`id`, `email`, `password`, `first_name`, `last_name`, `created_at`, `gender`, `phone_number`, `country`, `date_of_birth`, `googleId`, `picture`) VALUES
+(48, 'vasya.falyovskij@gmail.com', '$2a$04$p31on3TCSp14fPLPjRuqnelgT69WmkAVy2PBb5beiSEvYyeR5i8Qa', 'Василь', 'Фальовський', '2024-10-13', 'Чоловіча', '0956555110', 'Ukraine213', '2004-12-01', '117198055959106867405', 'https://lh3.googleusercontent.com/a/ACg8ocIFmlbl16I4QHytC3Tk2v9JoFWWJzIeK2UGXxbQdrTFy_lH8qY=s96-c'),
+(49, 'ron.bartonzzz@gmail.com', '$2a$04$r94z/sUrKaSyycWoSztnfexwJaHlCyBK02IW/.7if3YalL9Mfftsm', 'Василь213', 'Фальовський432', '2024-10-13', 'Інша', '0956555110', 'Ukraine', '1111-11-11', '107720322142409920200', 'https://lh3.googleusercontent.com/a/ACg8ocLLn3GWDom55ZxMFFfwYn4M6cnYr2cesYygzgm-SPmj2Kmi8hv2=s96-c'),
+(50, '1vasya.falyovskij@gmail.com', '$2a$07$DUdwN80EaTRzYIsG5uAXouvS6pKO9LKzurahm1AVq4N2kTvrBykr.', 'Василь', 'Фальовський', '2024-10-14', 'Чоловіча', '0956555110213', 'Ukraine', '2222-01-12', NULL, NULL);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `news_id` (`news_id`);
 
 --
 -- Indexes for table `Games_List`
@@ -437,6 +516,13 @@ ALTER TABLE `Matches`
   ADD KEY `Team1ID` (`Team1ID`),
   ADD KEY `Team2ID` (`Team2ID`),
   ADD KEY `fk_game` (`game_id`);
+
+--
+-- Indexes for table `news`
+--
+ALTER TABLE `news`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `game_id` (`game_id`);
 
 --
 -- Indexes for table `Stake`
@@ -463,6 +549,12 @@ ALTER TABLE `Users`
 --
 
 --
+-- AUTO_INCREMENT for table `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `Games_List`
 --
 ALTER TABLE `Games_List`
@@ -475,10 +567,16 @@ ALTER TABLE `Matches`
   MODIFY `MatchID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
 
 --
+-- AUTO_INCREMENT for table `news`
+--
+ALTER TABLE `news`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
 -- AUTO_INCREMENT for table `Stake`
 --
 ALTER TABLE `Stake`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `Teams`
@@ -490,11 +588,17 @@ ALTER TABLE `Teams`
 -- AUTO_INCREMENT for table `Users`
 --
 ALTER TABLE `Users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `comments`
+--
+ALTER TABLE `comments`
+  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`news_id`) REFERENCES `news` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `Matches`
@@ -503,6 +607,12 @@ ALTER TABLE `Matches`
   ADD CONSTRAINT `fk_game` FOREIGN KEY (`game_id`) REFERENCES `Games_List` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `matches_ibfk_1` FOREIGN KEY (`Team1ID`) REFERENCES `Teams` (`TeamID`),
   ADD CONSTRAINT `matches_ibfk_2` FOREIGN KEY (`Team2ID`) REFERENCES `Teams` (`TeamID`);
+
+--
+-- Constraints for table `news`
+--
+ALTER TABLE `news`
+  ADD CONSTRAINT `news_ibfk_1` FOREIGN KEY (`game_id`) REFERENCES `Games_List` (`id`);
 
 --
 -- Constraints for table `Stake`
