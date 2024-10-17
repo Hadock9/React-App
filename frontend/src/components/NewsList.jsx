@@ -26,7 +26,7 @@ const NewsList = ({ value }) => {
 					<div className='flex   h-[120px] my-5' key={OneNews.id}>
 						<img
 							src={OneNews.image_url}
-							className='w-auto h-32 rounded-md'
+							className='w-[210px] h-32 rounded-md'
 							alt=''
 						/>
 

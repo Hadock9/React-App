@@ -37,7 +37,7 @@ export function GamesList({ value }) {
 							<div className={styles.GameBlock}>
 								<img
 									className={styles.GamesImg}
-									src={'/' + game.ImageSrc}
+									src={game.ImageSrc}
 									alt={game.name}
 								/>
 								<h3 className={styles.GameName}>{game.name}</h3>
