@@ -1,32 +1,33 @@
 /* Контейнер для гри, що використовує сітку */
 .GameBlockRoot {
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	gap: 10px;
-	grid-auto-rows: minmax(100px, auto);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
 }
 
 /* Блок окремої гри */
 .GameBlock {
-	width: 210px;
-	height: 380px;
+    width: 210px;
+    height: 380px;
 }
 
 /* Зображення гри */
 .GamesImg {
-	width: 210px;
-	height: 290px;
+    border-radius: 20px;
+    width: 210px;
+    height: 290px;
 }
 
 /* Назва гри */
 .GameName {
-	margin-top: 5px;
-	font-weight: 600;
+    margin-top: 5px;
+    font-weight: 600;
 }
 
 /* Опис гри */
 .GameDescription {
-	color: #606060;
-	font-family: 'Roboto', 'Arial', sans-serif;
-	margin-top: 5px;
+    color: #606060;
+    font-family: 'Roboto', 'Arial', sans-serif;
+    margin-top: 5px;
 }
