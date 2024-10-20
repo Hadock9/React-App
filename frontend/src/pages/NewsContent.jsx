@@ -65,7 +65,7 @@ export function NewsContent() {
 									<p className='text-gray-600 text-xs  '>0</p>
 								</div>
 								<img
-									src={'/' + OneNews.image_url}
+									src={OneNews.image_url}
 									className='w-[80%]  rounded-md'
 									alt=' зображення'
 								/>
