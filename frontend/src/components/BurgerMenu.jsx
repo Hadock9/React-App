@@ -47,7 +47,7 @@ export function BurgerMenu() {
 						<p>Історія ставок</p>
 					</div>
 				</Link>
-				<Link to='/Home' className={style.AsideBlock}>
+				<Link to='/Balance' className={style.AsideBlock}>
 					<div className={style.AsideBlockIcon}>
 						<CircleDollarSign />
 					</div>
