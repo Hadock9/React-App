@@ -359,7 +359,7 @@ export function Registration() {
 						<div className={`${styles.RegFormBlock} ${styles.RegFormButton}`}>
 							<button
 								type='submit'
-								disabled={!FormValid} // Вимкнути кнопку, якщо форма не дійсна
+								disabled={!FormValid} // Вимкнути кнопку, якщо форма не дійснf
 								className={styles.CustomButtonSubmit}
 							>
 								Зареєструватися

@@ -21,4 +21,3 @@ root.render(
 		</AuthProvider>
 	</GoogleOAuthProvider>
 )
-//<Route path='/terms' element={<Terms/>} />

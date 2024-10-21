@@ -24,7 +24,12 @@ const Comments = ({ id }) => {
 		}
 	}, [Data])
 
-	const [CommentText, SetCommentText] = useState('')
+	const [ondisable, Setondisable] = useState(true)
+	const [CommentText, SetCommentText] = useState(' ')
+	const [CommentTextDirty, SetCommentTextDirty] = useState(false)
+	const [CommentTextError, SetCommentTextError] = useState(
+		'Дане поле не може бути пустим'
+	)
 	const handleSubmit = async e => {
 		e.preventDefault()
 
@@ -54,6 +59,25 @@ const Comments = ({ id }) => {
 			console.log('Помилка:', errorData)
 		}
 	}
+	const handleCommentText = e => {
+		SetCommentText(e.target.value)
+
+		if (e.target.value.length <= 3) {
+			SetCommentTextError('Дане поле не може бути меншим за 4 символи')
+			if (e.target.value.length == 0) {
+				SetCommentTextError('Дане поле не може бути пустим')
+			}
+		} else {
+			SetCommentTextError('')
+		}
+	}
+	useEffect(() => {
+		if (!CommentTextError) {
+			Setondisable(true)
+		} else {
+			Setondisable(false)
+		}
+	}, [CommentText])
 
 	if (isLoading) {
 		return <MyLoader />
@@ -74,19 +98,37 @@ const Comments = ({ id }) => {
 					/>
 				</div>
 				<div className='w-[100%]'>
+					{CommentTextDirty && CommentTextError && (
+						<motion.div
+							initial={{ x: -100, scale: 0 }}
+							animate={{ x: 0, scale: 1 }}
+							transition={{ ease: 'easeIn', duration: 0.5 }}
+							className='inline-block my-2 p-2 text-red-600 bg-red-100 border border-red-300 rounded-md'
+						>
+							{CommentTextError}
+						</motion.div>
+					)}
 					<form onSubmit={handleSubmit} className='flex flex-col justify-start'>
-						<textarea
+						<motion.textarea
+							initial={{ y: 0 }}
+							animate={{ y: CommentTextError ? 10 : 0 }}
+							transition={{ duration: 0.3, ease: 'easeInOut' }}
 							id='textarea'
+							onBlur={SetCommentTextDirty}
 							value={CommentText}
-							onChange={e => SetCommentText(e.target.value)}
+							onChange={handleCommentText}
 							className='resize-y min-h-[80px] max-h-[300px] overflow-auto w-[90%] h-[100px] p-2 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5ba1a] focus:border-[#f5ba1a] text-gray-700 placeholder-gray-500'
 							placeholder='Введіть свій коментар...'
-						></textarea>
+						></motion.textarea>
 
 						<motion.button
 							whileTap={{ scale: 0.9 }}
+							initial={{ scale: 1 }} // Початковий розмір
+							animate={{ scale: ondisable ? 1 : 0.95 }}
 							type='submit'
-							className='mt-4 w-[100px] h-[44px] bg-[#f5ba1a] text-white border-none cursor-pointer rounded-md'
+							disabled={!ondisable}
+							className={`mt-4 w-[100px] h-[44px] bg-[#f5ba1a] text-white border-none cursor-pointer rounded-md transition-all duration-300
+                disabled:bg-gray-300 disabled:cursor-not-allowed`}
 						>
 							Submit
 						</motion.button>
