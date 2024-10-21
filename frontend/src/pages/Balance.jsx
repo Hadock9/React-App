@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import React from 'react'
 import { BurgerMenu } from '../components/BurgerMenu'
 import { Footer } from '../components/Footer'
@@ -11,7 +12,15 @@ const Balance = () => {
 			<div className={rootstyle.Container}>
 				<BurgerMenu />
 
-				<main className={rootstyle.Main}> тут буде баланс </main>
+				<main className={rootstyle.Main}>
+					<motion.div
+						initial={{ opacity: 0, scale: 0 }}
+						animate={{ opacity: 1, scale: 1 }}
+						transition={{ ease: 'easeIn', duration: 2 }}
+					>
+						тут буде баланс
+					</motion.div>{' '}
+				</main>
 			</div>
 			<Footer />
 		</div>

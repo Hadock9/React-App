@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
@@ -82,12 +83,13 @@ const Comments = ({ id }) => {
 							placeholder='Введіть свій коментар...'
 						></textarea>
 
-						<button
+						<motion.button
+							whileTap={{ scale: 0.9 }}
 							type='submit'
 							className='mt-4 w-[100px] h-[44px] bg-[#f5ba1a] text-white border-none cursor-pointer rounded-md'
 						>
 							Submit
-						</button>
+						</motion.button>
 					</form>
 				</div>
 			</div>
