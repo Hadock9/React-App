@@ -9,293 +9,603 @@ import MyLoader from '../components/Loader'
 import { NavBar } from '../components/NavBar'
 import useFetchGet from '../hooks/fetch/useFetchGet'
 import { extractHoursAndMinutes, formatDate } from '../js/TimeValidation'
-import style from '../styles/Match.module.css'
 import rootstyle from '../styles/root.module.css'
+import { Link } from 'react-router-dom'
 
 export function Match() {
-	const [searchParams] = useSearchParams()
-	const idMatch = searchParams.get('idMatch')
-	console.log(idMatch)
-	const [matches, setData] = useState([]) // Стан для зберігання матчів
+    const [searchParams] = useSearchParams()
+    const idMatch = searchParams.get('idMatch')
+    const [match, setMatch] = useState(null)
 
-	const { Data, isLoading, failedToFetch } = useFetchGet({
-		url: 'http://localhost:4000/api/games/match/Match',
-		id: idMatch,
-	})
+    const { Data, isLoading, failedToFetch } = useFetchGet({
+        url: 'http://localhost:4000/api/games/match/Match',
+        id: idMatch,
+    })
 
-	useEffect(() => {
-		if (Data) {
-			setData(Data)
-		}
-	}, [Data])
+    useEffect(() => {
+        if (Data) {
+            setMatch(Data[0])
+        }
+    }, [Data])
 
-	if (isLoading) {
-		return <MyLoader />
-	}
-	return (
-		<div className={rootstyle.wrapper}>
-			<NavBar />
-			<UkrainianWar />
+    if (isLoading) {
+        return <MyLoader />
+    }
 
-			<div className={rootstyle.Container}>
-				<BurgerMenu />
-				<main className={rootstyle.Main}>
-					{matches.map((match, index) => (
-						<div className={style.MatchesBlock} key={index}>
-							{/* Блок для команди 1 */}
-							<div
-								className={style.MatchesBlockTeam}
-								style={{
-									background: `url(/${match.Team1Country})`,
-									backgroundSize: 'cover',
-									backgroundRepeat: 'no-repeat',
-									backgroundPosition: 'center',
-									minHeight: '160px',
-									width: '40%',
-								}}
-							>
-								<div className={style.MatchesBlockAbsolute}>
-									<img
-										draggable='false'
-										className={style.MatchesBlockImgLogo}
-										src={'/' + match.Team1Logo}
-										alt={match.Team1Name}
-									/>
-									<div
-										className={`${style.MatchesBlockCoef} ${style.MatchesBlockTeam1Coef}`}
-									>
-										<p>{match.Team1Coef}</p>
-									</div>
-									<div className={style.MatchesBlockTeamText}>
-										<p>{match.Team1Name}</p>
-										<p>{match.Team1Score}</p>
-									</div>
-								</div>
-							</div>
+    if (!match) {
+        return <CheckFetch />
+    }
 
-							{/* Блок для відображення результату матчу */}
-							<div className={style.MatchesBlockCenter}>
-								<p className={style.MatchesBlockVsDateTime}>
-									{formatDate(match.VsDate)} {/* Форматована дата матчу */}
-								</p>
-								<p className={style.MatchesBlockVs}>Vs</p>
-								<p className={style.MatchesBlockTime}>
-									{extractHoursAndMinutes(match.time)} {/* Час матчу */}
-								</p>
-							</div>
+    return (
+        <div className={rootstyle.wrapper}>
+            <NavBar />
+            <UkrainianWar />
+            <div className={rootstyle.Container}>
+                <BurgerMenu />
 
-							{/* Блок для команди 2 */}
-							<div
-								className={style.MatchesBlockTeam}
-								style={{
-									background: `url(/${match.Team2Country})`,
-									backgroundSize: 'cover',
-									backgroundRepeat: 'no-repeat',
-									backgroundPosition: 'center',
-									minHeight: '160px',
-									width: '40%',
-								}}
-							>
-								<div
-									className={`${style.MatchesBlockAbsolute} ${style.MatchesBlockAbsoluteTeam2}`}
-								>
-									<img
-										draggable='false'
-										className={style.MatchesBlockImgLogo}
-										src={'/' + match.Team2Logo}
-										alt={match.Team2Name}
-									/>
-									<div
-										className={`${style.MatchesBlockCoef} ${style.MatchesBlockTeam2Coef}`}
-									>
-										<p>{match.Team2Coef}</p>
-									</div>
-									<div className={style.MatchesBlockTeamText}>
-										<p>{match.Team2Name}</p>
-										<p>{match.Team2Score}</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					))}
+                <main className={rootstyle.Main}>
+                    {/* bg-[#393e46] */}
+                    <div className="bg-[#393e46]">
+                        <div className="flex justify-between w-full h-full bg-[#393e46] rounded-t-lg ">
+                            {/* Блок для команди 1 */}
+                            <div
+                                className="relative w-[40%] h-[160px] flex justify-center items-center px-5 rounded-tl-lg"
+                                style={{
+                                    backgroundImage: `linear-gradient(to right, rgba(57, 62, 70, 0.8), rgba(57, 62, 70, 0)), url(/${match.Team1Country})`,
+                                    backgroundSize: 'cover',
+                                    backgroundRepeat: 'no-repeat',
+                                    backgroundPosition: 'left',
+                                }}
+                            >
+                                <img
+                                    draggable="false"
+                                    className="h-[100px] w-[100px] object-contain mx-[10%]"
+                                    src={'/' + match.Team1Logo}
+                                    alt={match.Team1Name}
+                                />
+                                <div className="flex items-center justify-center bg-gray-700 bg-opacity-60 rounded-full mr-5 w-[40%]">
+                                    <p className="text-center font-semibold text-white text-[22px]">
+                                        {match.Team1Name}
+                                    </p>
+                                </div>
+                                <div className="flex flex-col items-center justify-between font-bold text-white text-[22px] mt-2 h-[80%]">
+                                    <div className="mt-4 p-2 rounded-full bg-gray-700 bg-opacity-60 w-12 h-12 flex justify-center items-center">
+                                        <p>{match.Team1Coef}</p>
+                                    </div>
+                                    <div className="mt-4 p-2 rounded-full bg-gray-700 bg-opacity-60 w-12 h-12 flex justify-center items-center">
+                                        {match.Team1Score > match.Team2Score ? (
+                                            <p className="text-green-700">
+                                                {match.Team1Score}
+                                            </p>
+                                        ) : (
+                                            <p className="text-red-700">
+                                                {match.Team1Score}
+                                            </p>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
 
-					{/* Відображення повідомлення про помилку при невдалому запиті */}
-					{failedToFetch ? <CheckFetch /> : console.log('Successful Fetch')}
+                            {/* Блок для відображення результату матчу */}
+                            <div className="flex flex-col items-center justify-center w-[20%] h-[160px] text-white text-[18px]">
+                                <p className="font-semibold text-center">
+                                    {formatDate(match.VsDate)}
+                                </p>
+                                <p className="font-bold">Vs</p>
+                                <p className="font-bold text-[24px]">
+                                    {extractHoursAndMinutes(match.time)}
+                                </p>
+                            </div>
 
-					<div className={style.MatchesBlockStake}>
-						<p>Зробити ставку із коефіцієнтом </p> {/* Блок для ставок */}
-					</div>
+                            {/* Блок для команди 2 */}
+                            <div
+                                className="relative w-[40%] h-[160px] flex flex-row-reverse justify-center items-center px-5 rounded-tr-lg"
+                                style={{
+                                    backgroundImage: `linear-gradient(to left, rgba(57, 62, 70, 0.8), rgba(57, 62, 70, 0)), url(/${match.Team2Country})`,
+                                    backgroundSize: 'cover',
+                                    backgroundRepeat: 'no-repeat',
+                                    backgroundPosition: 'right',
+                                }}
+                            >
+                                <img
+                                    draggable="false"
+                                    className="h-[100px] w-[100px] object-contain mx-[10%]"
+                                    src={'/' + match.Team2Logo}
+                                    alt={match.Team2Name}
+                                />
+                                <div className="flex items-center justify-center bg-gray-700 bg-opacity-60 rounded-full ml-5 w-[40%]">
+                                    <p className="text-center font-semibold text-white text-[22px]">
+                                        {match.Team2Name}
+                                    </p>
+                                </div>
+                                <div className="flex flex-col items-center justify-between font-bold text-white text-[22px] mt-2 h-[80%]">
+                                    <div className="mt-4 p-2 rounded-full bg-gray-700 bg-opacity-60 w-12 h-12 flex justify-center items-center">
+                                        <p>{match.Team2Coef}</p>
+                                    </div>
+                                    <div className="mt-4 p-2 rounded-full bg-gray-700 bg-opacity-60 w-12 h-12 flex justify-center items-center">
+                                        {match.Team2Score > match.Team1Score ? (
+                                            <p className="text-green-700">
+                                                {match.Team2Score}
+                                            </p>
+                                        ) : (
+                                            <p className="text-red-700">
+                                                {match.Team2Score}
+                                            </p>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {/*  */}
+                        <div className="flex w-full bg-[#393e46] text-white justify-evenly rounded-b-lg">
+                            <div className="w-[40%] flex justify-center items-center">
+                                <Link
+                                    to={`/Stake?MatchId=${match.MatchID}&TeamId=${match.Team1ID}`}
+                                >
+                                    <div className="bg-amber-500 rounded-lg my-[15px] px-[25px] py-[10px] hover:shadow-lg duration-300 hover:text-white hover:bg-amber-400">
+                                        Зробити ставку
+                                    </div>
+                                </Link>
+                            </div>
+                            <div className="w-[20%]"></div>
+                            <div className="w-[40%] flex justify-center items-center">
+                                <Link
+                                    to={`/Stake?MatchId=${match.MatchID}&TeamId=${match.Team2ID}`}
+                                >
+                                    <div className="bg-amber-500 rounded-lg my-[15px] px-[25px] py-[10px] hover:shadow-lg duration-300 hover:text-white hover:bg-amber-400">
+                                        Зробити ставку
+                                    </div>
+                                </Link>
+                            </div>
+                        </div>
 
-					{/* Заголовок для карт */}
-					<div className={style.Title}>
-						<Map />
-						<h3>Карти</h3>
-					</div>
+                        <div className="flex items-center my-4 justify-center">
+                            <Map className="text-white" />
+                            <h3 className="text-white text-lg ml-2">Карти</h3>
+                        </div>
 
-					{/* Блок для відображення таблиць карт */}
-					<div className={style.MatchesBlock}>
-						{/* Map 1 */}
-						<div className={`${style.table_component} ${style.MapBlock}`}>
-							<table>
-								<caption>
-									<p>Map 1: </p>
-								</caption>
-								<thead>
-									<tr>
-										<th>Bruv123</th>
-										<th></th>
-										<th>Kukuys</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>3.2K</td>
-										<td>Gold</td>
-										<td>6.7K</td>
-									</tr>
-									<tr>
-										<td>41.1K</td>
-										<td>Net</td>
-										<td>50.4K</td>
-									</tr>
-									<tr>
-										<td>7</td>
-										<td>Score</td>
-										<td>19</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-						{/* Map 2 */}
-						<div className={`${style.table_component} ${style.MapBlock}`}>
-							<table>
-								<caption>
-									<p>Map 2: </p>
-								</caption>
-								<thead>
-									<tr>
-										<th>Bruv123</th>
-										<th></th>
-										<th>Kukuys</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>3.2K</td>
-										<td>Gold</td>
-										<td>6.7K</td>
-									</tr>
-									<tr>
-										<td>41.1K</td>
-										<td>Net</td>
-										<td>50.4K</td>
-									</tr>
-									<tr>
-										<td>7</td>
-										<td>Score</td>
-										<td>19</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-						{/* Map 3 */}
-						<div className={`${style.table_component} ${style.MapBlock}`}>
-							<table>
-								<caption>
-									<p>Map 3: </p>
-								</caption>
-								<thead>
-									<tr>
-										<th>Bruv123</th>
-										<th></th>
-										<th>Kukuys</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>3.2K</td>
-										<td>Gold</td>
-										<td>6.7K</td>
-									</tr>
-									<tr>
-										<td>41.1K</td>
-										<td>Net</td>
-										<td>50.4K</td>
-									</tr>
-									<tr>
-										<td>7</td>
-										<td>Score</td>
-										<td>19</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
+                        {/* Блок для відображення таблиць карт */}
+                        <div className="flex flex-wrap justify-between w-full">
+                            {/* Map 1 */}
+                            <div className="w-full sm:w-1/3 p-2">
+                                <table className="w-full text-center bg-gray-800 rounded-lg overflow-hidden">
+                                    <caption className="text-white bg-gray-600 h-[40px] content-center font-bold">
+                                        Map
+                                    </caption>
+                                    <thead>
+                                        <tr className="bg-gray-700">
+                                            <th className="p-2 text-white">
+                                                Team1
+                                            </th>
+                                            <th className="p-2 text-white"></th>
+                                            <th className="p-2 text-white">
+                                                Team2
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                Kills
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                Deaths
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                25K
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                Money
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                25K
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                10
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                Score
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                10
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            {/* Map 2 */}
+                            <div className="w-full sm:w-1/3 p-2">
+                                <table className="w-full text-center bg-gray-800 rounded-lg overflow-hidden">
+                                    <caption className="text-white bg-gray-600 h-[40px] content-center font-bold">
+                                        Map
+                                    </caption>
+                                    <thead>
+                                        <tr className="bg-gray-700">
+                                            <th className="p-2 text-white">
+                                                Team1
+                                            </th>
+                                            <th className="p-2 text-white"></th>
+                                            <th className="p-2 text-white">
+                                                Team2
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                Kills
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                Deaths
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                25K
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                Money
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                25K
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                10
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                Score
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                10
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            {/* Map 3 */}
+                            <div className="w-full sm:w-1/3 p-2">
+                                <table className="w-full text-center bg-gray-800 rounded-lg overflow-hidden">
+                                    <caption className="text-white bg-gray-600 h-[40px] content-center font-bold">
+                                        Map
+                                    </caption>
+                                    <thead>
+                                        <tr className="bg-gray-700">
+                                            <th className="p-2 text-white">
+                                                Team1
+                                            </th>
+                                            <th className="p-2 text-white"></th>
+                                            <th className="p-2 text-white">
+                                                Team2
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                Kills
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                Deaths
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                25K
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                Money
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                25K
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                10
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                Score
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                10
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
 
-					{/* Заголовок для статистики гравців */}
-					<div className={style.Title}>
-						<Map />
-						<h3>Статистика Гравців</h3>
-					</div>
+                        {/* Заголовок для статистики гравців */}
+                        <div className="flex  items-center my-4 justify-center">
+                            <Map className="text-white" />
+                            <h3 className="text-white text-lg ml-2">
+                                Статистика Гравців
+                            </h3>
+                        </div>
 
-					{/* Блок для відображення таблиць статистики гравців */}
-					<div className={style.MatchesBlock}>
-						{/* Гравець 1 */}
-						<div className={`${style.table_component} ${style.MapBlock}`}>
-							<table>
-								<caption>
-									<p>Player 1: </p>
-								</caption>
-								<thead>
-									<tr>
-										<th>Name</th>
-										<th>Score</th>
-										<th>Kill</th>
-										<th>Death</th>
-										<th>Assists</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>Bruv123</td>
-										<td>3</td>
-										<td>10</td>
-										<td>4</td>
-										<td>5</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-						{/* Гравець 2 */}
-						<div className={`${style.table_component} ${style.MapBlock}`}>
-							<table>
-								<caption>
-									<p>Player 2: </p>
-								</caption>
-								<thead>
-									<tr>
-										<th>Name</th>
-										<th>Score</th>
-										<th>Kill</th>
-										<th>Death</th>
-										<th>Assists</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>Kukuys</td>
-										<td>4</td>
-										<td>12</td>
-										<td>5</td>
-										<td>6</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</main>
-			</div>
-			<Footer />
-		</div>
-	)
+                        {/* Блок для відображення таблиць статистики гравців */}
+                        <div className="flex flex-wrap justify-between w-full">
+                            {/* Team 1 */}
+                            <div className="w-full sm:w-1/2 p-2">
+                                <table className="w-full text-center bg-gray-800 rounded-lg overflow-hidden">
+                                    <caption className="text-white bg-gray-600 h-[40px] content-center">
+                                        <p className="font-bold">Team Name</p>
+                                    </caption>
+                                    <thead>
+                                        <tr className="bg-gray-700">
+                                            <th className="p-2 text-white">
+                                                Name
+                                            </th>
+                                            <th className="p-2 text-white">
+                                                Score
+                                            </th>
+                                            <th className="p-2 text-white">
+                                                Kill
+                                            </th>
+                                            <th className="p-2 text-white">
+                                                Death
+                                            </th>
+                                            <th className="p-2 text-white">
+                                                Assists
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                Player
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                1
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                1
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                3
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                64
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                Player
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                1
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                1
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                3
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                64
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                Player
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                1
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                1
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                3
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                64
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                Player
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                1
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                1
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                3
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                64
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                Player
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                1
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                1
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                3
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                64
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            {/* Team 2 */}
+                            <div className="w-full sm:w-1/2 p-2">
+                                <table className="w-full text-center bg-gray-800 rounded-lg overflow-hidden">
+                                    <caption className="text-white bg-gray-600 h-[40px] content-center ">
+                                        <p className="font-bold">Team Name</p>
+                                    </caption>
+                                    <thead>
+                                        <tr className="bg-gray-700">
+                                            <th className="p-2 text-white">
+                                                Name
+                                            </th>
+                                            <th className="p-2 text-white">
+                                                Score
+                                            </th>
+                                            <th className="p-2 text-white">
+                                                Kill
+                                            </th>
+                                            <th className="p-2 text-white">
+                                                Death
+                                            </th>
+                                            <th className="p-2 text-white">
+                                                Assists
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                Player
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                1
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                1
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                3
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                64
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                Player
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                1
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                1
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                3
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                64
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                Player
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                1
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                1
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                3
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                64
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                Player
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                1
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                1
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                3
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                64
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                Player
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                1
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                1
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                3
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                64
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+            <Footer />
+        </div>
+    )
 }
