@@ -1,4 +1,4 @@
-import { MessageSquareMore } from 'lucide-react'
+import { Eye } from 'lucide-react'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import useFetchGet from '../hooks/fetch/useFetchGet'
@@ -46,7 +46,7 @@ const NewsList = ({ value }) => {
 								<p className='mr-4 text-gray-400 text-xs'>
 									{NewsDate(OneNews.publish_date)}
 								</p>
-								<MessageSquareMore className='text-gray-400  h-4  ' />
+								<Eye className='text-gray-400 h-4 ' />
 								<p className='text-gray-600 text-xs  '>{OneNews.messages}</p>
 							</div>
 							<div className='my-3'>

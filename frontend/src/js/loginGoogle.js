@@ -28,6 +28,7 @@ export default function Logon() {
 				setIsRegUser(true)
 				setUser(decoded)
 				navigate('/Home')
+				navigate(0)
 			})
 			.catch(error => {
 				console.error('Error during login:', error)

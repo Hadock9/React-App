@@ -2,81 +2,94 @@ import { ThumbsDown, ThumbsUp } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { fetchCommentAction } from '../js/fetchCommentAction.js'
-import { updateDisLikes, updateLikes } from '../js/updateLikesDislikes.js'
+import {
+	DeleteStatus,
+	updateLikesDislikes,
+	updateUser_likes_dislikes,
+} from '../js/updateLikesDislikes.js'
+
 const LikesDisslikes = ({ OneComment }) => {
 	const { user } = useAuth()
 	const [likes, setLikes] = useState(OneComment.likes)
 	const [dislikes, setDislikes] = useState(OneComment.dislikes)
 	const [onlikes, setOnlikes] = useState(false)
 	const [ondislikes, setOndislikes] = useState(false)
-	const [onUpdateLikes, setOnUpdateLikes] = useState(false)
-	const [onUpdateDisLikes, setOnUpdateDisLikes] = useState(false)
+
 	useEffect(() => {
-		// Функція для отримання стану лайків
-		fetchCommentAction(OneComment.id, user.id, 'like').then(likeExists =>
+		// Функція для отримання стану лайків і дизлайків
+		const fetchStatus = async () => {
+			const likeExists = await fetchCommentAction(
+				OneComment.id,
+				user.id,
+				'like'
+			)
+			const dislikeExists = await fetchCommentAction(
+				OneComment.id,
+				user.id,
+				'dislike'
+			)
 			setOnlikes(likeExists)
-		)
-		// Функція для отримання стану дизлайків
-		fetchCommentAction(OneComment.id, user.id, 'dislike').then(dislikeExists =>
 			setOndislikes(dislikeExists)
-		)
-	}, []) // Викликаємо fetchCommentAction 1 раз
-
-	// Оновлення лайків на сервері
-
-	useEffect(() => {
-		if (onUpdateLikes) {
-			updateLikes(OneComment.id, user.id, likes)
-			setOnUpdateLikes(false) // Скидаємо onUpdate після оновлення
 		}
-	}, [onUpdateLikes])
+		fetchStatus()
+	}, [OneComment.id, user.id])
 
-	useEffect(() => {
-		if (onUpdateDisLikes) {
-			updateDisLikes(OneComment.id, user.id, dislikes)
-			setOnUpdateDisLikes(false) // Скидаємо onUpdate після оновлення
-		}
-	}, [onUpdateDisLikes])
+	// Оновлення статусу лайків на сервері
+	const updateLikes = async newLikes => {
+		await updateLikesDislikes(OneComment.id, newLikes, 'like')
+		await updateUser_likes_dislikes(OneComment.id, user.id, 'like')
+	}
+
+	// Оновлення статусу дизлайків на сервері
+	const updateDislikes = async newDislikes => {
+		await updateLikesDislikes(OneComment.id, newDislikes, 'dislike')
+		await updateUser_likes_dislikes(OneComment.id, user.id, 'dislike')
+	}
 
 	// Обробка натискання на лайк
 	const handleLikes = () => {
-		if (ondislikes) {
-			return
-		}
 		if (onlikes) {
-			setLikes(likes - 1) // Віднімемо лайк, якщо вже поставлено
+			// Якщо лайк вже поставлений, знімемо його
+			setLikes(likes - 1)
 			setOnlikes(false)
+			updateLikes(likes - 1) // Оновлення на сервері
 		} else {
-			setLikes(likes + 1) // Додамо лайк
+			// Додамо лайк
+			setLikes(likes + 1)
 			setOnlikes(true)
+			updateLikes(likes + 1) // Оновлення на сервері
+
 			if (ondislikes) {
-				setDislikes(dislikes - 1) // Якщо дизлайк поставлений, знімемо його
+				// Якщо дизлайк поставлений, знімемо його
+				setDislikes(dislikes - 1)
 				setOndislikes(false)
-				setOnUpdateDisLikes(true)
+				DeleteStatus(OneComment.id, user.id) // Викличемо видалення статусу дизлайка
+				updateDislikes(dislikes - 1) // Оновлення на сервері
 			}
 		}
-		setOnUpdateLikes(true)
 	}
 
 	// Обробка натискання на дизлайк
 	const handleDislikes = () => {
-		if (onlikes) {
-			return
-		}
 		if (ondislikes) {
-			setDislikes(dislikes - 1) // Віднімемо дизлайк, якщо вже поставлено
+			// Якщо дизлайк вже поставлений, знімемо його
+			setDislikes(dislikes - 1)
 			setOndislikes(false)
+			updateDislikes(dislikes - 1) // Оновлення на сервері
 		} else {
-			setDislikes(dislikes + 1) // Додамо дизлайк
+			// Додамо дизлайк
+			setDislikes(dislikes + 1)
 			setOndislikes(true)
+			updateDislikes(dislikes + 1) // Оновлення на сервері
+
 			if (onlikes) {
-				setLikes(likes - 1) // Якщо лайк поставлений, знімемо його
+				// Якщо лайк поставлений, знімемо його
+				setLikes(likes - 1)
 				setOnlikes(false)
-				setOnUpdateLikes(true)
+				DeleteStatus(OneComment.id, user.id) // Викличемо видалення статусу лайка
+				updateLikes(likes - 1) // Оновлення на сервері
 			}
 		}
-		// Оновлюємо лайки на сервері
-		setOnUpdateDisLikes(true) // Додано оновлення тут
 	}
 
 	return (

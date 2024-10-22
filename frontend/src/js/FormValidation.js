@@ -49,3 +49,37 @@ export const validateLastName = name => {
 export const validateConditions = conditions => {
 	return conditions ? '' : 'Ви повинні погодитися з умовами.'
 }
+
+// Валідація дати народження
+export const validateDate_of_birth = Date_of_birth => {
+	// Перетворюємо рядок дати на об'єкт Date
+	const dateOfBirth = new Date(Date_of_birth)
+	const date_now = new Date()
+
+	// Мінімальна дата (1 січня 1900 року)
+	const date_min = new Date('1900-01-01')
+
+	// Перевірка
+	if (dateOfBirth > date_min && dateOfBirth < date_now) {
+		return '' // Дата дійсна
+	} else {
+		return 'Дата повинна бути більшою ніж 1900 рік, але меншою ніж сьогодення'
+	}
+}
+
+export const validatePhone = Phone => {
+	const re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/
+	return re.test(Phone) ? '' : 'Телефон введено не правильно...'
+}
+
+export const validateTextArea = textArea => {
+	const trimmedText = textArea.trim()
+
+	if (!trimmedText) {
+		return 'Поле не може бути пустим'
+	} else if (trimmedText.length < 4 || trimmedText.length > 500) {
+		return `Поле має бути від 4 до 500 символів. Кількість символів: ${trimmedText.length}`
+	}
+
+	return ''
+}

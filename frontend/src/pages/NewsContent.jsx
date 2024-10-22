@@ -1,4 +1,3 @@
-import { MessageSquareMore } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { UkrainianWar } from '../components/BlockSaveUkraine'
@@ -48,7 +47,7 @@ export function NewsContent() {
 
 					<main className={rootstyle.Main}>
 						{/* News block */}
-						<div className='News my-5 ml-5'>
+						<div className='News my-5 ml-5 mr-24'>
 							<div className=' '>
 								<p className='text-[28px] font-sans  underline'>
 									{OneNews.title}
@@ -61,25 +60,26 @@ export function NewsContent() {
 									<p className='mr-4 text-gray-400 text-sm'>
 										{NewsDate(OneNews.publish_date)}
 									</p>
-									<MessageSquareMore className='text-gray-400  h-4  ' />
-									<p className='text-gray-600 text-xs  '>0</p>
 								</div>
-								<img
-									src={OneNews.image_url}
-									className='w-[80%]  rounded-md'
-									alt=' зображення'
-								/>
-
+								<div>
+									<img
+										src={OneNews.image_url}
+										className='w-[100%]  rounded-md'
+										alt='зображення'
+									/>
+								</div>
 								<div className='my-3'>
 									<div className='news-details'>
 										<h2 className='text-xl  font-bold'>Деталі новини</h2>
 										{parsedContent && parsedContent.questions.length > 0 ? (
 											parsedContent.questions.map((item, index) => (
 												<div key={index} className='question-answer mb-4'>
-													<p className='text-lg font-sans  font-bold'>
+													<p className='text-lg font-sans text-justify  font-bold '>
 														{item.question}
 													</p>
-													<p className='text-lg font-sans'>{item.answer}</p>
+													<p className='text-lg text-justify font-sans'>
+														{item.answer}
+													</p>
 												</div>
 											))
 										) : (
