@@ -22,33 +22,42 @@ export function GamesList({ value }) {
         <>
             {failedToFetch ? <CheckFetch /> : console.log('Successful Fetch')}
 
-<<<<<<< HEAD
+            {failedToFetch ? <CheckFetch /> : console.log('Successful Fetch')}
+
             <div className={styles.GameBlockRoot}>
                 {filterGames.length > 0 ? (
                     filterGames.map((game) => (
-                        <Link
-                            to={
-                                '/Home/' +
-                                game.name
-                                    .replaceAll(' ', '_')
-                                    .replaceAll('-', '_') +
-                                `/Matches?game_id=${game.id}`
-                            }
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ ease: 'easeIn', duration: 0.5 }}
                             key={game.id}
                         >
-                            <div className={styles.GameBlock}>
-                                <img
-                                    className={styles.GamesImg}
-                                    src={game.ImageSrc}
-                                    alt={game.name}
-                                />
-                                <h3 className={styles.GameName}>{game.name}</h3>
-                                <p className={styles.GameDescription}>
-                                    Дивляться {game.views} тис. глядачів у
-                                    всьому світі
-                                </p>
-                            </div>
-                        </Link>
+                            <Link
+                                to={
+                                    '/Home/' +
+                                    game.name
+                                        .replaceAll(' ', '_')
+                                        .replaceAll('-', '_') +
+                                    `/Matches?game_id=${game.id}`
+                                }
+                            >
+                                <div className={styles.GameBlock}>
+                                    <img
+                                        className={styles.GamesImg}
+                                        src={game.ImageSrc}
+                                        alt={game.name}
+                                    />
+                                    <h3 className={styles.GameName}>
+                                        {game.name}
+                                    </h3>
+                                    <p className={styles.GameDescription}>
+                                        Дивляться {game.views} тис. глядачів у
+                                        всьому світі
+                                    </p>
+                                </div>
+                            </Link>
+                        </motion.div>
                     ))
                 ) : failedToFetch ? (
                     console.log('Failed Fatch No Results :)')
@@ -58,46 +67,4 @@ export function GamesList({ value }) {
             </div>
         </>
     )
-=======
-			{failedToFetch ? <CheckFetch /> : console.log('Successful Fetch')}
-
-			<div className={styles.GameBlockRoot}>
-				{filterGames.length > 0 ? (
-					filterGames.map(game => (
-						<motion.div
-							initial={{ opacity: 0, scale: 0 }}
-							animate={{ opacity: 1, scale: 1 }}
-							transition={{ ease: 'easeIn', duration: 0.5 }}
-							key={game.id}
-						>
-							<Link
-								to={
-									'/Home/' +
-									game.name.replaceAll(' ', '_').replaceAll('-', '_') +
-									`/Matches?game_id=${game.id}`
-								}
-							>
-								<div className={styles.GameBlock}>
-									<img
-										className={styles.GamesImg}
-										src={game.ImageSrc}
-										alt={game.name}
-									/>
-									<h3 className={styles.GameName}>{game.name}</h3>
-									<p className={styles.GameDescription}>
-										Дивляться {game.views} тис. глядачів у всьому світі
-									</p>
-								</div>
-							</Link>
-						</motion.div>
-					))
-				) : failedToFetch ? (
-					console.log('Failed Fatch No Results :)')
-				) : (
-					<NoResultDisclaimer value={value} />
-				)}
-			</div>
-		</>
-	)
->>>>>>> eb9f8e9f69f95135ca358723167bc2700b14b16d
 }
