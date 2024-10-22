@@ -1,7 +1,7 @@
-export const updateLikes = async (commentId, userId, likes) => {
+export const updateLikesDislikes = async (commentId, Value, action) => {
 	try {
 		const response = await fetch(
-			`http://localhost:4000/api/comments/news_comments/updateLikes`,
+			`http://localhost:4000/api/comments/news_comments/updateLikesDislikes`,
 			{
 				method: 'PUT',
 				headers: {
@@ -9,8 +9,8 @@ export const updateLikes = async (commentId, userId, likes) => {
 				},
 				body: JSON.stringify({
 					commentId: commentId,
-					userId: userId,
-					likes,
+					Value,
+					action: action,
 				}),
 			}
 		)
@@ -19,7 +19,33 @@ export const updateLikes = async (commentId, userId, likes) => {
 			throw new Error('Не вдалося оновити лайки/дизлайки на сервері')
 		}
 
-		// Отримайте відповідь, щоб підтвердити оновлення, якщо потрібно
+		const result = await response.json()
+		console.log(result)
+	} catch (error) {
+		console.error('Помилка при оновленні лайків/дизлайків:', error)
+	}
+}
+export const updateUser_likes_dislikes = async (commentId, userId, action) => {
+	try {
+		const response = await fetch(
+			`http://localhost:4000/api/comments/news_comments/updateUser_likes_dislikes`,
+			{
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					commentId: commentId,
+					userId: userId,
+					action: action,
+				}),
+			}
+		)
+
+		if (!response.ok) {
+			throw new Error('Не вдалося оновити лайки/дизлайки на сервері')
+		}
+
 		const result = await response.json()
 		console.log(result)
 	} catch (error) {
@@ -27,19 +53,18 @@ export const updateLikes = async (commentId, userId, likes) => {
 	}
 }
 
-export const updateDisLikes = async (commentId, userId, dislikes) => {
+export const DeleteStatus = async (commentId, userId) => {
 	try {
 		const response = await fetch(
-			`http://localhost:4000/api/comments/news_comments/updateDisLikes`,
+			`http://localhost:4000/api/comments/news_comments/DeleteStatus?commentId=${commentId}&userId=${userId}`,
 			{
-				method: 'PUT',
+				method: 'DELETE',
 				headers: {
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify({
 					commentId: commentId,
 					userId: userId,
-					dislikes,
 				}),
 			}
 		)
@@ -52,6 +77,6 @@ export const updateDisLikes = async (commentId, userId, dislikes) => {
 		const result = await response.json()
 		console.log(result)
 	} catch (error) {
-		console.error('Помилка при оновленні лайків/дизлайків:', error)
+		console.error('Помилка при видаленні статусу лайків/дизлайків:', error)
 	}
 }

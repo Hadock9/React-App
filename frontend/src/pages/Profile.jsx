@@ -389,7 +389,7 @@ export function Profile() {
 							<div className={style.ProfileBlockText}>
 								<div className={style.LabelInput}>
 									<label className={style.CustomLabel}>Країна</label>
-									<div className='mt-[-10px] ml-[-10px]'>
+									<div className='mt-[-9px] ml-[-9px]'>
 										<CountrySelector
 											value={formData.country}
 											onChange={CountryHandler}
