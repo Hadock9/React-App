@@ -71,3 +71,15 @@ export const validatePhone = Phone => {
 	const re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/
 	return re.test(Phone) ? '' : 'Телефон введено не правильно...'
 }
+
+export const validateTextArea = textArea => {
+	const trimmedText = textArea.trim()
+
+	if (!trimmedText) {
+		return 'Поле не може бути пустим'
+	} else if (trimmedText.length < 4 || trimmedText.length > 500) {
+		return `Поле має бути від 4 до 500 символів. Кількість символів: ${trimmedText.length}`
+	}
+
+	return ''
+}

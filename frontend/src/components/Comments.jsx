@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import useFetchGet from '../hooks/fetch/useFetchGet'
+import { validateTextArea } from '../js/FormValidation'
 import { NewsDate } from '../js/TimeValidation'
 import LikesDisslikes from './LikesDisslikes'
 import MyLoader from './Loader'
@@ -62,14 +63,7 @@ const Comments = ({ id }) => {
 	const handleCommentText = e => {
 		SetCommentText(e.target.value)
 
-		if (e.target.value.length <= 3) {
-			SetCommentTextError('Дане поле не може бути меншим за 4 символи')
-			if (e.target.value.length == 0) {
-				SetCommentTextError('Дане поле не може бути пустим')
-			}
-		} else {
-			SetCommentTextError('')
-		}
+		SetCommentTextError(validateTextArea(e.target.value))
 	}
 	useEffect(() => {
 		if (!CommentTextError) {
