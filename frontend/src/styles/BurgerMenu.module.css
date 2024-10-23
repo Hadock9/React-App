@@ -1,6 +1,6 @@
 /* Контейнер для бокового меню */
 .AsideContainer {
-	@apply w-1/5 h-full bg-white mt-2 mr-2 rounded-r-lg select-none;
+	@apply w-1/5 h-full bg-gray-300 mt-2 mr-2 rounded-r-lg select-none;
 }
 
 /* Секція, що прихована */
@@ -10,7 +10,7 @@
 
 /* Блок елементів в боковому меню */
 .AsideBlock {
-	@apply w-full h-16 flex items-center cursor-pointer select-none;
+	@apply w-full h-16 flex items-center cursor-pointer  select-none;
 }
 
 /* Іконка для перегляду в боковому меню */
