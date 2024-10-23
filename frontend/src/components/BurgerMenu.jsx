@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from 'framer-motion'
 import {
 	CircleDollarSign,
 	CircleUserRound,
@@ -8,8 +9,8 @@ import {
 	Menu,
 	Wallet,
 } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { useMenu } from '../context/MenuContext'
-
 import style from '../styles/BurgerMenu.module.css'
 
 export function BurgerMenu() {
@@ -18,12 +19,36 @@ export function BurgerMenu() {
 	const toggleMenu = () => {
 		setIsOpen(prev => !prev)
 	}
-	{
+
+	const textAnimations = {
+		hidden: { opacity: 0, x: -20 },
+		show: { opacity: 1, x: 0 },
+		exit: { opacity: 0, x: -20 },
 	}
+
+	const transition = {
+		duration: 0.6,
+		ease: 'easeInOut',
+	}
+
+	const AnimatedText = ({ children }) => (
+		<AnimatePresence>
+			{isOpen && (
+				<motion.div
+					initial='hidden'
+					animate='show'
+					exit='exit'
+					variants={textAnimations}
+					transition={transition}
+				>
+					<p>{children}</p>
+				</motion.div>
+			)}
+		</AnimatePresence>
+	)
+
 	return (
-		<aside
-			className={isOpen ? style.AsideContainer : style.AsideContainerHidden}
-		>
+		<motion.aside animate={{ width: isOpen ? '350px' : '60px' }}>
 			<div className={style.AsideBlockBrowse} onClick={toggleMenu}>
 				<div className={style.AsideBlockIconBrowse}>
 					<Menu />
@@ -31,63 +56,49 @@ export function BurgerMenu() {
 			</div>
 
 			<>
-				<div className={style.AsideBlock}>
+				<Link to='/Home' className={style.AsideBlock}>
 					<div className={style.AsideBlockIcon}>
 						<House />
 					</div>
-					<div className={isOpen ? style.AsideBlockText : style.HiddenBlock}>
-						<p>Головна</p>
-					</div>
-				</div>
-				<div className={style.AsideBlock}>
+					<AnimatedText>Головна</AnimatedText>
+				</Link>
+				<Link to='/Stake' className={style.AsideBlock}>
 					<div className={style.AsideBlockIcon}>
 						<History />
 					</div>
-					<div className={isOpen ? style.AsideBlockText : style.HiddenBlock}>
-						<p>Історія ставок</p>
-					</div>
-				</div>
-				<div className={style.AsideBlock}>
+					<AnimatedText>Історія ставок</AnimatedText>
+				</Link>
+				<Link to='/Balance' className={style.AsideBlock}>
 					<div className={style.AsideBlockIcon}>
 						<CircleDollarSign />
 					</div>
-					<div className={isOpen ? style.AsideBlockText : style.HiddenBlock}>
-						<p>Управління Балансом</p>
-					</div>
-				</div>
-				<div className={style.AsideBlock}>
+					<AnimatedText>Баланс</AnimatedText>
+				</Link>
+				<Link to='/Home' className={style.AsideBlock}>
 					<div className={style.AsideBlockIcon}>
 						<Gem />
 					</div>
-					<div className={isOpen ? style.AsideBlockText : style.HiddenBlock}>
-						<p>Бонуси</p>
-					</div>
-				</div>
-				<div className={style.AsideBlock}>
+					<AnimatedText>Бонуси</AnimatedText>
+				</Link>
+				<Link to='/Profile' className={style.AsideBlock}>
 					<div className={style.AsideBlockIcon}>
 						<CircleUserRound />
 					</div>
-					<div className={isOpen ? style.AsideBlockText : style.HiddenBlock}>
-						<p>Мій профіль</p>
-					</div>
-				</div>
-				<div className={style.AsideBlock}>
+					<AnimatedText>Мій профіль</AnimatedText>
+				</Link>
+				<Link to='/Home' className={style.AsideBlock}>
 					<div className={style.AsideBlockIcon}>
 						<Wallet />
 					</div>
-					<div className={isOpen ? style.AsideBlockText : style.HiddenBlock}>
-						<p>Гаманець</p>
-					</div>
-				</div>
-				<div className={style.AsideBlock}>
+					<AnimatedText>Гаманець</AnimatedText>
+				</Link>
+				<Link to='/Notifications' className={style.AsideBlock}>
 					<div className={style.AsideBlockIcon}>
 						<Mail />
 					</div>
-					<div className={isOpen ? style.AsideBlockText : style.HiddenBlock}>
-						<p>Повідомлення</p>
-					</div>
-				</div>
+					<AnimatedText>Повідомлення</AnimatedText>
+				</Link>
 			</>
-		</aside>
+		</motion.aside>
 	)
 }

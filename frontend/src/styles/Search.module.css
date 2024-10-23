@@ -1,54 +1,80 @@
 /* Блок для пошуку */
 .SearchBlock {
-	width: 100%;
-	display: flex;
-	justify-content: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
 }
 
 /* Контейнер для поля пошуку */
 .Search {
-	width: 500px;
-	display: flex;
+    width: 500px;
+    display: flex;
 }
 
 /* Поле вводу для пошуку */
 .CustomInput {
+<<<<<<< HEAD
+    width: 100%;
+    height: 40px;
+    margin-left: 10px;
+    box-sizing: border-box;
+    border: none;
+    padding-left: 30px;
+    border-radius: 10px 0px 0px 10px;
+    border-bottom: 2px solid grey;
+=======
 	width: 100%;
 	height: 40px;
 	margin-left: 10px;
+	padding-left: 10px;
 	box-sizing: border-box;
 	border: none;
 	border-radius: 10px 0px 0px 10px;
 	border-bottom: 2px solid grey;
+>>>>>>> eb9f8e9f69f95135ca358723167bc2700b14b16d
 }
 
 /* Стиль для активного поля вводу */
 .CustomInput:focus {
-	outline: none;
+    outline: none;
 }
 
 /* Кнопка для пошуку */
 .CustomButton {
+<<<<<<< HEAD
+    height: 40px;
+    cursor: pointer;
+    box-sizing: border-box;
+    border: none;
+    padding: 0px 10px;
+    background-color: white;
+    border-radius: 0px 10px 10px 0px;
+    border-bottom: 2px solid grey;
+    border-left: 2px solid grey;
+=======
 	height: 40px;
 	cursor: pointer;
 	box-sizing: border-box;
 	border: none;
+	padding: 0px 10px;
 	background-color: white;
 	border-radius: 0px 10px 10px 0px;
 	border-bottom: 2px solid grey;
 	border-left: 2px solid grey;
+>>>>>>> eb9f8e9f69f95135ca358723167bc2700b14b16d
 }
 
 /* Контейнер для основного контенту */
 .Container {
-	display: flex;
+    display: flex;
 }
 
 /* Головний блок контенту */
 .Main {
-	width: 75%;
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	margin-top: 10px;
+    width: 75%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
 }

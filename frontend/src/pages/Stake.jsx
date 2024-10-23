@@ -1,4 +1,13 @@
 import { useEffect, useState } from 'react'
+import { UkrainianWar } from '../components/BlockSaveUkraine'
+import { BurgerMenu } from '../components/BurgerMenu'
+import { Footer } from '../components/Footer'
+import { NavBar } from '../components/NavBar'
+import { formatDate, formatTime } from '../js/TimeValidation'
+
+import MyLoader from '../components/Loader'
+import useFetchGet from '../hooks/fetch/useFetchGet'
+import rootstyle from '../styles/root.module.css'
 
 export function Stake() {
 	const [Stakes, setData] = useState([])
@@ -18,61 +27,98 @@ export function Stake() {
 			status: status,
 		}
 
-		fetch('http://localhost:4000/api/Stake', {
-			method: 'POST', // Відправка POST-запиту
+		fetch('http://localhost:4000/api/stake/', {
+			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify(stakeData), // Відправка даних ставки у форматі JSON
+			body: JSON.stringify(stakeData),
 		})
 	}
 
-	// Завантаження ставок з сервера
-	useEffect(() => {
-		fetch('http://localhost:4000/api/Stake1')
-			.then(res => res.json())
-			.then(data => setData(data)) // Встановлення отриманих даних у стан
-	}, [])
+	const { Data, isLoading, failedToFetch } = useFetchGet({
+		url: 'http://localhost:4000/api/stake/',
+	})
 
+	useEffect(() => {
+		if (Data) {
+			setData(Data)
+		}
+	}, [Data])
+
+	if (isLoading) {
+		return <MyLoader />
+	}
 	return (
-		<>
-			<div>
-				{/* Відображення деталей кожної ставки */}
-				{Stakes.map(stake => (
-					<div key={stake.id}>
-						<p>stake id {stake.id}</p>
-						<p>stake match_id {stake.match_id}</p>
-						<p>stake amount {stake.amount}</p>
-						<p>stake Coef {stake.Coef}</p>
-						<p>stake stake_time {stake.stake_time}</p>
-						<p>stake status {stake.status}</p>
-						<p>------------------------------------------------</p>
+		<div className={rootstyle.wrapper}>
+			<NavBar />
+			<UkrainianWar />
+			<div className={rootstyle.Container}>
+				<BurgerMenu />
+
+				<main className={rootstyle.Main}>
+					{/* Відображення деталей кожної ставки */}
+					{Stakes.map(stake => (
+						<div
+							className='w-full min-h-[100px] h-[120px] bg-gray-800 text-gray-200 flex gap-4 items-center justify-evenly p-4 rounded-lg my-5'
+							key={stake.id}
+						>
+							<div>{stake.id}</div>
+							<div>{stake.match_id}</div>
+							<div className='min-w-[20%] flex flex-col items-center'>
+								<div className='text-white text-3xl'>
+									₴{stake.amount * stake.Coef}
+								</div>
+								<div className='flex'>
+									<div>₴{stake.amount}</div>
+									<div>x{stake.Coef}</div>
+								</div>
+							</div>
+							<div className='flex flex-col justify-evenly items-center'>
+								<div>{formatTime(stake.stake_time)}</div>
+								<div>{formatDate(stake.stake_time)}</div>
+								<div>Status: {stake.status}</div>
+							</div>
+						</div>
+					))}
+
+					<div>
+						<form onSubmit={handleSubmit} className='space-y-4'>
+							<label className='block'>
+								<span>match_id</span>
+								<input
+									type='number'
+									name='match_id'
+									onChange={e => setMatchId(e.target.value)}
+									className='mt-1 block w-full rounded-md bg-gray-700 text-white border border-gray-600 p-2'
+								/>
+							</label>
+							<label className='block'>
+								<span>amount</span>
+								<input
+									type='number'
+									name='amount'
+									onChange={e => setAmount(e.target.value)}
+									className='mt-1 block w-full rounded-md bg-gray-700 text-white border border-gray-600 p-2'
+								/>
+							</label>
+							<label className='block'>
+								<span>Coef</span>
+								<input
+									type='number'
+									name='Coef'
+									onChange={e => setCoef(e.target.value)}
+									className='mt-1 block w-full rounded-md bg-gray-700 text-white border border-gray-600 p-2'
+								/>
+							</label>
+							<button className='bg-blue-600 text-white px-4 py-2 rounded-lg'>
+								submit
+							</button>
+						</form>
 					</div>
-				))}
+				</main>
 			</div>
-			<div>
-				<form action='' onSubmit={handleSubmit}>
-					<label htmlFor=''>match_id</label>
-					<input
-						type='number'
-						name='match_id'
-						onChange={e => setMatchId(e.target.value)}
-					/>
-					<label htmlFor=''>amount</label>
-					<input
-						type='number'
-						name='amount'
-						onChange={e => setAmount(e.target.value)}
-					/>
-					<label htmlFor=''>Coef</label>
-					<input
-						type='number'
-						name='Coef'
-						onChange={e => setCoef(e.target.value)}
-					/>
-					<button>submit</button> {/* Відправлення форми */}
-				</form>
-			</div>
-		</>
+			<Footer />
+		</div>
 	)
 }

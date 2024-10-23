@@ -1,5 +1,4 @@
 import { Search } from 'lucide-react'
-import style from '../styles/Search.module.css'
 
 //передаєм значення вище
 export function MySearch({ onChange }) {
@@ -9,20 +8,20 @@ export function MySearch({ onChange }) {
 	}
 
 	return (
-		<div className={style.SearchBlock}>
+		<div className='flex justify-center w-auto m-[15px]'>
 			<form action=''>
-				<div className={style.Search}>
+				<div className='flex items-center rounded-3xl p-[14px] bg-[#f2f2f2]  hover:shadow-lg duration-1000 hover:bg-white duration-1000 '>
+					<span className='material-symbols-outlined text-gray-400'>
+						<Search />
+					</span>
 					<input
 						type='text'
-						placeholder='Search'
+						placeholder='Пошук'
 						name='Search'
-						className={style.CustomInput}
+						className='ml-[14px] text-base border-0 outline-none bg-transparent	 w-[60px] focus:w-[350px]  duration-700  placeholder:text-gray-400'
 						//При зміні беремо створюємо функцію HandleNameChange
 						onChange={HandleNameChange}
 					/>
-					<button className={style.CustomButton}>
-						<Search />
-					</button>
 				</div>
 			</form>
 		</div>

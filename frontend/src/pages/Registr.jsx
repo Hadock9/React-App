@@ -162,13 +162,16 @@ export function Registration() {
 			}
 
 			try {
-				const response = await fetch('http://localhost:4000/api/Registration', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify(RegData),
-				})
+				const response = await fetch(
+					'http://localhost:4000/api/auth/registration',
+					{
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify(RegData),
+					}
+				)
 				console.log(response.ok)
 
 				if (response.ok) {
@@ -356,7 +359,7 @@ export function Registration() {
 						<div className={`${styles.RegFormBlock} ${styles.RegFormButton}`}>
 							<button
 								type='submit'
-								disabled={!FormValid} // Вимкнути кнопку, якщо форма не дійсна
+								disabled={!FormValid} // Вимкнути кнопку, якщо форма не дійснf
 								className={styles.CustomButtonSubmit}
 							>
 								Зареєструватися

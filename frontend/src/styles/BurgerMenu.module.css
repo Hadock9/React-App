@@ -1,58 +1,34 @@
 /* Контейнер для бокового меню */
 .AsideContainer {
-	width: 20%;
-	height: 100%;
-	background-color: white;
-	margin-top: 10px;
-	margin-right: 10px;
-	border-top-right-radius: 10px;
-	border-bottom-right-radius: 10px;
+	@apply w-1/5 h-full bg-white mt-2 mr-2 rounded-r-lg select-none;
 }
 
 /* Секція, що прихована */
 .HiddenBlock {
-	display: none;
+	@apply hidden;
 }
 
 /* Блок елементів в боковому меню */
 .AsideBlock {
-	width: 100%;
-	height: 60px;
-	display: flex;
-	align-items: center;
-	cursor: pointer;
+	@apply w-full h-16 flex items-center cursor-pointer select-none;
 }
 
 /* Іконка для перегляду в боковому меню */
 .AsideBlockIconBrowse {
-	cursor: pointer;
-	width: 60px;
-	height: 60px;
-	display: flex;
-	align-items: center;
-	margin: 10px;
+	@apply cursor-pointer w-16 h-16 flex items-center m-2;
 }
 
 /* Стиль для блока при наведенні */
 .AsideBlock:hover {
-	background-color: rgb(202, 200, 200);
-	border-top-right-radius: 10px;
-	border-bottom-right-radius: 10px;
+	@apply bg-gray-300 rounded-r-lg select-none;
 }
 
 /* Загальна іконка в боковому меню */
 .AsideBlockIcon {
-	width: 60px;
-	height: 60px;
-	display: flex;
-	align-items: center;
-	margin: 10px;
+	@apply w-16 h-16 flex items-center m-2;
 }
 
 /* Текстовий блок в боковому меню */
 .AsideBlockText {
-	width: 70%;
-	height: 60px;
-	display: flex;
-	align-items: center;
+	@apply w-4/5 h-16 flex items-center select-none;
 }

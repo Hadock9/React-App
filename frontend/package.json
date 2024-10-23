@@ -7,13 +7,17 @@
 		"@testing-library/jest-dom": "^5.17.0",
 		"@testing-library/react": "^13.4.0",
 		"@testing-library/user-event": "^13.5.0",
+		"framer-motion": "^11.11.9",
 		"jwt-decode": "^4.0.0",
 		"lucide-react": "^0.441.0",
 		"react": "^18.3.1",
 		"react-apple-login": "^1.1.6",
 		"react-dom": "^18.3.1",
+		"react-multi-carousel": "^2.8.5",
 		"react-router-dom": "^6.26.2",
 		"react-scripts": "5.0.1",
+		"react-select": "^5.8.1",
+		"react-select-country-list": "^2.2.3",
 		"web-vitals": "^2.1.4"
 	},
 	"scripts": {
@@ -22,6 +26,7 @@
 		"test": "react-scripts test",
 		"eject": "react-scripts eject"
 	},
+	"proxy": "http://localhost:4000",
 	"browserslist": {
 		"production": [
 			">0.2%",
@@ -33,5 +38,10 @@
 			"last 1 firefox version",
 			"last 1 safari version"
 		]
+	},
+	"devDependencies": {
+		"autoprefixer": "^10.4.20",
+		"postcss": "^8.4.47",
+		"tailwindcss": "^3.4.13"
 	}
 }
