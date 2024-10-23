@@ -45,11 +45,12 @@ export function Match() {
                 <BurgerMenu />
 
                 <main className={rootstyle.Main}>
-                    <div className="bg-[#393e46]">
-                        <div className="flex justify-between w-full h-full bg-[#393e46]">
+                    {/* bg-[#393e46] */}
+                    <div className="">
+                        <div className="flex justify-between w-full h-full bg-gray-700 rounded-t-lg">
                             {/* Блок для команди 1 */}
                             <div
-                                className="relative w-[40%] h-[160px] flex justify-center items-center px-5"
+                                className="relative w-[40%] h-[260px] flex justify-center items-center px-5 rounded-tl-lg"
                                 style={{
                                     backgroundImage: `linear-gradient(to right, rgba(57, 62, 70, 0.8), rgba(57, 62, 70, 0)), url(/${match.Team1Country})`,
                                     backgroundSize: 'cover',
@@ -87,7 +88,7 @@ export function Match() {
                             </div>
 
                             {/* Блок для відображення результату матчу */}
-                            <div className="flex flex-col items-center justify-center w-[20%] h-[160px] text-white text-[18px]">
+                            <div className="flex flex-col items-center justify-center w-[20%] h-[260px] text-white text-[18px]">
                                 <p className="font-semibold text-center">
                                     {formatDate(match.VsDate)}
                                 </p>
@@ -99,7 +100,7 @@ export function Match() {
 
                             {/* Блок для команди 2 */}
                             <div
-                                className="relative w-[40%] h-[160px] flex flex-row-reverse justify-center items-center px-5"
+                                className="relative w-[40%] h-[260px] flex flex-row-reverse justify-center items-center px-5 rounded-tr-lg"
                                 style={{
                                     backgroundImage: `linear-gradient(to left, rgba(57, 62, 70, 0.8), rgba(57, 62, 70, 0)), url(/${match.Team2Country})`,
                                     backgroundSize: 'cover',
@@ -137,66 +138,95 @@ export function Match() {
                             </div>
                         </div>
 
-                        <div className="flex w-full h-[30px] bg-[#393e46] text-white">
-                            <p>Зробити ставку із коефіцієнтом</p>
+                        {/* Заголовок для статистики команд по картах */}
+                        <div className="flex w-full bg-gray-700 text-white justify-between rounded-b-lg">
+                            <div className="flex w-[40%] justify-center">
+                                <Link
+                                    to={`/Stake?MatchId=${idMatch}&TeamId=${match.Team1ID}`}
+                                >
+                                    <div className="flex align-center rounded-2xl bg-amber-500 px-[20px] py-[10px] my-3 hover:bg-amber-400 text-white duration-300 ">
+                                        Зробити ставку із коефіцієнтом
+                                    </div>
+                                </Link>
+                            </div>
+                            <div className="flex w-[40%] justify-center">
+                                <Link
+                                    to={`/Stake?MatchId=${idMatch}&TeamId=${match.Team2ID}`}
+                                >
+                                    <div className="flex align-center rounded-2xl bg-amber-500 px-[20px] py-[10px] my-3 hover:bg-amber-400 text-white duration-300  ">
+                                        Зробити ставку із коефіцієнтом
+                                    </div>
+                                </Link>
+                            </div>
                         </div>
 
-                        <div className="flex items-center my-4">
-                            <Map className="text-white" />
-                            <h3 className="text-white text-lg ml-2">Карти</h3>
+                        <div className="flex items-center justify-center my-4">
+                            <Map className="text-black" />
+                            <h3 className="text-black text-lg ml-2">Карти</h3>
                         </div>
 
                         {/* Блок для відображення таблиць карт */}
                         <div className="flex flex-wrap justify-between w-full">
                             {/* Map 1 */}
                             <div className="w-full sm:w-1/3 p-2">
-                                <table className="w-full text-left bg-gray-800 rounded-lg overflow-hidden">
-                                    <caption className="text-white">
-                                        <p>Map 1: </p>
+                                <table className="w-full text-center bg-gray-800 rounded-lg overflow-hidden">
+                                    <caption className="text-white bg-gray-600 content-center p-2 font-bold">
+                                        <p>[MapName]</p>
                                     </caption>
                                     <thead>
                                         <tr className="bg-gray-700">
-                                            <th className="p-2 text-white">
-                                                Bruv123
+                                            <th className="p-2 text-white w-[45%]">
+                                                {match.Team1Name}
                                             </th>
                                             <th className="p-2 text-white"></th>
-                                            <th className="p-2 text-white">
-                                                Kukuys
+                                            <th className="p-2 text-white w-[45%]">
+                                                {match.Team2Name}
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td className="p-2 text-white">
-                                                3.2K
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                Kills
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                Deaths
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                10K
                                             </td>
                                             <td className="p-2 text-white">
                                                 Gold
                                             </td>
                                             <td className="p-2 text-white">
-                                                6.7K
+                                                10K
                                             </td>
                                         </tr>
                                         <tr>
                                             <td className="p-2 text-white">
-                                                41.1K
-                                            </td>
-                                            <td className="p-2 text-white">
-                                                Net
-                                            </td>
-                                            <td className="p-2 text-white">
-                                                50.4K
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td className="p-2 text-white">
-                                                7
+                                                [score]
                                             </td>
                                             <td className="p-2 text-white">
                                                 Score
                                             </td>
                                             <td className="p-2 text-white">
-                                                19
+                                                [score]
                                             </td>
                                         </tr>
                                     </tbody>
@@ -204,53 +234,64 @@ export function Match() {
                             </div>
                             {/* Map 2 */}
                             <div className="w-full sm:w-1/3 p-2">
-                                <table className="w-full text-left bg-gray-800 rounded-lg overflow-hidden">
-                                    <caption className="text-white">
-                                        <p>Map 2: </p>
+                                <table className="w-full text-center bg-gray-800 rounded-lg overflow-hidden">
+                                    <caption className="text-white bg-gray-600 content-center p-2 font-bold">
+                                        <p>[MapName]</p>
                                     </caption>
                                     <thead>
                                         <tr className="bg-gray-700">
-                                            <th className="p-2 text-white">
-                                                Bruv123
+                                            <th className="p-2 text-white w-[45%]">
+                                                {match.Team1Name}
                                             </th>
                                             <th className="p-2 text-white"></th>
-                                            <th className="p-2 text-white">
-                                                Kukuys
+                                            <th className="p-2 text-white w-[45%]">
+                                                {match.Team2Name}
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td className="p-2 text-white">
-                                                3.2K
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                Kills
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                Deaths
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                10K
                                             </td>
                                             <td className="p-2 text-white">
                                                 Gold
                                             </td>
                                             <td className="p-2 text-white">
-                                                6.7K
+                                                10K
                                             </td>
                                         </tr>
                                         <tr>
                                             <td className="p-2 text-white">
-                                                41.1K
-                                            </td>
-                                            <td className="p-2 text-white">
-                                                Net
-                                            </td>
-                                            <td className="p-2 text-white">
-                                                50.4K
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td className="p-2 text-white">
-                                                7
+                                                [score]
                                             </td>
                                             <td className="p-2 text-white">
                                                 Score
                                             </td>
                                             <td className="p-2 text-white">
-                                                19
+                                                [score]
                                             </td>
                                         </tr>
                                     </tbody>
@@ -258,53 +299,64 @@ export function Match() {
                             </div>
                             {/* Map 3 */}
                             <div className="w-full sm:w-1/3 p-2">
-                                <table className="w-full text-left bg-gray-800 rounded-lg overflow-hidden">
-                                    <caption className="text-white">
-                                        <p>Map 3: </p>
+                                <table className="w-full text-center bg-gray-800 rounded-lg overflow-hidden">
+                                    <caption className="text-white bg-gray-600 content-center p-2 font-bold">
+                                        <p>[MapName]</p>
                                     </caption>
                                     <thead>
                                         <tr className="bg-gray-700">
-                                            <th className="p-2 text-white">
-                                                Bruv123
+                                            <th className="p-2 text-white w-[45%]">
+                                                {match.Team1Name}
                                             </th>
                                             <th className="p-2 text-white"></th>
-                                            <th className="p-2 text-white">
-                                                Kukuys
+                                            <th className="p-2 text-white w-[45%]">
+                                                {match.Team2Name}
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td className="p-2 text-white">
-                                                3.2K
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                Kills
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                Deaths
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                10K
                                             </td>
                                             <td className="p-2 text-white">
                                                 Gold
                                             </td>
                                             <td className="p-2 text-white">
-                                                6.7K
+                                                10K
                                             </td>
                                         </tr>
                                         <tr>
                                             <td className="p-2 text-white">
-                                                41.1K
-                                            </td>
-                                            <td className="p-2 text-white">
-                                                Net
-                                            </td>
-                                            <td className="p-2 text-white">
-                                                50.4K
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td className="p-2 text-white">
-                                                7
+                                                [score]
                                             </td>
                                             <td className="p-2 text-white">
                                                 Score
                                             </td>
                                             <td className="p-2 text-white">
-                                                19
+                                                [score]
                                             </td>
                                         </tr>
                                     </tbody>
@@ -312,29 +364,26 @@ export function Match() {
                             </div>
                         </div>
 
-                        {/* Заголовок для статистики гравців */}
-                        <div className="flex  items-center my-4">
-                            <Map className="text-white" />
-                            <h3 className="text-white text-lg ml-2">
+                        {/* Заголовок для статистики гравців*/}
+                        <div className="flex items-center my-4 justify-center">
+                            <Map className="text-black" />
+                            <h3 className="text-black text-lg ml-2 ">
                                 Статистика Гравців
                             </h3>
                         </div>
 
                         {/* Блок для відображення таблиць статистики гравців */}
                         <div className="flex flex-wrap justify-between w-full">
-                            {/* Player 1 */}
+                            {/* Team 1 */}
                             <div className="w-full sm:w-1/2 p-2">
-                                <table className="w-full text-left bg-gray-800 rounded-lg overflow-hidden">
-                                    <caption className="text-white">
-                                        <p>Player 1: </p>
+                                <table className="w-full text-center bg-gray-800 rounded-lg overflow-hidden">
+                                    <caption className="text-white p-2 font-bold bg-gray-600">
+                                        <p>{match.Team1Name}</p>
                                     </caption>
                                     <thead>
                                         <tr className="bg-gray-700">
                                             <th className="p-2 text-white">
                                                 Name
-                                            </th>
-                                            <th className="p-2 text-white">
-                                                Score
                                             </th>
                                             <th className="p-2 text-white">
                                                 Kill
@@ -345,42 +394,128 @@ export function Match() {
                                             <th className="p-2 text-white">
                                                 Assists
                                             </th>
+                                            <th className="p-2 text-white">
+                                                Gold
+                                            </th>
+                                            <th className="p-2 text-white">
+                                                Score
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td className="p-2 text-white">
-                                                Bruv123
+                                                s1mple
                                             </td>
                                             <td className="p-2 text-white">
-                                                3
+                                                100
                                             </td>
                                             <td className="p-2 text-white">
                                                 10
                                             </td>
                                             <td className="p-2 text-white">
-                                                4
+                                                15
                                             </td>
                                             <td className="p-2 text-white">
-                                                5
+                                                15K
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                [score]
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                s1mple
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                10
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15K
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                [score]
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                s1mple
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                10
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15K
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                [score]
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                s1mple
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                10
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15K
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                [score]
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                s1mple
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                10
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15K
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                [score]
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-                            {/* Player 2 */}
+                            {/* Team 2 */}
                             <div className="w-full sm:w-1/2 p-2">
-                                <table className="w-full text-left bg-gray-800 rounded-lg overflow-hidden">
-                                    <caption className="text-white">
-                                        <p>Player 2: </p>
+                                <table className="w-full text-center bg-gray-800 rounded-lg overflow-hidden">
+                                    <caption className="text-white p-2 font-bold bg-gray-600">
+                                        <p>{match.Team1Name}</p>
                                     </caption>
                                     <thead>
                                         <tr className="bg-gray-700">
                                             <th className="p-2 text-white">
                                                 Name
-                                            </th>
-                                            <th className="p-2 text-white">
-                                                Score
                                             </th>
                                             <th className="p-2 text-white">
                                                 Kill
@@ -391,24 +526,645 @@ export function Match() {
                                             <th className="p-2 text-white">
                                                 Assists
                                             </th>
+                                            <th className="p-2 text-white">
+                                                Gold
+                                            </th>
+                                            <th className="p-2 text-white">
+                                                Score
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td className="p-2 text-white">
-                                                Kukuys
+                                                s1mple
                                             </td>
                                             <td className="p-2 text-white">
-                                                4
+                                                100
                                             </td>
                                             <td className="p-2 text-white">
-                                                12
+                                                10
                                             </td>
                                             <td className="p-2 text-white">
-                                                5
+                                                15
                                             </td>
                                             <td className="p-2 text-white">
-                                                6
+                                                15K
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                [score]
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                s1mple
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                10
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15K
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                [score]
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                s1mple
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                10
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15K
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                [score]
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                s1mple
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                10
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15K
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                [score]
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                s1mple
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                10
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15K
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                [score]
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div className="flex flex-wrap justify-between w-full">
+                            {/* Team 1 */}
+                            <div className="w-full sm:w-1/2 p-2">
+                                <table className="w-full text-center bg-gray-800 rounded-lg overflow-hidden">
+                                    <caption className="text-white p-2 font-bold bg-gray-600">
+                                        <p>{match.Team1Name}</p>
+                                    </caption>
+                                    <thead>
+                                        <tr className="bg-gray-700">
+                                            <th className="p-2 text-white">
+                                                Name
+                                            </th>
+                                            <th className="p-2 text-white">
+                                                Kill
+                                            </th>
+                                            <th className="p-2 text-white">
+                                                Death
+                                            </th>
+                                            <th className="p-2 text-white">
+                                                Assists
+                                            </th>
+                                            <th className="p-2 text-white">
+                                                Gold
+                                            </th>
+                                            <th className="p-2 text-white">
+                                                Score
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                s1mple
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                10
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15K
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                [score]
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                s1mple
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                10
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15K
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                [score]
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                s1mple
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                10
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15K
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                [score]
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                s1mple
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                10
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15K
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                [score]
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                s1mple
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                10
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15K
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                [score]
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            {/* Team 2 */}
+                            <div className="w-full sm:w-1/2 p-2">
+                                <table className="w-full text-center bg-gray-800 rounded-lg overflow-hidden">
+                                    <caption className="text-white p-2 font-bold bg-gray-600">
+                                        <p>{match.Team1Name}</p>
+                                    </caption>
+                                    <thead>
+                                        <tr className="bg-gray-700">
+                                            <th className="p-2 text-white">
+                                                Name
+                                            </th>
+                                            <th className="p-2 text-white">
+                                                Kill
+                                            </th>
+                                            <th className="p-2 text-white">
+                                                Death
+                                            </th>
+                                            <th className="p-2 text-white">
+                                                Assists
+                                            </th>
+                                            <th className="p-2 text-white">
+                                                Gold
+                                            </th>
+                                            <th className="p-2 text-white">
+                                                Score
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                s1mple
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                10
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15K
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                [score]
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                s1mple
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                10
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15K
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                [score]
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                s1mple
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                10
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15K
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                [score]
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                s1mple
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                10
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15K
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                [score]
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                s1mple
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                10
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15K
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                [score]
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div className="flex flex-wrap justify-between w-full">
+                            {/* Team 1 */}
+                            <div className="w-full sm:w-1/2 p-2">
+                                <table className="w-full text-center bg-gray-800 rounded-lg overflow-hidden">
+                                    <caption className="text-white p-2 font-bold bg-gray-600">
+                                        <p>{match.Team1Name}</p>
+                                    </caption>
+                                    <thead>
+                                        <tr className="bg-gray-700">
+                                            <th className="p-2 text-white">
+                                                Name
+                                            </th>
+                                            <th className="p-2 text-white">
+                                                Kill
+                                            </th>
+                                            <th className="p-2 text-white">
+                                                Death
+                                            </th>
+                                            <th className="p-2 text-white">
+                                                Assists
+                                            </th>
+                                            <th className="p-2 text-white">
+                                                Gold
+                                            </th>
+                                            <th className="p-2 text-white">
+                                                Score
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                s1mple
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                10
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15K
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                [score]
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                s1mple
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                10
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15K
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                [score]
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                s1mple
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                10
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15K
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                [score]
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                s1mple
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                10
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15K
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                [score]
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                s1mple
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                10
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15K
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                [score]
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            {/* Team 2 */}
+                            <div className="w-full sm:w-1/2 p-2">
+                                <table className="w-full text-center bg-gray-800 rounded-lg overflow-hidden">
+                                    <caption className="text-white p-2 font-bold bg-gray-600">
+                                        <p>{match.Team1Name}</p>
+                                    </caption>
+                                    <thead>
+                                        <tr className="bg-gray-700">
+                                            <th className="p-2 text-white">
+                                                Name
+                                            </th>
+                                            <th className="p-2 text-white">
+                                                Kill
+                                            </th>
+                                            <th className="p-2 text-white">
+                                                Death
+                                            </th>
+                                            <th className="p-2 text-white">
+                                                Assists
+                                            </th>
+                                            <th className="p-2 text-white">
+                                                Gold
+                                            </th>
+                                            <th className="p-2 text-white">
+                                                Score
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                s1mple
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                10
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15K
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                [score]
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                s1mple
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                10
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15K
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                [score]
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                s1mple
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                10
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15K
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                [score]
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                s1mple
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                10
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15K
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                [score]
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="p-2 text-white">
+                                                s1mple
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                100
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                10
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                15K
+                                            </td>
+                                            <td className="p-2 text-white">
+                                                [score]
                                             </td>
                                         </tr>
                                     </tbody>
