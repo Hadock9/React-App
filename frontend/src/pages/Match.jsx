@@ -11,6 +11,7 @@ import useFetchGet from '../hooks/fetch/useFetchGet'
 import { extractHoursAndMinutes, formatDate } from '../js/TimeValidation'
 import rootstyle from '../styles/root.module.css'
 import { Link } from 'react-router-dom'
+import MatchComments from '../components/MatchComments'
 
 export function Match() {
     const [searchParams] = useSearchParams()
@@ -415,6 +416,7 @@ export function Match() {
                             </div>
                         </div>
                     </div>
+                    <MatchComments id={idMatch} />
                 </main>
             </div>
             <Footer />
