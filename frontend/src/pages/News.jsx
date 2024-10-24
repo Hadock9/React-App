@@ -5,9 +5,8 @@ import { Footer } from '../components/Footer'
 import { NavBar } from '../components/NavBar'
 
 import { useState } from 'react'
-import NewsLastAside from '../components/NewsLastAside'
+import NewsAside from '../components/NewsAside'
 import NewsList from '../components/NewsList'
-import NewsPopAside from '../components/NewsPopAside'
 import { MySearch } from '../components/Search'
 import rootstyle from '../styles/root.module.css'
 
@@ -46,8 +45,8 @@ export function News() {
 						<NewsList value={value} />
 					</main>
 					<aside className='w-[25%]'>
-						<NewsLastAside />
-						<NewsPopAside />
+						<NewsAside url={'http://localhost:4000/api/news/news_last'} />
+						<NewsAside url={'http://localhost:4000/api/news/news_last'} />
 					</aside>
 				</div>
 				<Footer />

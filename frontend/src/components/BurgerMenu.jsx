@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, useAnimationControls } from 'framer-motion'
+import { motion, useAnimationControls } from 'framer-motion'
 import {
 	CircleDollarSign,
 	CircleUserRound,
@@ -23,7 +23,6 @@ const sideBarInfo = [
 	{ link: '/Notifications', icon: <Mail />, name: 'Повідомлення' },
 ]
 
-// Компонент  анімації іконки гамбургер-меню
 const Path = props => (
 	<motion.path
 		fill='transparent'
@@ -41,7 +40,6 @@ export function BurgerMenu() {
 		setIsOpen(prev => !prev)
 	}
 
-	// Варіанти анімації для контейнера меню
 	const containerVariants = {
 		hidden: {
 			width: '60px',
@@ -71,37 +69,15 @@ export function BurgerMenu() {
 		}
 	}, [isOpen, containerControls])
 
-	// Анімації для тексту меню
-	const textAnimations = {
-		hidden: { opacity: 0, x: -20 },
-		show: { opacity: 1, x: 0 },
-		exit: { opacity: 0, x: -20 },
-	}
-
-	const transition = {
-		duration: 0.6,
-		ease: 'easeInOut',
-	}
-
-	// Компонент анімованого тексту
 	const AnimatedText = ({ children }) => (
-		<AnimatePresence>
-			{isOpen && (
-				<motion.div
-					initial='hidden'
-					animate='show'
-					exit='exit'
-					variants={{
-						hidden: { opacity: 0, x: -20 },
-						show: { opacity: 1, x: 0 },
-						exit: { opacity: 0, x: -20 },
-					}}
-					transition={{ duration: 0.6, ease: 'easeInOut', delay: 0.1 }}
-				>
-					<p>{children}</p>
-				</motion.div>
-			)}
-		</AnimatePresence>
+		<motion.div
+			initial={{ opacity: 0, x: -20 }}
+			animate={isOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+			transition={{ duration: 0.6, ease: 'easeInOut', delay: 0.1 }}
+			style={{ display: isOpen ? 'block' : 'none' }} // Ensure it doesn't render when closed
+		>
+			<p>{children}</p>
+		</motion.div>
 	)
 
 	return (

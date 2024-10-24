@@ -11,7 +11,7 @@ export function NavBar() {
 			<header className='flex justify-around items-center w-full h-17 shadow-lg p-3'>
 				<Link to='/Home'>
 					<div className='flex'>
-						<div className='h-10 w-10 flex justify-center items-center'>
+						<div className='h-8 w-8 flex justify-center items-center'>
 							<MotionFireLogo />
 						</div>
 						{/* <div

@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import { Eye } from 'lucide-react'
 import React from 'react'
 import { Link } from 'react-router-dom'
@@ -17,13 +18,26 @@ const NewsList = ({ value }) => {
 	if (isLoading) {
 		return <MyLoader />
 	}
+
+	const Variants = {
+		hidden: { opacity: 0, x: -50 },
+		show: { opacity: 1, x: 0 },
+	}
+
 	return (
 		<>
 			{failedToFetch ? (
 				<p>Не вдалося завантажити новини. Спробуйте ще раз пізніше.</p>
 			) : (
 				filterNews.map(OneNews => (
-					<div className='flex   h-[120px] my-5' key={OneNews.id}>
+					<motion.div
+						initial='hidden'
+						whileInView='show'
+						viewport={{ once: true }}
+						variants={Variants}
+						className='flex   h-[120px] my-5'
+						key={OneNews.id}
+					>
 						<img
 							src={OneNews.image_url}
 							className='w-[210px] h-32 rounded-md'
@@ -61,7 +75,7 @@ const NewsList = ({ value }) => {
 								<p className='text-sm mt-4'>{OneNews.description}</p>
 							</div>
 						</div>
-					</div>
+					</motion.div>
 				))
 			)}
 		</>

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { UkrainianWar } from '../components/BlockSaveUkraine'
 import { BurgerMenu } from '../components/BurgerMenu'
 import { Footer } from '../components/Footer'
@@ -6,6 +6,8 @@ import { GamesList } from '../components/GamesList'
 import { NavBar } from '../components/NavBar'
 import { MySearch } from '../components/Search'
 
+import MyCarousel from '../components/Carousel'
+import useFetchGet from '../hooks/fetch/useFetchGet'
 import rootstyle from '../styles/root.module.css'
 
 export function Home() {
@@ -15,6 +17,13 @@ export function Home() {
 	const handleValueChange = value => {
 		Setvalue(value)
 	}
+	const [games, setGames] = useState([])
+	const { Data, isLoading, failedToFetch } = useFetchGet({
+		url: 'http://localhost:4000/api/games/Games_List',
+	})
+	useEffect(() => {
+		setGames(Data)
+	}, [Data])
 
 	return (
 		<>
@@ -32,6 +41,7 @@ export function Home() {
 						<GamesList value={value} />
 					</main>
 				</div>
+				<MyCarousel Array={games} />
 				<Footer />
 			</div>
 		</>

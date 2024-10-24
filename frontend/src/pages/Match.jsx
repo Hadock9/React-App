@@ -133,15 +133,15 @@ export function Match() {
 						{/* Заголовок для статистики команд по картах */}
 						<div className='flex w-full bg-gray-700 text-white justify-between rounded-b-lg'>
 							<div className='flex w-[40%] justify-center'>
-								<Link to={`/Stake?MatchId=${idMatch}&TeamId=${match.Team1ID}`}>
-									<div className='flex align-center rounded-2xl bg-amber-500 px-[20px] py-[10px] my-3 hover:bg-amber-400 text-white duration-300 '>
+								<Link to={`/Stake?MatchId=${idMatch}&TeamNumber=${1}`}>
+									<div className='flex  align-center rounded-2xl bg-primary px-[20px] py-[10px] my-3 hover:bg-primary text-white duration-300 '>
 										Зробити ставку із коефіцієнтом
 									</div>
 								</Link>
 							</div>
 							<div className='flex w-[40%] justify-center'>
-								<Link to={`/Stake?MatchId=${idMatch}&TeamId=${match.Team2ID}`}>
-									<div className='flex align-center rounded-2xl bg-amber-500 px-[20px] py-[10px] my-3 hover:bg-amber-400 text-white duration-300  '>
+								<Link to={`/Stake?MatchId=${idMatch}&TeamNumber=${2}`}>
+									<div className='flex align-center rounded-2xl bg-primary px-  py-[10px] my-3 hover:bg-primary text-white duration-300  '>
 										Зробити ставку із коефіцієнтом
 									</div>
 								</Link>

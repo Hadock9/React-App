@@ -8,8 +8,7 @@ import { NavBar } from '../components/NavBar'
 import { Eye } from 'lucide-react'
 import Comments from '../components/Comments'
 import MyLoader from '../components/Loader'
-import NewsLastAside from '../components/NewsLastAside'
-import NewsPopAside from '../components/NewsPopAside'
+import NewsAside from '../components/NewsAside'
 import { useAuth } from '../context/AuthContext'
 import useFetchGet from '../hooks/fetch/useFetchGet'
 import { NewsDate } from '../js/TimeValidation'
@@ -107,8 +106,10 @@ export function NewsContent() {
 									<p className='mr-4 text-gray-400 text-sm'>
 										{NewsDate(OneNews.publish_date)}
 									</p>
-									<Eye className='text-gray-400 h-4 ' />
-									<p className='text-gray-600 text-xs'>{OneNews.views}</p>
+									<div className='flex'>
+										<Eye className='text-gray-400 h-5 mr-1' />
+										<p className='text-gray-400 text-sm'>{OneNews.views}</p>
+									</div>
 								</div>
 								<div>
 									<img
@@ -149,8 +150,8 @@ export function NewsContent() {
 						</div>
 					</main>
 					<aside className='w-[25%]'>
-						<NewsLastAside />
-						<NewsPopAside />
+						<NewsAside url={'http://localhost:4000/api/news/news_last'} />
+						<NewsAside url={'http://localhost:4000/api/news/news_last'} />
 					</aside>
 				</div>
 				<Footer />

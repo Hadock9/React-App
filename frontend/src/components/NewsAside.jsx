@@ -1,14 +1,15 @@
+import { motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import useFetchGet from '../hooks/fetch/useFetchGet'
 import { NewsDate } from '../js/TimeValidation'
 import MyLoader from './Loader'
 
-const NewsPopAside = () => {
+const NewsAside = ({ url }) => {
 	const [News, SetNews] = useState(null)
 
 	const { Data, isLoading, failedToFetch } = useFetchGet({
-		url: 'http://localhost:4000/api/news/news_last',
+		url: url,
 	})
 
 	useEffect(() => {
@@ -20,15 +21,22 @@ const NewsPopAside = () => {
 	if (!News && !failedToFetch) {
 		return <MyLoader />
 	}
-
-	if (failedToFetch) {
-		return <p>Не вдалося завантажити новину.</p>
+	const Variants = {
+		hidden: { opacity: 0, x: 50 },
+		show: { opacity: 1, x: 0 },
 	}
 	return (
-		<div className='mr-4 my-5  rounded-xl'>
-			<h3 className='font-bold my-5 text-xl'>Популярні новини</h3>
+		<div className='mr-4 my-5   rounded-xl'>
+			<h3 className='font-bold my-5 text-xl'>Останні новини</h3>
 			{News.map(OneNews => (
-				<div className='my-6' key={OneNews.id}>
+				<motion.div
+					initial='hidden'
+					whileInView='show'
+					viewport={{ once: true }}
+					variants={Variants}
+					key={OneNews.id}
+					className='my-6'
+				>
 					<div className='flex '>
 						<Link
 							to={
@@ -48,10 +56,10 @@ const NewsPopAside = () => {
 					<div>
 						<Link className='text-base underline'>{OneNews.title}</Link>
 					</div>
-				</div>
+				</motion.div>
 			))}
 		</div>
 	)
 }
 
-export default NewsPopAside
+export default NewsAside
