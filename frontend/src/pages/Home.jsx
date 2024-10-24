@@ -9,31 +9,31 @@ import { MySearch } from '../components/Search'
 import rootstyle from '../styles/root.module.css'
 
 export function Home() {
-    const [value, Setvalue] = useState('') // Стан для зберігання значення пошуку
+	const [value, Setvalue] = useState('') // Стан для зберігання значення пошуку
 
-    // Оновлюєм значення із MySearch
-    const handleValueChange = (value) => {
-        Setvalue(value)
-    }
+	// Оновлюєм значення із MySearch
+	const handleValueChange = value => {
+		Setvalue(value)
+	}
 
-    return (
-        <>
-            <div className={rootstyle.wrapper}>
-                <NavBar />
-                <MySearch onChange={handleValueChange} />
+	return (
+		<>
+			<div className={rootstyle.wrapper}>
+				<NavBar />
+				<MySearch onChange={handleValueChange} />
 
-                <UkrainianWar />
-                <div className={rootstyle.Container}>
-                    <BurgerMenu />
-                    <main className={rootstyle.Main}>
-                        {/* Приймаємо значення із MySearch */}
-                        {/* Передаємо значення із MySearch в GamesList */}
+				<UkrainianWar />
+				<div className={rootstyle.Container}>
+					<BurgerMenu />
+					<main className={rootstyle.Main}>
+						{/* Приймаємо значення із MySearch */}
+						{/* Передаємо значення із MySearch в GamesList */}
 
-                        <GamesList value={value} />
-                    </main>
-                </div>
-                <Footer />
-            </div>
-        </>
-    )
+						<GamesList value={value} />
+					</main>
+				</div>
+				<Footer />
+			</div>
+		</>
+	)
 }

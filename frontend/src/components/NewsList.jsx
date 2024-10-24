@@ -47,7 +47,7 @@ const NewsList = ({ value }) => {
 									{NewsDate(OneNews.publish_date)}
 								</p>
 								<Eye className='text-gray-400 h-4 ' />
-								<p className='text-gray-600 text-xs  '>{OneNews.messages}</p>
+								<p className='text-gray-600 text-xs  '>{OneNews.views}</p>
 							</div>
 							<div className='my-3'>
 								<Link

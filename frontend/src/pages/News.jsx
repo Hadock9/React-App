@@ -26,7 +26,10 @@ export function News() {
 				<div className={rootstyle.Container}>
 					<BurgerMenu />
 
-					<main className={rootstyle.Main}>
+					<main
+						className={rootstyle.Main}
+						style={{ paddingLeft: '18px', marginRight: '28px' }}
+					>
 						<MySearch onChange={handleValueChange} />
 						<h3 className='font-bold my-5'>Новини кіберспорту по рубриках</h3>
 						<div className='flex font-medium'>

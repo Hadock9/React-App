@@ -25,7 +25,7 @@
 
 /* Загальна іконка в боковому меню */
 .AsideBlockIcon {
-	@apply w-16 h-16 flex items-center m-2;
+	@apply w-16 h-16 flex items-center m-2 ml-3;
 }
 
 /* Текстовий блок в боковому меню */

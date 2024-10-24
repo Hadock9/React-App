@@ -91,8 +91,12 @@ export function BurgerMenu() {
 					initial='hidden'
 					animate='show'
 					exit='exit'
-					variants={textAnimations}
-					transition={transition}
+					variants={{
+						hidden: { opacity: 0, x: -20 },
+						show: { opacity: 1, x: 0 },
+						exit: { opacity: 0, x: -20 },
+					}}
+					transition={{ duration: 0.6, ease: 'easeInOut', delay: 0.1 }}
 				>
 					<p>{children}</p>
 				</motion.div>
@@ -146,6 +150,7 @@ export function BurgerMenu() {
 			{sideBarInfo.map((Item, index) => (
 				<motion.div
 					key={index}
+					initial={{ scale: 1 }}
 					whileHover={{ scale: 1.1 }}
 					whileTap={{ scale: 0.95 }}
 				>

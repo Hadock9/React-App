@@ -8,14 +8,14 @@ import { NewsDate } from '../js/TimeValidation'
 import LikesDisslikes from './LikesDisslikes'
 import MyLoader from './Loader'
 
-const Comments = ({ id }) => {
+const Comments = ({ id, urlFetch, urlPost }) => {
 	const navigate = useNavigate()
 
 	const [Comments, SetComments] = useState([])
 	const { user } = useAuth()
 
 	const { Data, isLoading, failedToFetch } = useFetchGet({
-		url: 'http://localhost:4000/api/comments/news_comments',
+		url: urlFetch,
 		id: id,
 	})
 
@@ -35,22 +35,19 @@ const Comments = ({ id }) => {
 		e.preventDefault()
 
 		const CommentData = {
-			news_id: id,
+			id: id,
 			author: user.first_name,
 			content: CommentText,
 			picture: user.picture,
 		}
 
-		const response = await fetch(
-			'http://localhost:4000/api/comments/news_comments/comment',
-			{
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(CommentData),
-			}
-		)
+		const response = await fetch(urlPost, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(CommentData),
+		})
 
 		if (response.ok) {
 			console.log('Комент вставлений успішно ')
@@ -111,7 +108,7 @@ const Comments = ({ id }) => {
 							onBlur={SetCommentTextDirty}
 							value={CommentText}
 							onChange={handleCommentText}
-							className='resize-y min-h-[80px] max-h-[300px] overflow-auto w-[90%] h-[100px] p-2 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5ba1a] focus:border-[#f5ba1a] text-gray-700 placeholder-gray-500 '
+							className='resize-y min-h-[80px] max-h-[300px] overflow-auto w-[90%] h-[100px] p-2 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary text-gray-700 placeholder-gray-500 '
 							placeholder='Введіть свій коментар...'
 						></motion.textarea>
 
@@ -121,7 +118,7 @@ const Comments = ({ id }) => {
 							animate={{ scale: ondisable ? 1 : 0.95 }}
 							type='submit'
 							disabled={!ondisable}
-							className={`mt-4 w-[100px] h-[44px] bg-[#f5ba1a] text-white border-none cursor-pointer rounded-md transition-all duration-300
+							className={`mt-4 w-[100px] h-[44px] bg-primary text-white border-none cursor-pointer rounded-md transition-all duration-300
                 disabled:bg-gray-300 disabled:cursor-not-allowed`}
 						>
 							Submit
