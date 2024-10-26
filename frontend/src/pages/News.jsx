@@ -5,9 +5,8 @@ import { Footer } from '../components/Footer'
 import { NavBar } from '../components/NavBar'
 
 import { useState } from 'react'
-import NewsLastAside from '../components/NewsLastAside'
+import NewsAside from '../components/NewsAside'
 import NewsList from '../components/NewsList'
-import NewsPopAside from '../components/NewsPopAside'
 import { MySearch } from '../components/Search'
 import rootstyle from '../styles/root.module.css'
 
@@ -23,15 +22,17 @@ export function News() {
             <div className={rootstyle.wrapper}>
                 <NavBar />
                 <UkrainianWar />
-                <MySearch onChange={handleValueChange} />
-
                 <div className={rootstyle.Container}>
                     <BurgerMenu />
 
-                    <main className={rootstyle.Main}>
-                        <div className="font-bold text-2xl mb-5">
+                    <main
+                        className={rootstyle.Main}
+                        style={{ paddingLeft: '18px', marginRight: '28px' }}
+                    >
+                        <MySearch onChange={handleValueChange} />
+                        <h3 className="font-bold my-5">
                             Новини кіберспорту по рубриках
-                        </div>
+                        </h3>
                         <div className="flex font-medium">
                             <span className="w-px h-5 bg-gray-400 mr-4"></span>
                             <Link className="mr-4">CS2</Link>
@@ -46,8 +47,12 @@ export function News() {
                         <NewsList value={value} />
                     </main>
                     <aside className="w-[25%]">
-                        <NewsLastAside />
-                        <NewsPopAside />
+                        <NewsAside
+                            url={'http://localhost:4000/api/news/news_last'}
+                        />
+                        <NewsAside
+                            url={'http://localhost:4000/api/news/news_last'}
+                        />
                     </aside>
                 </div>
                 <Footer />

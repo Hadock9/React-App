@@ -32,7 +32,6 @@ export function GamesList({ value }) {
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ ease: 'easeIn', duration: 0.5 }}
                             key={game.id}
-                            className=""
                         >
                             <Link
                                 to={
@@ -43,9 +42,7 @@ export function GamesList({ value }) {
                                     `/Matches?game_id=${game.id}`
                                 }
                             >
-                                <div
-                                    className={`hover:shadow-lg hover:bg-white duration-500 ${styles.GameBlock}`}
-                                >
+                                <div className={styles.GameBlock}>
                                     <img
                                         className={styles.GamesImg}
                                         src={game.ImageSrc}

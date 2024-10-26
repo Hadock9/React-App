@@ -1,28 +1,28 @@
 const express = require('express')
 const {
-    getNews_comments,
-    Create_comment,
-    updateLikesDislikesCount,
-    updateUser_likes_dislikes,
-    getStateLikesDislikes,
-    DeleteStatus,
-    getMatch_comments,
-    Create_Match_comment,
+	getNews_comments,
+	Create_comment,
+	updateLikesDislikesCount,
+	updateUser_likes_dislikes,
+	getStateLikesDislikes,
+	DeleteStatus,
+	getMatch_comments,
+	Create_Match_comment,
 } = require('../controllers/commentsController')
 const router = express.Router()
 
-router.get('/news_comments/:news_id', getNews_comments)
+router.get('/news_comments/:id', getNews_comments)
 router.post('/news_comments/comment', Create_comment)
 
-router.get('/match_comments/:match_id', getMatch_comments) //<----
+router.get('/match_comments/:id', getMatch_comments) //<----
 router.post('/match_comments/comment', Create_Match_comment)
 
 router.get('/news_comments/:comment_id/:user_id/:action', getStateLikesDislikes)
 
 router.put('/news_comments/updateLikesDislikes', updateLikesDislikesCount)
 router.put(
-    '/news_comments/updateUser_likes_dislikes',
-    updateUser_likes_dislikes
+	'/news_comments/updateUser_likes_dislikes',
+	updateUser_likes_dislikes
 )
 router.delete('/news_comments/DeleteStatus', DeleteStatus)
 module.exports = router

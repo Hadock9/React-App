@@ -110,7 +110,7 @@ const LikesDisslikes = ({ OneComment }) => {
 				className='ml-3 flex select-none cursor-pointer'
 			>
 				{ondislikes ? (
-					<ThumbsDown className='ml-2 text-red-700 animate-pulse h-4 mt-[2px]' />
+					<ThumbsDown className='ml-2 text-primary animate-pulse h-4 mt-[2px]' />
 				) : (
 					<ThumbsDown className='ml-2 text-gray-400 h-4 mt-[2px]' />
 				)}

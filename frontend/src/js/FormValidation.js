@@ -83,3 +83,13 @@ export const validateTextArea = textArea => {
 
 	return ''
 }
+
+export const validateStakeAmount = (Amount, UserBalance) => {
+	if (Amount == 0) {
+		return 'Поле не може  != 0'
+	} else if (Amount < 0 || Amount > UserBalance) {
+		return `Поле має бути більшим за 0  та меншим за ваш баланс ${UserBalance}`
+	}
+
+	return ''
+}

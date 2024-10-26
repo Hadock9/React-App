@@ -3,9 +3,10 @@ import { UkrainianWar } from '../components/BlockSaveUkraine'
 
 import { jwtDecode } from 'jwt-decode'
 import { UserRound } from 'lucide-react'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import CountrySelector from '../components/CountrySelector'
+import Select from 'react-select'
+import countryList from 'react-select-country-list'
 import MyLoader from '../components/Loader'
 import { NavBar } from '../components/NavBar'
 import { NotAuthorized } from '../components/NotAuthorized'
@@ -428,7 +429,7 @@ export function Profile() {
                                 initial={{ scale: 1 }}
                                 type="submit"
                                 disabled={!FormValid}
-                                className={`mt-4 w-[100%] mx-4 h-[44px] bg-[#f5ba1a] text-white border-none cursor-pointer rounded-md transition-all duration-300
+                                className={`mt-4 w-[100%] mx-4 h-[44px] bg-primary text-white border-none cursor-pointer rounded-md transition-all duration-300
 									disabled:bg-gray-300 disabled:cursor-not-allowed`}
                             >
                                 Зберегти зміни{' '}
@@ -443,3 +444,38 @@ export function Profile() {
 }
 
 export default Profile
+
+const customStyles = {
+    control: (provided) => ({
+        ...provided,
+        backgroundColor: 'transparent',
+        border: 'none',
+        boxShadow: 'none',
+    }),
+    option: (provided) => ({
+        ...provided,
+        padding: 0,
+    }),
+    singleValue: (provided) => ({
+        ...provided,
+        color: 'white',
+    }),
+    placeholder: (provided) => ({
+        ...provided,
+        color: 'black',
+    }),
+}
+
+function CountrySelector({ value, onChange }) {
+    const options = useMemo(() => countryList().getData(), [])
+
+    return (
+        <Select
+            options={options}
+            value={options.find((option) => option.label === value)}
+            onChange={onChange}
+            styles={customStyles}
+            className="border-none"
+        />
+    )
+}

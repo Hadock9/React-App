@@ -11,35 +11,35 @@ export function NavBar() {
         <>
             <header className="flex justify-around items-center w-full h-17 shadow-lg p-3">
                 <Link to="/Home">
-                    <div className="flex w-[300px] justify-center">
-                        <div className="h-10 w-10 flex justify-center items-center">
+                    <div className="flex">
+                        <div className="h-8 w-8 flex justify-center items-center">
                             <MotionFireLogo />
                         </div>
-                        <div
-                            className={`text-5xl self-end ml-2 mb-1 ${rootstyle.LogoFont}`}
-                        >
-                            CyberBet
-                        </div>
+                        {/* <div
+							className={`text-5xl self-end ml-2 mb-1 ${rootstyle.LogoFont}`}
+						>
+							CyberBet
+						</div> */}
                     </div>
                 </Link>
-                <div className="flex self-center">
+                <div className="flex gap-[50px]">
                     <Link to="/News">
-                        <div className="hover:animate-pulse font-sans font-semibold text-base px-3 mx-3 h-[64px] content-center hover:shadow-lg duration-700 rounded-xl">
+                        <div className="hover:animate-pulse font-sans font-semibold text-base">
                             Новини
                         </div>
                     </Link>
                     <Link to="/Home">
-                        <div className="hover:animate-pulse font-sans font-semibold text-base px-3 mx-3 h-[64px] content-center hover:shadow-lg duration-700 rounded-xl">
+                        <div className="hover:animate-pulse font-sans font-semibold text-base">
                             Головна
                         </div>
                     </Link>
                     <Link to="/Home">
-                        <div className="hover:animate-pulse font-sans font-semibold text-base px-3 mx-3 h-[64px] content-center hover:shadow-lg duration-700 rounded-xl">
+                        <div className="hover:animate-pulse font-sans font-semibold text-base">
                             Контакти
                         </div>
                     </Link>
                     <Link to="/Home">
-                        <div className="hover:animate-pulse font-sans font-semibold text-base px-3 mx-3 h-[64px] content-center hover:shadow-lg duration-700 rounded-xl">
+                        <div className="hover:animate-pulse font-sans font-semibold text-base">
                             Підтримати
                         </div>
                     </Link>
