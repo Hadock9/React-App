@@ -20,15 +20,14 @@ export function Home() {
         <>
             <div className={rootstyle.wrapper}>
                 <NavBar />
+                {/* Приймаємо значення із MySearch */}
                 <MySearch onChange={handleValueChange} />
 
                 <UkrainianWar />
                 <div className={rootstyle.Container}>
                     <BurgerMenu />
                     <main className={rootstyle.Main}>
-                        {/* Приймаємо значення із MySearch */}
                         {/* Передаємо значення із MySearch в GamesList */}
-
                         <GamesList value={value} />
                     </main>
                 </div>
