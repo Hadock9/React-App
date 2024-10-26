@@ -22,17 +22,17 @@ export function News() {
             <div className={rootstyle.wrapper}>
                 <NavBar />
                 <UkrainianWar />
+                <MySearch onChange={handleValueChange} />
                 <div className={rootstyle.Container}>
                     <BurgerMenu />
 
                     <main
                         className={rootstyle.Main}
-                        style={{ paddingLeft: '18px', marginRight: '28px' }}
+                        style={{ paddingLeft: '90px', marginRight: '28px' }}
                     >
-                        <MySearch onChange={handleValueChange} />
-                        <h3 className="font-bold my-5">
+                        <div className="font-bold mb-3 text-lg">
                             Новини кіберспорту по рубриках
-                        </h3>
+                        </div>
                         <div className="flex font-medium">
                             <span className="w-px h-5 bg-gray-400 mr-4"></span>
                             <Link className="mr-4">CS2</Link>

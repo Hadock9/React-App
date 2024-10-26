@@ -10,17 +10,17 @@
 
 /* Блок елементів в боковому меню */
 .AsideBlock {
-    @apply w-full h-16 flex items-center cursor-pointer  select-none;
+    @apply w-[300px] h-16 flex items-center cursor-pointer  select-none;
 }
 
 /* Іконка для перегляду в боковому меню */
 .AsideBlockIconBrowse {
-    @apply w-16 h-16 flex items-center justify-center;
+    @apply w-16 h-16 flex items-center justify-center cursor-pointer;
 }
 
 /* Загальна іконка в боковому меню */
 .AsideBlockIcon {
-    @apply w-16 h-16 flex items-center m-2 ml-3;
+    @apply w-16 h-16 flex items-center justify-center;
 }
 
 /* Текстовий блок в боковому меню */

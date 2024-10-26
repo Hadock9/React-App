@@ -35,29 +35,25 @@ const NewsList = ({ value }) => {
                         whileInView="show"
                         viewport={{ once: true }}
                         variants={Variants}
-                        className="flex   h-[120px] my-5"
+                        className="flex h-[120px] my-5"
                         key={OneNews.id}
                     >
-                        <img
-                            src={OneNews.image_url}
-                            className="w-[210px] h-32 rounded-md"
-                            alt=""
-                        />
+                        <Link
+                            to={`${OneNews.gameName.replace(
+                                /[\s-]/g,
+                                '_'
+                            )}?OneNews=${OneNews.id}`}
+                        >
+                            <img
+                                src={OneNews.image_url}
+                                className="w-[210px] h-32 rounded-md"
+                                alt=""
+                            />
+                        </Link>
 
                         <div className="ml-5">
                             <div className="flex">
-                                <Link
-                                    to={
-                                        '/Home/' +
-                                        OneNews.gameName
-                                            .replaceAll(' ', '_')
-                                            .replaceAll('-', '_') +
-                                        `/Matches?game_id=${OneNews.gameId}`
-                                    }
-                                    className="text-xs"
-                                >
-                                    {OneNews.gameName}
-                                </Link>
+                                {OneNews.gameName}
                                 <span className="ml-3 w-px h-4 bg-gray-400 mr-4"></span>
                                 <p className="mr-4 text-gray-400 text-xs">
                                     {NewsDate(OneNews.publish_date)}
@@ -67,20 +63,22 @@ const NewsList = ({ value }) => {
                                     {OneNews.views}
                                 </p>
                             </div>
-                            <div className="my-3">
-                                <Link
-                                    to={`${OneNews.gameName.replace(
-                                        /[\s-]/g,
-                                        '_'
-                                    )}?OneNews=${OneNews.id}`}
-                                    className="text-base underline"
-                                >
-                                    {OneNews.title}
-                                </Link>
-                                <p className="text-sm mt-4">
-                                    {OneNews.description}
-                                </p>
-                            </div>
+                            <Link
+                                to={`${OneNews.gameName.replace(
+                                    /[\s-]/g,
+                                    '_'
+                                )}?OneNews=${OneNews.id}`}
+                            >
+                                <div className="my-3">
+                                    <div className="text-2xl font-bold">
+                                        {OneNews.title}
+                                    </div>
+
+                                    <p className="text-sm mt-4">
+                                        {OneNews.description}
+                                    </p>
+                                </div>
+                            </Link>
                         </div>
                     </motion.div>
                 ))

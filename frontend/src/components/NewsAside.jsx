@@ -27,7 +27,7 @@ const NewsAside = ({ url }) => {
     }
     return (
         <div className="mr-4 my-5   rounded-xl">
-            <h3 className="font-bold my-5 text-xl">Останні новини</h3>
+            <h3 className="font-bold my-5 text-lg">Останні новини</h3>
             {News.map((OneNews) => (
                 <motion.div
                     initial="hidden"
