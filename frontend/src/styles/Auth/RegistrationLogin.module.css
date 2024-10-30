@@ -1,0 +1,172 @@
+/* Без підкреслення, колір тексту чорний, курсор вказівника */
+a {
+	text-decoration: none;
+	color: black;
+	cursor: pointer;
+}
+
+/* Контейнер для основного вмісту */
+.Container {
+	width: 100%;
+	display: flex;
+	min-height: 100vh;
+	flex-wrap: wrap;
+}
+
+/* Правий блок з фоновим зображенням */
+.RightBlock {
+	flex: 1;
+	min-width: 300px;
+	color: white;
+	background-image: url('../../img/Earth.jfif');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* Лівий блок з формою */
+.LeftBlock {
+	flex: 1;
+	min-width: 300px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: white;
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+/* Основна форма для реєстрації */
+.RegForm {
+	background: white;
+	width: 100%;
+	max-width: 400px;
+	padding: 20px;
+	border-radius: 5px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	box-sizing: border-box;
+}
+
+/* Лінія вгорі форми */
+.RegFormLine {
+	border-radius: 5px 5px 0 0;
+	background: #cb172a;
+	width: 100%;
+	height: 5px;
+}
+
+/* Заголовок форми */
+.RegFormHeader {
+	text-align: center;
+	margin: 20px 0;
+	font-size: 24px;
+	color: #333;
+}
+
+/* Повідомлення про помилки */
+.RegFormError {
+	color: red;
+	font-size: 12px;
+	margin-bottom: 10px;
+}
+
+/* Основний блок форми */
+.RegFormFullBlock {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin-top: 15px;
+}
+
+/* Блок для імен */
+.RegFormNamesBlock {
+	display: flex;
+	justify-content: space-between;
+}
+.RegFormBlockPassword {
+	cursor: pointer;
+}
+/* Блок для введення даних */
+.RegFormBlock {
+	display: flex;
+	align-items: center;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 8px;
+	background: #f9f9f9;
+}
+
+/* Блок для введення імен */
+.RegFormBlockNames {
+	width: 44%;
+}
+
+/* Поля вводу в формі */
+.RegFormBlock input {
+	border: none;
+	outline: none;
+	flex: 1;
+	padding-left: 10px;
+	font-size: 14px;
+	background: transparent;
+}
+
+/* Контейнер для чекбоксів */
+.checkboxContainer {
+	display: flex;
+	align-items: center;
+	margin-top: 15px;
+}
+
+/* Поле для чекбоксу */
+.checkboxContainer input {
+	margin-right: 10px;
+}
+
+/* Блок для чекбоксів */
+.RegFormCheckbox {
+	margin-top: 15px;
+}
+
+/* Кнопка форми */
+.RegFormButton {
+	margin-top: 15px;
+}
+
+/* Кнопка відправлення форми */
+.CustomButtonSubmit {
+	width: 100%;
+	padding: 10px;
+	background-color: #cb172a;
+	border: none;
+	border-radius: 4px;
+	color: white;
+	font-size: 16px;
+	cursor: pointer;
+	margin-top: 20px;
+	transition: background-color 0.3s ease;
+}
+
+/* Стиль для неактивної кнопки */
+.CustomButtonSubmit:disabled {
+	background-color: #ccc;
+	cursor: not-allowed;
+}
+
+/* Стиль для кнопки при наведенні */
+.CustomButtonSubmit:not(:disabled):hover {
+	background-color: #cb172a;
+}
+
+/* Блок після форми */
+.AfterForm {
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+	text-align: center;
+	font-size: 14px;
+	color: #555;
+}
