@@ -28,18 +28,33 @@ const Balance = () => {
                     <motion.div
                         initial={{ opacity: 0, scale: 0 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        transition={{ ease: 'easeIn', duration: 2 }}
+                        transition={{ ease: 'easeIn', duration: 0.8 }}
                     >
                         {loading ? (
                             <p>Loading balance...</p>
                         ) : userBalance != null ? (
-                            <p>Your balance: {userBalance} UAH</p>
+                            <div className="flex justify-center ">
+                                <div className="text-xl my-5">
+                                    Ваш поточний баланс:
+                                </div>
+                                <div className="flex items-center font-bold text-2xl ml-2">
+                                    {userBalance} UAH
+                                </div>
+                            </div>
                         ) : (
                             <p>No balance information available.</p>
                         )}
                     </motion.div>
-
-                    <CreditCard />
+                    <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{
+                            ease: 'easeIn',
+                            duration: 0.8,
+                        }}
+                    >
+                        <CreditCard />
+                    </motion.div>
                 </main>
             </div>
             <Footer />

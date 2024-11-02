@@ -111,6 +111,13 @@ export const validateCreditCard = (Card) => {
         return 'Дані ведені неправильно або дана карта не є дійсною'
 }
 
+export const validateAmount = (Amount) => {
+    if (!Amount) return 'Поле з сумою не може бути пустим'
+    const amountPattern = /^\d+$/
+
+    if (!amountPattern.test(Amount)) return 'Сума введена з помилками'
+}
+
 export const validateExpDate = (expDate) => {
     if (!expDate) return 'Поле з датою не може бути пустим'
 

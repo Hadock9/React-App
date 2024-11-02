@@ -44,9 +44,13 @@ const MyCarousel = ({ Array }) => {
                     }
                 >
                     <motion.div
-                        initial={{ opacity: 0, y: 200 }}
+                        initial={{ opacity: 0, y: -200 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.4, ease: 'easeIn', duration: 1 }}
+                        transition={{
+                            delay: 0.3,
+                            ease: 'easeIn',
+                            duration: 0.7,
+                        }}
                         className=" flex items-center"
                     >
                         <img

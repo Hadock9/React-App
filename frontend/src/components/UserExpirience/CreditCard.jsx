@@ -1,4 +1,3 @@
-import Mybutton from '../../UI/Mybutton'
 import { useEffect, useState } from 'react'
 import TextError from '../../UI/TextError'
 
@@ -7,19 +6,28 @@ import {
     validateCreditCard,
     validateExpDate,
     validateCVV,
+    validateAmount,
 } from '../../js/FormValidation.js'
+import Mybutton from '../../UI/Mybutton.jsx'
+import { MotionFireLogo } from './MotionFireLogo.jsx'
 
 export function CreditCard() {
+    const [Amount, setAmount] = useState('')
     const [Card, setCard] = useState('')
     const [Name, setName] = useState('')
     const [ExpDate, setExpDate] = useState('')
     const [CVV, setCVV] = useState('')
+    const [FormValid, setFormValid] = useState(false) // Для визначення, чи форма готова до відправлення
 
+    const [AmountDirty, setAmountDirty] = useState(false)
     const [CardDirty, setCardDirty] = useState(false)
     const [NameDirty, setNameDirty] = useState(false)
     const [ExpDateDirty, setExpDateDirty] = useState(false)
     const [CVVDirty, setCVVDirty] = useState(false)
 
+    const [AmountError, setAmountError] = useState(
+        'Поле з сумою не може бути пустим'
+    )
     const [CardError, setCardError] = useState(
         'Номер карти не може бути пустим'
     )
@@ -33,6 +41,9 @@ export function CreditCard() {
 
     const blurHandler = (e) => {
         switch (e.target.name) {
+            case 'Amount':
+                setAmountDirty(true)
+                break
             case 'Card':
                 setCardDirty(true)
                 break
@@ -50,6 +61,10 @@ export function CreditCard() {
         }
     }
 
+    const AmountHandler = (e) => {
+        setAmount(e.target.value)
+        setAmountError(validateAmount(e.target.value))
+    }
     const CardHandler = (e) => {
         setCard(e.target.value)
         setCardError(validateCreditCard(e.target.value))
@@ -66,39 +81,68 @@ export function CreditCard() {
         setCVV(e.target.value)
         setCVVError(validateCVV(e.target.value))
     }
-    return (
-        <div className=" ">
-            {/*  */}
-            <TextError TextDirty={CardDirty} TextError={CardError} />
-            <TextError TextDirty={NameDirty} TextError={NameError} />
-            <TextError TextDirty={ExpDateDirty} TextError={ExpDateError} />
-            <TextError TextDirty={CVVDirty} TextError={CVVError} />
 
-            <div className="absolute -z-10"></div>
-            {/* left-[250px] */}
-            <div className="absolute rounded-full bg-gradient-to-br from-red-500 bg-red-950 opacity-80 h-[240px] w-[240px] left-[55%] top-[10%]"></div>
-            {/* top-[120px] left-[-50px] */}
-            <div className="absolute rounded-full bg-gradient-to-br from-red-500 bg-red-950 opacity-80 h-[300px] w-[300px] left-[35%] top-[20%]"></div>
-            <div className=" flex flex-col items-center">
-                <div className=" flex flex-col h-[280px] w-[420px] rounded-2xl bg-black bg-opacity-10 backdrop-blur-lg border border-black border-opacity-10 shadow-lg p-5">
-                    <div className="flex justify-end">
-                        <img
-                            className="h-20 w-48 mb-5"
-                            src="https://pngimg.com/uploads/visa/visa_PNG4.png"
-                            alt="Visa Logo"
-                        />
-                        <img
-                            className="h-20 w-32 mb-5"
-                            src="https://pngimg.com/uploads/mastercard/mastercard_PNG8.png"
-                            alt="Visa Logo"
-                        />
+    useEffect(() => {
+        if (AmountError || CardError || NameError || ExpDateError || CVVError) {
+            setFormValid(false)
+        } else {
+            setFormValid(true)
+        }
+    }, [AmountError || CardError || NameError || ExpDateError || CVVError])
+
+    return (
+        <div className="mt-10">
+            <div className="flex flex-col items-center relative">
+                <div className="absolute rounded-full bg-gradient-to-br from-primary bg-red-950 opacity-80 h-[240px] w-[240px] left-[52%] top-[-10%]"></div>
+                <div className="absolute rounded-full bg-gradient-to-br from-primary bg-red-950 opacity-80 h-[300px] w-[300px] left-[27%] top-[5%]"></div>
+
+                <div className="flex flex-col absolute left-[70%]">
+                    <TextError
+                        TextDirty={AmountDirty}
+                        TextError={AmountError}
+                    />
+                    <TextError TextDirty={CardDirty} TextError={CardError} />
+                    <TextError TextDirty={NameDirty} TextError={NameError} />
+                    <TextError
+                        TextDirty={ExpDateDirty}
+                        TextError={ExpDateError}
+                    />
+                    <TextError TextDirty={CVVDirty} TextError={CVVError} />
+                </div>
+
+                <form className=" flex flex-col h-[280px] w-[420px] rounded-2xl bg-black bg-opacity-10 backdrop-blur-lg border border-black border-opacity-10 shadow-lg p-5">
+                    <div className="flex justify-between">
+                        <div className="flex flex-col">
+                            <label className="text-white text-xs font-light">
+                                СУМА В ГРИВНЯХ
+                            </label>
+                            <div className="flex ">
+                                <input
+                                    className="w-[60%] h-10 text-white placeholder-white text-xl bg-transparent placeholder-gray-400 border-b border-white focus:outline-none mb-4"
+                                    placeholder="123 456"
+                                    type="text"
+                                    name="Amount"
+                                    value={Amount}
+                                    onBlur={blurHandler}
+                                    onChange={AmountHandler}
+                                    maxLength="6"
+                                    required
+                                />
+                                <div className="h-10 text-white text-xl bg-transparent border-white mt-1 align-text-bottom">
+                                    UAH
+                                </div>
+                            </div>
+                        </div>
+                        <div className="h-10 w-10 flex justify-center items-center mr-8">
+                            <MotionFireLogo />
+                        </div>
                     </div>
 
-                    <label className="text-white text-xs font-light mb-1">
-                        Card Number
+                    <label className="text-white text-xs font-light">
+                        НОМЕР КАРТИ
                     </label>
                     <input
-                        className="w-full h-12 text-white placeholder-white text-xl bg-transparent placeholder-gray-400 border-b border-white focus:outline-none mb-8"
+                        className="w-full h-10 text-white placeholder-white text-xl bg-transparent placeholder-gray-400 border-b border-white focus:outline-none mb-8"
                         placeholder="1234 1234 1234 1234"
                         type="telephone"
                         name="Card"
@@ -112,11 +156,11 @@ export function CreditCard() {
                     <div className="container2 flex justify-between">
                         <div className="flex flex-col mr-5 w-1/3">
                             <label className="text-white text-xs font-light mb-1">
-                                Card Holder
+                                ІМ'Я ВЛАСНИКА
                             </label>
                             <input
                                 className="text-white placeholder-white bg-transparent placeholder-gray-400 border-b border-white focus:outline-none"
-                                placeholder="JOHN DOE"
+                                placeholder="Іван Мазепа"
                                 type="text"
                                 name="Name"
                                 value={Name}
@@ -128,7 +172,7 @@ export function CreditCard() {
 
                         <div className="flex flex-col mr-5 w-1/4">
                             <label className="text-white text-xs font-light mb-1">
-                                Exp. Date
+                                ДІЙСНЕ ДО
                             </label>
                             <input
                                 className="text-white placeholder-white bg-transparent placeholder-gray-400 border-b border-white focus:outline-none"
@@ -160,8 +204,8 @@ export function CreditCard() {
                             />
                         </div>
                     </div>
-                </div>
-                <Mybutton>Submit</Mybutton>
+                </form>
+                <Mybutton ondisable={FormValid}>Submit</Mybutton>
             </div>
         </div>
     )
