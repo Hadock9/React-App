@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { BurgerMenu } from '../../components/BurgerMenu'
+import BurgerMenu from '../../components/BurgerMenu'
 import { UkrainianWar } from '../../components/UserExpirience/BlockSaveUkraine'
 import { Footer } from '../../components/UserExpirience/Footer'
 import { NavBar } from '../../components/UserExpirience/NavBar'

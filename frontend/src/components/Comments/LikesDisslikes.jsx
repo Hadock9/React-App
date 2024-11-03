@@ -1,38 +1,18 @@
 import { ThumbsDown, ThumbsUp } from 'lucide-react'
-import React, { useEffect, useState } from 'react'
-import { fetchCommentAction } from '../../js/fetchCommentAction.js'
+import React, { useState } from 'react'
+import { useAuth } from '../../context/AuthContext'
 import {
 	DeleteStatus,
 	updateLikesDislikes,
 	updateUser_likes_dislikes,
 } from '../../js/updateLikesDislikes.js'
-import { useAuth } from '../../context/AuthContext'
 
 const LikesDisslikes = ({ OneComment }) => {
 	const { user } = useAuth()
 	const [likes, setLikes] = useState(OneComment.likes)
 	const [dislikes, setDislikes] = useState(OneComment.dislikes)
-	const [onlikes, setOnlikes] = useState(false)
-	const [ondislikes, setOndislikes] = useState(false)
-
-	useEffect(() => {
-		// Функція для отримання стану лайків і дизлайків
-		const fetchStatus = async () => {
-			const likeExists = await fetchCommentAction(
-				OneComment.id,
-				user.id,
-				'like'
-			)
-			const dislikeExists = await fetchCommentAction(
-				OneComment.id,
-				user.id,
-				'dislike'
-			)
-			setOnlikes(likeExists)
-			setOndislikes(dislikeExists)
-		}
-		fetchStatus()
-	}, [OneComment.id, user.id])
+	const [onlikes, setOnlikes] = useState(OneComment.onlikes)
+	const [ondislikes, setOndislikes] = useState(OneComment.ondislikes)
 
 	// Оновлення статусу лайків на сервері
 	const updateLikes = async newLikes => {

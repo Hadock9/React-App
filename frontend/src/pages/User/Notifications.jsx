@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { BurgerMenu } from '../../components/BurgerMenu'
+import BurgerMenu from '../../components/BurgerMenu'
 import { Footer } from '../../components/UserExpirience/Footer'
 import { NavBar } from '../../components/UserExpirience/NavBar'
 import useFetchGet from '../../hooks/useFetchGet'

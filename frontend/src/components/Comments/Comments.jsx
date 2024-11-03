@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import toast, { Toaster } from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 import useFetchGet from '../../hooks/useFetchGet'
 import { validateTextArea } from '../../js/FormValidation'
 import { NewsDate } from '../../js/TimeValidation'
+import IsRegUser from '../../UI/IsRegUser'
 import Mybutton from '../../UI/Mybutton'
 import MyTextArea from '../../UI/TextArea'
 import TextError from '../../UI/TextError'
@@ -14,16 +16,21 @@ const Comments = ({ id, urlFetch, urlPost }) => {
 	const navigate = useNavigate()
 
 	const [Comments, SetComments] = useState([])
-	const { user } = useAuth()
+	const { user, isRegUser } = useAuth()
 
 	const { Data, isLoading, failedToFetch } = useFetchGet({
 		url: urlFetch,
-		id: id,
 	})
 
 	useEffect(() => {
 		if (Data) {
-			SetComments(Data)
+			SetComments(
+				Data.map(comment => ({
+					...comment,
+					onlikes: comment.likedOrDisliked === 'like' ? true : false,
+					ondislikes: comment.likedOrDisliked === 'dislike' ? true : false,
+				}))
+			)
 		}
 	}, [Data])
 
@@ -53,10 +60,21 @@ const Comments = ({ id, urlFetch, urlPost }) => {
 
 		if (response.ok) {
 			console.log('Комент вставлений успішно ')
-			navigate(0)
+			toast.success('Комент додано успішно')
+			SetComments(prevComments => [
+				...prevComments,
+				{ ...CommentData, publish_date: new Date(), likes: 0, dislikes: 0 },
+			])
+			SetCommentText('')
+			SetCommentTextError('Дане поле не може бути пустим')
+			SetCommentTextDirty(false)
 		} else {
 			const errorData = await response.json()
 			console.log('Помилка:', errorData)
+			toast.error('Комент додано не успішно')
+			SetCommentText('')
+			SetCommentTextError('Дане поле не може бути пустим')
+			SetCommentTextDirty(false)
 		}
 	}
 	const handleCommentText = e => {
@@ -75,17 +93,24 @@ const Comments = ({ id, urlFetch, urlPost }) => {
 	if (isLoading) {
 		return <MyLoader />
 	}
+
 	return (
 		<div className='Comments'>
+			<Toaster position='top-center' reverseOrder={false} />
+
 			<div className='flex'>
 				<h1 className='text-xl text-black font-semibold'>
 					Коментарі {Comments.length}
 				</h1>
 			</div>
+			<IsRegUser RegUser={isRegUser}>
+				Ви не зареєстровані. Коментарі можуть залишати тільки зареєстровані
+				користувачі.
+			</IsRegUser>
 			<div className='My comment my-3 flex'>
 				<div className='w-[10%] flex justify-center   items-center'>
 					<img
-						src={user.picture}
+						src={isRegUser ? user.picture : '/img/User-Default.svg'}
 						className='w-[40px] h-[40px] rounded-full'
 						alt=''
 					/>
@@ -103,7 +128,7 @@ const Comments = ({ id, urlFetch, urlPost }) => {
 							value={CommentText}
 							onChange={handleCommentText}
 						/>
-						<Mybutton ondisable={ondisable}>Submit</Mybutton>
+						<Mybutton ondisable={ondisable & isRegUser}>Submit</Mybutton>
 					</form>
 				</div>
 			</div>
@@ -137,4 +162,4 @@ const Comments = ({ id, urlFetch, urlPost }) => {
 	)
 }
 
-export default Comments
+export default React.memo(Comments)

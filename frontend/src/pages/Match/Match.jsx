@@ -1,7 +1,7 @@
 import { Map } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import { BurgerMenu } from '../../components/BurgerMenu'
+import BurgerMenu from '../../components/BurgerMenu'
 import Comments from '../../components/Comments/Comments'
 import { CheckFetch } from '../../components/Disclaimer/BadFatchDisclaimer'
 import MyLoader from '../../components/Disclaimer/Loader'
@@ -9,6 +9,7 @@ import { MapStat, PlayerStat } from '../../components/Match/MatchStatistic'
 import { UkrainianWar } from '../../components/UserExpirience/BlockSaveUkraine'
 import { Footer } from '../../components/UserExpirience/Footer'
 import { NavBar } from '../../components/UserExpirience/NavBar'
+import { useAuth } from '../../context/AuthContext'
 import useFetchGet from '../../hooks/useFetchGet'
 import { extractHoursAndMinutes, formatDate } from '../../js/TimeValidation'
 import rootstyle from '../../styles/root.module.css'
@@ -17,6 +18,7 @@ export function Match() {
 	const [searchParams] = useSearchParams()
 	const idMatch = searchParams.get('idMatch')
 	const [match, setMatch] = useState(null)
+	const { user, isRegUser } = useAuth()
 
 	const { Data, isLoading, failedToFetch } = useFetchGet({
 		url: 'http://localhost:4000/api/games/match/Match',
@@ -179,7 +181,9 @@ export function Match() {
 					</div>
 					<Comments
 						id={idMatch}
-						urlFetch={'http://localhost:4000/api/comments/match_comments'}
+						urlFetch={`http://localhost:4000/api/comments/match_comments/${idMatch}/${
+							isRegUser ? user.id : 0
+						}`}
 						urlPost={
 							'http://localhost:4000/api/comments/match_comments/comment'
 						}

@@ -153,7 +153,7 @@ export function Profile() {
 			country: formData.country,
 		}
 
-		fetch('http://localhost:4000/api/auth/updateProfile', {
+		fetch('http://localhost:4000/api/user/updateProfile', {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json',

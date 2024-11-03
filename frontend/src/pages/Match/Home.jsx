@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { BurgerMenu } from '../../components/BurgerMenu'
+import BurgerMenu from '../../components/BurgerMenu'
 import { GamesList } from '../../components/Match/GamesList'
 import { MySearch } from '../../components/Search'
 import { UkrainianWar } from '../../components/UserExpirience/BlockSaveUkraine'

@@ -1,188 +1,189 @@
 import { useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
-import { BurgerMenu } from '../../components/BurgerMenu'
-import MyLoader from '../../components/Disclaimer/Loader'
-import MatchOneBlock from '../../components/Match/MatchOneBlock'
+import { toast, Toaster } from 'react-hot-toast'
+import { useNavigate, useSearchParams } from 'react-router-dom'
+import BurgerMenu from '../../components/BurgerMenu'
+import StakeForm from '../../components/Match/StakeForm'
 import { UkrainianWar } from '../../components/UserExpirience/BlockSaveUkraine'
 import { Footer } from '../../components/UserExpirience/Footer'
 import { NavBar } from '../../components/UserExpirience/NavBar'
 import { useAuth } from '../../context/AuthContext'
-import useFetchGet from '../../hooks/useFetchGet'
-import { validateStakeAmount } from '../../js/FormValidation'
 import { formatDate, formatTime } from '../../js/TimeValidation'
 import rootstyle from '../../styles/root.module.css'
-import Mybutton from '../../UI/Mybutton'
-import TextError from '../../UI/TextError'
 
 export function Stake() {
+	const navigate = useNavigate()
 	const [searchParams] = useSearchParams()
 	const id = searchParams.get('MatchId')
 	const TeamNumber = searchParams.get('TeamNumber')
-	const [Stakes, setStakes] = useState([])
-	const [amount, setAmount] = useState(0)
-	const [amountDirty, setAmountDirty] = useState('')
-	const [amountError, setAmountError] = useState('Поле не може  != 0')
 
+	const [stakes, setStakes] = useState([])
+	const [amount, setAmount] = useState(0)
+	const [match, setMatch] = useState(null)
+	const [stakeTeamInfo, setStakeTeamInfo] = useState({})
 	const { user } = useAuth()
 
-	const [Match, setMatch] = useState(null)
-	const [isLoadingMatch, setIsLoadingMatch] = useState(true)
-	const [failedToFetchMatch, setFailedToFetchMatch] = useState(null)
-	const [StakeTeamInfo, setStakeTeamInfo] = useState({})
-
+	// Fetch stakes data for the user
 	useEffect(() => {
-		const fetchMatch = async () => {
+		if (!user) return
+
+		const fetchStakesData = async () => {
+			try {
+				const response = await fetch(
+					`http://localhost:4000/api/stake/${user.id}`
+				)
+				if (!response.ok) throw new Error('Network response was not ok')
+				const data = await response.json()
+				setStakes(data)
+			} catch (error) {
+				console.error('Failed to fetch stakes:', error)
+			}
+		}
+
+		fetchStakesData()
+	}, [user])
+
+	// Fetch match data based on match ID
+	useEffect(() => {
+		if (!id) return
+
+		const fetchMatchData = async () => {
 			try {
 				const response = await fetch(
 					`http://localhost:4000/api/games/match/Match/${id}`
 				)
-				if (!response.ok) {
-					throw new Error('Network response was not ok')
-				}
+				if (!response.ok) throw new Error('Network response was not ok')
 				const data = await response.json()
 				setMatch(data)
 			} catch (error) {
-				setFailedToFetchMatch(`Failed to fetch match data: ${error.message}`)
-				console.error('Failed to fetch match data: ', error)
-			} finally {
-				setIsLoadingMatch(false)
+				console.error('Failed to fetch match data:', error)
+				toast.error(`Failed to fetch match data: ${error.message}`)
 			}
 		}
 
-		fetchMatch()
+		fetchMatchData()
 	}, [id])
 
+	// Set stake team info based on team number
 	useEffect(() => {
-		if (Match && Match.length > 0) {
+		if (match && match.length > 0) {
 			const teamInfo =
-				TeamNumber == 1
+				TeamNumber === '1'
 					? {
-							TeamCoef: Match[0].Team1Coef,
-							TeamCountry: Match[0].Team1Country,
-							TeamID: Match[0].Team1ID,
-							TeamLogo: Match[0].Team1Logo,
-							TeamName: Match[0].Team1Name,
+							TeamCoef: match[0].Team1Coef,
+							TeamCountry: match[0].Team1Country,
+							TeamID: match[0].Team1ID,
+							TeamLogo: match[0].Team1Logo,
+							TeamName: match[0].Team1Name,
 					  }
 					: {
-							TeamCoef: Match[0].Team2Coef,
-							TeamCountry: Match[0].Team2Country,
-							TeamID: Match[0].Team2ID,
-							TeamLogo: Match[0].Team2Logo,
-							TeamName: Match[0].Team2Name,
+							TeamCoef: match[0].Team2Coef,
+							TeamCountry: match[0].Team2Country,
+							TeamID: match[0].Team2ID,
+							TeamLogo: match[0].Team2Logo,
+							TeamName: match[0].Team2Name,
 					  }
 			setStakeTeamInfo(teamInfo)
 		}
-	}, [Match, TeamNumber])
-
-	const {
-		Data: stakeData,
-		isLoading: isLoadingStakes,
-		failedToFetch,
-	} = useFetchGet({
-		url: 'http://localhost:4000/api/stake/',
-	})
+	}, [match, TeamNumber])
 
 	const handleSubmit = async e => {
 		e.preventDefault()
 
-		if (!StakeTeamInfo.TeamID) {
-			console.error('Team ID is not defined.')
+		if (!match || !stakeTeamInfo.TeamID) {
+			console.error('Missing required data for submission.')
 			return
 		}
+		// Update user bonus money
+		fetch('http://localhost:4000/api/user/updateBonusMoney', {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${localStorage.getItem('token')}`,
+			},
+			body: JSON.stringify({
+				//user id
+				id: user.id,
+				bonus_money: user.bonus_money,
+				amount,
+			}),
+		})
+			.then(response => response.json())
+			.then(data => {
+				if (data.error) {
+					console.log('Error:', data.error)
+					alert(data.error)
+					return
+				}
+				console.log('Login successful:', data)
+				localStorage.setItem('token', data.token)
+				console.log('Оновлення даних пройшло успішно:', data.message)
+				const decoded = jwtDecode(data.token)
+				setIsRegUser(true)
+				setUser(decoded)
+			})
+			.catch(error => {
+				console.error('Error during login:', error)
+			})
 
 		const stakeData = {
-			match_id: Match[0]?.MatchID,
-			Coef: StakeTeamInfo.TeamCoef,
+			match_id: match[0]?.MatchID,
+			Coef: stakeTeamInfo.TeamCoef,
 			user_id: user.id,
-			team_id: StakeTeamInfo.TeamID,
-			amount: amount,
+			team_id: stakeTeamInfo.TeamID,
+			amount,
 		}
-
+		// add stake
 		try {
 			const response = await fetch('http://localhost:4000/api/stake/', {
 				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
+				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify(stakeData),
 			})
 
-			if (!response.ok) {
-				throw new Error('Error submitting stake')
-			}
+			if (!response.ok) throw new Error('Error submitting stake')
 
-			console.log('Stake submitted successfully')
+			navigate(0)
+			toast.success('Stake submitted successfully')
 		} catch (err) {
 			console.error(err)
+			toast.error('Failed to submit stake')
 		}
-	}
-
-	useEffect(() => {
-		if (stakeData) {
-			setStakes(stakeData)
-		}
-	}, [stakeData])
-
-	const handleAmount = e => {
-		setAmount(e.target.value)
-		setAmountError(validateStakeAmount(e.target.value, user.bonus_money))
-	}
-	const [ondisable, Setondisable] = useState(true)
-	useEffect(() => {
-		if (!amountError) {
-			Setondisable(true)
-		} else {
-			Setondisable(false)
-		}
-	}, [amountError])
-
-	if (isLoadingStakes || isLoadingMatch) {
-		return <MyLoader />
-	}
-
-	if (failedToFetch || failedToFetchMatch) {
-		return <div>Error loading data. Please try again later.</div>
 	}
 
 	return (
 		<div className={rootstyle.wrapper}>
 			<NavBar />
+			<Toaster position='top-center' reverseOrder={false} />
 			<UkrainianWar />
 			<div className={rootstyle.Container}>
 				<BurgerMenu />
 				<main className={rootstyle.Main}>
-					<TextError TextDirty={amountDirty} TextError={amountError} />
-					<div className='flex '>
-						<MatchOneBlock MatchGet={StakeTeamInfo} />
-						<div>
-							<form onSubmit={handleSubmit} className=' '>
-								<label className='block'>
-									<span>Amount</span>
-									<input
-										type='number'
-										name='amount'
-										onBlur={setAmountDirty}
-										value={amount}
-										onChange={handleAmount}
-										className='mt-1 block w-full rounded-md bg-gray-700 text-white border border-gray-600 p-2'
-									/>
-								</label>
-
-								<Mybutton ondisable={ondisable}>Submit</Mybutton>
-							</form>
+					{id && TeamNumber && (
+						<div className='flex'>
+							<StakeForm
+								MatchGet={stakeTeamInfo}
+								amount={amount}
+								handleSubmit={handleSubmit}
+								setAmount={setAmount}
+								user={user}
+							/>
 						</div>
-					</div>
-
-					{Stakes.map(stake => (
+					)}
+					{stakes.map(stake => (
 						<div
 							className='w-full min-h-[100px] h-[120px] bg-gray-800 text-gray-200 flex gap-4 items-center justify-evenly p-4 rounded-lg my-5'
 							key={stake.id}
 						>
-							<div>{stake.id}</div>
-							<div>{stake.match_id}</div>
+							<div className='flex items-center gap-2'>
+								<img
+									src={`/${stake.TeamLogo}`}
+									alt={`${stake.TeamName} logo`}
+									className='h-20 w-20 object-cover'
+								/>
+							</div>
 							<div className='min-w-[20%] flex flex-col items-center'>
 								<div className='text-white text-3xl'>
-									₴{stake.amount * stake.Coef}
+									₴{(stake.amount * stake.Coef).toFixed(2)}
 								</div>
 								<div className='flex'>
 									<div>₴{stake.amount}</div>
@@ -196,7 +197,6 @@ export function Stake() {
 							</div>
 						</div>
 					))}
-					<div></div>
 				</main>
 			</div>
 			<Footer />

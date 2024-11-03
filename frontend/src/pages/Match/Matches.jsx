@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { BurgerMenu } from '../../components/BurgerMenu'
-import { NotAuthorized } from '../../components/Disclaimer/NotAuthorized'
+import BurgerMenu from '../../components/BurgerMenu'
 import { MatchBlock } from '../../components/Match/MatchBlock'
 import { MySearch } from '../../components/Search'
 import { UkrainianWar } from '../../components/UserExpirience/BlockSaveUkraine'
@@ -17,9 +16,7 @@ export function Matches() {
 	const handleValueChange = value => {
 		Setvalue(value) // Оновлення стану при зміні значення
 	}
-	if (!isRegUser) {
-		return <NotAuthorized />
-	}
+
 	return (
 		<>
 			<div className={rootstyle.wrapper}>
