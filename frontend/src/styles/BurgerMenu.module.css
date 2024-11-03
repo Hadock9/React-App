@@ -1,6 +1,6 @@
 /* Контейнер для бокового меню */
-.AsideContainer {
-	@apply w-1/5 h-full bg-white mt-2 mr-2 rounded-r-lg select-none;
+.BurgerMenuContainer {
+	@apply w-1/5 h-full   mt-2 mr-2 rounded-r-lg select-none;
 }
 
 /* Секція, що прихована */
@@ -10,22 +10,19 @@
 
 /* Блок елементів в боковому меню */
 .AsideBlock {
-	@apply w-full h-16 flex items-center cursor-pointer select-none;
+	@apply h-16 flex items-center cursor-pointer  select-none;
 }
-
+.AsideBlock:hover {
+	@apply cursor-pointer bg-gray-300 rounded-r-lg select-none;
+}
 /* Іконка для перегляду в боковому меню */
 .AsideBlockIconBrowse {
-	@apply cursor-pointer w-16 h-16 flex items-center m-2;
-}
-
-/* Стиль для блока при наведенні */
-.AsideBlock:hover {
-	@apply bg-gray-300 rounded-r-lg select-none;
+	@apply w-16 h-16 flex items-center justify-center cursor-pointer;
 }
 
 /* Загальна іконка в боковому меню */
 .AsideBlockIcon {
-	@apply w-16 h-16 flex items-center m-2;
+	@apply w-16 h-16 flex items-center justify-center;
 }
 
 /* Текстовий блок в боковому меню */

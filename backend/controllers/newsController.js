@@ -89,3 +89,44 @@ GROUP BY
 		res.json(result)
 	})
 }
+
+exports.addNews_views = (req, res) => {
+	const { news_id, user_id, news_views } = req.body
+	// Перевіряєм чи є запис про перегляди в таблиці
+	const checkQuery = `
+		SELECT *
+		FROM user_views
+		WHERE user_id = ? AND news_id = ?;
+		`
+
+	db.query(checkQuery, [user_id, news_id], (err, result) => {
+		if (err) {
+			return res.status(500).json({ error: 'Database error' })
+		}
+
+		// Якщо запису немає, вставляємо  запис
+		if (result.length === 0) {
+			const insertQuery = `
+		INSERT INTO user_views (user_id, news_id, created_at) 
+		VALUES (?, ?, NOW());
+	`
+			db.query(insertQuery, [user_id, news_id], (err, insertResult) => {
+				if (err) {
+					return res.status(500).json({ error: 'Database error' })
+				}
+				const updateViewsQuery = `
+			UPDATE news
+			SET views = ? 
+			WHERE id = ?;
+		`
+				// Якщо а також додаєм 1 перегляд
+				db.query(updateViewsQuery, [news_views + 1, news_id], (err, result) => {
+					if (err) {
+						return res.status(500).json({ error: 'Database error' })
+					}
+					return res.status(201).json({ id: insertResult.insertId })
+				})
+			})
+		}
+	})
+}

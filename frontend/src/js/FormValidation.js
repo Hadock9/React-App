@@ -83,3 +83,64 @@ export const validateTextArea = textArea => {
 
 	return ''
 }
+
+export const validateStakeAmount = (Amount, UserBalance) => {
+	if (!Amount) {
+		return 'Поле не може бути пустим'
+	} else {
+		if (Amount == 0) {
+			return 'Поле не може дорівнювати 0 ₴'
+		} else if ((Amount == 0) & (UserBalance == 0)) {
+			return `Ваш баланс 0 ₴`
+		} else if (Amount < 0 || Amount > UserBalance) {
+			return `Поле має бути більшим за 0  та меншим за ваш баланс ${UserBalance} ₴`
+		}
+	}
+
+	return ''
+}
+
+// Валідація імені на картці
+export const validateCardName = Name => {
+	if (!Name) return "Ім'я власника не може бути пустим"
+	const re = /^[A-Z][a-z]+( [A-Z][a-z]+)*$/
+	return re.test(Name)
+		? ''
+		: "Ім'я повинно містити два слова, перша літера кожного слова мaє бути великою."
+}
+
+export const validateCreditCard = Card => {
+	if (!Card) return 'Номер карти не може бути пустим'
+	const visaMasterPattern = /^(4\d{15}|5[1-5]\d{14}|2[2-7]\d{14})$/
+
+	if (!visaMasterPattern.test(Card))
+		return 'Дані ведені неправильно або дана карта не є дійсною'
+}
+
+export const validateExpDate = expDate => {
+	if (!expDate) return 'Поле з датою не може бути пустим'
+
+	const expPattern = /^(0[1-9]|1[0-2])\/\d{2}$/
+	if (!expPattern.test(expDate)) {
+		return 'Неправильний формат дати'
+	}
+
+	const [month, year] = expDate.split('/').map(Number)
+
+	const currentDate = new Date()
+	const currentMonth = currentDate.getMonth() + 1
+	const currentYear = currentDate.getFullYear() % 100
+
+	if (year < currentYear || (year === currentYear && month < currentMonth)) {
+		return 'Термін карти збіг кінця'
+	}
+
+	return ''
+}
+
+export const validateCVV = cvv => {
+	if (!cvv) return 'Поле з кодом безпеки не може бути пустим'
+
+	const cvvPattern = /^\d{3}$/
+	if (!cvvPattern.test(cvv)) return 'Поле з кодом безпеки заповнено неправильно'
+}

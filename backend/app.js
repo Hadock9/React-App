@@ -6,6 +6,7 @@ const stakeRoutes = require('./routes/stake')
 const newsRoutes = require('./routes/news')
 const commentsRoutes = require('./routes/comments')
 const notificationsRoutes = require('./routes/notifications')
+const userRoutes = require('./routes/user')
 const path = require('path')
 
 const app = express()
@@ -20,5 +21,5 @@ app.use('/api/stake', stakeRoutes)
 app.use('/api/news', newsRoutes)
 app.use('/api/comments', commentsRoutes)
 app.use('/api/notifications', notificationsRoutes)
-
+app.use('/api/user', userRoutes)
 module.exports = app

@@ -1,6 +1,6 @@
 import { BurgerMenu } from '../components/BurgerMenu'
-import { Footer } from '../components/Footer'
-import { NavBar } from '../components/NavBar'
+import { Footer } from '../components/UserExpirience/Footer'
+import { NavBar } from '../components/UserExpirience/NavBar'
 
 import rootstyle from '../styles/root.module.css'
 
