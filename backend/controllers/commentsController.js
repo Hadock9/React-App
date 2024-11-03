@@ -31,22 +31,6 @@ exports.Create_comment = (req, res) => {
 	})
 }
 
-exports.getStateLikesDislikes = (req, res) => {
-	const sql = `
-		SELECT action
-		FROM user_likes_dislikes
-		WHERE user_id = ? AND comment_id = ?;
-	`
-
-	db.query(sql, [req.params.user_id, req.params.comment_id], (err, results) => {
-		if (err) {
-			return res.status(500).json({ error: err.message })
-		}
-
-		res.json(results)
-	})
-}
-
 exports.DeleteStatus = (req, res) => {
 	const { commentId, userId } = req.query
 
@@ -173,6 +157,18 @@ exports.getMatch_comments = (req, res) => {
 				AND uld.user_id = ?
 				WHERE c.match_id = ?;`
 	db.query(sql, [req.params.user_id, req.params.id], (err, result) => {
+		if (err) {
+			return res.status(500).json({ error: err.message })
+		}
+		res.json(result)
+	})
+}
+exports.getIdLast_comment = (req, res) => {
+	const sql = `SELECT c.id 
+			FROM comments c
+			ORDER BY c.id DESC
+			LIMIT 1;`
+	db.query(sql, [req.params.id], (err, result) => {
 		if (err) {
 			return res.status(500).json({ error: err.message })
 		}

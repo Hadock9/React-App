@@ -81,7 +81,7 @@ function BurgerMenu() {
 
 	return (
 		<motion.aside
-			initial='hidden'
+			initial='hidden' // Initial state
 			variants={containerVariants}
 			animate={containerControls}
 			className={style.BurgerMenuContainer}

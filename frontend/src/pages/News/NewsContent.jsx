@@ -3,7 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom'
 import BurgerMenu from '../../components/BurgerMenu'
 import { UkrainianWar } from '../../components/UserExpirience/BlockSaveUkraine'
 import { Footer } from '../../components/UserExpirience/Footer'
-import { NavBar } from '../../components/UserExpirience/NavBar'
+import NavBar from '../../components/UserExpirience/NavBar'
 
 import { Eye } from 'lucide-react'
 import Comments from '../../components/Comments/Comments'
@@ -144,14 +144,21 @@ export function NewsContent() {
 										urlPost={
 											'http://localhost:4000/api/comments/news_comments/comment'
 										}
+										what_id='news'
 									/>
 								</div>
 							</div>
 						</div>
 					</main>
 					<aside className='w-[25%]'>
-						<NewsAside url={'http://localhost:4000/api/news/news_last'} />
-						<NewsAside url={'http://localhost:4000/api/news/news_last'} />
+						<NewsAside
+							url={'http://localhost:4000/api/news/news_last'}
+							title={'Останні новини'}
+						/>
+						<NewsAside
+							title={'Найцікавіші новини'}
+							url={'http://localhost:4000/api/news/news_pop'}
+						/>
 					</aside>
 				</div>
 				<Footer />

@@ -8,7 +8,7 @@ import {
 } from '../../js/updateLikesDislikes.js'
 
 const LikesDisslikes = ({ OneComment }) => {
-	const { user } = useAuth()
+	const { user, isRegUser } = useAuth()
 	const [likes, setLikes] = useState(OneComment.likes)
 	const [dislikes, setDislikes] = useState(OneComment.dislikes)
 	const [onlikes, setOnlikes] = useState(OneComment.onlikes)
@@ -75,8 +75,11 @@ const LikesDisslikes = ({ OneComment }) => {
 	return (
 		<div className='likes-dislikes flex mt-2'>
 			<div
-				onClick={handleLikes}
-				className='flex no-select select-none cursor-pointer'
+				onClick={isRegUser ? handleLikes : null}
+				// handleLikes виконується лише для зареєстрованих користувачів
+				className={`flex no-select select-none cursor-pointer ${
+					!isRegUser ? 'opacity-50 cursor-not-allowed' : ''
+				}`}
 			>
 				{onlikes ? (
 					<ThumbsUp className='ml-2 text-green-700 animate-pulse h-4 mt-[2px]' />
@@ -86,8 +89,11 @@ const LikesDisslikes = ({ OneComment }) => {
 				{likes}
 			</div>
 			<div
-				onClick={handleDislikes}
-				className='ml-3 flex select-none cursor-pointer'
+				onClick={isRegUser ? handleDislikes : null}
+				// handleLikes виконується лише для зареєстрованих користувачів
+				className={`flex no-select select-none cursor-pointer ${
+					!isRegUser ? 'opacity-50 cursor-not-allowed' : ''
+				}`}
 			>
 				{ondislikes ? (
 					<ThumbsDown className='ml-2 text-primary animate-pulse h-4 mt-[2px]' />

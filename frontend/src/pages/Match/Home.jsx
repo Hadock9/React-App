@@ -4,7 +4,7 @@ import { GamesList } from '../../components/Match/GamesList'
 import { MySearch } from '../../components/Search'
 import { UkrainianWar } from '../../components/UserExpirience/BlockSaveUkraine'
 import { Footer } from '../../components/UserExpirience/Footer'
-import { NavBar } from '../../components/UserExpirience/NavBar'
+import NavBar from '../../components/UserExpirience/NavBar'
 
 import MyCarousel from '../../components/UserExpirience/Carousel'
 import useFetchGet from '../../hooks/useFetchGet'

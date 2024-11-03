@@ -1,10 +1,12 @@
 import { motion } from 'framer-motion'
 import React from 'react'
+import { useAuth } from '../context/AuthContext'
 
-const IsRegUser = ({ children, RegUser }) => {
+const IsRegUser = ({ children }) => {
+	const { isRegUser } = useAuth()
 	return (
 		<>
-			{!RegUser && (
+			{!isRegUser && (
 				<motion.div
 					initial={{ x: -100, scale: 0 }}
 					animate={{ x: 0, scale: 1 }}

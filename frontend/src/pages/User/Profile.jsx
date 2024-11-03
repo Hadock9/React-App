@@ -9,7 +9,7 @@ import Select from 'react-select'
 import countryList from 'react-select-country-list'
 import MyLoader from '../../components/Disclaimer/Loader'
 import { NotAuthorized } from '../../components/Disclaimer/NotAuthorized'
-import { NavBar } from '../../components/UserExpirience/NavBar'
+import NavBar from '../../components/UserExpirience/NavBar'
 import { useAuth } from '../../context/AuthContext'
 import useFetchGet from '../../hooks/useFetchGet'
 import {

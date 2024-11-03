@@ -12,7 +12,7 @@ import TextError from '../../UI/TextError'
 import LikesDisslikes from '../Comments/LikesDisslikes'
 import MyLoader from './../Disclaimer/Loader'
 
-const Comments = ({ id, urlFetch, urlPost }) => {
+const Comments = ({ id, urlFetch, urlPost, what_id }) => {
 	const navigate = useNavigate()
 
 	const [Comments, SetComments] = useState([])
@@ -61,10 +61,29 @@ const Comments = ({ id, urlFetch, urlPost }) => {
 		if (response.ok) {
 			console.log('Комент вставлений успішно ')
 			toast.success('Комент додано успішно')
-			SetComments(prevComments => [
-				...prevComments,
-				{ ...CommentData, publish_date: new Date(), likes: 0, dislikes: 0 },
-			])
+			SetComments(prevComments => {
+				// Отримуємо максимальний ID із наявних коментарів
+				const maxId =
+					prevComments.length > 0 ? Math.max(...prevComments.map(c => c.id)) : 0
+
+				// Визначаємо, яке поле (news_id чи match_id) використовувати на основі значення what_id
+				const newComment = {
+					...CommentData,
+					id: maxId + 1,
+					publish_date: new Date(),
+					likes: 0,
+					dislikes: 0,
+				}
+
+				if (what_id === 'news') {
+					newComment.news_id = id
+				} else if (what_id === 'match') {
+					newComment.match_id = id
+				}
+
+				// Додаємо новий коментар до масиву коментарів
+				return [...prevComments, newComment]
+			})
 			SetCommentText('')
 			SetCommentTextError('Дане поле не може бути пустим')
 			SetCommentTextDirty(false)
@@ -103,9 +122,10 @@ const Comments = ({ id, urlFetch, urlPost }) => {
 					Коментарі {Comments.length}
 				</h1>
 			</div>
-			<IsRegUser RegUser={isRegUser}>
+			<IsRegUser>
 				Ви не зареєстровані. Коментарі можуть залишати тільки зареєстровані
-				користувачі.
+				користувачі.Лайки та дизлайки можуть ставити також тільки зареєстровані
+				користувачі
 			</IsRegUser>
 			<div className='My comment my-3 flex'>
 				<div className='w-[10%] flex justify-center   items-center'>

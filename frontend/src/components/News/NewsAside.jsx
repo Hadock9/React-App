@@ -5,7 +5,7 @@ import useFetchGet from '../../hooks/useFetchGet'
 import { NewsDate } from '../../js/TimeValidation'
 import MyLoader from '../Disclaimer/Loader'
 
-const NewsAside = ({ url }) => {
+const NewsAside = ({ url, title }) => {
 	const [News, SetNews] = useState(null)
 
 	const { Data, isLoading, failedToFetch } = useFetchGet({
@@ -27,7 +27,7 @@ const NewsAside = ({ url }) => {
 	}
 	return (
 		<div className='mr-4 my-5   rounded-xl'>
-			<h3 className='font-bold my-5 text-lg'>Останні новини</h3>
+			<h3 className='font-bold my-5 text-lg'>{title}</h3>
 			{News.map(OneNews => (
 				<motion.div
 					initial='hidden'
@@ -54,7 +54,14 @@ const NewsAside = ({ url }) => {
 						</p>
 					</div>
 					<div>
-						<Link className='text-base underline'>{OneNews.title}</Link>
+						<Link
+							to={`/News/${OneNews.gameName.replace(/[\s-]/g, '_')}?OneNews=${
+								OneNews.id
+							}`}
+							className='text-base underline'
+						>
+							{OneNews.title}
+						</Link>
 					</div>
 				</motion.div>
 			))}

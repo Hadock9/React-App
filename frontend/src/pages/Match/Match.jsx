@@ -8,11 +8,12 @@ import MyLoader from '../../components/Disclaimer/Loader'
 import { MapStat, PlayerStat } from '../../components/Match/MatchStatistic'
 import { UkrainianWar } from '../../components/UserExpirience/BlockSaveUkraine'
 import { Footer } from '../../components/UserExpirience/Footer'
-import { NavBar } from '../../components/UserExpirience/NavBar'
+import NavBar from '../../components/UserExpirience/NavBar'
 import { useAuth } from '../../context/AuthContext'
 import useFetchGet from '../../hooks/useFetchGet'
 import { extractHoursAndMinutes, formatDate } from '../../js/TimeValidation'
 import rootstyle from '../../styles/root.module.css'
+import IsRegUser from '../../UI/IsRegUser'
 
 export function Match() {
 	const [searchParams] = useSearchParams()
@@ -47,7 +48,10 @@ export function Match() {
 				<BurgerMenu />
 
 				<main className={rootstyle.Main}>
-					{/* bg-[#393e46] */}
+					<IsRegUser>
+						Ви не зареєстровані.Робити ставки можуть тільки зареєстровані
+						користувачі.
+					</IsRegUser>
 					<div className=''>
 						<div className='flex justify-between w-full h-full bg-gray-700 rounded-t-lg'>
 							{/* Блок для команди 1 */}
@@ -133,22 +137,37 @@ export function Match() {
 						</div>
 
 						{/* Заголовок для статистики команд по картах */}
-						<div className='flex w-full bg-gray-700 text-white justify-between rounded-b-lg'>
-							<div className='flex w-[40%] justify-center'>
-								<Link to={`/Stake?MatchId=${idMatch}&TeamNumber=${1}`}>
-									<div className='flex  align-center rounded-2xl bg-primary px-[20px] py-[10px] my-3 hover:bg-primary text-white duration-300 '>
-										Зробити ставку із коефіцієнтом
-									</div>
-								</Link>
+						{(match.status == 'finished') | !isRegUser ? (
+							<div className='flex w-full bg-gray-700 text-white justify-between rounded-b-lg'>
+								Ставки не приймаються на закінчені матчі
 							</div>
-							<div className='flex w-[40%] justify-center'>
-								<Link to={`/Stake?MatchId=${idMatch}&TeamNumber=${2}`}>
-									<div className='flex  align-center rounded-2xl bg-primary px-[20px] py-[10px] my-3 hover:bg-primary text-white duration-300 '>
-										Зробити ставку із коефіцієнтом
-									</div>
-								</Link>
+						) : (
+							<div className='flex w-full bg-gray-700 text-white justify-between rounded-b-lg'>
+								<div className='flex w-[40%] justify-center'>
+									<Link
+										to={`/Stake?MatchId=${idMatch}&TeamNumber=${1}`}
+										className='w-full'
+									>
+										<div className='flex justify-center items-center w-full h-full rounded-b-lg bg-primary px-5 py-4   hover:bg-primary-dark text-white duration-300'>
+											Зробити ставку із коефіцієнтом
+										</div>
+									</Link>
+								</div>
+								<div className='flex  w-[20%] justify-center items-center'>
+									<p> Зробити ставку </p>
+								</div>
+								<div className='flex  w-[40%] justify-center'>
+									<Link
+										to={`/Stake?MatchId=${idMatch}&TeamNumber=${2}`}
+										className='w-full'
+									>
+										<div className='flex justify-center items-center w-full h-full rounded-b-lg bg-primary px-5 py-4   hover:bg-primary-dark text-white duration-300'>
+											Зробити ставку із коефіцієнтом
+										</div>
+									</Link>
+								</div>
 							</div>
-						</div>
+						)}
 
 						<div className='flex items-center justify-center my-4'>
 							<Map className='text-black' />
@@ -187,6 +206,7 @@ export function Match() {
 						urlPost={
 							'http://localhost:4000/api/comments/match_comments/comment'
 						}
+						what_id='match'
 					/>
 				</main>
 			</div>

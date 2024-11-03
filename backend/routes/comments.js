@@ -4,7 +4,7 @@ const {
 	Create_comment,
 	updateLikesDislikesCount,
 	updateUser_likes_dislikes,
-	getStateLikesDislikes,
+	getIdLast_comment,
 	DeleteStatus,
 	getMatch_comments,
 	Create_Match_comment,
@@ -13,6 +13,8 @@ const router = express.Router()
 
 router.get('/news_comments/:id/:user_id', getNews_comments)
 router.post('/news_comments/comment', Create_comment)
+
+router.get('/GetLastcomment', getIdLast_comment)
 
 router.get('/match_comments/:id/:user_id', getMatch_comments)
 router.post('/match_comments/comment', Create_Match_comment)
