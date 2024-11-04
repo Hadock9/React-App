@@ -85,10 +85,16 @@ export const validateTextArea = (textArea) => {
 }
 
 export const validateStakeAmount = (Amount, UserBalance) => {
-    if (Amount == 0) {
-        return 'Поле не може  != 0'
-    } else if (Amount < 0 || Amount > UserBalance) {
-        return `Поле має бути більшим за 0  та меншим за ваш баланс ${UserBalance}`
+    if (!Amount) {
+        return 'Поле не може бути пустим'
+    } else {
+        if (Amount == 0) {
+            return 'Поле не може дорівнювати 0 ₴'
+        } else if ((Amount == 0) & (UserBalance == 0)) {
+            return `Ваш баланс 0 ₴`
+        } else if (Amount < 0 || Amount > UserBalance) {
+            return `Поле має бути більшим за 0  та меншим за ваш баланс ${UserBalance} ₴`
+        }
     }
 
     return ''
@@ -109,13 +115,6 @@ export const validateCreditCard = (Card) => {
 
     if (!visaMasterPattern.test(Card))
         return 'Дані ведені неправильно або дана карта не є дійсною'
-}
-
-export const validateAmount = (Amount) => {
-    if (!Amount) return 'Поле з сумою не може бути пустим'
-    const amountPattern = /^\d+$/
-
-    if (!amountPattern.test(Amount)) return 'Сума введена з помилками'
 }
 
 export const validateExpDate = (expDate) => {

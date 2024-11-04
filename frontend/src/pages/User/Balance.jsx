@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
-import { BurgerMenu } from '../../components/BurgerMenu'
-import { Footer } from '../../components/UserExpirience/Footer'
-import { NavBar } from '../../components/UserExpirience/NavBar'
+import BurgerMenu from '../../components/BurgerMenu'
 import { CreditCard } from '../../components/UserExpirience/CreditCard'
+import { Footer } from '../../components/UserExpirience/Footer'
+import NavBar from '../../components/UserExpirience/NavBar'
 import { useAuth } from '../../context/AuthContext'
 import rootstyle from '../../styles/root.module.css'
 

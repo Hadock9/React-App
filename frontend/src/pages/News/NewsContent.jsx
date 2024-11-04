@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import { BurgerMenu } from '../../components/BurgerMenu'
+import BurgerMenu from '../../components/BurgerMenu'
 import { UkrainianWar } from '../../components/UserExpirience/BlockSaveUkraine'
 import { Footer } from '../../components/UserExpirience/Footer'
-import { NavBar } from '../../components/UserExpirience/NavBar'
+import NavBar from '../../components/UserExpirience/NavBar'
 
 import { Eye } from 'lucide-react'
 import Comments from '../../components/Comments/Comments'
@@ -16,7 +16,7 @@ import rootstyle from '../../styles/root.module.css'
 
 export function NewsContent() {
 	const [OneNews, SetOneNews] = useState(null)
-	const { user } = useAuth()
+	const { user, isRegUser } = useAuth()
 
 	const [searchParams] = useSearchParams()
 	const id = searchParams.get('OneNews')
@@ -138,20 +138,27 @@ export function NewsContent() {
 									</div>
 									<Comments
 										id={id}
-										urlFetch={
-											'http://localhost:4000/api/comments/news_comments'
-										}
+										urlFetch={`http://localhost:4000/api/comments/news_comments/${id}/${
+											isRegUser ? user.id : 0
+										}`}
 										urlPost={
 											'http://localhost:4000/api/comments/news_comments/comment'
 										}
+										what_id='news'
 									/>
 								</div>
 							</div>
 						</div>
 					</main>
 					<aside className='w-[25%]'>
-						<NewsAside url={'http://localhost:4000/api/news/news_last'} />
-						<NewsAside url={'http://localhost:4000/api/news/news_last'} />
+						<NewsAside
+							url={'http://localhost:4000/api/news/news_last'}
+							title={'Останні новини'}
+						/>
+						<NewsAside
+							title={'Найцікавіші новини'}
+							url={'http://localhost:4000/api/news/news_pop'}
+						/>
 					</aside>
 				</div>
 				<Footer />

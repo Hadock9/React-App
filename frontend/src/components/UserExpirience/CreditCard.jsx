@@ -2,11 +2,10 @@ import { useEffect, useState } from 'react'
 import TextError from '../../UI/TextError'
 
 import {
+    validateCVV,
     validateCardName,
     validateCreditCard,
     validateExpDate,
-    validateCVV,
-    validateAmount,
 } from '../../js/FormValidation.js'
 import Mybutton from '../../UI/Mybutton.jsx'
 import { MotionFireLogo } from './MotionFireLogo.jsx'
@@ -63,7 +62,6 @@ export function CreditCard() {
 
     const AmountHandler = (e) => {
         setAmount(e.target.value)
-        setAmountError(validateAmount(e.target.value))
     }
     const CardHandler = (e) => {
         setCard(e.target.value)

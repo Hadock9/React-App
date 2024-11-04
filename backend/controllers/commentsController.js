@@ -1,8 +1,14 @@
 const db = require('../db.js')
 
 exports.getNews_comments = (req, res) => {
-	const sql = `SELECT * FROM comments WHERE news_id = (?);`
-	db.query(sql, [req.params.id], (err, result) => {
+	const sql = `SELECT c.*, 
+       uld.action AS likedOrDisliked
+				FROM comments c
+				LEFT JOIN user_likes_dislikes uld 
+				ON c.id = uld.comment_id 
+				AND uld.user_id = ?
+				WHERE c.news_id = ?;`
+	db.query(sql, [req.params.user_id, req.params.id], (err, result) => {
 		if (err) {
 			return res.status(500).json({ error: err.message })
 		}
@@ -23,24 +29,6 @@ exports.Create_comment = (req, res) => {
 		}
 		return res.status(201).json({ id: result.insertId })
 	})
-}
-
-exports.getStateLikesDislikes = (req, res) => {
-	const sql = `
-        SELECT comment_id 
-        FROM user_likes_dislikes 
-        WHERE user_id = ? AND comment_id = ? AND action = ?;
-    `
-	db.query(
-		sql,
-		[req.params.user_id, req.params.comment_id, req.params.action],
-		(err, result) => {
-			if (err) {
-				return res.status(500).json({ error: err.message })
-			}
-			res.json(result)
-		}
-	)
 }
 
 exports.DeleteStatus = (req, res) => {
@@ -161,7 +149,25 @@ exports.updateUser_likes_dislikes = (req, res) => {
 }
 
 exports.getMatch_comments = (req, res) => {
-	const sql = `SELECT * FROM comments WHERE match_id = (?);`
+	const sql = `SELECT c.*, 
+       uld.action AS likedOrDisliked
+				FROM comments c
+				LEFT JOIN user_likes_dislikes uld 
+				ON c.id = uld.comment_id 
+				AND uld.user_id = ?
+				WHERE c.match_id = ?;`
+	db.query(sql, [req.params.user_id, req.params.id], (err, result) => {
+		if (err) {
+			return res.status(500).json({ error: err.message })
+		}
+		res.json(result)
+	})
+}
+exports.getIdLast_comment = (req, res) => {
+	const sql = `SELECT c.id 
+			FROM comments c
+			ORDER BY c.id DESC
+			LIMIT 1;`
 	db.query(sql, [req.params.id], (err, result) => {
 		if (err) {
 			return res.status(500).json({ error: err.message })

@@ -1,8 +1,12 @@
 const db = require('../db.js')
 
 exports.getStakeList = (req, res) => {
-	const sql = 'SELECT * FROM Stake'
-	db.query(sql, (err, result) => {
+	const sql = `
+	SELECT Stake.*, teams.TeamName, teams.TeamLogo, teams.TeamCountry
+	FROM Stake
+	JOIN teams ON Stake.team_id = teams.TeamID
+	WHERE Stake.user_id = ?;`
+	db.query(sql, [req.params.id], (err, result) => {
 		if (err) {
 			return res.status(500).json({ error: err.message })
 		}

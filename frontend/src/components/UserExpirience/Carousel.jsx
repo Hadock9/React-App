@@ -11,6 +11,11 @@ const MyCarousel = ({ Array }) => {
             items: 6,
             slidesToSlide: 3,
         },
+        mac: {
+            breakpoint: { max: 1600, min: 1024 },
+            items: 4,
+            slidesToSlide: 3,
+        },
         tablet: {
             breakpoint: { max: 1024, min: 464 },
             items: 4,

@@ -9,7 +9,7 @@ import Select from 'react-select'
 import countryList from 'react-select-country-list'
 import MyLoader from '../../components/Disclaimer/Loader'
 import { NotAuthorized } from '../../components/Disclaimer/NotAuthorized'
-import { NavBar } from '../../components/UserExpirience/NavBar'
+import NavBar from '../../components/UserExpirience/NavBar'
 import { useAuth } from '../../context/AuthContext'
 import useFetchGet from '../../hooks/useFetchGet'
 import {
@@ -153,7 +153,7 @@ export function Profile() {
 			country: formData.country,
 		}
 
-		fetch('http://localhost:4000/api/auth/updateProfile', {
+		fetch('http://localhost:4000/api/user/updateProfile', {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json',

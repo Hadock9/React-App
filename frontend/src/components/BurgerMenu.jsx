@@ -8,11 +8,10 @@ import {
 	Mail,
 	Wallet,
 } from 'lucide-react'
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useMenu } from '../context/MenuContext'
 import style from '../styles/BurgerMenu.module.css'
-
 const sideBarInfo = [
 	{ link: '/Home', icon: <House />, name: 'Головна' },
 	{ link: '/Stake', icon: <History />, name: 'Історія ставок' },
@@ -33,7 +32,7 @@ const Path = props => (
 	/>
 )
 
-export function BurgerMenu() {
+function BurgerMenu() {
 	const { isOpen, setIsOpen } = useMenu()
 
 	const toggleMenu = () => {
@@ -82,7 +81,7 @@ export function BurgerMenu() {
 
 	return (
 		<motion.aside
-			initial='hidden'
+			initial='hidden' // Initial state
 			variants={containerVariants}
 			animate={containerControls}
 			className={style.BurgerMenuContainer}
@@ -139,3 +138,4 @@ export function BurgerMenu() {
 		</motion.aside>
 	)
 }
+export default React.memo(BurgerMenu)
