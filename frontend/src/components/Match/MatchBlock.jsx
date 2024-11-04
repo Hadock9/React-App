@@ -9,17 +9,26 @@ import { NoResultDisclaimer } from '../Disclaimer/NoResultDisclaimer'
 
 export function MatchBlock({ value }) {
 	const [Match, setData] = useState([])
+	const [currentPage, setCurrentPage] = useState(1)
+	const limit = 10
 
 	const [searchParams] = useSearchParams()
 	const game_id = searchParams.get('game_id')
 
+	let url = 'http://localhost:4000/api/games/matches'
+	if (game_id) {
+		url += `/game_id=${game_id}`
+	} else {
+		url += `?_limit=${limit}&_page=${currentPage}`
+	}
 	const { Data, isLoading, failedToFetch } = useFetchGet({
-		url: 'http://localhost:4000/api/games/match',
-		id: game_id,
+		url: url,
 	})
 
 	useEffect(() => {
-		if (Data) {
+		if (Data && Array.isArray(Data.data)) {
+			setData(Data.data)
+		} else {
 			setData(Data)
 		}
 	}, [Data])
@@ -31,6 +40,15 @@ export function MatchBlock({ value }) {
 		)
 	})
 
+	const getPagesArray = totalPages => {
+		const pagesArray = []
+		for (let i = 1; i <= totalPages; i++) {
+			pagesArray.push(i)
+		}
+		return pagesArray
+	}
+
+	let PagesArray = getPagesArray(Data?.totalPages)
 	if (isLoading) {
 		return <MyLoader />
 	}
@@ -129,6 +147,22 @@ export function MatchBlock({ value }) {
 			) : (
 				<NoResultDisclaimer value={value} />
 			)}
+
+			<div>
+				<div className='flex justify-center'>
+					{PagesArray.map(page => (
+						<button
+							class='relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800'
+							key={page}
+							onClick={() => setCurrentPage(page)}
+						>
+							<span class='relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0'>
+								{page}
+							</span>
+						</button>
+					))}
+				</div>
+			</div>
 		</>
 	)
 }

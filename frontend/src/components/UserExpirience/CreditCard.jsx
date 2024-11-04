@@ -14,7 +14,7 @@ import {
 import Mybutton from '../../UI/Mybutton.jsx'
 import { MotionFireLogo } from './MotionFireLogo.jsx'
 
-export function CreditCard() {
+export function CreditCard({ action }) {
 	const { setIsRegUser, setUser, user } = useAuth()
 	const navigate = useNavigate()
 
@@ -128,7 +128,7 @@ export function CreditCard() {
 				id: user.id,
 				bonus_money: user.bonus_money,
 				amount: amountInt,
-				action: 'add',
+				action: action,
 			}),
 		})
 			.then(response => response.json())

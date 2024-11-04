@@ -4,6 +4,7 @@ import './index.css'
 import { Login } from './pages/Auth/Login'
 import { Registration } from './pages/Auth/Registr'
 import { ResetPassword } from './pages/Auth/ResetPassword'
+import Donate from './pages/Donate'
 import { Home } from './pages/Match/Home'
 import { Match } from './pages/Match/Match'
 import { Matches } from './pages/Match/Matches'
@@ -27,10 +28,13 @@ const App = () => {
 			<Route path='/Stake' element={<Stake />} />
 			<Route path='/Profile' element={<Profile />} />
 			<Route path={'Home/:Game/Matches'} element={<Matches />} />
+			<Route path={'/Matches'} element={<Matches />} />
+			<Route path={'/Matches/:Match'} element={<Match />} />
 			<Route path={'Home/:Game/Matches/:Match'} element={<Match />} />
 			<Route path='/404' element={<Erorpage />} />
 			<Route path='/Notifications' element={<Notifications />} />
 			<Route path='/Balance' element={<Balance />} />
+			<Route path='/Donate' element={<Donate />} />
 			<Route path='/ResetPassword' element={<ResetPassword />} />
 			<Route path='*' element={<Navigate to='/404' replace />} />
 		</Routes>

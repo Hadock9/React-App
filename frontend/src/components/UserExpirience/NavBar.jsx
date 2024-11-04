@@ -19,6 +19,13 @@ function NavBar() {
 			setIsHidden(false)
 		}
 	})
+
+	const navBarInfo = [
+		{ link: '/News', name: 'Новини' },
+		{ link: '/Home', name: 'Головна' },
+		{ link: '/Matches', name: 'Матчі' },
+		{ link: '/Donate', name: 'Підтримати' },
+	]
 	return (
 		<>
 			<motion.header
@@ -39,26 +46,13 @@ function NavBar() {
 					</div>
 				</Link>
 				<div className='flex self-center'>
-					<Link to='/News'>
-						<div className='hover:animate-pulse font-sans font-semibold text-base px-3 mx-3 h-[64px] content-center hover:shadow-lg duration-700 rounded-xl'>
-							Новини
-						</div>
-					</Link>
-					<Link to='/Home'>
-						<div className='hover:animate-pulse font-sans font-semibold text-base px-3 mx-3 h-[64px] content-center hover:shadow-lg duration-700 rounded-xl'>
-							Головна
-						</div>
-					</Link>
-					<Link to='/Home'>
-						<div className='hover:animate-pulse font-sans font-semibold text-base px-3 mx-3 h-[64px] content-center hover:shadow-lg duration-700 rounded-xl'>
-							Контакти
-						</div>
-					</Link>
-					<Link to='/Home'>
-						<div className='hover:animate-pulse font-sans font-semibold text-base px-3 mx-3 h-[64px] content-center hover:shadow-lg duration-700 rounded-xl'>
-							Підтримати
-						</div>
-					</Link>
+					{navBarInfo.map((item, index) => (
+						<Link to={item.link}>
+							<div className='hover:animate-pulse font-sans font-semibold text-base px-3 mx-3 h-[64px] content-center hover:shadow-lg duration-700 rounded-xl'>
+								{item.name}
+							</div>
+						</Link>
+					))}
 				</div>
 
 				<div className='flex w-[300px] justify-center'>

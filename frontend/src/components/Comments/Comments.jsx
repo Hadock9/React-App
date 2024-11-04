@@ -174,7 +174,6 @@ const Comments = ({ id, urlFetch, urlPost, what_id }) => {
 								x: 0,
 								transition: {
 									duration: 0.5,
-									delay: index * 0.1,
 								},
 							},
 						}}

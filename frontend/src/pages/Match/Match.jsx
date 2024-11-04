@@ -22,7 +22,7 @@ export function Match() {
 	const { user, isRegUser } = useAuth()
 
 	const { Data, isLoading, failedToFetch } = useFetchGet({
-		url: 'http://localhost:4000/api/games/match/Match',
+		url: 'http://localhost:4000/api/games/matches/Match',
 		id: idMatch,
 	})
 

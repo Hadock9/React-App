@@ -5,11 +5,9 @@ import { MySearch } from '../../components/Search'
 import { UkrainianWar } from '../../components/UserExpirience/BlockSaveUkraine'
 import { Footer } from '../../components/UserExpirience/Footer'
 import NavBar from '../../components/UserExpirience/NavBar'
-import { useAuth } from '../../context/AuthContext'
 import rootstyle from '../../styles/root.module.css'
 
 export function Matches() {
-	const { isRegUser } = useAuth()
 	const [value, Setvalue] = useState('') // Стан для зберігання значення пошуку
 
 	// Оновлюємо значення із MySearch
