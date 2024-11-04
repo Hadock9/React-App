@@ -118,7 +118,7 @@ export function CreditCard() {
                             </label>
                             <div className="flex ">
                                 <input
-                                    className="w-[60%] h-10 text-white placeholder-white text-xl bg-transparent placeholder-gray-400 border-b border-white focus:outline-none mb-4"
+                                    className="w-[60%] h-10 text-white text-xl bg-transparent placeholder-gray-400 border-b border-white focus:outline-none mb-4"
                                     placeholder="123 456"
                                     type="text"
                                     name="Amount"
@@ -142,7 +142,7 @@ export function CreditCard() {
                         НОМЕР КАРТИ
                     </label>
                     <input
-                        className="w-full h-10 text-white placeholder-white text-xl bg-transparent placeholder-gray-400 border-b border-white focus:outline-none mb-8"
+                        className="w-full h-10 text-white  text-xl bg-transparent placeholder-gray-400 border-b border-white focus:outline-none mb-8"
                         placeholder="1234 1234 1234 1234"
                         type="telephone"
                         name="Card"
@@ -159,7 +159,7 @@ export function CreditCard() {
                                 ІМ'Я ВЛАСНИКА
                             </label>
                             <input
-                                className="text-white placeholder-white bg-transparent placeholder-gray-400 border-b border-white focus:outline-none"
+                                className="text-white  bg-transparent placeholder-gray-400 border-b border-white focus:outline-none"
                                 placeholder="Іван Мазепа"
                                 type="text"
                                 name="Name"
@@ -172,10 +172,10 @@ export function CreditCard() {
 
                         <div className="flex flex-col mr-5 w-1/4">
                             <label className="text-white text-xs font-light mb-1">
-                                ДІЙСНЕ ДО
+                                ДІЙСНА ДО
                             </label>
                             <input
-                                className="text-white placeholder-white bg-transparent placeholder-gray-400 border-b border-white focus:outline-none"
+                                className="text-white  bg-transparent placeholder-gray-400 border-b border-white focus:outline-none"
                                 placeholder="10/25"
                                 type="text"
                                 name="ExpDate"
@@ -189,10 +189,10 @@ export function CreditCard() {
 
                         <div className="flex flex-col w-1/4">
                             <label className="text-white text-xs font-light mb-1">
-                                CCV
+                                CVV
                             </label>
                             <input
-                                className="text-white placeholder-white bg-transparent placeholder-gray-400 border-b border-white focus:outline-none"
+                                className="text-white  bg-transparent placeholder-gray-400 border-b border-white focus:outline-none"
                                 placeholder="123"
                                 type="text"
                                 maxLength="3"

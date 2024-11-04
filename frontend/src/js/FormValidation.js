@@ -100,7 +100,7 @@ export const validateCardName = (Name) => {
     const re = /^[A-Z][a-z]+( [A-Z][a-z]+)*$/
     return re.test(Name)
         ? ''
-        : "Ім'я повинно містити два слова, перша літера кожного слова мaє бути великою."
+        : "Ім'я повинно містити два слова, перша літера кожного слова мaє бути великою та написане латиною."
 }
 
 export const validateCreditCard = (Card) => {

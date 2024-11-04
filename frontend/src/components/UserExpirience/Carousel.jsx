@@ -51,7 +51,7 @@ const MyCarousel = ({ Array }) => {
                             ease: 'easeIn',
                             duration: 0.7,
                         }}
-                        className=" flex items-center"
+                        className=" flex justify-center"
                     >
                         <img
                             className="rounded-2xl w-[210px] h-[290px]"
