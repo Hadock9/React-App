@@ -54,10 +54,15 @@ exports.updateProfile = async (req, res) => {
 }
 
 exports.updateBonusMoney = async (req, res) => {
-	const { id, bonus_money, amount } = req.body
+	const { id, bonus_money, amount, action } = req.body
 
 	const sqlUpdate = `UPDATE Users SET  bonus_money = ? WHERE id = ?`
-	const money = bonus_money - amount
+	let money = 0
+	if (action === 'add') {
+		money = bonus_money + amount
+	} else if (action === 'sub') {
+		money = bonus_money - amount
+	}
 	db.query(sqlUpdate, [money, id], (err, result) => {
 		if (err) {
 			console.error('Error updating bonus_money:', err)

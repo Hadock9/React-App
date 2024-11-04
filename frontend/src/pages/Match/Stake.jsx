@@ -105,6 +105,7 @@ export function Stake() {
 				id: user.id,
 				bonus_money: user.bonus_money,
 				amount,
+				action: 'sub',
 			}),
 		})
 			.then(response => response.json())

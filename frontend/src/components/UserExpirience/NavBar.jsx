@@ -1,15 +1,33 @@
+import { motion, useMotionValueEvent, useScroll } from 'framer-motion'
 import { UserRoundX } from 'lucide-react'
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 import rootstyle from '../../styles/root.module.css'
+
 import { MotionFireLogo } from './MotionFireLogo'
 function NavBar() {
 	const { isRegUser, user, logout } = useAuth()
 
+	const [isHidden, setIsHidden] = useState(false)
+	const { scrollY } = useScroll()
+
+	useMotionValueEvent(scrollY, 'change', y => {
+		if (y > 60) {
+			setIsHidden(true)
+		} else {
+			setIsHidden(false)
+		}
+	})
 	return (
 		<>
-			<header className='flex justify-around items-center w-full h-17 shadow-lg p-3'>
+			<motion.header
+				initial={'show'}
+				animate={isHidden ? 'hidden' : 'show'}
+				variants={{ hidden: { y: '-100%' }, show: { y: '0%' } }}
+				transition={{ duration: 0.5 }}
+				className='flex justify-around items-center w-full h-17 shadow-lg p-3'
+			>
 				<Link to='/Home'>
 					<div className='flex w-[300px] justify-center'>
 						<div className='h-10 w-10 flex justify-center items-center'>
@@ -85,7 +103,7 @@ function NavBar() {
 						</div>
 					)}
 				</div>
-			</header>
+			</motion.header>
 		</>
 	)
 }

@@ -73,7 +73,7 @@ function BurgerMenu() {
 			initial={{ opacity: 0, x: -20 }}
 			animate={isOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
 			transition={{ duration: 0.6, ease: 'easeInOut', delay: 0.1 }}
-			style={{ display: isOpen ? 'block' : 'none' }} // Ensure it doesn't render when closed
+			style={{ display: isOpen ? 'block' : 'none' }}
 		>
 			<p>{children}</p>
 		</motion.div>

@@ -1,6 +1,6 @@
 /* Контейнер для бокового меню */
 .BurgerMenuContainer {
-	@apply w-1/5 h-full   mt-2 mr-2 rounded-r-lg select-none;
+	@apply w-1/5 h-full sticky top-0   mt-2 mr-2 rounded-r-lg select-none;
 }
 
 /* Секція, що прихована */

@@ -139,7 +139,7 @@ export function Match() {
 						{/* Заголовок для статистики команд по картах */}
 						{(match.status == 'finished') | !isRegUser ? (
 							<div className='flex w-full bg-gray-700 text-white justify-between rounded-b-lg'>
-								Ставки не приймаються на закінчені матчі
+								Ставки не приймаються
 							</div>
 						) : (
 							<div className='flex w-full bg-gray-700 text-white justify-between rounded-b-lg'>

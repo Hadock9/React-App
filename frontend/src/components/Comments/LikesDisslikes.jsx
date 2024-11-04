@@ -1,5 +1,6 @@
 import { ThumbsDown, ThumbsUp } from 'lucide-react'
 import React, { useState } from 'react'
+import { toast } from 'react-hot-toast'
 import { useAuth } from '../../context/AuthContext'
 import {
 	DeleteStatus,
@@ -32,13 +33,15 @@ const LikesDisslikes = ({ OneComment }) => {
 			// Якщо лайк вже поставлений, знімемо його
 			setLikes(likes - 1)
 			setOnlikes(false)
-			updateLikes(likes - 1) // Оновлення на сервері
+			updateLikes(likes - 1)
+			toast.success('Лайк знято успішно')
+			// Оновлення на сервері
 		} else {
 			// Додамо лайк
 			setLikes(likes + 1)
 			setOnlikes(true)
 			updateLikes(likes + 1) // Оновлення на сервері
-
+			toast.success('Лайк додано успішно')
 			if (ondislikes) {
 				// Якщо дизлайк поставлений, знімемо його
 				setDislikes(dislikes - 1)
@@ -55,13 +58,15 @@ const LikesDisslikes = ({ OneComment }) => {
 			// Якщо дизлайк вже поставлений, знімемо його
 			setDislikes(dislikes - 1)
 			setOndislikes(false)
-			updateDislikes(dislikes - 1) // Оновлення на сервері
+			updateDislikes(dislikes - 1)
+			toast.success('Дизлайк знято успішно')
+			// Оновлення на сервері
 		} else {
 			// Додамо дизлайк
 			setDislikes(dislikes + 1)
 			setOndislikes(true)
 			updateDislikes(dislikes + 1) // Оновлення на сервері
-
+			toast.success('Дизлайк поставлено успішно')
 			if (onlikes) {
 				// Якщо лайк поставлений, знімемо його
 				setLikes(likes - 1)
