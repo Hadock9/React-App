@@ -28,9 +28,9 @@ export const MapStat = ({ match }) => {
                 </caption>
                 <thead>
                     <tr className='bg-gray-700'>
-                        <th className='p-2 text-white w-[45%]'>{match.Team1Name}</th>
+                        <th className='p-2 text-white w-[45%]'>Team</th>
                         <th className='p-2 text-white'></th>
-                        <th className='p-2 text-white w-[45%]'>{match.Team2Name}</th>
+                        <th className='p-2 text-white w-[45%]'>Team</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -65,7 +65,7 @@ export const PlayerStat = ({ match }) => {
         <div className='w-full sm:w-1/2 p-2'>
             <table className='w-full text-center bg-gray-800 rounded-lg overflow-hidden'>
                 <caption className='text-white p-2 font-bold bg-gray-600'>
-                    <p>{match.Team1Name}</p>
+                    <p>Team</p>
                 </caption>
                 <thead>
                     <tr className='bg-gray-700'>
