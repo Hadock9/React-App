@@ -43,7 +43,7 @@ const MyCarousel = ({ Array }) => {
 				<Link
 					key={index}
 					to={
-						'/Home/' +
+						'/Games/' +
 						Item.name.replaceAll(' ', '_').replaceAll('-', '_') +
 						`/Matches?game_id=${Item.id}`
 					}
