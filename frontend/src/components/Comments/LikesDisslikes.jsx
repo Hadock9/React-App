@@ -1,7 +1,7 @@
 import { ThumbsDown, ThumbsUp } from 'lucide-react'
 import React, { useState } from 'react'
 import { toast } from 'react-hot-toast'
-import { useAuth } from '../../context/AuthContext'
+import { useAuth } from '../../context/AuthContext.jsx'
 import {
 	DeleteStatus,
 	updateLikesDislikes,
