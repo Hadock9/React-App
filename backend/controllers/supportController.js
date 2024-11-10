@@ -1,26 +1,18 @@
 const db = require('../db.js')
 
-exports.getNotificationsList = (req, res) => {
-	const sql = `SELECT n.*, s.*, 
-       t.*
-FROM Notifications n
-JOIN stake s ON n.stake_id = s.id
-JOIN teams t ON s.team_id = t.teamid
-WHERE n.user_id = ?;`
+exports.CreateRequest = (req, res) => {
+	const { user_id, content, title, type } = req.body
 
-	db.query(sql, [req.params.id], (err, result) => {
+	const sql =
+		'INSERT INTO support (author_id, content, title, request_type) VALUES (?, ?, ?, ?)'
+	const params = [user_id, content, title, type]
+
+	db.query(sql, params, (err, result) => {
 		if (err) {
-			console.error('Database error:', err)
-			return res
-				.status(500)
-				.json({ error: 'An error occurred while fetching notifications.' })
+			return res.status(500).json({ error: err.message })
 		}
 
-		if (result.length === 0) {
-			return res.status(404).json({ message: 'No notifications found.' }) // Обробка випадку, коли немає сповіщень
-		}
-
-		res.json(result) // Повертаємо сповіщення
+		res.status(201).json({ id: result.insertId })
 	})
 }
 
@@ -38,11 +30,9 @@ exports.GET_LIST = (req, res) => {
 
 	// Основний SQL-запит з урахуванням сортування, обмеження та зміщення
 	const sql = `
-		SELECT n.*, s.amount,s.Coef,s.stake_time,	
-				t.TeamName, t.TeamLogo, t.TeamCountry
-	FROM Notifications n
-	JOIN stake s ON n.stake_id = s.id
-	JOIN teams t ON s.team_id = t.teamid
+		SELECT s.*, u.first_name AS author, u.picture  
+	 FROM support s
+	 JOIN users u ON s.author_id = u.id
 		ORDER BY ?? ${sortOrder === 'DESC' ? 'DESC' : 'ASC'}
 		LIMIT ? OFFSET ?;
 	`
@@ -57,7 +47,7 @@ exports.GET_LIST = (req, res) => {
 		}
 
 		// Запит для підрахунку загальної кількості записів
-		const countSql = 'SELECT COUNT(*) AS total FROM Notifications'
+		const countSql = 'SELECT COUNT(*) AS total FROM support'
 		db.query(countSql, (countErr, countResults) => {
 			if (countErr) {
 				return res.status(500).json({ error: countErr.message })
@@ -66,7 +56,7 @@ exports.GET_LIST = (req, res) => {
 			const total = countResults[0].total
 
 			// Формуємо заголовок `Content-Range` на основі фактичних даних
-			const contentRange = `notifications ${start}-${
+			const contentRange = `support ${start}-${
 				start + results.length - 1
 			}/${total}`
 			console.log('Content-Range:', contentRange) // Діагностика Content-Range

@@ -15,7 +15,7 @@ export function MatchBlock({ value }) {
 	const [searchParams] = useSearchParams()
 	const game_id = searchParams.get('game_id')
 
-	let url = 'http://localhost:4000/api/games/matches'
+	let url = 'http://localhost:4000/api/match/matches'
 	if (game_id) {
 		url += `/game_id=${game_id}`
 	} else {

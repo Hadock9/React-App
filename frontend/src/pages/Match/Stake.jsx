@@ -49,7 +49,7 @@ export function Stake() {
 		const fetchMatchData = async () => {
 			try {
 				const response = await fetch(
-					`http://localhost:4000/api/games/matches/Match/${id}`
+					`http://localhost:4000/api/match/matches/Match/${id}`
 				)
 				if (!response.ok) throw new Error('Network response was not ok')
 				const data = await response.json()

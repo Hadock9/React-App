@@ -84,6 +84,18 @@ export const validateTextArea = textArea => {
 	return ''
 }
 
+export const validateInput = Input => {
+	const trimmedText = Input.trim()
+
+	if (!trimmedText) {
+		return 'Поле не може бути пустим'
+	} else if (trimmedText.length < 4 || trimmedText.length > 500) {
+		return `Поле має бути від 4 до 500 символів. Кількість символів: ${trimmedText.length}`
+	}
+
+	return ''
+}
+
 export const validateStakeAmount = (Amount, UserBalance) => {
 	if (!Amount) {
 		return 'Поле не може бути пустим'

@@ -1,7 +1,8 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { BadgeX, Pencil } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
-import toast, { Toaster } from 'react-hot-toast'
+import toast from 'react-hot-toast'
+
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 import { validateTextArea } from '../../js/FormValidation'
@@ -122,8 +123,6 @@ const Comments = ({ id, urlFetch, urlPost, what_id }) => {
 
 	return (
 		<div className='Comments'>
-			<Toaster position='top-center' reverseOrder={false} />
-
 			<div className='flex'>
 				<h1 className='text-xl text-black font-semibold'>
 					Коментарі {Comments.length}

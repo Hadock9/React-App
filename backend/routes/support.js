@@ -1,12 +1,9 @@
 const express = require('express')
-const {
-	getNotificationsList,
-	GET_LIST,
-} = require('../controllers/notificationsController')
+const { GET_LIST, CreateRequest } = require('../controllers/supportController')
 
 const router = express.Router()
 
-router.get('/:id', getNotificationsList)
+router.post('/', CreateRequest)
 
 // For react-admin
 router.get('/', GET_LIST)

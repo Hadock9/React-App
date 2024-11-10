@@ -96,21 +96,21 @@ export function Home() {
 						initial='hidden'
 						whileInView='visible'
 						viewport={{ once: true }}
-						class='flex flex-col items-center justify-center bg-gray-100 px-6 py-12'
+						className='flex flex-col items-center justify-center bg-gray-100 px-6 py-12'
 					>
-						<div class='w-16 h-1 bg-blue-600 rounded mb-8'></div>
-						<div class='text-center max-w-2xl'>
+						<div className='w-16 h-1 bg-blue-600 rounded mb-8'></div>
+						<div className='text-center max-w-2xl'>
 							<motion.p
 								custom={1}
 								variants={infoAnimation}
-								class='text-2xl font-bold text-gray-800 mb-4'
+								className='text-2xl font-bold text-gray-800 mb-4'
 							>
 								Що ми пропонуємо
 							</motion.p>
 							<motion.p
 								custom={2}
 								variants={infoAnimation}
-								class='text-lg text-gray-700 leading-relaxed'
+								className='text-lg text-gray-700 leading-relaxed'
 							>
 								Ми пропонуємо вам унікальні можливості для ставок на
 								найпопулярніші кіберспортивні події. Наш сервіс забезпечує

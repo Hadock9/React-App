@@ -6,6 +6,7 @@ export const AuthContext = createContext()
 export const AuthProvider = ({ children }) => {
 	const [isRegUser, setIsRegUser] = useState(false)
 	const [user, setUser] = useState(null)
+	const [isLoading, setIsLoading] = useState(true)
 
 	useEffect(() => {
 		const token = localStorage.getItem('token')
@@ -32,6 +33,7 @@ export const AuthProvider = ({ children }) => {
 			setIsRegUser(false)
 			setUser(null)
 		}
+		setIsLoading(false) // Завершуємо завантаження
 	}, [])
 
 	const logout = () => {
@@ -42,7 +44,7 @@ export const AuthProvider = ({ children }) => {
 
 	return (
 		<AuthContext.Provider
-			value={{ isRegUser, user, setIsRegUser, setUser, logout }}
+			value={{ isRegUser, user, isLoading, setIsRegUser, setUser, logout }}
 		>
 			{children}
 		</AuthContext.Provider>

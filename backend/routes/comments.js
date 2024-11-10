@@ -9,6 +9,7 @@ const {
 	update_comment,
 	getMatch_comments,
 	Create_Match_comment,
+	GET_LIST,
 } = require('../controllers/commentsController')
 const router = express.Router()
 
@@ -27,4 +28,8 @@ router.put(
 	updateUser_likes_dislikes
 )
 router.delete('/news_comments/DeleteStatus', DeleteStatus)
+
+// For react-admin
+router.get('/', GET_LIST)
+
 module.exports = router
