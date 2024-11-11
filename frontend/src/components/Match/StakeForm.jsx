@@ -9,7 +9,7 @@ export default function StakeForm({
 	amount,
 	handleSubmit,
 	setAmount,
-	user,
+	userBalance,
 }) {
 	const [Match, setMatch] = useState(null)
 	const [amountDirty, setAmountDirty] = useState(false)
@@ -22,7 +22,7 @@ export default function StakeForm({
 
 	const handleAmount = e => {
 		setAmount(e.target.value)
-		setAmountError(validateStakeAmount(e.target.value, user.bonus_money))
+		setAmountError(validateStakeAmount(e.target.value, userBalance))
 	}
 
 	useEffect(() => {

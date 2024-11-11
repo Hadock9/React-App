@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import useFetchGet from '../../hooks/useFetchGet'
@@ -57,7 +58,10 @@ export function MatchBlock({ value }) {
 		const activeClasses = isActive ? 'bg-green-700' : 'bg-red-700'
 		return `${baseClasses} ${activeClasses}`
 	}
-
+	const buttonVariants = {
+		hover: { scale: 1.1 },
+		tap: { scale: 0.9 },
+	}
 	if (isLoading) {
 		return <MyLoader />
 	}
@@ -159,16 +163,77 @@ export function MatchBlock({ value }) {
 
 			<div>
 				<div className='flex justify-center'>
-					{PagesArray.map(page => (
-						<button
+					<motion.button
+						type='button'
+						onClick={() => setCurrentPage(prev => (prev > 1 ? prev - 1 : prev))}
+						variants={buttonVariants}
+						whileHover='hover'
+						whileTap='tap'
+					>
+						Previous Page
+					</motion.button>
+
+					{currentPage - 3 > 1 && (
+						<>
+							<motion.button
+								type='button'
+								className={getButtonClasses(currentPage === Data.totalPages)}
+								onClick={() => setCurrentPage(1)}
+								variants={buttonVariants}
+								whileHover='hover'
+								whileTap='tap'
+							>
+								{1}
+							</motion.button>
+							<span>...</span>
+						</>
+					)}
+
+					{PagesArray.filter(
+						page => page >= currentPage - 2 && page <= currentPage + 2
+					).map(page => (
+						<motion.button
 							type='button'
 							className={getButtonClasses(currentPage === page)}
 							key={page}
 							onClick={() => setCurrentPage(page)}
+							variants={buttonVariants}
+							whileHover='hover'
+							whileTap='tap'
 						>
 							{page}
-						</button>
+						</motion.button>
 					))}
+
+					{currentPage + 3 < Data?.totalPages && (
+						<>
+							<span>...</span>
+							<motion.button
+								type='button'
+								className={getButtonClasses(currentPage === Data.totalPages)}
+								onClick={() => setCurrentPage(Data.totalPages)}
+								variants={buttonVariants}
+								whileHover='hover'
+								whileTap='tap'
+							>
+								{Data.totalPages}
+							</motion.button>
+						</>
+					)}
+
+					<motion.button
+						type='button'
+						onClick={() =>
+							setCurrentPage(prev =>
+								prev < Data?.totalPages ? prev + 1 : prev
+							)
+						}
+						variants={buttonVariants}
+						whileHover='hover'
+						whileTap='tap'
+					>
+						Next Page
+					</motion.button>
 				</div>
 			</div>
 		</>

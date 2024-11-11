@@ -2,11 +2,14 @@ import { useEffect, useState } from 'react'
 import { toast, Toaster } from 'react-hot-toast'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import BurgerMenu from '../../components/BurgerMenu'
+import { CheckFetch } from '../../components/Disclaimer/BadFatchDisclaimer'
+import MyLoader from '../../components/Disclaimer/Loader'
 import StakeForm from '../../components/Match/StakeForm'
 import { UkrainianWar } from '../../components/UserExpirience/BlockSaveUkraine'
 import Footer from '../../components/UserExpirience/Footer'
 import NavBar from '../../components/UserExpirience/NavBar'
 import { useAuth } from '../../context/AuthContext'
+import useFetchGet from '../../hooks/useFetchGet'
 import { formatDate, formatTime } from '../../js/TimeValidation'
 import rootstyle from '../../styles/root.module.css'
 
@@ -21,6 +24,16 @@ export function Stake() {
 	const [match, setMatch] = useState(null)
 	const [stakeTeamInfo, setStakeTeamInfo] = useState({})
 	const { user } = useAuth()
+	const [userBalance, setUserBalance] = useState(null)
+	const { Data, isLoading, failedToFetch } = useFetchGet({
+		url: `http://localhost:4000/api/user/${user?.id}/getMoney`,
+	})
+
+	useEffect(() => {
+		if (Data && Data[0]?.bonus_money !== undefined) {
+			setUserBalance(Data[0].bonus_money)
+		}
+	}, [Data])
 
 	// Fetch stakes data for the user
 	useEffect(() => {
@@ -151,6 +164,12 @@ export function Stake() {
 		}
 	}
 
+	if (failedToFetch) {
+		return <CheckFetch />
+	}
+	if (isLoading) {
+		return <MyLoader />
+	}
 	return (
 		<div className={rootstyle.wrapper}>
 			<NavBar />
@@ -166,7 +185,7 @@ export function Stake() {
 								amount={amount}
 								handleSubmit={handleSubmit}
 								setAmount={setAmount}
-								user={user}
+								userBalance={userBalance}
 							/>
 						</div>
 					)}

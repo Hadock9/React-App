@@ -1,24 +1,34 @@
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import BurgerMenu from '../components/BurgerMenu'
+import { CheckFetch } from '../components/Disclaimer/BadFatchDisclaimer'
+import MyLoader from '../components/Disclaimer/Loader'
 import { CreditCard } from '../components/UserExpirience/CreditCard'
 import Footer from '../components/UserExpirience/Footer'
 import NavBar from '../components/UserExpirience/NavBar'
 import { useAuth } from '../context/AuthContext'
+import useFetchGet from '../hooks/useFetchGet'
 import rootstyle from '../styles/root.module.css'
 
 export function Donate() {
 	const { user } = useAuth()
 	const [userBalance, setUserBalance] = useState(null)
-	const [loading, setLoading] = useState(true)
+	const { Data, isLoading, failedToFetch } = useFetchGet({
+		url: `http://localhost:4000/api/user/${user?.id}/getMoney`,
+	})
 
 	useEffect(() => {
-		if (user) {
-			setUserBalance(user.bonus_money)
-			setLoading(false)
+		if (Data && Data[0]?.bonus_money !== undefined) {
+			setUserBalance(Data[0].bonus_money)
 		}
-	}, [user])
+	}, [Data])
 
+	if (failedToFetch) {
+		return <CheckFetch />
+	}
+	if (isLoading) {
+		return <MyLoader />
+	}
 	return (
 		<div className={rootstyle.wrapper}>
 			<NavBar />
@@ -45,7 +55,7 @@ export function Donate() {
 									</div>
 									<div className='text-xl '>Задонатьте нам)</div>
 								</div>
-								<CreditCard action={'sub'} />
+								<CreditCard action={'sub'} userBalance={userBalance} />
 							</div>
 						)}
 					</motion.div>

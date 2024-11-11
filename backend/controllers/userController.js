@@ -63,6 +63,21 @@ exports.updateBonusMoney = async (req, res) => {
 	})
 }
 
+exports.GetMoney = (req, res) => {
+	const sql = `
+		SELECT bonus_money FROM users 
+	 WHERE id = ?;
+	`
+	// Виконуємо основний запит
+	db.query(sql, [req.params.id], (err, results) => {
+		if (err) {
+			return res.status(500).json({ error: err.message })
+		}
+
+		res.json(results)
+	})
+}
+
 exports.GET_LIST = (req, res) => {
 	// параметри `range` та `sort` з запиту
 	const range = JSON.parse(req.query.range || '[0, 9]')
