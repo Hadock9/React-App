@@ -10,6 +10,7 @@ const {
 	getMatch_comments,
 	Create_Match_comment,
 	GET_LIST,
+	Delete_commentRA,
 } = require('../controllers/commentsController')
 const router = express.Router()
 
@@ -31,5 +32,6 @@ router.delete('/news_comments/DeleteStatus', DeleteStatus)
 
 // For react-admin
 router.get('/', GET_LIST)
+router.delete('/:id', Delete_commentRA)
 
 module.exports = router

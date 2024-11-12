@@ -1,7 +1,6 @@
 import React from 'react'
 import { Toaster } from 'react-hot-toast'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import Support from './components/UserExpirience/Support'
 import './index.css'
 import AdminDashboard from './Moderation/Admin/pages/AdminDashboard'
 import SupportDashboard from './Moderation/Support/pages/SupportDashboard'
@@ -21,6 +20,7 @@ import Balance from './pages/User/Balance'
 import { Home } from './pages/User/Home'
 import Notifications from './pages/User/Notifications'
 import { Profile } from './pages/User/Profile'
+import Support from './pages/User/Support'
 import ProtectedRoute from './ProtectedRoute'
 
 const App = () => {

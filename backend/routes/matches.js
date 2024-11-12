@@ -4,6 +4,7 @@ const {
 	getMatchListPagination,
 	getMatchById,
 	GET_LIST,
+	Delete_match,
 } = require('../controllers/matchesController')
 
 const router = express.Router()
@@ -14,5 +15,5 @@ router.get('/matches/Match/:id', getMatchById)
 
 // For react-admin
 router.get('/', GET_LIST)
-
+router.delete('/:id', Delete_match)
 module.exports = router

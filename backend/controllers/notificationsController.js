@@ -77,3 +77,21 @@ exports.GET_LIST = (req, res) => {
 		})
 	})
 }
+
+exports.Delete_notification = (req, res) => {
+	const sql = 'DELETE FROM Notifications WHERE id = ?'
+	db.query(sql, [req.params.id], (err, result) => {
+		if (err) {
+			console.error('Database error:', err)
+			return res
+				.status(500)
+				.json({ error: 'An error occurred while deleting the notification.' })
+		}
+
+		if (result.affectedRows === 0) {
+			return res.status(404).json({ message: 'Notification not found.' })
+		}
+
+		res.json({ message: 'Notification deleted successfully.' })
+	})
+}

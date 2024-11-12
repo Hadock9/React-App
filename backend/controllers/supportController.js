@@ -67,3 +67,15 @@ exports.GET_LIST = (req, res) => {
 		})
 	})
 }
+
+exports.DeleteRequest = (req, res) => {
+	const sql = 'DELETE FROM support WHERE id = ?'
+
+	db.query(sql, [req.params.id], (err, results) => {
+		if (err) {
+			return res.status(500).json({ error: err.message })
+		}
+
+		res.json(results)
+	})
+}

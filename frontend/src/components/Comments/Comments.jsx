@@ -27,7 +27,7 @@ const Comments = ({ id, urlFetch, urlPost }) => {
 	const [editedText, setEditedText] = useState('')
 
 	const [isVisible, setVisible] = useState(false)
-	const [DottedCOmment, setDottedCOmment] = useState(null)
+	const [MoreCommentButt, setMoreComment] = useState(null)
 
 	const [ondisable, Setondisable] = useState(true)
 	const [CommentText, SetCommentText] = useState(' ')
@@ -109,7 +109,7 @@ const Comments = ({ id, urlFetch, urlPost }) => {
 	}
 
 	const toggleDropdown = comment => {
-		setDottedCOmment(comment.id)
+		setMoreComment(comment.id)
 		setVisible(isVisible => !isVisible)
 	}
 
@@ -162,7 +162,7 @@ const Comments = ({ id, urlFetch, urlPost }) => {
 							value={CommentText}
 							onChange={handleCommentText}
 						/>
-						<Mybutton ondisable={ondisable & isRegUser}>Submit</Mybutton>
+						<Mybutton ondisable={ondisable && isRegUser}>Submit</Mybutton>
 					</form>
 				</div>
 			</div>
@@ -226,7 +226,7 @@ const Comments = ({ id, urlFetch, urlPost }) => {
 										>
 											<Ellipsis />
 										</div>
-										{isVisible && DottedCOmment === OneComment.id && (
+										{isVisible && MoreCommentButt === OneComment.id && (
 											<motion.div
 												initial={'hidden'}
 												class='absolute rounded-lg shadow-lg bg-gray-100'

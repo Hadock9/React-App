@@ -114,7 +114,7 @@ export function Home() {
 						viewport={{ once: true }}
 						className='flex flex-col items-center justify-center  px-6 py-12'
 					>
-						<div className='w-16 h-1 bg-blue-600 rounded mb-8'></div>
+						<div className='w-16 h-1 bg-primary rounded mb-8'></div>
 						<div className='text-center max-w-2xl'>
 							<motion.p
 								custom={1}

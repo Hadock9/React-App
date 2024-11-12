@@ -6,6 +6,7 @@ const {
 	getNews_pop,
 	addNews_views,
 	GET_LIST,
+	Delete_news,
 } = require('../controllers/newsController')
 const router = express.Router()
 
@@ -17,5 +18,5 @@ router.put('/addNews_views', addNews_views)
 
 // For react-admin
 router.get('/', GET_LIST)
-
+router.delete('/:id', Delete_news)
 module.exports = router
