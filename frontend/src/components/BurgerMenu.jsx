@@ -3,10 +3,10 @@ import {
 	CircleDollarSign,
 	CircleUserRound,
 	Gem,
+	Gift,
 	History,
 	House,
 	Mail,
-	Wallet,
 } from 'lucide-react'
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
@@ -18,7 +18,7 @@ const sideBarInfo = [
 	{ link: '/Balance', icon: <CircleDollarSign />, name: 'Баланс' },
 	{ link: '/Bonuses', icon: <Gem />, name: 'Бонуси' },
 	{ link: '/Profile', icon: <CircleUserRound />, name: 'Мій профіль' },
-	{ link: '/Wallet', icon: <Wallet />, name: 'Гаманець' },
+	{ link: '/Donate', icon: <Gift />, name: 'Підтримати' },
 	{ link: '/Notifications', icon: <Mail />, name: 'Повідомлення' },
 ]
 

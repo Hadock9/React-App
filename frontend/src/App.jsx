@@ -9,6 +9,7 @@ import { Login } from './pages/Auth/Login'
 import { Registration } from './pages/Auth/Registr'
 import { ResetPassword } from './pages/Auth/ResetPassword'
 import Donate from './pages/Donate'
+import FAQ from './pages/FAQ'
 import { Games } from './pages/Match/Games'
 import { Match } from './pages/Match/Match'
 import { Matches } from './pages/Match/Matches'
@@ -46,6 +47,7 @@ const App = () => {
 				<Route path='/Donate' element={<Donate />} />
 				<Route path='/ResetPassword' element={<ResetPassword />} />
 				<Route path='/Feedback' element={<Support />} />
+				<Route path='/FAQ' element={<FAQ />} />
 				<Route path='*' element={<Erorpage />} />
 
 				{/* Захищені адмінські маршрути */}

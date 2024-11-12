@@ -1,13 +1,13 @@
 import restProvider from 'ra-data-simple-rest'
 import React from 'react'
 import { Admin, Resource } from 'react-admin'
-import CommentsList from '../components/CommentsList'
-import GamesList from '../components/GamesList'
-import MatchList from '../components/MatchList'
-import NewsList from '../components/NewsList'
-import NotificationsList from '../components/NotificationsList'
-import StakeList from '../components/StakeList'
-import UsersList from '../components/UsersList'
+import CommentsList from '../components/comments/CommentsList'
+import GamesList from '../components/games/GamesList'
+import MatchList from '../components/match/MatchList'
+import NewsList from '../components/news/NewsList'
+import NotificationsList from '../components/notifications/NotificationsList'
+import StakeList from '../components/stake/StakeList'
+import UsersList from '../components/user/UsersList'
 
 const AdminDashboard = () => {
 	return (

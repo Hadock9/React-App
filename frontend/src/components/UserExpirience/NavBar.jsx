@@ -24,7 +24,7 @@ function NavBar() {
 		{ link: '/News', name: 'Новини' },
 		{ link: '/Games', name: 'Ігри' },
 		{ link: '/Matches', name: 'Матчі' },
-		{ link: '/Donate', name: 'Підтримати' },
+		{ link: '/Stake', name: 'Cтавки' },
 	]
 	return (
 		<>

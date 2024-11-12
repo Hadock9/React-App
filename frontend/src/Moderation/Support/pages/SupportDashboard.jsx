@@ -1,8 +1,8 @@
 import restProvider from 'ra-data-simple-rest'
 import React from 'react'
 import { Admin, Resource } from 'react-admin'
-import CommentsList from '../../Admin/components/CommentsList'
-import SupportList from '../components/SupportList'
+import CommentsList from '../../Admin/components/comments/CommentsList'
+import SupportList from '../components/support/SupportList'
 
 const SupportDashboard = () => {
 	return (
