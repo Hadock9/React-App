@@ -21,7 +21,6 @@ const ProtectedRoute = ({ children, requiredRole }) => {
 		return <Navigate to='/Login' />
 	}
 	if (user.role === 'developer') {
-		toast.success('Welcome developer :)')
 		return children
 	}
 	// Перевірка, чи має користувач потрібну роль

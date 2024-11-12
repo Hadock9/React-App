@@ -60,7 +60,7 @@ function FAQ() {
 
 				<main className={rootstyle.Main}>
 					<div className='flex flex-col items-center justify-center mb-6'>
-						<h1 className='text-4xl font-bold'>FAQ</h1>
+						<h1 className='text-4xl font-bold my-7'>FAQ</h1>
 						<div>
 							{FAQInfo.map((item, index) => (
 								<Accordion key={index}>

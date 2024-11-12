@@ -64,7 +64,7 @@ export function Home() {
 						initial='hidden'
 						whileInView='visible'
 						viewport={{ once: true }}
-						className='flex flex-col-reverse md:flex-row items-center bg-gray-100 py-16 px-6 md:px-12'
+						className='flex flex-col-reverse md:flex-row items-center  py-16 px-6 md:px-12'
 					>
 						<motion.div
 							variants={heroTextAnimation}
@@ -96,7 +96,7 @@ export function Home() {
 						initial='hidden'
 						whileInView='visible'
 						viewport={{ once: true }}
-						className='flex flex-col items-center justify-center bg-gray-100 px-6 py-12'
+						className='flex flex-col items-center justify-center  px-6 py-12'
 					>
 						<div className='w-16 h-1 bg-blue-600 rounded mb-8'></div>
 						<div className='text-center max-w-2xl'>

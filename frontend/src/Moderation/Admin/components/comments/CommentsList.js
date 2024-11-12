@@ -9,9 +9,9 @@ import {
 	List,
 	TextField,
 } from 'react-admin'
-const CommentsList = props => {
+const CommentsList = () => {
 	return (
-		<List {...props}>
+		<List>
 			<Datagrid>
 				<TextField source='id' />
 				<TextField source='author' />

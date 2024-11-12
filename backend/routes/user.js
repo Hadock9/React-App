@@ -6,6 +6,8 @@ const {
 	GET_LIST,
 } = require('../controllers/userController')
 
+const { registration } = require('../controllers/authController')
+
 const router = express.Router()
 
 router.put('/updateProfile', updateProfile)
@@ -14,5 +16,5 @@ router.get('/:id/getMoney', GetMoney)
 
 // For react-admin
 router.get('/', GET_LIST)
-
+router.post('/', registration)
 module.exports = router

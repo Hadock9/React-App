@@ -1,16 +1,28 @@
-import { Edit } from 'lucide-react'
 import React from 'react'
 import {
+	Button,
 	Datagrid,
 	DateField,
 	DeleteButton,
-	EditButton,
 	ImageField,
+	Link,
 	List,
 	TextField,
+	useRecordContext,
 } from 'react-admin'
 
-const SupportList = props => {
+const ReplyButton = () => {
+	const record = useRecordContext()
+	return (
+		<Button
+			component={Link}
+			to={`/user/${record.id}/reply`}
+			label='Відповісти'
+		/>
+	)
+}
+
+const SupportList = ({ basePath, ...props }) => {
 	return (
 		<List {...props}>
 			<Datagrid>
@@ -21,7 +33,7 @@ const SupportList = props => {
 				<ImageField source='picture' />
 				<TextField source='request_type' />
 				<DateField source='created_at' />
-				<EditButton basePath='/support' icon={<Edit />} />
+				<ReplyButton />
 				<DeleteButton basePath='/support' />
 			</Datagrid>
 		</List>
