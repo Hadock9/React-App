@@ -90,6 +90,7 @@ export function NewsContent() {
 
                     <main className={rootstyle.Main}>
                         {/* News block */}
+
                         <div className='News my-5 ml-5 mr-24'>
                             <div className=' '>
                                 <p className='text-4xl font-extrabold font-sans '>
@@ -133,6 +134,7 @@ export function NewsContent() {
                                             <p>Немає даних для відображення.</p>
                                         )}
                                     </div>
+
                                     <Comments
                                         id={id}
                                         urlFetch={`http://localhost:4000/api/comments/news_comments/${id}/${
