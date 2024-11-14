@@ -41,7 +41,7 @@ export default function StakeForm({ MatchGet, amount, handleSubmit, setAmount, u
                         <img
                             src={Match.TeamLogo}
                             alt='Smaller Image'
-                            class='absolute inset-0 ml-auto mr-[5%] w-24 h-24'
+                            class='absolute inset-0 mt-auto ml-auto mr-[5%] w-24 h-24'
                         />
                     </div>
                     <div className='flex flex-col items-center'>

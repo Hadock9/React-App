@@ -254,7 +254,7 @@ export function Stake() {
                                             <img
                                                 src={stake.TeamLogo}
                                                 alt='Smaller Image'
-                                                class='absolute inset-0 ml-auto mr-[5%] w-24 h-24'
+                                                class='absolute inset-0 mt-auto ml-auto mr-[5%] w-24 h-24'
                                             />
                                         </div>
                                     </div>
