@@ -1,126 +1,130 @@
 /* Контейнер для блоку матчів */
 .MatchesBlock {
-	width: 100%;
-	height: 100%;
-	background-color: #393e46;
-	display: flex;
-	justify-content: space-between;
-	margin-bottom: 10px;
-	cursor: pointer;
-	border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    /* #393e46; */
+    /*  rgb(63 63 70); */
+    background-color: rgb(55 65 81);
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border-radius: 10px;
 }
 
 /* Країна матчів */
 .MatchesBlockCountry {
-	margin: 10px 10px;
+    margin: 10px 10px;
 }
 
 /* Коефіцієнт ставки */
 .MatchesBlockCoef {
-	border-radius: 50%;
-	background-color: #5f646d;
-	position: absolute;
-	width: 40px;
-	height: 40px;
-	text-align: center;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	color: white;
+    border-radius: 50%;
+    /*  */
+    background-color: rgb(107 114 128);
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
 }
 
 /* Коефіцієнт для команди 1 */
 .MatchesBlockTeam1Coef {
-	right: 25px;
+    right: 25px;
 }
 
 /* Коефіцієнт для команди 2 */
 .MatchesBlockTeam2Coef {
-	left: 25px;
+    left: 25px;
 }
 
 /* Інформація про матч */
 .MatchesBlockInfo {
-	width: 55%;
-	height: 120px;
-	display: flex;
-	padding-top: 10px;
+    width: 55%;
+    height: 120px;
+    display: flex;
+    padding-top: 10px;
 }
 
 /* Команда 1 */
 .MatchesBlockTeam {
-	width: 40%;
-	position: relative;
-	height: 120px;
-	display: flex;
+    width: 40%;
+    position: relative;
+    height: 120px;
+    display: flex;
 }
 
 /* Команда 2 */
 .MatchesBlockTeam2 {
-	width: 35%;
-	position: relative;
-	height: 120px;
-	display: flex;
-	flex-direction: row-reverse;
+    width: 35%;
+    position: relative;
+    height: 120px;
+    display: flex;
+    flex-direction: row-reverse;
 }
 
 /* Зображення країни */
 .MatchesBlockImgCountry {
-	height: auto;
-	width: 25px;
+    height: auto;
+    width: 25px;
 }
 
 /* Логотип команди */
 .MatchesBlockImgLogo {
-	width: auto;
-	height: 100px;
+    width: auto;
+    height: 100px;
 }
 
 /* Центр блоку матчів */
 .MatchesBlockCenter {
-	width: 20%;
-	justify-content: center;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	height: 100px;
-	color: white;
+    width: 20%;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100px;
+    color: white;
 
-	margin: 0px;
+    margin: 0px;
 }
 
 /* Дата та час матчу */
 .MatchesBlockVsDateTime {
-	text-align: center;
-	line-height: 20px;
-	font-weight: 600;
+    text-align: center;
+    line-height: 20px;
+    font-weight: 600;
 }
 
 /* Порівняння команд */
 .MatchesBlockVs {
-	font-weight: 700;
+    font-weight: 700;
 }
 
 /* Сторона блоку матчів */
 .MatchesBlockSide {
-	width: 40%;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	border-radius: 10px;
-	background-color: #545961;
-	padding-right: 10px;
-	text-align: center;
-	color: white;
-	font-weight: 600;
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    /* #545961 */
+    background-color: rgb(107 114 128);
+
+    text-align: center;
+    color: white;
+    font-weight: 600;
 }
 
 /* Зображення для сторони 1 */
 .MatchesSideBlockImg1 {
-	margin: 0 30px;
+    margin: 0 30px;
 }
 
 .MatchesSideImg {
-	width: auto;
-	height: 28px;
+    width: auto;
+    height: 28px;
 }
