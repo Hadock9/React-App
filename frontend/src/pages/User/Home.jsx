@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import BurgerMenu from '../../components/BurgerMenu'
@@ -7,41 +8,54 @@ import Footer from '../../components/UserExpirience/Footer'
 import { MotionFireLogo } from '../../components/UserExpirience/MotionFireLogo'
 import NavBar from '../../components/UserExpirience/NavBar'
 import rootstyle from '../../styles/root.module.css'
+=======
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import BurgerMenu from "../../components/BurgerMenu";
+import { UkrainianWar } from "../../components/UserExpirience/BlockSaveUkraine";
+import MyCarousel from "../../components/UserExpirience/Carousel";
+import Footer from "../../components/UserExpirience/Footer";
+import { MotionFireLogo } from "../../components/UserExpirience/MotionFireLogo";
+import NavBar from "../../components/UserExpirience/NavBar";
+import useFetchGet from "../../hooks/useFetchGet";
+import rootstyle from "../../styles/root.module.css";
+>>>>>>> d451ef5ba (Home & Tech support update)
 
 export function Home() {
-	const heroTextAnimation = {
-		hidden: {
-			x: -100,
-			opacity: 0,
-		},
-		visible: {
-			x: 0,
-			opacity: 1,
-		},
-	}
+  const heroTextAnimation = {
+    hidden: {
+      x: -100,
+      opacity: 0,
+    },
+    visible: {
+      x: 0,
+      opacity: 1,
+    },
+  };
 
-	const heroImageAnimation = {
-		hidden: {
-			x: 100,
-			opacity: 0,
-		},
-		visible: {
-			x: 0,
-			opacity: 1,
-		},
-	}
+  const heroImageAnimation = {
+    hidden: {
+      x: 100,
+      opacity: 0,
+    },
+    visible: {
+      x: 0,
+      opacity: 1,
+    },
+  };
 
-	const infoAnimation = {
-		hidden: {
-			y: 100,
-			opacity: 0,
-		},
-		visible: custom => ({
-			y: 0,
-			opacity: 1,
-			transition: { delay: custom * 0.3 },
-		}),
-	}
+  const infoAnimation = {
+    hidden: {
+      y: 100,
+      opacity: 0,
+    },
+    visible: (custom) => ({
+      y: 0,
+      opacity: 1,
+      transition: { delay: custom * 0.3 },
+    }),
+  };
 
 	const stairsAnimation = {
 		hidden: {
