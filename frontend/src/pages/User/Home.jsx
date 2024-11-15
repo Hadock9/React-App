@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import BurgerMenu from '../../components/BurgerMenu'
 import { UkrainianWar } from '../../components/UserExpirience/BlockSaveUkraine'
@@ -7,7 +6,6 @@ import MyCarousel from '../../components/UserExpirience/Carousel'
 import Footer from '../../components/UserExpirience/Footer'
 import { MotionFireLogo } from '../../components/UserExpirience/MotionFireLogo'
 import NavBar from '../../components/UserExpirience/NavBar'
-import useFetchGet from '../../hooks/useFetchGet'
 import rootstyle from '../../styles/root.module.css'
 
 export function Home() {
@@ -45,13 +43,17 @@ export function Home() {
 		}),
 	}
 
-	const [games, setGames] = useState([])
-	const { Data, isLoading, failedToFetch } = useFetchGet({
-		url: 'http://localhost:4000/api/games/Games_List',
-	})
-	useEffect(() => {
-		setGames(Data)
-	}, [Data])
+	const stairsAnimation = {
+		hidden: {
+			y: 100,
+			opacity: 0,
+		},
+		visible: custom => ({
+			y: 0 + custom * 20,
+			opacity: 1,
+			transition: { delay: custom * 0.3 },
+		}),
+	}
 
 	return (
 		<div className={rootstyle.wrapper}>
