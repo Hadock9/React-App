@@ -1,3 +1,5 @@
+import { AnimatePresence, motion } from 'framer-motion'
+
 import { useEffect, useState } from 'react'
 import BurgerMenu from '../../components/BurgerMenu'
 import Footer from '../../components/UserExpirience/Footer'
@@ -42,25 +44,42 @@ const Notifications = () => {
                 <BurgerMenu />
 
                 <main className={rootstyle.Main}>
-                    {Notifications.map((Notification) => (
-                        <div
-                            className='w-full min-h-[100px] h-[120px] bg-gray-800 text-gray-200 flex gap-4 items-center justify-evenly p-4 rounded-lg my-5'
-                            key={Notification.id}
-                        >
-                            <div>{Notification.id}</div>
-                            <div>{Notification.match_id}</div>
-                            <div className='min-w-[20%] flex flex-col items-center'>
-                                <div className='flex'>
-                                    <div> {Notification.content} </div>
+                    <div className='flex flex-col-reverse'>
+                        {Notifications.map((Notification) => (
+                            <motion.div
+                                initial='hidden'
+                                whileInView='show'
+                                exit='hidden'
+                                viewport={{ once: true }}
+                                variants={{
+                                    hidden: { opacity: 0, x: -50 },
+
+                                    show: {
+                                        opacity: 1,
+                                        x: 0,
+                                        transition: {
+                                            duration: 0.5,
+                                        },
+                                    },
+                                }}
+                            >
+                                <div
+                                    className='bg-gray-700 text-white flex rounded-lg my-5 p-10'
+                                    key={Notification.id}
+                                >
+                                    <div className='flex grow-[5] basis-0 items-center text-m '>
+                                        <div className='pl-[20%]'>{Notification.content}</div>
+                                    </div>
+                                    <div className='flex grow basis-0 justify-center items-center'>
+                                        Status: {Notification.type}
+                                    </div>
+                                    <div className='flex grow basis-0 justify-center items-center'>
+                                        {formatDate(Notification.created_at)}
+                                    </div>
                                 </div>
-                            </div>
-                            <div className='flex flex-col justify-evenly items-center'>
-                                <div></div>
-                                <div>{formatDate(Notification.created_at)}</div>
-                                <div>Status: {Notification.type}</div>
-                            </div>
-                        </div>
-                    ))}
+                            </motion.div>
+                        ))}
+                    </div>
                 </main>
             </div>
             <Footer />
