@@ -1,31 +1,31 @@
 /* Контейнер для бокового меню */
 .BurgerMenuContainer {
-	@apply w-1/5 h-full   mt-2 mr-2 rounded-r-lg select-none;
+    @apply w-1/5 h-full sticky top-0   mt-2 mr-2 rounded-r-lg select-none;
 }
 
 /* Секція, що прихована */
 .HiddenBlock {
-	@apply hidden;
+    @apply hidden;
 }
 
 /* Блок елементів в боковому меню */
 .AsideBlock {
-	@apply h-16 flex items-center cursor-pointer  select-none;
+    @apply h-16 flex items-center cursor-pointer  select-none;
 }
 .AsideBlock:hover {
-	@apply cursor-pointer bg-gray-300 rounded-r-lg select-none;
+    @apply cursor-pointer bg-gray-300 rounded-r-lg select-none;
 }
 /* Іконка для перегляду в боковому меню */
 .AsideBlockIconBrowse {
-	@apply w-16 h-16 flex items-center justify-center cursor-pointer;
+    @apply w-[60px] h-[60px] flex items-center justify-center cursor-pointer;
 }
 
 /* Загальна іконка в боковому меню */
 .AsideBlockIcon {
-	@apply w-16 h-16 flex items-center justify-center;
+    @apply w-[60px] h-[60px] flex items-center justify-center;
 }
 
 /* Текстовий блок в боковому меню */
 .AsideBlockText {
-	@apply w-4/5 h-16 flex items-center select-none;
+    @apply w-4/5 h-16 flex items-center select-none;
 }

@@ -1,14 +1,11 @@
 const express = require('express')
-const {
-	getGamesList,
-	getMatchListByGameId,
-	getMatchById,
-} = require('../controllers/gamesController')
+const { getGamesList, GET_LIST } = require('../controllers/gamesController')
 
 const router = express.Router()
 
 router.get('/Games_List', getGamesList)
-router.get('/match/:game_id', getMatchListByGameId)
-router.get('/match/Match/:id', getMatchById)
+
+// For react-admin
+router.get('/', GET_LIST)
 
 module.exports = router

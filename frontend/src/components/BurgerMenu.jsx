@@ -3,10 +3,10 @@ import {
 	CircleDollarSign,
 	CircleUserRound,
 	Gem,
+	Gift,
 	History,
 	House,
 	Mail,
-	Wallet,
 } from 'lucide-react'
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
@@ -18,7 +18,7 @@ const sideBarInfo = [
 	{ link: '/Balance', icon: <CircleDollarSign />, name: 'Баланс' },
 	{ link: '/Bonuses', icon: <Gem />, name: 'Бонуси' },
 	{ link: '/Profile', icon: <CircleUserRound />, name: 'Мій профіль' },
-	{ link: '/Wallet', icon: <Wallet />, name: 'Гаманець' },
+	{ link: '/Donate', icon: <Gift />, name: 'Підтримати' },
 	{ link: '/Notifications', icon: <Mail />, name: 'Повідомлення' },
 ]
 
@@ -73,7 +73,7 @@ function BurgerMenu() {
 			initial={{ opacity: 0, x: -20 }}
 			animate={isOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
 			transition={{ duration: 0.6, ease: 'easeInOut', delay: 0.1 }}
-			style={{ display: isOpen ? 'block' : 'none' }} // Ensure it doesn't render when closed
+			style={{ display: isOpen ? 'block' : 'none' }}
 		>
 			<p>{children}</p>
 		</motion.div>

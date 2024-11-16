@@ -43,7 +43,7 @@ const MyCarousel = ({ Array }) => {
 				<Link
 					key={index}
 					to={
-						'/Home/' +
+						'/Games/' +
 						Item.name.replaceAll(' ', '_').replaceAll('-', '_') +
 						`/Matches?game_id=${Item.id}`
 					}
@@ -56,7 +56,7 @@ const MyCarousel = ({ Array }) => {
 							ease: 'easeIn',
 							duration: 0.7,
 						}}
-						className=' flex items-center'
+						className=' flex justify-center'
 					>
 						<img
 							className='rounded-2xl w-[210px] h-[290px]'

@@ -10,23 +10,49 @@ exports.getGamesList = (req, res) => {
 	})
 }
 
-exports.getMatchListByGameId = (req, res) => {
-	const sql = `SELECT M.MatchID, M.Place, M.season, M.VsDate, T1.TeamName AS Team1Name, T1.TeamLogo AS Team1Logo, T1.TeamCountry AS Team1Country, M.Team1Coef, T2.TeamName AS Team2Name, T2.TeamLogo AS Team2Logo, T2.TeamCountry AS Team2Country, M.Team2Coef, GL.name AS GameName, GL.min_logo AS GameMinLogo FROM Matches M JOIN Teams T1 ON M.Team1ID = T1.TeamID JOIN Teams T2 ON M.Team2ID = T2.TeamID JOIN Games_List GL ON M.game_id = GL.id WHERE M.game_id = ?`
-	db.query(sql, [req.params.game_id], (err, result) => {
-		if (err) {
-			return res.status(500).json({ error: err.message })
-		}
-		res.json(result)
-	})
-}
+exports.GET_LIST = (req, res) => {
+	// параметри `range` та `sort` з запиту
+	const range = JSON.parse(req.query.range || '[0, 9]')
+	const sort = JSON.parse(req.query.sort || '["id", "ASC"]')
 
-exports.getMatchById = (req, res) => {
-	const sql = `SELECT M.MatchID, M.Team1ID, M.Team2ID, M.Place, M.time, M.VsDate, T1.TeamName AS Team1Name, T1.TeamLogo AS Team1Logo, T1.TeamCountry AS Team1Country, M.Team1Coef, M.status, T2.TeamName AS Team2Name, T2.TeamLogo AS Team2Logo, T2.TeamCountry AS Team2Country, M.Team2Coef, M.Team1Score, M.Team2Score 
-	FROM Matches M JOIN Teams T1 ON M.Team1ID = T1.TeamID JOIN Teams T2 ON M.Team2ID = T2.TeamID WHERE M.MatchID = ?`
-	db.query(sql, [req.params.id], (err, result) => {
+	const start = range[0]
+	const end = range[1]
+	const limit = end - start + 1
+	const offset = start
+
+	const [sortField, sortOrder] = sort
+
+	const sql = `SELECT * FROM Games_List  ORDER BY ?? ${
+		sortOrder === 'DESC' ? 'DESC' : 'ASC'
+	}
+		LIMIT ? OFFSET ?`
+
+	const queryParams = [sortField, limit, offset]
+
+	// Виконуємо основний запит
+	db.query(sql, queryParams, (err, results) => {
 		if (err) {
 			return res.status(500).json({ error: err.message })
 		}
-		res.json(result)
+
+		// Запит для підрахунку загальної кількості записів
+		const countSql = 'SELECT COUNT(*) AS total FROM Games_List'
+		db.query(countSql, (countErr, countResults) => {
+			if (countErr) {
+				return res.status(500).json({ error: countErr.message })
+			}
+
+			const total = countResults[0].total
+
+			// Формуємо заголовок `Content-Range` на основі фактичних даних
+			const contentRange = `Matches ${start}-${
+				start + results.length - 1
+			}/${total}`
+			console.log('Content-Range:', contentRange)
+
+			res.setHeader('Content-Range', contentRange)
+			res.setHeader('Access-Control-Expose-Headers', 'Content-Range')
+			res.json(results)
+		})
 	})
 }

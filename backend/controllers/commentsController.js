@@ -2,11 +2,15 @@ const db = require('../db.js')
 
 exports.getNews_comments = (req, res) => {
 	const sql = `SELECT c.*, 
-       uld.action AS likedOrDisliked
+       uld.action AS likedOrDisliked, 
+       u.first_name AS author, 
+       u.picture AS picture
 				FROM comments c
 				LEFT JOIN user_likes_dislikes uld 
-				ON c.id = uld.comment_id 
-				AND uld.user_id = ?
+							ON c.id = uld.comment_id 
+							AND uld.user_id = ?
+				JOIN users u 
+							ON c.user_id = u.id
 				WHERE c.news_id = ?;`
 	db.query(sql, [req.params.user_id, req.params.id], (err, result) => {
 		if (err) {
@@ -17,12 +21,12 @@ exports.getNews_comments = (req, res) => {
 }
 
 exports.Create_comment = (req, res) => {
-	const { id, author, content, picture } = req.body
+	const { id, content, user_id } = req.body
 
 	const sql =
-		'INSERT INTO comments (	author, content, picture,news_id ,publish_date) VALUES (?, ?, ?, ?, NOW()) '
+		'INSERT INTO comments (user_id, content,  news_id, publish_date) VALUES (?, ?, ?, NOW())'
 
-	db.query(sql, [author, content, picture, id], (err, result) => {
+	db.query(sql, [user_id, content, id], (err, result) => {
 		if (err) {
 			console.error('Error inserting user:', err)
 			return res.status(500).json({ error: 'Database error' })
@@ -31,6 +35,32 @@ exports.Create_comment = (req, res) => {
 	})
 }
 
+exports.Delete_comment = (req, res) => {
+	const { commentId } = req.body
+
+	const sql = 'DELETE FROM comments WHERE id = ?'
+
+	db.query(sql, [commentId], (err, result) => {
+		if (err) {
+			console.error('Error inserting user:', err)
+			return res.status(500).json({ error: 'Database error' })
+		}
+		return res.status(201).json({ commentId: result.deleteResult })
+	})
+}
+exports.update_comment = (req, res) => {
+	const { commentId, content } = req.body
+
+	const sql = 'UPDATE comments SET content = ? WHERE id = ?'
+
+	db.query(sql, [content, commentId], (err, result) => {
+		if (err) {
+			console.error('Error inserting user:', err)
+			return res.status(500).json({ error: 'Database error' })
+		}
+		return res.status(201).json({ id: result.insertId })
+	})
+}
 exports.DeleteStatus = (req, res) => {
 	const { commentId, userId } = req.query
 
@@ -150,11 +180,15 @@ exports.updateUser_likes_dislikes = (req, res) => {
 
 exports.getMatch_comments = (req, res) => {
 	const sql = `SELECT c.*, 
-       uld.action AS likedOrDisliked
+       uld.action AS likedOrDisliked, 
+       u.first_name AS author, 
+       u.picture AS picture
 				FROM comments c
 				LEFT JOIN user_likes_dislikes uld 
-				ON c.id = uld.comment_id 
-				AND uld.user_id = ?
+									ON c.id = uld.comment_id 
+									AND uld.user_id = ?
+				JOIN users u 
+									ON c.user_id = u.id
 				WHERE c.match_id = ?;`
 	db.query(sql, [req.params.user_id, req.params.id], (err, result) => {
 		if (err) {
@@ -177,16 +211,73 @@ exports.getIdLast_comment = (req, res) => {
 }
 
 exports.Create_Match_comment = (req, res) => {
-	const { id, author, content, picture } = req.body
+	const { id, content, user_id } = req.body
 
 	const sql =
-		'INSERT INTO comments (	author, content, picture, match_id ,publish_date) VALUES (?, ?, ?, ?, NOW()) '
+		'INSERT INTO comments (	user_id, content,  match_id ,publish_date) VALUES (?, ?,   ?, NOW()) '
 
-	db.query(sql, [author, content, picture, id], (err, result) => {
+	db.query(sql, [user_id, content, id], (err, result) => {
 		if (err) {
 			console.error('Error inserting user:', err)
 			return res.status(500).json({ error: 'Database error' })
 		}
 		return res.status(201).json({ id: result.insertId })
+	})
+}
+
+exports.GET_LIST = (req, res) => {
+	// параметри `range` та `sort` з запиту
+	const range = JSON.parse(req.query.range || '[0, 9]')
+	const sort = JSON.parse(req.query.sort || '["id", "ASC"]')
+
+	const start = range[0]
+	const end = range[1]
+	const limit = end - start + 1
+	const offset = start
+
+	const [sortField, sortOrder] = sort
+
+	// Основний SQL-запит з урахуванням сортування, обмеження та зміщення
+	const sql = `
+		SELECT c.*, 
+      
+       u.first_name AS author, 
+       u.picture AS picture
+				FROM comments c
+				JOIN users u 
+							ON c.user_id = u.id
+			 
+		ORDER BY ?? ${sortOrder === 'DESC' ? 'DESC' : 'ASC'}
+		LIMIT ? OFFSET ?;
+	`
+
+	// Параметри для запиту
+	const queryParams = [sortField, limit, offset]
+
+	// Виконуємо основний запит
+	db.query(sql, queryParams, (err, results) => {
+		if (err) {
+			return res.status(500).json({ error: err.message })
+		}
+
+		// Запит для підрахунку загальної кількості записів
+		const countSql = 'SELECT COUNT(*) AS total FROM comments'
+		db.query(countSql, (countErr, countResults) => {
+			if (countErr) {
+				return res.status(500).json({ error: countErr.message })
+			}
+
+			const total = countResults[0].total
+
+			// Формуємо заголовок `Content-Range` на основі фактичних даних
+			const contentRange = `comments ${start}-${
+				start + results.length - 1
+			}/${total}`
+			console.log('Content-Range:', contentRange) // Діагностика Content-Range
+
+			res.setHeader('Content-Range', contentRange)
+			res.setHeader('Access-Control-Expose-Headers', 'Content-Range')
+			res.json(results)
+		})
 	})
 }

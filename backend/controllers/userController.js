@@ -1,9 +1,7 @@
 const jwt = require('jsonwebtoken')
 
 const db = require('../db.js')
-const secretKey =
-	'"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"'
-
+const generateToken = require('./token/tokenUtils')
 exports.updateProfile = async (req, res) => {
 	const { id, first_name, last_name, date_of_birth, gender, phone, country } =
 		req.body
@@ -26,26 +24,7 @@ exports.updateProfile = async (req, res) => {
 					return res.status(500).json({ error: 'Database error' })
 				}
 
-				const user = result[0]
-
-				// Створення токена
-				const token = jwt.sign(
-					{
-						id: result[0].id,
-						email: result[0].email,
-						first_name: result[0].first_name,
-						last_name: result[0].last_name,
-						date_of_birth: result[0].date_of_birth,
-						country: result[0].country,
-						gender: result[0].gender,
-						phone_number: result[0].phone_number,
-						picture: result[0].picture,
-						bonus_money: result[0].bonus_money,
-						created_at: result[0].created_at,
-					},
-					secretKey,
-					{ expiresIn: '1h' }
-				)
+				const token = generateToken(result[0])
 
 				return res.json({ token })
 			})
@@ -54,10 +33,15 @@ exports.updateProfile = async (req, res) => {
 }
 
 exports.updateBonusMoney = async (req, res) => {
-	const { id, bonus_money, amount } = req.body
+	const { id, bonus_money, amount, action } = req.body
 
 	const sqlUpdate = `UPDATE Users SET  bonus_money = ? WHERE id = ?`
-	const money = bonus_money - amount
+	let money = 0
+	if (action === 'add') {
+		money = bonus_money + amount
+	} else if (action === 'sub') {
+		money = bonus_money - amount
+	}
 	db.query(sqlUpdate, [money, id], (err, result) => {
 		if (err) {
 			console.error('Error updating bonus_money:', err)
@@ -71,28 +55,76 @@ exports.updateBonusMoney = async (req, res) => {
 				return res.status(500).json({ error: 'Database error' })
 			}
 
-			const user = result[0]
-
 			// Створення токена
-			const token = jwt.sign(
-				{
-					id: result[0].id,
-					email: result[0].email,
-					first_name: result[0].first_name,
-					last_name: result[0].last_name,
-					date_of_birth: result[0].date_of_birth,
-					country: result[0].country,
-					gender: result[0].gender,
-					phone_number: result[0].phone_number,
-					picture: result[0].picture,
-					bonus_money: result[0].bonus_money,
-					created_at: result[0].created_at,
-				},
-				secretKey,
-				{ expiresIn: '1h' }
-			)
+			const token = generateToken(result[0])
 
 			return res.json({ token })
+		})
+	})
+}
+
+exports.GetMoney = (req, res) => {
+	const sql = `
+		SELECT bonus_money FROM users 
+	 WHERE id = ?;
+	`
+	// Виконуємо основний запит
+	db.query(sql, [req.params.id], (err, results) => {
+		if (err) {
+			return res.status(500).json({ error: err.message })
+		}
+
+		res.json(results)
+	})
+}
+
+exports.GET_LIST = (req, res) => {
+	// параметри `range` та `sort` з запиту
+	const range = JSON.parse(req.query.range || '[0, 9]')
+	const sort = JSON.parse(req.query.sort || '["id", "ASC"]')
+
+	const start = range[0]
+	const end = range[1]
+	const limit = end - start + 1
+	const offset = start
+
+	const [sortField, sortOrder] = sort
+
+	// Основний SQL-запит з урахуванням сортування, обмеження та зміщення
+	const sql = `
+		SELECT * FROM users 
+	 
+		ORDER BY ?? ${sortOrder === 'DESC' ? 'DESC' : 'ASC'}
+		LIMIT ? OFFSET ?;
+	`
+
+	// Параметри для запиту
+	const queryParams = [sortField, limit, offset]
+
+	// Виконуємо основний запит
+	db.query(sql, queryParams, (err, results) => {
+		if (err) {
+			return res.status(500).json({ error: err.message })
+		}
+
+		// Запит для підрахунку загальної кількості записів
+		const countSql = 'SELECT COUNT(*) AS total FROM users'
+		db.query(countSql, (countErr, countResults) => {
+			if (countErr) {
+				return res.status(500).json({ error: countErr.message })
+			}
+
+			const total = countResults[0].total
+
+			// Формуємо заголовок `Content-Range` на основі фактичних даних
+			const contentRange = `news ${start}-${
+				start + results.length - 1
+			}/${total}`
+			console.log('Content-Range:', contentRange) // Діагностика Content-Range
+
+			res.setHeader('Content-Range', contentRange)
+			res.setHeader('Access-Control-Expose-Headers', 'Content-Range')
+			res.json(results)
 		})
 	})
 }
