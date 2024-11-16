@@ -45,10 +45,9 @@ module.exports = {
   ],
 
   // 6. DevServer (опціонально)
-  devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    compress: true,
-    port: 9000,
-    allowedHosts: 'all',
-  },
+ devServer: {
+  allowedHosts: ['.localhost', '0.0.0.0'], // Приклад коректного значення
+  port: 3000, // Ваш порт
+  open: true, // Автоматичне відкриття браузера
+},
 };
