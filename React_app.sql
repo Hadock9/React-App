@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 10, 2024 at 10:33 PM
+-- Generation Time: Nov 17, 2024 at 10:41 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -330,19 +330,6 @@ INSERT INTO `comments` (`id`, `news_id`, `match_id`, `content`, `publish_date`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `games`
---
-
-CREATE TABLE `games` (
-  `id` int(11) NOT NULL,
-  `image_src` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `views` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `games_list`
 --
 
@@ -657,19 +644,6 @@ INSERT INTO `notifications` (`id`, `user_id`, `stake_id`, `content`, `type`, `cr
 (55, 66, 44, 'Вітаємо! Ви виграли 397.6500₴ у ставці на команду Toronto Ultra', 'win', '2024-11-09 13:09:15'),
 (56, 66, 45, 'Вітаємо! Ви виграли 386.1000₴ у ставці на команду Toronto Ultra', 'win', '2024-11-09 13:09:15'),
 (57, 66, 46, 'Вітаємо! Ви виграли 351.4500₴ у ставці на команду Toronto Ultra', 'win', '2024-11-09 13:09:15');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `product`
---
-
-CREATE TABLE `product` (
-  `id` bigint(20) NOT NULL,
-  `image_src` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `views` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1161,12 +1135,6 @@ ALTER TABLE `comments`
   ADD KEY `fk_user_id` (`user_id`);
 
 --
--- Indexes for table `games`
---
-ALTER TABLE `games`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `games_list`
 --
 ALTER TABLE `games_list`
@@ -1195,12 +1163,6 @@ ALTER TABLE `notifications`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `fk_stake` (`stake_id`);
-
---
--- Indexes for table `product`
---
-ALTER TABLE `product`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `stake`
@@ -1258,12 +1220,6 @@ ALTER TABLE `comments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=383;
 
 --
--- AUTO_INCREMENT for table `games`
---
-ALTER TABLE `games`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `games_list`
 --
 ALTER TABLE `games_list`
@@ -1286,12 +1242,6 @@ ALTER TABLE `news`
 --
 ALTER TABLE `notifications`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
-
---
--- AUTO_INCREMENT for table `product`
---
-ALTER TABLE `product`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `stake`
@@ -1338,21 +1288,21 @@ ALTER TABLE `user_views`
 --
 ALTER TABLE `comments`
   ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`news_id`) REFERENCES `news` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `matches`
 --
 ALTER TABLE `matches`
   ADD CONSTRAINT `fk_game` FOREIGN KEY (`game_id`) REFERENCES `games_list` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `matches_ibfk_1` FOREIGN KEY (`Team1ID`) REFERENCES `teams` (`TeamID`),
-  ADD CONSTRAINT `matches_ibfk_2` FOREIGN KEY (`Team2ID`) REFERENCES `teams` (`TeamID`);
+  ADD CONSTRAINT `matches_ibfk_1` FOREIGN KEY (`Team1ID`) REFERENCES `teams` (`TeamID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `matches_ibfk_2` FOREIGN KEY (`Team2ID`) REFERENCES `teams` (`TeamID`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `news`
 --
 ALTER TABLE `news`
-  ADD CONSTRAINT `news_ibfk_1` FOREIGN KEY (`game_id`) REFERENCES `games_list` (`id`);
+  ADD CONSTRAINT `news_ibfk_1` FOREIGN KEY (`game_id`) REFERENCES `games_list` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `notifications`
@@ -1367,13 +1317,13 @@ ALTER TABLE `notifications`
 ALTER TABLE `stake`
   ADD CONSTRAINT `fk_team` FOREIGN KEY (`team_id`) REFERENCES `teams` (`TeamID`) ON DELETE CASCADE,
   ADD CONSTRAINT `fk_user_stake` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `stake_ibfk_1` FOREIGN KEY (`match_id`) REFERENCES `matches` (`MatchID`);
+  ADD CONSTRAINT `stake_ibfk_1` FOREIGN KEY (`match_id`) REFERENCES `matches` (`MatchID`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `support`
 --
 ALTER TABLE `support`
-  ADD CONSTRAINT `support_ibfk_1` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `support_ibfk_1` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `user_likes_dislikes`
@@ -1385,8 +1335,8 @@ ALTER TABLE `user_likes_dislikes`
 -- Constraints for table `user_views`
 --
 ALTER TABLE `user_views`
-  ADD CONSTRAINT `user_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `Users` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `user_views_ibfk_2` FOREIGN KEY (`news_id`) REFERENCES `News` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `user_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `user_views_ibfk_2` FOREIGN KEY (`news_id`) REFERENCES `news` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
