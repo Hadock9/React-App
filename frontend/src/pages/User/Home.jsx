@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import BurgerMenu from '../../components/BurgerMenu'
+import Transition from '../../components/transition'
 import { UkrainianWar } from '../../components/UserExpirience/BlockSaveUkraine'
 import MyCarousel from '../../components/UserExpirience/Carousel'
 import Footer from '../../components/UserExpirience/Footer'
@@ -10,7 +11,7 @@ import NavBar from '../../components/UserExpirience/NavBar'
 import useFetchGet from '../../hooks/useFetchGet'
 import rootstyle from '../../styles/root.module.css'
 
-export function Home() {
+function Home() {
 	const heroTextAnimation = {
 		hidden: {
 			x: -100,
@@ -193,3 +194,5 @@ export function Home() {
 		</div>
 	)
 }
+
+export default Transition(Home)

@@ -25,8 +25,8 @@ const NewsList = props => {
 				<TextField source='views' />
 				<DateField source='updated_at' />
 				<DateField source='publish_date' />
-				<EditButton basePath='/support' icon={<Edit />} />
-				<DeleteButton basePath='/support' />
+				<EditButton icon={<Edit />} />
+				<DeleteButton />
 			</Datagrid>
 		</List>
 	)

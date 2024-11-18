@@ -79,3 +79,15 @@ exports.DeleteRequest = (req, res) => {
 		res.json(results)
 	})
 }
+
+exports.GetRequest = (req, res) => {
+	const sql = 'SELECT * FROM support WHERE id = ?'
+
+	db.query(sql, [req.params.id], (err, results) => {
+		if (err) {
+			return res.status(500).json({ error: err.message })
+		}
+
+		res.json(results[0])
+	})
+}

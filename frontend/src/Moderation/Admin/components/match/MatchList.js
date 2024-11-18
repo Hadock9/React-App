@@ -5,6 +5,7 @@ import {
 	DateField,
 	DeleteButton,
 	EditButton,
+	ImageField,
 	List,
 	TextField,
 } from 'react-admin'
@@ -18,15 +19,15 @@ const MatchList = props => {
 				<DateField source='VsDate' />
 				<TextField source='GameName' />
 				<TextField source='Team1Name' />
-				<TextField source='Team1Logo' />
-				<TextField source='Team1Country' />
+				<ImageField source='Team1Logo' />
+				<ImageField source='Team1Country' />
 				<TextField source='Team2Name' />
-				<TextField source='Team2Logo' />
-				<TextField source='Team2Country' />
+				<ImageField source='Team2Logo' />
+				<ImageField source='Team2Country' />
 				<TextField source='season' />
 				<TextField source='status' />
-				<EditButton basePath='/support' icon={<Edit />} />
-				<DeleteButton basePath='/support' />
+				<EditButton icon={<Edit />} />
+				<DeleteButton />
 			</Datagrid>
 		</List>
 	)

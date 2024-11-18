@@ -161,6 +161,7 @@ const Comments = ({ id, urlFetch, urlPost }) => {
 							onBlur={SetCommentTextDirty}
 							value={CommentText}
 							onChange={handleCommentText}
+							placeholder='Введіть свій коментар...'
 						/>
 						<Mybutton ondisable={ondisable && isRegUser}>Submit</Mybutton>
 					</form>

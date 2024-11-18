@@ -1,12 +1,22 @@
 const db = require('../db.js')
 
 exports.getNotificationsList = (req, res) => {
-	const sql = `SELECT n.*, s.*, 
-       t.*
-FROM Notifications n
-JOIN stake s ON n.stake_id = s.id
-JOIN teams t ON s.team_id = t.teamid
-WHERE n.user_id = ?;`
+	const sql = `SELECT n.*, 
+      
+       s.amount AS amount, 
+       
+			 sp.title AS support_title,
+			 sp.content AS support_content,
+
+       a.first_name AS admin_name,
+			 a.picture AS admin_picture
+
+			FROM Notifications n
+			LEFT JOIN users u ON n.user_id = u.id
+			LEFT JOIN stake s ON n.stake_id = s.id
+			LEFT JOIN support sp ON n.support_id = sp.id
+			LEFT JOIN users a ON n.admin_id = a.id
+			WHERE n.user_id = ?;`
 
 	db.query(sql, [req.params.id], (err, result) => {
 		if (err) {
@@ -93,5 +103,25 @@ exports.Delete_notification = (req, res) => {
 		}
 
 		res.json({ message: 'Notification deleted successfully.' })
+	})
+}
+
+exports.Create_notifications = (req, res) => {
+	const { content, admin_id, user_id, support_id } = req.body
+	const sql =
+		'INSERT INTO Notifications (support_id,content, admin_id, user_id, type) VALUES (?, ?,?, ?, "info")'
+
+	db.query(sql, [support_id, content, admin_id, user_id], (err, result) => {
+		if (err) {
+			console.error('Database error:', err)
+			return res.status(500).json({
+				error: 'An error occurred while creating the notification.',
+			})
+		}
+
+		// Повертаємо ідентифікатор нового запису
+		res.json({
+			id: result.insertId,
+		})
 	})
 }

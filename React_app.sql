@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 17, 2024 at 10:41 PM
+-- Generation Time: Nov 18, 2024 at 01:48 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -338,29 +338,28 @@ CREATE TABLE `games_list` (
   `name` varchar(255) DEFAULT NULL,
   `ImageSrc` varchar(100) NOT NULL,
   `views` int(11) NOT NULL,
-  `min_logo` varchar(255) DEFAULT NULL,
-  `image_src` varchar(255) DEFAULT NULL
+  `min_logo` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `games_list`
 --
 
-INSERT INTO `games_list` (`id`, `name`, `ImageSrc`, `views`, `min_logo`, `image_src`) VALUES
-(1, 'Counter-Strike 2', 'img/Games/Counter-Strike2.png', 80, 'img/GamesMiniLogo/counterstrike.png', NULL),
-(2, 'Call of Duty Warzone', 'img/Games/CallofDuty-Warzone.png', 88, 'img/GamesMiniLogo/CallofDuty-Warzone.png', NULL),
-(3, 'Dota 2', 'img/Games/Dota2.png', 123, 'img/GamesMiniLogo/Dota2.png', NULL),
-(4, 'FIFA киберспорт', 'img/Games/FIFA.png', 12, 'img/GamesMiniLogo/FIFA.png', NULL),
-(5, 'Halo Infinite', 'img/Games/HaloInfinite.png', 12, 'img/GamesMiniLogo/HaloInfinite.png', NULL),
-(6, 'League of Legends Wild Rift', 'img/Games/LeagueofLegends-WildRift.png', 11, 'img/GamesMiniLogo/LeagueofLegends-WildRift.png', NULL),
-(7, 'League of Legends', 'img/Games/LeagueofLegends.png', 11, 'img/GamesMiniLogo/LeagueofLegends.png', NULL),
-(8, 'Overwatch 2', 'img/Games/Overwatch2.png', 11, 'img/GamesMiniLogo/Overwatch2.png', NULL),
-(9, 'PlayerUnknown\'s Battlegrounds', 'img/Games/PlayerUnknown\'sBattlegrounds.png', 34, 'img/GamesMiniLogo/PlayerUnknown\'sBattlegrounds.png', NULL),
-(10, 'Pokkén Tournament', 'img/Games/PokkenTournament.png', 67, 'img/GamesMiniLogo/PokkenTournament.png', NULL),
-(11, 'Rocket League', 'img/Games/RocketLeague.png', 34, 'img/GamesMiniLogo/RocketLeague.png', NULL),
-(12, 'Tom Clancy’s Rainbow Six Siege', 'img/Games/TomClancysRainbowSixSiege.png', 87, 'img/GamesMiniLogo/RainbowSixSiege.png', NULL),
-(13, 'Valorant', 'img/Games/Valorant.png', 23, 'img/GamesMiniLogo/Valorant.png', NULL),
-(14, 'Deadlock', 'img/Games/Default.jpg', 4, 'img/GamesMiniLogo/Default.png', NULL);
+INSERT INTO `games_list` (`id`, `name`, `ImageSrc`, `views`, `min_logo`) VALUES
+(1, 'Counter-Strike 2', '/img/Games/Counter-Strike2.png', 80, '/img/GamesMiniLogo/counterstrike.png'),
+(2, 'Call of Duty Warzone', '/img/Games/CallofDuty-Warzone.png', 88, '/img/GamesMiniLogo/CallofDuty-Warzone.png'),
+(3, 'Dota 2', '/img/Games/Dota2.png', 123, '/img/GamesMiniLogo/Dota2.png'),
+(4, 'FIFA киберспорт', '/img/Games/FIFA.png', 12, '/img/GamesMiniLogo/FIFA.png'),
+(5, 'Halo Infinite', '/img/Games/HaloInfinite.png', 12, '/img/GamesMiniLogo/HaloInfinite.png'),
+(6, 'League of Legends Wild Rift', '/img/Games/LeagueofLegends-WildRift.png', 11, '/img/GamesMiniLogo/LeagueofLegends-WildRift.png'),
+(7, 'League of Legends', '/img/Games/LeagueofLegends.png', 11, '/img/GamesMiniLogo/LeagueofLegends.png'),
+(8, 'Overwatch 2', '/img/Games/Overwatch2.png', 11, '/img/GamesMiniLogo/Overwatch2.png'),
+(9, 'PlayerUnknown\'s Battlegrounds', '/img/Games/PlayerUnknown\'sBattlegrounds.png', 34, '/img/GamesMiniLogo/PlayerUnknown\'sBattlegrounds.png'),
+(10, 'Pokkén Tournament', '/img/Games/PokkenTournament.png', 67, '/img/GamesMiniLogo/PokkenTournament.png'),
+(11, 'Rocket League', '/img/Games/RocketLeague.png', 34, '/img/GamesMiniLogo/RocketLeague.png'),
+(12, 'Tom Clancy’s Rainbow Six Siege', '/img/Games/TomClancysRainbowSixSiege.png', 87, '/img/GamesMiniLogo/RainbowSixSiege.png'),
+(13, 'Valorant', '/img/Games/Valorant.png', 23, '/img/GamesMiniLogo/Valorant.png'),
+(14, 'Deadlock', '/img/Games/Default.jpg', 4, '/img/GamesMiniLogo/Default.png');
 
 -- --------------------------------------------------------
 
@@ -607,7 +606,7 @@ INSERT INTO `news` (`id`, `title`, `author`, `game_id`, `publish_date`, `status`
 (51, 'Результати турніру Rainbow Six Major', 'Sport.ua', 12, '2024-10-02 15:00:00', 'published', 950, 0, 'https://staticctf.ubisoft.com/J3yJr34U2pZ2Ieem48Dwy9uqj5PNUQTn/3jf0Sw15Oix6a1s65LpkEV/78341a1c84feffc515cafcf1e551b495/B6_MAN_Major_Keyvisual_960x540.jpg', '2024-10-16 17:23:42', 'Результати головних матчів Rainbow Six Major вже відомі.', '{\n    \"questions\": [\n        {\n            \"question\": \"Які ваші враження від результатів турніру Rainbow Six Major?\",\n            \"answer\": \"Цей турнір був вражаючим! Команди показали високу майстерність та непередбачувану гру, що зробило матчі неймовірно цікавими для шанувальників.\"\n        },\n        {\n            \"question\": \"Які команди або гравці вас найбільше вразили на цьому турнірі?\",\n            \"answer\": \"Декілька команд справили на мене велике враження своєю командною хімією і здатністю адаптуватися до умов матчу. Гравці, які проявили себе у критичних моментах, стали справжніми зірками.\"\n        },\n        {\n            \"question\": \"Які ключові моменти визначили результати турніру?\",\n            \"answer\": \"Стратегії, використані командами, були критично важливими. Також варто зазначити індивідуальні виступи гравців, які змогли вирішити матчі в свою користь завдяки вражаючій грі.\"\n        },\n        {\n            \"question\": \"Які прогнози у вас щодо майбутнього Rainbow Six після цього Major?\",\n            \"answer\": \"Очікую, що цей турнір підвищить інтерес до Rainbow Six на міжнародній арені. Багато нових талантів можуть з’явитися на сцені, що зробить наступні турніри ще більш захоплюючими.\"\n        },\n        {\n            \"question\": \"Що ці результати означають для спільноти Rainbow Six?\",\n            \"answer\": \"Це свідчить про зростання популярності гри та підтримки з боку спільноти. Фанати можуть очікувати нових можливостей для змагань та ще більше видовищних матчів у майбутньому.\"\n        }\n    ]\n}\n', 0),
 (52, 'Оновлення серії чемпіонату Rocket League', 'Sport.ua', 11, '2024-10-01 11:30:00', 'published', 761, 0, 'https://www.rocketleague.com/images/keyart/rl_evergreen.jpg', '2024-11-03 20:49:37', 'Новини та результати з останнього сезону Rocket League Championship Series.', '{\n    \"questions\": [\n        {\n            \"question\": \"Які основні зміни були оголошені в оновленні серії чемпіонату Rocket League?\",\n            \"answer\": \"Оновлення включає нові правила, зміни в форматі турнірів та цікаві додатки для гравців. Це підвищує конкуренцію та робить матчі ще більш захоплюючими.\"\n        },\n        {\n            \"question\": \"Як ці зміни вплинуть на участь команд у чемпіонаті?\",\n            \"answer\": \"Зміни в правилах можуть вплинути на стратегії команд. Деякі команди можуть адаптуватися швидше, що дозволить їм отримати перевагу у змаганнях.\"\n        },\n        {\n            \"question\": \"Які нові функції будуть доступні для гравців у серії чемпіонату?\",\n            \"answer\": \"Оновлення приносить нові можливості для кастомізації автомобілів, а також покращену систему винагород для учасників. Це підвищує інтерес до участі в чемпіонаті.\"\n        },\n        {\n            \"question\": \"Які ваші прогнози щодо впливу оновлення на майбутні сезони?\",\n            \"answer\": \"Очікую, що це оновлення підвищить рівень конкуренції в серії чемпіонату. Багато команд, які адаптуються до змін, можуть зайняти вищі позиції у таблиці.\"\n        },\n        {\n            \"question\": \"Що це означає для спільноти Rocket League?\",\n            \"answer\": \"Ці зміни свідчать про зростаючу підтримку та розвиток серії чемпіонату. Спільнота може очікувати більше захоплюючих моментів та нових можливостей для змагань.\"\n        }\n    ]\n}\n', 0),
 (53, 'Нові члени Зали слави кіберспорту', 'Sport.ua', 1, '2024-09-30 10:00:00', 'published', 681, 0, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqL3uN2PLdC1AvbSp4l0tfndV7L7Fqys0ZKg&s', '2024-11-09 10:44:48', 'Нових членів Зали слави кіберспорту офіційно оголошено.', '{\n    \"questions\": [\n        {\n            \"question\": \"Хто нові члени Зали слави кіберспорту у цьому році?\",\n            \"answer\": \"Цього року до Зали слави були введені кілька видатних постатей, які суттєво вплинули на розвиток кіберспорту. Їхні досягнення та внесок у цю галузь заслуговують на визнання.\"\n        },\n        {\n            \"question\": \"Які досягнення відзначають нових членів Зали слави?\",\n            \"answer\": \"Кожен з нових членів має вражаючі успіхи, від численних перемог на світових турнірах до інновацій у стратегічному підході до гри. Це підтверджує їхній величезний вплив на кіберспорт.\"\n        },\n        {\n            \"question\": \"Як введення нових членів вплине на спільноту кіберспорту?\",\n            \"answer\": \"Це надихає нові покоління гравців та фанатів, показуючи, що досягнення в кіберспорті можуть призводити до визнання на міжнародному рівні.\"\n        },\n        {\n            \"question\": \"Які реакції викликало оголошення нових членів Зали слави?\",\n            \"answer\": \"Спільнота відреагувала з захопленням! Багато шанувальників та колег з інших команд висловлюють свої вітання та повагу до нових членів.\"\n        },\n        {\n            \"question\": \"Які ваші прогнози щодо майбутніх введень до Зали слави кіберспорту?\",\n            \"answer\": \"Очікую, що в наступні роки ми побачимо ще більше видатних особистостей, які зроблять значний внесок у розвиток кіберспорту та надихнуть нові покоління гравців.\"\n        }\n    ]\n}\n', 0),
-(54, 'Огляд турніру Street Fighter V', 'Sport.ua', 14, '2024-09-29 17:00:00', 'published', 501, 0, 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/807290/ss_b85febde8d0c14be489a9b0d1544c9be372f0c70.1920x1080.jpg?t=1708064701', '2024-10-24 10:37:26', 'Основні моменти та результати турніру з Street Fighter V.', '{\n    \"questions\": [\n        {\n            \"question\": \"Які ваші враження від турніру Street Fighter V?\",\n            \"answer\": \"Турнір був неймовірно захоплюючим! Гравці продемонстрували високий рівень майстерності та стратегії, що зробило матчі дуже видовищними для шанувальників.\"\n        },\n        {\n            \"question\": \"Які гравці вас найбільше вразили на цьому турнірі?\",\n            \"answer\": \"Декілька гравців показали вражаючі комбінації та чудову реакцію. Їхня здатність адаптуватися до стилю суперників справила на мене велике враження.\"\n        },\n        {\n            \"question\": \"Які ключові моменти визначили результат турніру?\",\n            \"answer\": \"Стратегії, що використовувалися гравцями, та їхня здатність реагувати на зміни в матчах стали критично важливими. Моменти, коли гравці виходили з найскладніших ситуацій, справді вражали.\"\n        },\n        {\n            \"question\": \"Які ваші прогнози щодо майбутнього Street Fighter V після цього турніру?\",\n            \"answer\": \"Очікую, що цей турнір підвищить популярність гри та залучить нових гравців. З кожним новим сезоном ми бачимо зростання інтересу до Street Fighter V.\"\n        },\n        {\n            \"question\": \"Що ці результати означають для спільноти Street Fighter?\",\n            \"answer\": \"Це підтверджує, що Street Fighter V залишається одним із провідних файтингів у світі. Спільнота може очікувати нових можливостей для змагань та подальшого розвитку.\"\n        }\n    ]\n}\n', 0),
+(54, 'Огляд турніру Street Fighter V', 'Sport.ua', 14, '2024-09-29 17:00:00', 'published', 502, 0, 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/807290/ss_b85febde8d0c14be489a9b0d1544c9be372f0c70.1920x1080.jpg?t=1708064701', '2024-11-17 22:14:35', 'Основні моменти та результати турніру з Street Fighter V.', '{\n    \"questions\": [\n        {\n            \"question\": \"Які ваші враження від турніру Street Fighter V?\",\n            \"answer\": \"Турнір був неймовірно захоплюючим! Гравці продемонстрували високий рівень майстерності та стратегії, що зробило матчі дуже видовищними для шанувальників.\"\n        },\n        {\n            \"question\": \"Які гравці вас найбільше вразили на цьому турнірі?\",\n            \"answer\": \"Декілька гравців показали вражаючі комбінації та чудову реакцію. Їхня здатність адаптуватися до стилю суперників справила на мене велике враження.\"\n        },\n        {\n            \"question\": \"Які ключові моменти визначили результат турніру?\",\n            \"answer\": \"Стратегії, що використовувалися гравцями, та їхня здатність реагувати на зміни в матчах стали критично важливими. Моменти, коли гравці виходили з найскладніших ситуацій, справді вражали.\"\n        },\n        {\n            \"question\": \"Які ваші прогнози щодо майбутнього Street Fighter V після цього турніру?\",\n            \"answer\": \"Очікую, що цей турнір підвищить популярність гри та залучить нових гравців. З кожним новим сезоном ми бачимо зростання інтересу до Street Fighter V.\"\n        },\n        {\n            \"question\": \"Що ці результати означають для спільноти Street Fighter?\",\n            \"answer\": \"Це підтверджує, що Street Fighter V залишається одним із провідних файтингів у світі. Спільнота може очікувати нових можливостей для змагань та подальшого розвитку.\"\n        }\n    ]\n}\n', 0),
 (55, 'Завершення сезону Hearthstone Grandmasters', 'Sport.ua', 14, '2024-09-28 13:00:00', 'published', 821, 0, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYpeOSc99wUgOzkUC4Ug2FdyzKh--q1RWs5Q&s', '2024-11-03 19:38:17', 'Фінал сезону Hearthstone Grandmasters, підсумки і переможці.', '{\n    \"questions\": [\n        {\n            \"question\": \"Які ваші враження від завершення сезону Hearthstone Grandmasters?\",\n            \"answer\": \"Завершення сезону було неймовірно емоційним! Гравці продемонстрували вражаючі навички, а фінальні матчі стали справжнім святом для шанувальників.\"\n        },\n        {\n            \"question\": \"Які гравці виділилися протягом сезону?\",\n            \"answer\": \"Декілька гравців справили враження своєю стабільною грою і стратегічним підходом. Вони зуміли піднятися на верхні позиції таблиці і заробити визнання в спільноті.\"\n        },\n        {\n            \"question\": \"Які ключові моменти визначили результати сезону?\",\n            \"answer\": \"Зміни в меті гри та адаптація до нових карт стали вирішальними факторами. Гравці, які могли швидко реагувати на зміни, показали кращі результати.\"\n        },\n        {\n            \"question\": \"Які ваші прогнози щодо майбутнього Hearthstone Grandmasters після цього сезону?\",\n            \"answer\": \"Очікую, що наступний сезон принесе нові стратегії та цікаві результати. Зростаюча популярність гри залучить нових талантів, які піднімуть рівень змагань.\"\n        },\n        {\n            \"question\": \"Що завершення сезону означає для спільноти Hearthstone?\",\n            \"answer\": \"Це свідчить про стабільність та розвиток Hearthstone як змагальної гри. Спільнота може очікувати ще більше цікавих моментів та змагань у майбутньому.\"\n        }\n    ]\n}\n', 0),
 (56, 'Початок Warzone World Series', 'Sport.ua', 2, '2024-09-27 19:00:00', 'published', 711, 0, 'https://i.ytimg.com/vi/liIcSYgVo2Q/maxresdefault.jpg', '2024-11-03 21:00:39', 'Розпочався турнір Warzone World Series, де зустрінуться найкращі гравці.', '{\n    \"questions\": [\n        {\n            \"question\": \"Які ваші враження від початку Warzone World Series?\",\n            \"answer\": \"Початок Warzone World Series став справжнім святом для фанатів! Гравці з різних регіонів зібралися, щоб продемонструвати свої навички на міжнародній арені.\"\n        },\n        {\n            \"question\": \"Які команди або гравці виділилися в перші дні турніру?\",\n            \"answer\": \"Декілька команд зуміли вразити всіх своєю стратегією і командною роботою. Особливо цікаво було спостерігати за тим, як вони адаптуються до умов гри.\"\n        },\n        {\n            \"question\": \"Які ключові елементи турніру ви вважаєте найбільш важливими?\",\n            \"answer\": \"Стратегічне планування та взаємодія між гравцями стали вирішальними факторами. Гравці, які можуть ефективно комунікувати та координувати свої дії, мають більші шанси на успіх.\"\n        },\n        {\n            \"question\": \"Які ваші прогнози щодо розвитку подій у Warzone World Series?\",\n            \"answer\": \"Очікую, що змагання стануть ще більш напруженими, оскільки команди почнуть адаптувати свої стратегії. Це може призвести до несподіваних результатів і захоплюючих моментів.\"\n        },\n        {\n            \"question\": \"Що початок Warzone World Series означає для спільноти Call of Duty?\",\n            \"answer\": \"Це підкреслює зростаючий інтерес до змагань у Warzone. Спільнота може очікувати більше подій та можливостей для участі у великій кіберспортивній арені.\"\n        }\n    ]\n}\n', 0);
 
@@ -623,27 +622,56 @@ CREATE TABLE `notifications` (
   `stake_id` int(11) DEFAULT NULL,
   `content` text NOT NULL,
   `type` enum('info','win','lost') DEFAULT 'info',
-  `created_at` datetime DEFAULT current_timestamp()
+  `created_at` datetime DEFAULT current_timestamp(),
+  `admin_id` int(11) DEFAULT NULL,
+  `support_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `notifications`
 --
 
-INSERT INTO `notifications` (`id`, `user_id`, `stake_id`, `content`, `type`, `created_at`) VALUES
-(13, 64, 28, 'Вітаємо! Ви виграли 184.5000₴ у ставці на команду Virtus.pro', 'win', '2024-10-24 20:25:21'),
-(14, 64, 29, 'Вітаємо! Ви виграли 184.5000₴ у ставці на команду London Royal Ravens', 'win', '2024-10-24 20:27:32'),
-(15, 66, 33, 'Вітаємо! Ви виграли 155.0000₴ у ставці на команду Team Liquid', 'win', '2024-10-26 12:59:18'),
-(48, 66, 34, 'Вітаємо! Ви виграли 17.5000₴ у ставці на команду Ninjas in Pyjamas', 'win', '2024-11-09 13:07:07'),
-(49, 66, 38, 'Вітаємо! Ви виграли 56.1000₴ у ставці на команду Toronto Ultra', 'win', '2024-11-09 13:09:15'),
-(50, 66, 39, 'Вітаємо! Ви виграли 351.4500₴ у ставці на команду Toronto Ultra', 'win', '2024-11-09 13:09:15'),
-(51, 66, 40, 'Вітаємо! Ви виграли 4.9500₴ у ставці на команду Toronto Ultra', 'win', '2024-11-09 13:09:15'),
-(52, 66, 41, 'Вітаємо! Ви виграли 202.9500₴ у ставці на команду Toronto Ultra', 'win', '2024-11-09 13:09:15'),
-(53, 66, 42, 'Вітаємо! Ви виграли 202.9500₴ у ставці на команду Toronto Ultra', 'win', '2024-11-09 13:09:15'),
-(54, 66, 43, 'Вітаємо! Ви виграли 36.3000₴ у ставці на команду Toronto Ultra', 'win', '2024-11-09 13:09:15'),
-(55, 66, 44, 'Вітаємо! Ви виграли 397.6500₴ у ставці на команду Toronto Ultra', 'win', '2024-11-09 13:09:15'),
-(56, 66, 45, 'Вітаємо! Ви виграли 386.1000₴ у ставці на команду Toronto Ultra', 'win', '2024-11-09 13:09:15'),
-(57, 66, 46, 'Вітаємо! Ви виграли 351.4500₴ у ставці на команду Toronto Ultra', 'win', '2024-11-09 13:09:15');
+INSERT INTO `notifications` (`id`, `user_id`, `stake_id`, `content`, `type`, `created_at`, `admin_id`, `support_id`) VALUES
+(13, 64, 28, 'Вітаємо! Ви виграли 184.5000₴ у ставці на команду Virtus.pro', 'win', '2024-10-24 20:25:21', NULL, NULL),
+(14, 64, 29, 'Вітаємо! Ви виграли 184.5000₴ у ставці на команду London Royal Ravens', 'win', '2024-10-24 20:27:32', NULL, NULL),
+(15, 66, 33, 'Вітаємо! Ви виграли 155.0000₴ у ставці на команду Team Liquid', 'win', '2024-10-26 12:59:18', NULL, NULL),
+(48, 66, 34, 'Вітаємо! Ви виграли 17.5000₴ у ставці на команду Ninjas in Pyjamas', 'win', '2024-11-09 13:07:07', NULL, NULL),
+(49, 66, 38, 'Вітаємо! Ви виграли 56.1000₴ у ставці на команду Toronto Ultra', 'win', '2024-11-09 13:09:15', NULL, NULL),
+(50, 66, 39, 'Вітаємо! Ви виграли 351.4500₴ у ставці на команду Toronto Ultra', 'win', '2024-11-09 13:09:15', NULL, NULL),
+(51, 66, 40, 'Вітаємо! Ви виграли 4.9500₴ у ставці на команду Toronto Ultra', 'win', '2024-11-09 13:09:15', NULL, NULL),
+(52, 66, 41, 'Вітаємо! Ви виграли 202.9500₴ у ставці на команду Toronto Ultra', 'win', '2024-11-09 13:09:15', NULL, NULL),
+(53, 66, 42, 'Вітаємо! Ви виграли 202.9500₴ у ставці на команду Toronto Ultra', 'win', '2024-11-09 13:09:15', NULL, NULL),
+(54, 66, 43, 'Вітаємо! Ви виграли 36.3000₴ у ставці на команду Toronto Ultra', 'win', '2024-11-09 13:09:15', NULL, NULL),
+(55, 66, 44, 'Вітаємо! Ви виграли 397.6500₴ у ставці на команду Toronto Ultra', 'win', '2024-11-09 13:09:15', NULL, NULL),
+(56, 66, 45, 'Вітаємо! Ви виграли 386.1000₴ у ставці на команду Toronto Ultra', 'win', '2024-11-09 13:09:15', NULL, NULL),
+(57, 66, 46, 'Вітаємо! Ви виграли 351.4500₴ у ставці на команду Toronto Ultra', 'win', '2024-11-09 13:09:15', NULL, NULL),
+(58, NULL, NULL, '2134', 'info', '2024-11-18 01:48:57', NULL, NULL),
+(59, 66, NULL, 'dsafdsa', 'info', '2024-11-18 12:51:09', 66, NULL),
+(60, 66, NULL, 'dsafdsa', 'info', '2024-11-18 12:52:03', 66, NULL),
+(61, 66, NULL, 'dsafdsa', 'info', '2024-11-18 12:53:05', 66, NULL),
+(62, 66, NULL, 'dsafdsa', 'info', '2024-11-18 12:53:57', 66, NULL),
+(63, 66, NULL, 'dsafdsa', 'info', '2024-11-18 12:54:03', 66, NULL),
+(64, NULL, NULL, 'Не хвилює ваш запит)', 'info', '2024-11-18 12:57:38', NULL, NULL),
+(65, 66, NULL, 'Не хвилює ваш запит)', 'info', '2024-11-18 12:58:46', 66, NULL),
+(66, 66, NULL, 'Не хвилює ваш запит)', 'info', '2024-11-18 13:04:33', 66, NULL),
+(67, 66, NULL, '1234', 'info', '2024-11-18 13:04:39', 66, NULL),
+(68, 66, NULL, '1234', 'info', '2024-11-18 13:05:32', 66, NULL),
+(69, 66, NULL, '1234', 'info', '2024-11-18 13:06:56', 66, NULL),
+(70, 66, NULL, '1234', 'info', '2024-11-18 13:07:20', 66, NULL),
+(71, 66, NULL, '1234', 'info', '2024-11-18 13:08:24', 66, NULL),
+(72, 66, NULL, '12342134іфвпівфі', 'info', '2024-11-18 13:08:35', 66, NULL),
+(73, 66, NULL, '12342134іфвпівфі', 'info', '2024-11-18 13:08:42', 66, NULL),
+(74, 66, NULL, '12342134іфвпівфі', 'info', '2024-11-18 13:08:59', 66, NULL),
+(75, 66, NULL, '12342134іфвпівфі', 'info', '2024-11-18 13:10:11', 66, NULL),
+(76, 66, NULL, 'Не хвилює ваш запит)', 'info', '2024-11-18 13:10:25', 66, NULL),
+(77, 66, NULL, 'Не хвилює ваш запит)', 'info', '2024-11-18 13:11:13', 66, NULL),
+(78, 66, NULL, 'Не хвилює ваш запит)', 'info', '2024-11-18 13:15:38', 66, 2),
+(79, 66, NULL, 'Не хвилює ваш запит)', 'info', '2024-11-18 13:17:34', 66, 12),
+(81, 66, NULL, '1234', 'info', '2024-11-18 14:31:14', 66, 12),
+(82, 66, NULL, 'Не хвилює ваш запит)', 'info', '2024-11-18 14:36:28', 66, 12),
+(83, 66, NULL, 'Не хвилює ваш запит)', 'info', '2024-11-18 14:38:20', 66, 12),
+(84, 66, NULL, '', 'info', '2024-11-18 14:45:50', 66, 12),
+(85, 66, NULL, '', 'info', '2024-11-18 14:46:43', 66, 12);
 
 -- --------------------------------------------------------
 
@@ -770,25 +798,26 @@ CREATE TABLE `support` (
   `content` text DEFAULT NULL,
   `author_id` int(11) DEFAULT NULL,
   `request_type` enum('bug','feedback','feature_request','information_request') NOT NULL,
-  `created_at` datetime DEFAULT current_timestamp()
+  `created_at` datetime DEFAULT current_timestamp(),
+  `reply` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `support`
 --
 
-INSERT INTO `support` (`id`, `title`, `content`, `author_id`, `request_type`, `created_at`) VALUES
-(1, 'не працює сайт ', 'фівдоідфлводлфіовдлофідводфіовдфіовдлофідлволдфіовдлофідлвофдлів', 61, 'bug', '2024-11-10 20:52:13'),
-(2, ' 12343', ' sadfs', 66, 'bug', '2024-11-10 22:26:05'),
-(3, ' 12344', ' asdfsad', 66, 'bug', '2024-11-10 22:26:17'),
-(4, ' 1234', ' asdf', 66, 'bug', '2024-11-10 22:27:14'),
-(5, ' dsadf', ' 1234', 66, 'bug', '2024-11-10 22:27:34'),
-(6, ' 1234', ' sadf', 66, 'bug', '2024-11-10 22:28:14'),
-(7, ' 2134', ' asdfdsdfsad', 66, 'bug', '2024-11-10 22:31:45'),
-(8, ' 2134', ' sadf', 66, 'feature_request', '2024-11-10 22:31:51'),
-(9, ' asdfasd', ' sjadljlkdsa', 66, 'feedback', '2024-11-10 22:32:13'),
-(10, ' asdf', ' asd23', 66, 'feedback', '2024-11-10 22:35:06'),
-(11, ' 1232', 'ASDFD ', 66, 'bug', '2024-11-10 23:18:56');
+INSERT INTO `support` (`id`, `title`, `content`, `author_id`, `request_type`, `created_at`, `reply`) VALUES
+(2, ' 12343', ' sadfs', 66, 'bug', '2024-11-10 22:26:05', 1),
+(3, ' 12344', ' asdfsad', 66, 'bug', '2024-11-10 22:26:17', 0),
+(4, ' 1234', ' asdf', 66, 'bug', '2024-11-10 22:27:14', 0),
+(5, ' dsadf', ' 1234', 66, 'bug', '2024-11-10 22:27:34', 0),
+(6, ' 1234', ' sadf', 66, 'bug', '2024-11-10 22:28:14', 0),
+(7, ' 2134', ' asdfdsdfsad', 66, 'bug', '2024-11-10 22:31:45', 0),
+(8, ' 2134', ' sadf', 66, 'feature_request', '2024-11-10 22:31:51', 0),
+(9, ' asdfasd', ' sjadljlkdsa', 66, 'feedback', '2024-11-10 22:32:13', 0),
+(10, ' asdf', ' asd23', 66, 'feedback', '2024-11-10 22:35:06', 0),
+(11, ' 1232', 'ASDFD ', 66, 'bug', '2024-11-10 23:18:56', 0),
+(12, 'сайт впав ', 'пофіксіть свій сайт... замахали ', 66, 'bug', '2024-11-18 13:17:14', 0);
 
 -- --------------------------------------------------------
 
@@ -808,136 +837,136 @@ CREATE TABLE `teams` (
 --
 
 INSERT INTO `teams` (`TeamID`, `TeamName`, `TeamLogo`, `TeamCountry`) VALUES
-(3, 'Natus Vincere', 'img/Logos/navi.png', 'img/Countries/ua.png'),
-(4, 'Astralis', 'img/Logos/astralis.png', 'img/Countries/dk.png'),
-(5, 'G2 Esports', 'img/Logos/g2.png', 'img/Countries/fr.png'),
-(6, 'FaZe Clan', 'img/Logos/faze.png', 'img/Countries/us.png'),
-(7, 'Team Vitality', 'img/Logos/vitality.png', 'img/Countries/fr.png'),
-(8, 'Ninjas in Pyjamas', 'img/Logos/nip.png', 'img/Countries/se.png'),
-(9, 'Fnatic', 'img/Logos/fnatic.png', 'img/Countries/uk.png'),
-(10, 'Cloud9', 'img/Logos/cloud9.png', 'img/Countries/us.png'),
-(11, 'BIG', 'img/Logos/big.png', 'img/Countries/de.png'),
-(12, 'Team Liquid', 'img/Logos/teamliquid.png', 'img/Countries/us.png'),
-(13, 'OpTic Gaming', 'img/Logos/optic.png', 'img/Countries/us.png'),
-(14, 'Atlanta FaZe', 'img/Logos/atlanta_faze.png', 'img/Countries/us.png'),
-(15, 'Toronto Ultra', 'img/Logos/toronto_ultra.png', 'img/Countries/ca.png'),
-(16, 'Dallas Empire', 'img/Logos/dallas_empire.png', 'img/Countries/us.png'),
-(17, 'New York Subliners', 'img/Logos/ny_subliners.png', 'img/Countries/us.png'),
-(18, 'Minnesota RØKKR', 'img/Logos/minnesota_rokkr.png', 'img/Countries/us.png'),
-(19, 'Paris Legion', 'img/Logos/paris_legion.png', 'img/Countries/fr.png'),
-(20, 'London Royal Ravens', 'img/Logos/london_ravens.png', 'img/Countries/uk.png'),
-(21, 'Los Angeles Thieves', 'img/Logos/la_thieves.png', 'img/Countries/us.png'),
-(22, 'Florida Mutineers', 'img/Logos/florida_mutineers.png', 'img/Countries/us.png'),
-(23, 'OG', 'img/Logos/og.png', 'img/Countries/eu.png'),
-(24, 'Team Secret', 'img/Logos/team_secret.png', 'img/Countries/eu.png'),
-(25, 'Evil Geniuses', 'img/Logos/eg.png', 'img/Countries/us.png'),
-(26, 'Virtus.pro', 'img/Logos/vp.png', 'img/Countries/ru.png'),
-(27, 'PSG.LGD', 'img/Logos/psg_lgd.png', 'img/Countries/cn.png'),
-(28, 'TNC Predator', 'img/Logos/tnc_predator.png', 'img/Countries/ph.png'),
-(29, 'Team Liquid', 'img/Logos/teamliquid.png', 'img/Countries/nl.png'),
-(30, 'Nigma Galaxy', 'img/Logos/nigma.png', 'img/Countries/eu.png'),
-(31, 'Vici Gaming', 'img/Logos/vici_gaming.png', 'img/Countries/cn.png'),
-(32, 'Invictus Gaming', 'img/Logos/invictus.png', 'img/Countries/cn.png'),
-(33, 'Sentinels', 'img/Logos/sentinels.png', 'img/Countries/us.png'),
-(34, 'Cloud9', 'img/Logos/cloud9.png', 'img/Countries/us.png'),
-(35, 'OpTic Gaming', 'img/Logos/optic.png', 'img/Countries/us.png'),
-(36, 'eUnited', 'img/Logos/eunited.png', 'img/Countries/us.png'),
-(37, 'Fnatic', 'img/Logos/fnatic.png', 'img/Countries/uk.png'),
-(38, 'FaZe Clan', 'img/Logos/faze.png', 'img/Countries/us.png'),
-(39, 'G2 Esports', 'img/Logos/g2.png', 'img/Countries/fr.png'),
-(40, 'Oxygen Esports', 'img/Logos/oxygen_esports.png', 'img/Countries/us.png'),
-(41, 'Pioneers', 'img/Logos/pioneers.png', 'img/Countries/us.png'),
-(42, 'Spacestation Gaming', 'img/Logos/spacestation.png', 'img/Countries/us.png'),
-(43, 'Team Queso', 'img/Logos/teamqueso.png', 'img/Countries/es.png'),
-(44, 'Tribe Gaming', 'img/Logos/tribe.png', 'img/Countries/us.png'),
-(45, 'Immortals', 'img/Logos/immortals.png', 'img/Countries/us.png'),
-(46, 'TSM', 'img/Logos/tsm.png', 'img/Countries/us.png'),
-(47, 'Nova Esports', 'img/Logos/nova.png', 'img/Countries/hk.png'),
-(48, 'JD Gaming', 'img/Logos/jd_gaming.png', 'img/Countries/cn.png'),
-(49, 'KT Rolster', 'img/Logos/kt_rolster.png', 'img/Countries/kr.png'),
-(50, 'Flash Wolves', 'img/Logos/flashwolves.png', 'img/Countries/tw.png'),
-(51, 'Team Secret', 'img/Logos/team_secret.png', 'img/Countries/eu.png'),
-(52, 'RRQ', 'img/Logos/rrq.png', 'img/Countries/id.png'),
-(53, 'T1', 'img/Logos/t1.png', 'img/Countries/kr.png'),
-(54, 'G2 Esports', 'img/Logos/g2.png', 'img/Countries/fr.png'),
-(55, 'Fnatic', 'img/Logos/fnatic.png', 'img/Countries/uk.png'),
-(56, 'Cloud9', 'img/Logos/cloud9.png', 'img/Countries/us.png'),
-(57, 'Team Liquid', 'img/Logos/teamliquid.png', 'img/Countries/us.png'),
-(58, 'DWG KIA', 'img/Logos/dwgkia.png', 'img/Countries/kr.png'),
-(59, 'RNG', 'img/Logos/rng.png', 'img/Countries/cn.png'),
-(60, 'EDward Gaming', 'img/Logos/edg.png', 'img/Countries/cn.png'),
-(61, 'Gen.G', 'img/Logos/geng.png', 'img/Countries/kr.png'),
-(62, 'MAD Lions', 'img/Logos/madlions.png', 'img/Countries/es.png'),
-(63, 'San Francisco Shock', 'img/Logos/sf_shock.png', 'img/Countries/us.png'),
-(64, 'Dallas Fuel', 'img/Logos/dallas_fuel.png', 'img/Countries/us.png'),
-(65, 'Seoul Dynasty', 'img/Logos/seoul_dynasty.png', 'img/Countries/kr.png'),
-(66, 'Shanghai Dragons', 'img/Logos/shanghai_dragons.png', 'img/Countries/cn.png'),
-(67, 'Los Angeles Gladiators', 'img/Logos/la_gladiators.png', 'img/Countries/us.png'),
-(68, 'Florida Mayhem', 'img/Logos/florida_mayhem.png', 'img/Countries/us.png'),
-(69, 'London Spitfire', 'img/Logos/london_spitfire.png', 'img/Countries/uk.png'),
-(70, 'Houston Outlaws', 'img/Logos/houston_outlaws.png', 'img/Countries/us.png'),
-(71, 'Washington Justice', 'img/Logos/washington_justice.png', 'img/Countries/us.png'),
-(72, 'Toronto Defiant', 'img/Logos/toronto_defiant.png', 'img/Countries/ca.png'),
-(73, 'FaZe Clan', 'img/Logos/faze.png', 'img/Countries/us.png'),
-(74, 'TSM', 'img/Logos/tsm.png', 'img/Countries/us.png'),
-(75, 'Gen.G', 'img/Logos/geng.png', 'img/Countries/kr.png'),
-(76, 'Team Liquid', 'img/Logos/teamliquid.png', 'img/Countries/us.png'),
-(77, 'Na\'Vi', 'img/Logos/navi.png', 'img/Countries/ua.png'),
-(78, 'ENCE', 'img/Logos/ence.png', 'img/Countries/fi.png'),
-(79, 'Oath Gaming', 'img/Logos/oath.png', 'img/Countries/us.png'),
-(80, 'FURY', 'img/Logos/fury.png', 'img/Countries/au.png'),
-(81, 'Digital Athletics', 'img/Logos/da.png', 'img/Countries/tr.png'),
-(82, 'Virtus.pro', 'img/Logos/vp.png', 'img/Countries/ru.png'),
-(83, 'Roxo', 'img/Logos/roxo.png', 'img/Countries/us.png'),
-(84, 'Thulius', 'img/Logos/thulius.png', 'img/Countries/us.png'),
-(85, 'SlippingBug', 'img/Logos/slippingbug.png', 'img/Countries/us.png'),
-(86, 'Goreson', 'img/Logos/goreson.png', 'img/Countries/us.png'),
-(87, 'BadIntent', 'img/Logos/badintent.png', 'img/Countries/us.png'),
-(88, 'CatFight', 'img/Logos/catfight.png', 'img/Countries/us.png'),
-(89, 'Kira', 'img/Logos/kira.png', 'img/Countries/us.png'),
-(90, 'Burnside', 'img/Logos/burnside.png', 'img/Countries/us.png'),
-(91, 'Wingtide', 'img/Logos/wingtide.png', 'img/Countries/de.png'),
-(92, 'Elm', 'img/Logos/elm.png', 'img/Countries/us.png'),
-(93, 'Team BDS', 'img/Logos/bds.png', 'img/Countries/ch.png'),
-(94, 'G2 Esports', 'img/Logos/g2.png', 'img/Countries/fr.png'),
-(95, 'FaZe Clan', 'img/Logos/faze.png', 'img/Countries/us.png'),
-(96, 'Team Vitality', 'img/Logos/vitality.png', 'img/Countries/fr.png'),
-(97, 'NRG Esports', 'img/Logos/nrg.png', 'img/Countries/us.png'),
-(98, 'Spacestation Gaming', 'img/Logos/spacestation.png', 'img/Countries/us.png'),
-(99, 'Rogue', 'img/Logos/rogue.png', 'img/Countries/us.png'),
-(100, 'Version1', 'img/Logos/version1.png', 'img/Countries/us.png'),
-(101, 'Endpoint', 'img/Logos/endpoint.png', 'img/Countries/uk.png'),
-(102, 'Oxygen Esports', 'img/Logos/oxygen_esports.png', 'img/Countries/us.png'),
-(103, 'Team BDS', 'img/Logos/bds.png', 'img/Countries/ch.png'),
-(104, 'Ninjas in Pyjamas', 'img/Logos/nip.png', 'img/Countries/br.png'),
-(105, 'Team Liquid', 'img/Logos/teamliquid.png', 'img/Countries/br.png'),
-(106, 'FaZe Clan', 'img/Logos/faze.png', 'img/Countries/br.png'),
-(107, 'G2 Esports', 'img/Logos/g2.png', 'img/Countries/fr.png'),
-(108, 'Rogue', 'img/Logos/rogue.png', 'img/Countries/us.png'),
-(109, 'Spacestation Gaming', 'img/Logos/spacestation.png', 'img/Countries/us.png'),
-(110, 'DarkZero Esports', 'img/Logos/darkzero.png', 'img/Countries/us.png'),
-(111, 'Cloud9', 'img/Logos/cloud9.png', 'img/Countries/kr.png'),
-(112, 'Team Empire', 'img/Logos/teamempire.png', 'img/Countries/ru.png'),
-(113, 'Sentinels', 'img/Logos/sentinels.png', 'img/Countries/us.png'),
-(114, 'Team Liquid', 'img/Logos/teamliquid.png', 'img/Countries/eu.png'),
-(115, 'Fnatic', 'img/Logos/fnatic.png', 'img/Countries/uk.png'),
-(116, 'G2 Esports', 'img/Logos/g2.png', 'img/Countries/fr.png'),
-(117, 'Acend', 'img/Logos/acend.png', 'img/Countries/eu.png'),
-(118, 'Vision Strikers', 'img/Logos/vision_strikers.png', 'img/Countries/kr.png'),
-(119, 'X10 CRIT', 'img/Logos/x10_crit.png', 'img/Countries/th.png'),
-(120, 'KRÜ Esports', 'img/Logos/kru_esports.png', 'img/Countries/ar.png'),
-(121, '100 Thieves', 'img/Logos/100_thieves.png', 'img/Countries/us.png'),
-(122, 'Envy', 'img/Logos/envy.png', 'img/Countries/us.png'),
-(123, 'Unknown', 'img/Logos/unknown.png', 'img/Countries/us.png'),
-(124, 'Eclipse', 'img/Logos/eclipse.png', 'img/Countries/us.png'),
-(125, 'Helix', 'img/Logos/helix.png', 'img/Countries/us.png'),
-(126, 'Nova', 'img/Logos/nova.png', 'img/Countries/us.png'),
-(127, 'Rift', 'img/Logos/rift.png', 'img/Countries/us.png'),
-(128, 'Titan', 'img/Logos/titan.png', 'img/Countries/us.png'),
-(129, 'Vanguard', 'img/Logos/vanguard.png', 'img/Countries/us.png'),
-(130, 'Zenith', 'img/Logos/zenith.png', 'img/Countries/us.png'),
-(131, 'Ascend', 'img/Logos/ascend.png', 'img/Countries/us.png'),
-(132, 'Elysium', 'img/Logos/elysium.png', 'img/Countries/us.png');
+(3, 'Natus Vincere', '/img/Logos/navi.png', '/img/Countries/ua.png'),
+(4, 'Astralis', '/img/Logos/astralis.png', '/img/Countries/dk.png'),
+(5, 'G2 Esports', '/img/Logos/g2.png', '/img/Countries/fr.png'),
+(6, 'FaZe Clan', '/img/Logos/faze.png', '/img/Countries/us.png'),
+(7, 'Team Vitality', '/img/Logos/vitality.png', '/img/Countries/fr.png'),
+(8, 'Ninjas in Pyjamas', '/img/Logos/nip.png', '/img/Countries/se.png'),
+(9, 'Fnatic', '/img/Logos/fnatic.png', '/img/Countries/uk.png'),
+(10, 'Cloud9', '/img/Logos/cloud9.png', '/img/Countries/us.png'),
+(11, 'BIG', '/img/Logos/big.png', '/img/Countries/de.png'),
+(12, 'Team Liquid', '/img/Logos/teamliquid.png', '/img/Countries/us.png'),
+(13, 'OpTic Gaming', '/img/Logos/optic.png', '/img/Countries/us.png'),
+(14, 'Atlanta FaZe', '/img/Logos/atlanta_faze.png', '/img/Countries/us.png'),
+(15, 'Toronto Ultra', '/img/Logos/toronto_ultra.png', '/img/Countries/ca.png'),
+(16, 'Dallas Empire', '/img/Logos/dallas_empire.png', '/img/Countries/us.png'),
+(17, 'New York Subliners', '/img/Logos/ny_subliners.png', '/img/Countries/us.png'),
+(18, 'Minnesota RØKKR', '/img/Logos/minnesota_rokkr.png', '/img/Countries/us.png'),
+(19, 'Paris Legion', '/img/Logos/paris_legion.png', '/img/Countries/fr.png'),
+(20, 'London Royal Ravens', '/img/Logos/london_ravens.png', '/img/Countries/uk.png'),
+(21, 'Los Angeles Thieves', '/img/Logos/la_thieves.png', '/img/Countries/us.png'),
+(22, 'Florida Mutineers', '/img/Logos/florida_mutineers.png', '/img/Countries/us.png'),
+(23, 'OG', '/img/Logos/og.png', '/img/Countries/eu.png'),
+(24, 'Team Secret', '/img/Logos/team_secret.png', '/img/Countries/eu.png'),
+(25, 'Evil Geniuses', '/img/Logos/eg.png', '/img/Countries/us.png'),
+(26, 'Virtus.pro', '/img/Logos/vp.png', '/img/Countries/ru.png'),
+(27, 'PSG.LGD', '/img/Logos/psg_lgd.png', '/img/Countries/cn.png'),
+(28, 'TNC Predator', '/img/Logos/tnc_predator.png', '/img/Countries/ph.png'),
+(29, 'Team Liquid', '/img/Logos/teamliquid.png', '/img/Countries/nl.png'),
+(30, 'Nigma Galaxy', '/img/Logos/nigma.png', '/img/Countries/eu.png'),
+(31, 'Vici Gaming', '/img/Logos/vici_gaming.png', '/img/Countries/cn.png'),
+(32, 'Invictus Gaming', '/img/Logos/invictus.png', '/img/Countries/cn.png'),
+(33, 'Sentinels', '/img/Logos/sentinels.png', '/img/Countries/us.png'),
+(34, 'Cloud9', '/img/Logos/cloud9.png', '/img/Countries/us.png'),
+(35, 'OpTic Gaming', '/img/Logos/optic.png', '/img/Countries/us.png'),
+(36, 'eUnited', '/img/Logos/eunited.png', '/img/Countries/us.png'),
+(37, 'Fnatic', '/img/Logos/fnatic.png', '/img/Countries/uk.png'),
+(38, 'FaZe Clan', '/img/Logos/faze.png', '/img/Countries/us.png'),
+(39, 'G2 Esports', '/img/Logos/g2.png', '/img/Countries/fr.png'),
+(40, 'Oxygen Esports', '/img/Logos/oxygen_esports.png', '/img/Countries/us.png'),
+(41, 'Pioneers', '/img/Logos/pioneers.png', '/img/Countries/us.png'),
+(42, 'Spacestation Gaming', '/img/Logos/spacestation.png', '/img/Countries/us.png'),
+(43, 'Team Queso', '/img/Logos/teamqueso.png', '/img/Countries/es.png'),
+(44, 'Tribe Gaming', '/img/Logos/tribe.png', '/img/Countries/us.png'),
+(45, 'Immortals', '/img/Logos/immortals.png', '/img/Countries/us.png'),
+(46, 'TSM', '/img/Logos/tsm.png', '/img/Countries/us.png'),
+(47, 'Nova Esports', '/img/Logos/nova.png', '/img/Countries/hk.png'),
+(48, 'JD Gaming', '/img/Logos/jd_gaming.png', '/img/Countries/cn.png'),
+(49, 'KT Rolster', '/img/Logos/kt_rolster.png', '/img/Countries/kr.png'),
+(50, 'Flash Wolves', '/img/Logos/flashwolves.png', '/img/Countries/tw.png'),
+(51, 'Team Secret', '/img/Logos/team_secret.png', '/img/Countries/eu.png'),
+(52, 'RRQ', '/img/Logos/rrq.png', '/img/Countries/id.png'),
+(53, 'T1', '/img/Logos/t1.png', '/img/Countries/kr.png'),
+(54, 'G2 Esports', '/img/Logos/g2.png', '/img/Countries/fr.png'),
+(55, 'Fnatic', '/img/Logos/fnatic.png', '/img/Countries/uk.png'),
+(56, 'Cloud9', '/img/Logos/cloud9.png', '/img/Countries/us.png'),
+(57, 'Team Liquid', '/img/Logos/teamliquid.png', '/img/Countries/us.png'),
+(58, 'DWG KIA', '/img/Logos/dwgkia.png', '/img/Countries/kr.png'),
+(59, 'RNG', '/img/Logos/rng.png', '/img/Countries/cn.png'),
+(60, 'EDward Gaming', '/img/Logos/edg.png', '/img/Countries/cn.png'),
+(61, 'Gen.G', '/img/Logos/geng.png', '/img/Countries/kr.png'),
+(62, 'MAD Lions', '/img/Logos/madlions.png', '/img/Countries/es.png'),
+(63, 'San Francisco Shock', '/img/Logos/sf_shock.png', '/img/Countries/us.png'),
+(64, 'Dallas Fuel', '/img/Logos/dallas_fuel.png', '/img/Countries/us.png'),
+(65, 'Seoul Dynasty', '/img/Logos/seoul_dynasty.png', '/img/Countries/kr.png'),
+(66, 'Shanghai Dragons', '/img/Logos/shanghai_dragons.png', '/img/Countries/cn.png'),
+(67, 'Los Angeles Gladiators', '/img/Logos/la_gladiators.png', '/img/Countries/us.png'),
+(68, 'Florida Mayhem', '/img/Logos/florida_mayhem.png', '/img/Countries/us.png'),
+(69, 'London Spitfire', '/img/Logos/london_spitfire.png', '/img/Countries/uk.png'),
+(70, 'Houston Outlaws', '/img/Logos/houston_outlaws.png', '/img/Countries/us.png'),
+(71, 'Washington Justice', '/img/Logos/washington_justice.png', '/img/Countries/us.png'),
+(72, 'Toronto Defiant', '/img/Logos/toronto_defiant.png', '/img/Countries/ca.png'),
+(73, 'FaZe Clan', '/img/Logos/faze.png', '/img/Countries/us.png'),
+(74, 'TSM', '/img/Logos/tsm.png', '/img/Countries/us.png'),
+(75, 'Gen.G', '/img/Logos/geng.png', '/img/Countries/kr.png'),
+(76, 'Team Liquid', '/img/Logos/teamliquid.png', '/img/Countries/us.png'),
+(77, 'Na\'Vi', '/img/Logos/navi.png', '/img/Countries/ua.png'),
+(78, 'ENCE', '/img/Logos/ence.png', '/img/Countries/fi.png'),
+(79, 'Oath Gaming', '/img/Logos/oath.png', '/img/Countries/us.png'),
+(80, 'FURY', '/img/Logos/fury.png', '/img/Countries/au.png'),
+(81, 'Digital Athletics', '/img/Logos/da.png', '/img/Countries/tr.png'),
+(82, 'Virtus.pro', '/img/Logos/vp.png', '/img/Countries/ru.png'),
+(83, 'Roxo', '/img/Logos/roxo.png', '/img/Countries/us.png'),
+(84, 'Thulius', '/img/Logos/thulius.png', '/img/Countries/us.png'),
+(85, 'SlippingBug', '/img/Logos/slippingbug.png', '/img/Countries/us.png'),
+(86, 'Goreson', '/img/Logos/goreson.png', '/img/Countries/us.png'),
+(87, 'BadIntent', '/img/Logos/badintent.png', '/img/Countries/us.png'),
+(88, 'CatFight', '/img/Logos/catfight.png', '/img/Countries/us.png'),
+(89, 'Kira', '/img/Logos/kira.png', '/img/Countries/us.png'),
+(90, 'Burnside', '/img/Logos/burnside.png', '/img/Countries/us.png'),
+(91, 'Wingtide', '/img/Logos/wingtide.png', '/img/Countries/de.png'),
+(92, 'Elm', '/img/Logos/elm.png', '/img/Countries/us.png'),
+(93, 'Team BDS', '/img/Logos/bds.png', '/img/Countries/ch.png'),
+(94, 'G2 Esports', '/img/Logos/g2.png', '/img/Countries/fr.png'),
+(95, 'FaZe Clan', '/img/Logos/faze.png', '/img/Countries/us.png'),
+(96, 'Team Vitality', '/img/Logos/vitality.png', '/img/Countries/fr.png'),
+(97, 'NRG Esports', '/img/Logos/nrg.png', '/img/Countries/us.png'),
+(98, 'Spacestation Gaming', '/img/Logos/spacestation.png', '/img/Countries/us.png'),
+(99, 'Rogue', '/img/Logos/rogue.png', '/img/Countries/us.png'),
+(100, 'Version1', '/img/Logos/version1.png', '/img/Countries/us.png'),
+(101, 'Endpoint', '/img/Logos/endpoint.png', '/img/Countries/uk.png'),
+(102, 'Oxygen Esports', '/img/Logos/oxygen_esports.png', '/img/Countries/us.png'),
+(103, 'Team BDS', '/img/Logos/bds.png', '/img/Countries/ch.png'),
+(104, 'Ninjas in Pyjamas', '/img/Logos/nip.png', '/img/Countries/br.png'),
+(105, 'Team Liquid', '/img/Logos/teamliquid.png', '/img/Countries/br.png'),
+(106, 'FaZe Clan', '/img/Logos/faze.png', '/img/Countries/br.png'),
+(107, 'G2 Esports', '/img/Logos/g2.png', '/img/Countries/fr.png'),
+(108, 'Rogue', '/img/Logos/rogue.png', '/img/Countries/us.png'),
+(109, 'Spacestation Gaming', '/img/Logos/spacestation.png', '/img/Countries/us.png'),
+(110, 'DarkZero Esports', '/img/Logos/darkzero.png', '/img/Countries/us.png'),
+(111, 'Cloud9', '/img/Logos/cloud9.png', '/img/Countries/kr.png'),
+(112, 'Team Empire', '/img/Logos/teamempire.png', '/img/Countries/ru.png'),
+(113, 'Sentinels', '/img/Logos/sentinels.png', '/img/Countries/us.png'),
+(114, 'Team Liquid', '/img/Logos/teamliquid.png', '/img/Countries/eu.png'),
+(115, 'Fnatic', '/img/Logos/fnatic.png', '/img/Countries/uk.png'),
+(116, 'G2 Esports', '/img/Logos/g2.png', '/img/Countries/fr.png'),
+(117, 'Acend', '/img/Logos/acend.png', '/img/Countries/eu.png'),
+(118, 'Vision Strikers', '/img/Logos/vision_strikers.png', '/img/Countries/kr.png'),
+(119, 'X10 CRIT', '/img/Logos/x10_crit.png', '/img/Countries/th.png'),
+(120, 'KRÜ Esports', '/img/Logos/kru_esports.png', '/img/Countries/ar.png'),
+(121, '100 Thieves', '/img/Logos/100_thieves.png', '/img/Countries/us.png'),
+(122, 'Envy', '/img/Logos/envy.png', '/img/Countries/us.png'),
+(123, 'Unknown', '/img/Logos/unknown.png', '/img/Countries/us.png'),
+(124, 'Eclipse', '/img/Logos/eclipse.png', '/img/Countries/us.png'),
+(125, 'Helix', '/img/Logos/helix.png', '/img/Countries/us.png'),
+(126, 'Nova', '/img/Logos/nova.png', '/img/Countries/us.png'),
+(127, 'Rift', '/img/Logos/rift.png', '/img/Countries/us.png'),
+(128, 'Titan', '/img/Logos/titan.png', '/img/Countries/us.png'),
+(129, 'Vanguard', '/img/Logos/vanguard.png', '/img/Countries/us.png'),
+(130, 'Zenith', '/img/Logos/zenith.png', '/img/Countries/us.png'),
+(131, 'Ascend', '/img/Logos/ascend.png', '/img/Countries/us.png'),
+(132, 'Elysium', '/img/Logos/elysium.png', '/img/Countries/us.png');
 
 -- --------------------------------------------------------
 
@@ -1119,7 +1148,8 @@ INSERT INTO `user_views` (`id`, `user_id`, `news_id`, `created_at`) VALUES
 (16, 66, 52, '2024-11-03 20:49:37'),
 (17, 66, 56, '2024-11-03 21:00:39'),
 (18, 66, 47, '2024-11-04 10:29:50'),
-(19, 66, 53, '2024-11-09 10:44:48');
+(19, 66, 53, '2024-11-09 10:44:48'),
+(20, 66, 54, '2024-11-17 22:14:35');
 
 --
 -- Indexes for dumped tables
@@ -1162,7 +1192,9 @@ ALTER TABLE `news`
 ALTER TABLE `notifications`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`),
-  ADD KEY `fk_stake` (`stake_id`);
+  ADD KEY `fk_stake_id` (`stake_id`),
+  ADD KEY `fk_support_id` (`support_id`),
+  ADD KEY `fk_admin_id` (`admin_id`);
 
 --
 -- Indexes for table `stake`
@@ -1241,7 +1273,7 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT for table `stake`
@@ -1253,7 +1285,7 @@ ALTER TABLE `stake`
 -- AUTO_INCREMENT for table `support`
 --
 ALTER TABLE `support`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `teams`
@@ -1277,7 +1309,7 @@ ALTER TABLE `user_likes_dislikes`
 -- AUTO_INCREMENT for table `user_views`
 --
 ALTER TABLE `user_views`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Constraints for dumped tables
@@ -1308,8 +1340,9 @@ ALTER TABLE `news`
 -- Constraints for table `notifications`
 --
 ALTER TABLE `notifications`
-  ADD CONSTRAINT `fk_stake` FOREIGN KEY (`stake_id`) REFERENCES `stake` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `notifications_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_admin_id` FOREIGN KEY (`admin_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_stake_id` FOREIGN KEY (`stake_id`) REFERENCES `stake` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_support_id` FOREIGN KEY (`support_id`) REFERENCES `support` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `stake`
@@ -1324,19 +1357,6 @@ ALTER TABLE `stake`
 --
 ALTER TABLE `support`
   ADD CONSTRAINT `support_ibfk_1` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `user_likes_dislikes`
---
-ALTER TABLE `user_likes_dislikes`
-  ADD CONSTRAINT `user_likes_dislikes_ibfk_2` FOREIGN KEY (`comment_id`) REFERENCES `comments` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `user_views`
---
-ALTER TABLE `user_views`
-  ADD CONSTRAINT `user_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `user_views_ibfk_2` FOREIGN KEY (`news_id`) REFERENCES `news` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

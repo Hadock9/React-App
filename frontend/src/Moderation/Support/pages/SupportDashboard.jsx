@@ -3,9 +3,8 @@ import React from 'react'
 import { Admin, CustomRoutes, Resource } from 'react-admin'
 import { Route } from 'react-router-dom'
 import CommentsList from '../../Admin/components/comments/CommentsList'
-import Reply from '../components/Reply'
+import Reply from '../components/support/Reply'
 import SupportList from '../components/support/SupportList'
-
 const SupportDashboard = () => {
 	return (
 		<Admin
@@ -16,7 +15,7 @@ const SupportDashboard = () => {
 			<Resource name='comments' list={CommentsList} />
 
 			<CustomRoutes>
-				<Route path='/support/:id/reply' element={<Reply />} />
+				<Route path='/reply/:id' element={<Reply />} />
 			</CustomRoutes>
 		</Admin>
 	)
