@@ -84,6 +84,22 @@ export const validateTextArea = textArea => {
 	return ''
 }
 
+export const validateTextAreaHF = textArea => {
+	if (!textArea || textArea.trim() === '') {
+		return 'Поле не може бути пустим'
+	}
+	if (!textArea || typeof textArea !== 'string' || textArea.trim() === '') {
+		return 'Поле не може бути пустим'
+	}
+
+	const trimmedText = textArea.trim()
+
+	if (trimmedText.length < 4 || trimmedText.length > 500) {
+		return `Поле має бути від 4 до 500 символів. Кількість символів: ${trimmedText.length}`
+	}
+
+	return true // Успішна валідація
+}
 export const validateInput = Input => {
 	const trimmedText = Input.trim()
 

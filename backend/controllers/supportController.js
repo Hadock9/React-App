@@ -81,7 +81,10 @@ exports.DeleteRequest = (req, res) => {
 }
 
 exports.GetRequest = (req, res) => {
-	const sql = 'SELECT * FROM support WHERE id = ?'
+	const sql = `
+		SELECT s.*, u.first_name AS author FROM support s
+		JOIN  users u   ON s.author_id = u.id
+		WHERE s.id = ?`
 
 	db.query(sql, [req.params.id], (err, results) => {
 		if (err) {
@@ -89,5 +92,20 @@ exports.GetRequest = (req, res) => {
 		}
 
 		res.json(results[0])
+	})
+}
+
+exports.SetReply = (req, res) => {
+	const sql = `
+	UPDATE support
+	SET reply = ?
+	WHERE  id = ? `
+
+	db.query(sql, [1, req.params.id], (err, result) => {
+		if (err) {
+			return res.status(500).json({ error: err.message })
+		}
+
+		res.status(201).json({ id: result.insertId })
 	})
 }

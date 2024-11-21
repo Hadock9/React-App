@@ -4,6 +4,7 @@ const {
 	CreateRequest,
 	DeleteRequest,
 	GetRequest,
+	SetReply,
 } = require('../controllers/supportController')
 
 const router = express.Router()
@@ -14,4 +15,5 @@ router.post('/', CreateRequest)
 router.get('/', GET_LIST)
 router.delete('/:id', DeleteRequest)
 router.get('/:id', GetRequest)
+router.put('/reply/:id', SetReply)
 module.exports = router

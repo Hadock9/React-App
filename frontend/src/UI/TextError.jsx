@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import React from 'react'
 
-const TextError = ({ TextDirty, TextError }) => {
+const TextError = ({ TextDirty = true, TextError }) => {
 	return (
 		<>
 			<AnimatePresence>
