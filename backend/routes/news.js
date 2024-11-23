@@ -6,7 +6,10 @@ const {
 	getNews_pop,
 	addNews_views,
 	GET_LIST,
+ 
 	Delete_news,
+ 
+ 
 } = require('../controllers/newsController')
 const router = express.Router()
 
