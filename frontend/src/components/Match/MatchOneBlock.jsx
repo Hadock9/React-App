@@ -23,7 +23,7 @@ export default function MatchOneBlock({ MatchGet }) {
 					<img
 						draggable='false'
 						className='w-1/2 h-auto'
-						src={'/' + Match.TeamCountry}
+						src={Match.TeamCountry}
 						alt={Match.TeamCountry}
 					/>
 				</div>
@@ -33,7 +33,7 @@ export default function MatchOneBlock({ MatchGet }) {
 				<img
 					draggable='false'
 					className='w-1/2 w-auto'
-					src={'/' + Match.TeamLogo}
+					src={Match.TeamLogo}
 					alt={Match.TeamCountry + ' logo'}
 				/>
 			</div>

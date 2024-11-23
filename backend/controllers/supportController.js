@@ -67,3 +67,45 @@ exports.GET_LIST = (req, res) => {
 		})
 	})
 }
+
+exports.DeleteRequest = (req, res) => {
+	const sql = 'DELETE FROM support WHERE id = ?'
+
+	db.query(sql, [req.params.id], (err, results) => {
+		if (err) {
+			return res.status(500).json({ error: err.message })
+		}
+
+		res.json(results)
+	})
+}
+
+exports.GetRequest = (req, res) => {
+	const sql = `
+		SELECT s.*, u.first_name AS author FROM support s
+		JOIN  users u   ON s.author_id = u.id
+		WHERE s.id = ?`
+
+	db.query(sql, [req.params.id], (err, results) => {
+		if (err) {
+			return res.status(500).json({ error: err.message })
+		}
+
+		res.json(results[0])
+	})
+}
+
+exports.SetReply = (req, res) => {
+	const sql = `
+	UPDATE support
+	SET reply = ?
+	WHERE  id = ? `
+
+	db.query(sql, [1, req.params.id], (err, result) => {
+		if (err) {
+			return res.status(500).json({ error: err.message })
+		}
+
+		res.status(201).json({ id: result.insertId })
+	})
+}

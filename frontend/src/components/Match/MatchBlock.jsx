@@ -7,6 +7,7 @@ import style from '../../styles/Match/Matches.module.css'
 import { CheckFetch } from '../Disclaimer/BadFatchDisclaimer'
 import MyLoader from '../Disclaimer/Loader'
 import { NoResultDisclaimer } from '../Disclaimer/NoResultDisclaimer'
+import { ArrowBigRight, ArrowBigLeft, Ellipsis } from 'lucide-react'
 
 export function MatchBlock({ value }) {
     const [Match, setData] = useState([])
@@ -54,8 +55,8 @@ export function MatchBlock({ value }) {
     // стилізація кнопок бажано переробити)
     const getButtonClasses = (isActive) => {
         const baseClasses =
-            'focus:outline-none text-white hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2   dark:hover:bg-green-700 dark:focus:ring-green-800'
-        const activeClasses = isActive ? 'bg-green-700' : 'bg-red-700'
+            'w-[3rem] h-[2.5rem] text-white border-none cursor-pointer rounded-md transition-all duration-100'
+        const activeClasses = isActive ? 'bg-red-700' : 'bg-gray-500'
         return `${baseClasses} ${activeClasses}`
     }
     const buttonVariants = {
@@ -83,14 +84,14 @@ export function MatchBlock({ value }) {
                                             <img
                                                 draggable='false'
                                                 className={style.MatchesBlockImgCountry}
-                                                src={'/' + Match.Team1Country}
+                                                src={Match.Team1Country}
                                                 alt=''
                                             />
                                         </div>
                                         <img
                                             draggable='false'
                                             className={style.MatchesBlockImgLogo}
-                                            src={'/' + Match.Team1Logo}
+                                            src={Match.Team1Logo}
                                             alt=''
                                         />
                                         {console.log(Match.Team1Country)}
@@ -112,7 +113,7 @@ export function MatchBlock({ value }) {
                                             <img
                                                 draggable='false'
                                                 className={style.MatchesBlockImgCountry}
-                                                src={'/' + Match.Team2Country}
+                                                src={Match.Team2Country}
                                                 alt=''
                                             />
                                         </div>
@@ -120,7 +121,7 @@ export function MatchBlock({ value }) {
                                         <img
                                             draggable='false'
                                             className={style.MatchesBlockImgLogo}
-                                            src={'/' + Match.Team2Logo}
+                                            src={Match.Team2Logo}
                                             alt=''
                                         />
                                         <div
@@ -135,7 +136,7 @@ export function MatchBlock({ value }) {
                                         <img
                                             draggable='false'
                                             className={style.MatchesSideImg}
-                                            src={'/' + Match.GameMinLogo}
+                                            src={Match.GameMinLogo}
                                             alt=''
                                         />
                                     </div>
@@ -146,7 +147,7 @@ export function MatchBlock({ value }) {
                                         <img
                                             draggable='false'
                                             className={style.MatchesSideImg}
-                                            src={'/' + Match.GameMinLogo}
+                                            src={Match.GameMinLogo}
                                             alt=''
                                         />
                                     </div>
@@ -161,8 +162,8 @@ export function MatchBlock({ value }) {
                 <NoResultDisclaimer value={value} />
             )}
 
-            <div>
-                <div className='flex justify-center'>
+            {Data.totalPages > 1 && (
+                <div className='flex justify-center gap-2 mb-3'>
                     <motion.button
                         type='button'
                         onClick={() => setCurrentPage((prev) => (prev > 1 ? prev - 1 : prev))}
@@ -170,10 +171,10 @@ export function MatchBlock({ value }) {
                         whileHover='hover'
                         whileTap='tap'
                     >
-                        Previous Page
+                        <ArrowBigLeft className='w-[3rem] h-[2rem] ' />
                     </motion.button>
 
-                    {currentPage - 3 > 1 && (
+                    {currentPage - 3 >= 1 && (
                         <>
                             <motion.button
                                 type='button'
@@ -185,7 +186,7 @@ export function MatchBlock({ value }) {
                             >
                                 {1}
                             </motion.button>
-                            <span>...</span>
+                            <Ellipsis className='self-end' />
                         </>
                     )}
 
@@ -205,9 +206,9 @@ export function MatchBlock({ value }) {
                         </motion.button>
                     ))}
 
-                    {currentPage + 3 < Data?.totalPages && (
+                    {currentPage + 3 <= Data?.totalPages && (
                         <>
-                            <span>...</span>
+                            <Ellipsis className='self-end' />
                             <motion.button
                                 type='button'
                                 className={getButtonClasses(currentPage === Data.totalPages)}
@@ -230,10 +231,10 @@ export function MatchBlock({ value }) {
                         whileHover='hover'
                         whileTap='tap'
                     >
-                        Next Page
+                        <ArrowBigRight className='w-[3rem] h-[2rem] ' />
                     </motion.button>
                 </div>
-            </div>
+            )}
         </>
     )
 }

@@ -83,3 +83,13 @@ exports.GET_LIST = (req, res) => {
 		})
 	})
 }
+
+exports.Delete_stake = (req, res) => {
+	const sql = 'DELETE FROM Stake WHERE id = ?'
+	db.query(sql, [req.params.id], (err, result) => {
+		if (err) {
+			return res.status(500).json({ error: err.message })
+		}
+		res.json(result)
+	})
+}

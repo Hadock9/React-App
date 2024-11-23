@@ -2,7 +2,7 @@ const db = require('../db.js')
 
 exports.getNews_list = (req, res) => {
 	const sql =
-		'SELECT n.id, n.title, n.content, n.author, g.name AS gameName,g.id AS gameId, n.publish_date, n.status, n.views, n.likes,	n.messages,  n.image_url, n.updated_at, n.description FROM news n JOIN Games_List g ON n.game_id = g.id;'
+		'SELECT n.id, n.title, n.content, n.author, g.name AS gameName,g.id AS gameId, n.publish_date, n.status, n.views,  n.image_url, n.updated_at, n.description FROM news n JOIN Games_List g ON n.game_id = g.id;'
 	db.query(sql, (err, result) => {
 		if (err) {
 			return res.status(500).json({ error: err.message })
@@ -17,8 +17,8 @@ exports.getNews_last = (req, res) => {
 					g.id AS gameId, 
 					n.publish_date, 
 					n.views, 
-					n.likes,
-					n.messages, 
+			 
+				 
 					n.updated_at, 
 					n.description 
 		FROM news n 
@@ -40,8 +40,7 @@ exports.getNews_pop = (req, res) => {
 					g.id AS gameId, 
 					n.publish_date, 
 					n.views, 
-					n.likes,
-					n.messages, 
+				 
 					n.updated_at, 
 					n.description 
 		FROM news n 
@@ -66,8 +65,7 @@ exports.getNewsById = (req, res) => {
     n.publish_date, 
     n.status, 
     n.views, 
-    n.likes, 
-		n.messages, 
+    
     n.image_url, 
     n.updated_at, 
     n.description,
@@ -80,7 +78,7 @@ JOIN
 WHERE 
     n.id = ? 
 GROUP BY 
-    n.id, n.title, n.author, g.name, g.id, n.publish_date, n.status, n.views, n.likes, n.image_url, n.updated_at, n.description;`
+    n.id, n.title, n.author, g.name, g.id, n.publish_date, n.status, n.views,   n.image_url, n.updated_at, n.description;`
 
 	db.query(sql, [req.params.id], (err, result) => {
 		if (err) {
@@ -182,5 +180,15 @@ exports.GET_LIST = (req, res) => {
 			res.setHeader('Access-Control-Expose-Headers', 'Content-Range')
 			res.json(results)
 		})
+	})
+}
+
+exports.Delete_news = (req, res) => {
+	const sql = 'DELETE FROM news WHERE id = ?'
+	db.query(sql, [req.params.id], (err, result) => {
+		if (err) {
+			return res.status(500).json({ error: err.message })
+		}
+		res.json(result)
 	})
 }

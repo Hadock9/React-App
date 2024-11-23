@@ -20,8 +20,8 @@ const CommentsList = () => {
 				<TextField source='likes' />
 				<ImageField source='picture' />
 				<DateField source='publish_date' />
-				<EditButton basePath='/comments' icon={<Edit />} />
-				<DeleteButton basePath='/comments' />
+				<EditButton icon={<Edit />} />
+				<DeleteButton />
 			</Datagrid>
 		</List>
 	)

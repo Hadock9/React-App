@@ -128,3 +128,15 @@ exports.GET_LIST = (req, res) => {
 		})
 	})
 }
+
+exports.Delete_user = (req, res) => {
+	const sql = 'DELETE FROM users WHERE id = ?'
+
+	db.query(sql, [req.params.id], (err, result) => {
+		if (err) {
+			console.error('Error inserting user:', err)
+			return res.status(500).json({ error: 'Database error' })
+		}
+		return res.status(201).json({ userId: result.deleteResult })
+	})
+}

@@ -22,8 +22,8 @@ const StakeList = props => {
 				<TextField source='team_id' />
 				<TextField source='user_id' />
 				<DateField source='stake_time' />
-				<EditButton basePath='/support' icon={<Edit />} />
-				<DeleteButton basePath='/support' />
+				<EditButton icon={<Edit />} />
+				<DeleteButton />
 			</Datagrid>
 		</List>
 	)

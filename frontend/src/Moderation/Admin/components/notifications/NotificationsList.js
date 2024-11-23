@@ -5,6 +5,7 @@ import {
 	DateField,
 	DeleteButton,
 	EditButton,
+	ImageField,
 	List,
 	TextField,
 } from 'react-admin'
@@ -15,12 +16,12 @@ const NotificationsList = props => {
 				<TextField source='id' />
 				<TextField source='content' />
 				<TextField source='TeamName' />
-				<TextField source='TeamCountry' />
+				<ImageField source='TeamCountry' />
 				<TextField source='Coef' />
 				<TextField source='type' />
 				<DateField source='created_at' />
-				<EditButton basePath='/support' icon={<Edit />} />
-				<DeleteButton basePath='/support' />
+				<EditButton icon={<Edit />} />
+				<DeleteButton />
 			</Datagrid>
 		</List>
 	)

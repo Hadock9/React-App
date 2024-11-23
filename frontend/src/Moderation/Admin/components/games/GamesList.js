@@ -4,6 +4,7 @@ import {
 	Datagrid,
 	DeleteButton,
 	EditButton,
+	ImageField,
 	List,
 	TextField,
 } from 'react-admin'
@@ -14,10 +15,10 @@ const GamesList = props => {
 				<TextField source='id' />
 				<TextField source='name' />
 				<TextField source='views' />
-				<TextField source='ImageSrc' />
+				<ImageField source='ImageSrc' />
 
-				<EditButton basePath='/support' icon={<Edit />} />
-				<DeleteButton basePath='/support' />
+				<EditButton icon={<Edit />} />
+				<DeleteButton />
 			</Datagrid>
 		</List>
 	)

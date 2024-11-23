@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import BurgerMenu from '../../components/BurgerMenu'
+import Transition from '../../components/transition'
 import { UkrainianWar } from '../../components/UserExpirience/BlockSaveUkraine'
 import MyCarousel from '../../components/UserExpirience/Carousel'
 import Footer from '../../components/UserExpirience/Footer'
@@ -10,7 +11,7 @@ import NavBar from '../../components/UserExpirience/NavBar'
 import useFetchGet from '../../hooks/useFetchGet'
 import rootstyle from '../../styles/root.module.css'
 
-export function Home() {
+function Home() {
 	const heroTextAnimation = {
 		hidden: {
 			x: -100,
@@ -45,6 +46,18 @@ export function Home() {
 		}),
 	}
 
+	const stairsAnimation = {
+		hidden: {
+			y: 100,
+			opacity: 0,
+		},
+		visible: custom => ({
+			y: 0 + custom * 20,
+			opacity: 1,
+			transition: { delay: custom * 0.3 },
+		}),
+	}
+
 	const [games, setGames] = useState([])
 	const { Data, isLoading, failedToFetch } = useFetchGet({
 		url: 'http://localhost:4000/api/games/Games_List',
@@ -64,7 +77,7 @@ export function Home() {
 						initial='hidden'
 						whileInView='visible'
 						viewport={{ once: true }}
-						className='flex flex-col-reverse md:flex-row items-center  py-16 px-6 md:px-12'
+						className='flex flex-col-reverse md:flex-row items-center py-16 px-6 md:px-12'
 					>
 						<motion.div
 							variants={heroTextAnimation}
@@ -87,16 +100,18 @@ export function Home() {
 						</motion.div>
 						<motion.div
 							variants={heroImageAnimation}
-							className='md:w-1/2 flex justify-center md:justify-end mb-8 md:mb-0'
+							className='md:w-1/2 flex justify-center md:justify-center mb-8 md:mb-0'
 						>
-							<MotionFireLogo />
+							<figure className='w-80'>
+								<MotionFireLogo />
+							</figure>
 						</motion.div>
 					</motion.section>
 					<motion.div
 						initial='hidden'
 						whileInView='visible'
 						viewport={{ once: true }}
-						className='flex flex-col items-center justify-center  px-6 py-12'
+						className='flex flex-col items-center justify-center px-6 py-12'
 					>
 						<div className='w-16 h-1 bg-blue-600 rounded mb-8'></div>
 						<div className='text-center max-w-2xl'>
@@ -119,6 +134,58 @@ export function Home() {
 								кіберспорту разом з нами!
 							</motion.p>
 						</div>
+						<motion.div
+							initial='hidden'
+							whileInView='visible'
+							viewport={{ once: true }}
+							className='flex flex-col md:flex-row items-center justify-center px-6 py-12 space-y-6 md:space-y-0 md:space-x-6'
+						>
+							<motion.div
+								custom={1}
+								variants={stairsAnimation}
+								className='bg-white p-6 rounded-lg shadow-md text-center md:w-1/3'
+							>
+								<h3 className='text-xl font-bold text-gray-800 mb-2'>
+									Розширені можливості
+								</h3>
+								<p className='text-gray-600'>
+									Отримайте доступ до ексклюзивних ставок на провідні
+									кіберспортивні події та турніри з усього світу.
+								</p>
+							</motion.div>
+
+							<div className='hidden md:block w-12 h-1 bg-blue-600 transform md:translate-y-5'></div>
+
+							<motion.div
+								custom={2}
+								variants={stairsAnimation}
+								className='bg-white p-6 rounded-lg shadow-md text-center md:w-1/3'
+							>
+								<h3 className='text-xl font-bold text-gray-800 mb-2'>
+									Деталізована аналітика
+								</h3>
+								<p className='text-gray-600'>
+									Зрозумійте, хто та коли цікавиться вашими ставками, завдяки
+									детальним звітам та аналітиці.
+								</p>
+							</motion.div>
+
+							<div className='hidden md:block w-12 h-1 bg-blue-600 transform md:translate-y-10'></div>
+
+							<motion.div
+								custom={3}
+								variants={stairsAnimation}
+								className='bg-white p-6 rounded-lg shadow-md text-center md:w-1/3'
+							>
+								<h3 className='text-xl font-bold text-gray-800 mb-2'>
+									Повна персоналізація
+								</h3>
+								<p className='text-gray-600'>
+									Налаштовуйте свої ставки та доступ до спеціальних функцій для
+									максимальної зручності.
+								</p>
+							</motion.div>
+						</motion.div>
 					</motion.div>
 					<MyCarousel Array={games} />
 				</main>
@@ -127,3 +194,5 @@ export function Home() {
 		</div>
 	)
 }
+
+export default Transition(Home)
