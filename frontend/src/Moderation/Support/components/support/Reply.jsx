@@ -20,7 +20,16 @@ const Reply = () => {
 		formState: { errors, isValid },
 		trigger,
 		clearErrors,
-	} = useForm({ mode: 'onChange' })
+	} = useForm({
+		mode: 'onChange',
+		defaultValues: {
+			content: `Доброго дня.
+Дякуємо за звернення до нашої служби підтримки. Ми отримали ваш запит.
+Ми уважно розглянули ваше питання і хочемо надати наступну відповідь:
+
+Якщо у вас залишаться додаткові питання або проблема не вирішиться, будь ласка, дайте нам знати. Ми завжди готові допомогти!`,
+		},
+	})
 
 	const onSubmit = data => {
 		console.log('Data:', data)
