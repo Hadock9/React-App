@@ -7,6 +7,7 @@ import rootstyle from '../../styles/root.module.css'
 
 import { MotionFireLogo } from './MotionFireLogo'
 function NavBar() {
+
     const { isRegUser, user, logout } = useAuth()
 
     const [isHidden, setIsHidden] = useState(false)
@@ -28,6 +29,7 @@ function NavBar() {
     ]
     return (
         <>
+
             <motion.header
                 initial={'show'}
                 animate={isHidden ? 'hidden' : 'show'}
@@ -36,17 +38,17 @@ function NavBar() {
                 className='flex justify-around items-center w-full h-17 shadow-lg p-3'
             >
                 <Link to='/Home'>
-                    <div className='flex w-[300px] justify-center'>
+                    <div className='flex w-[200px] md:w-[300px] justify-center'>
                         <div className='h-10 w-10 flex justify-center items-center'>
                             <MotionFireLogo />
                         </div>
-                        <div className={`text-5xl self-end ml-5 ${rootstyle.LogoFont}`}>
+                        <div className={`text-3xl md:text-5xl self-end ml-5 ${rootstyle.LogoFont}`}>
                             CyberBet
                         </div>
                     </div>
                 </Link>
 
-                <div className='flex self-center w-[30%]'>
+                <div className='flex self-center w-[30%] xl:flex hidden self-center flex-wrap gap-9 mt-10'>
                     {navBarInfo.map((item, index) => (
                         <Link
                             to={item.link}
@@ -58,12 +60,13 @@ function NavBar() {
                     ))}
                 </div>
 
-                <div className='flex w-[300px] justify-center'>
+
+                <div className='flex w-[200px] md:w-[300px] justify-center'>
                     {isRegUser ? (
                         <div className='flex items-center gap-[10px]'>
                             <Link to='/profile'>
-                                <div className='flex items-center gap-[12px] hover:animate-pulse font-sans font-semibold hover:shadow-lg duration-700 h-[60px] px-[15px] rounded-xl'>
-                                    <div className='h-11 w-11 flex justify-center items-center '>
+                                <div className='flex items-center gap-[12px] hover:animate-pulse font-sans font-semibold hover:shadow-lg duration-700 h-[40px] md:h-[60px] px-[10px] md:px-[15px] rounded-xl'>
+                                    <div className='h-8 w-8 md:h-11 md:w-11 flex justify-center items-center'>
                                         <img
                                             className='w-[100%] h-auto rounded-full'
                                             src={user.picture}
@@ -76,7 +79,7 @@ function NavBar() {
                             <Link to='/Home'>
                                 <div
                                     onClick={logout}
-                                    className='flex items-center hover:animate-pulse font-sans font-semibold hover:shadow-lg duration-700 h-[60px] px-[15px] text-rose-800 rounded-xl'
+                                    className='hover:animate-pulse font-sans font-semibold hover:shadow-lg duration-700 h-[40px] md:h-[60px] px-[10px] md:px-[15px] text-rose-800 rounded-xl'
                                 >
                                     <p>Розлогінитися</p>
                                 </div>
@@ -85,15 +88,15 @@ function NavBar() {
                     ) : (
                         <div className='flex items-center gap-[10px]'>
                             <Link to='/Login'>
-                                <div className='flex items-center gap-[12px] hover:animate-pulse font-sans font-semibold hover:shadow-lg duration-700 h-[60px] px-[15px] rounded-xl'>
-                                    <div className='h-9 w-9 flex justify-center items-center '>
+                                <div className='flex items-center gap-[12px] hover:animate-pulse font-sans font-semibold hover:shadow-lg duration-700 h-[40px] md:h-[60px] px-[10px] md:px-[15px] rounded-xl'>
+                                    <div className='h-8 w-8 md:h-9 md:w-9 flex justify-center items-center'>
                                         <UserRoundX className='w-[100%] h-auto' />
                                     </div>
                                     <div>Вхід</div>
                                 </div>
                             </Link>
                             <Link to='/Registration'>
-                                <div className='flex items-center hover:animate-pulse font-sans font-semibold hover:shadow-lg duration-700 h-[60px] px-[15px] rounded-xl'>
+                                <div className='flex items-center hover:animate-pulse font-sans font-semibold hover:shadow-lg duration-700 h-[40px] md:h-[60px] px-[10px] md:px-[15px] rounded-xl'>
                                     Зареєструватися
                                 </div>
                             </Link>

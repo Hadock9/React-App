@@ -87,20 +87,19 @@ export function NewsContent() {
                 <UkrainianWar />
                 <div className={rootstyle.Container}>
                     <BurgerMenu />
-
                     <main className={rootstyle.Main}>
                         {/* News block */}
-
-                        <div className='News my-5 ml-5 mr-24'>
-                            <div className=' '>
-                                <p className='text-4xl font-extrabold font-sans '>
+                        <div className='News my-5 ml-5 mr-5 sm:mr-10 lg:mr-24'>
+                            <div>
+                                {/* Заголовок новини */}
+                                <p className='text-3xl sm:text-4xl font-extrabold font-sans'>
                                     {OneNews.title}
                                 </p>
-                                <div className='flex my-4'>
-                                    <Link to='#' className='text-sm'>
-                                        {OneNews.gameName}
-                                    </Link>
-                                    <span className='ml-3 w-px h-5 bg-gray-400 mr-4 '></span>
+
+                                {/* Інформація про новину */}
+                                <div className='flex my-4 flex-wrap'>
+                                    <Link to='#' className='text-sm'>{OneNews.gameName}</Link>
+                                    <span className='ml-3 w-px h-5 bg-gray-400 mr-4'></span>
                                     <p className='mr-4 text-gray-400 text-sm'>
                                         {NewsDate(OneNews.publish_date)}
                                     </p>
@@ -109,14 +108,18 @@ export function NewsContent() {
                                         <p className='text-gray-400 text-sm'>{OneNews.views}</p>
                                     </div>
                                 </div>
+
+                                {/* Зображення новини */}
                                 <div className='flex justify-center my-3'>
                                     <img
                                         src={OneNews.image_url}
-                                        className='w-[90%] rounded-lg'
+                                        className='w-full sm:w-[80%] lg:w-[90%] rounded-lg'
                                         alt='зображення'
                                     />
                                 </div>
+
                                 <div className='my-3'>
+                                    {/* Деталі новини */}
                                     <div className='news-details'>
                                         <h2 className='text-xl font-bold'>Деталі новини</h2>
                                         {parsedContent && parsedContent.questions.length > 0 ? (
@@ -135,20 +138,18 @@ export function NewsContent() {
                                         )}
                                     </div>
 
+                                    {/* Коментарі */}
                                     <Comments
                                         id={id}
-                                        urlFetch={`http://localhost:4000/api/comments/news_comments/${id}/${
-                                            isRegUser ? user.id : 0
-                                        }`}
-                                        urlPost={
-                                            'http://localhost:4000/api/comments/news_comments/comment'
-                                        }
+                                        urlFetch={`http://localhost:4000/api/comments/news_comments/${id}/${isRegUser ? user.id : 0}`}
+                                        urlPost={'http://localhost:4000/api/comments/news_comments/comment'}
                                         what_id='news'
                                     />
                                 </div>
                             </div>
                         </div>
                     </main>
+
                     <aside className='w-[25%]'>
                         <NewsAside
                             url={'http://localhost:4000/api/news/news_last'}

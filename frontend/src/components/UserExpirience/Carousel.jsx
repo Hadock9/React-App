@@ -6,26 +6,22 @@ import { Link } from 'react-router-dom'
 
 const MyCarousel = ({ Array }) => {
 	const responsive = {
-		desktop: {
-			breakpoint: { max: 3000, min: 1024 },
-			items: 6,
-			slidesToSlide: 3,
-		},
-		mac: {
-			breakpoint: { max: 1600, min: 1024 },
-			items: 4,
-			slidesToSlide: 3,
-		},
-		tablet: {
-			breakpoint: { max: 1024, min: 464 },
-			items: 4,
-			slidesToSlide: 2,
-		},
-		mobile: {
-			breakpoint: { max: 464, min: 0 },
-			items: 1,
-			slidesToSlide: 1,
-		},
+		superLargeDesktop: {
+			breakpoint: { max: 4000, min: 1200 },
+			items: 4, // Чотири елементи на дуже великих екранах
+		  },
+		  desktop: {
+			breakpoint: { max: 1200, min: 900 },
+			items: 3, // Три елементи на звичайних екранах
+		  },
+		  tablet: {
+			breakpoint: { max: 900, min: 600 },
+			items: 2, // Два елементи на планшетах
+		  },
+		  mobile: {
+			breakpoint: { max: 600, min: 0 },
+			items: 1, // Один елемент на мобільних пристроях
+		  },
 	}
 
 	return (

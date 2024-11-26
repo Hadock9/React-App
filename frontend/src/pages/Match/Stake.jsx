@@ -245,7 +245,7 @@ export function Stake() {
 								}}
 							>
 								<div
-									className='w-full flex text-white bg-gray-700 shadow-lg gap-4 items-center justify-evenly p-4 rounded-lg my-5'
+									className='w-full min-h-[128px] h-auto md:h-[120px] bg-gray-800 text-gray-200 flex flex-col md:flex-row gap-4 items-center justify-around p-4 rounded-lg my-5'
 									key={stake.id}
 								>
 									<div className='flex grow basis-0 justify-center'>
@@ -268,16 +268,16 @@ export function Stake() {
 									<div className='flex grow basis-0 justify-center text-lg'>
 										{stake.TeamName}
 									</div>
-									<div className='flex flex-col grow basis-0 bg-gray-500 rounded-lg py-3 items-center'>
-										<div className='text-3xl'>
+									<div className='min-w-[20%] flex flex-col items-center'>
+										<div className='text-white text-xl md:text-3xl'>
 											₴{(stake.amount * stake.Coef).toFixed(2)}
 										</div>
-										<div className='flex text-s'>
+										<div className='flex text-sm md:text-base'>
 											<div>₴{stake.amount}</div>
 											<div>x{stake.Coef}</div>
 										</div>
 									</div>
-									<div className='flex grow basis-0 flex-col justify-evenly items-center'>
+									<div className='flex flex-col justify-evenly items-center text-sm md:text-base'>
 										<div>{formatTime(stake.stake_time)}</div>
 										<div>{formatDate(stake.stake_time)}</div>
 										<div>Status: {stake.status}</div>

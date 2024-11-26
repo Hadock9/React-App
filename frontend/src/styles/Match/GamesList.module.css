@@ -1,19 +1,35 @@
 /* Контейнер для гри, що використовує сітку */
 .GameBlockRoot {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); /* Автоматичне заповнення */
     gap: 10px;
-    grid-auto-rows: minmax(100px, auto);
     justify-items: center;
     margin-right: 64px;
 }
 
-/* Блок окремої гри */
 .GameBlock {
-    width: 230px;
+    width: 100%; /* Автоматично підлаштовуватиметься під ширину колонки */
     height: 410px;
     padding: 10px;
     border-radius: 1.5rem;
+}
+/* Адаптивність для різних розмірів екрану */
+@media (min-width: 576px) {
+    .GameBlock {
+        flex: 1 1 calc(50% - 20px); /* Дві колонки на малих екранах */
+    }
+}
+
+@media (min-width: 768px) {
+    .GameBlock {
+        flex: 1 1 calc(33.33% - 20px); /* Три колонки на середніх екранах */
+    }
+}
+
+@media (min-width: 992px) {
+    .GameBlock {
+        flex: 1 1 calc(25% - 20px); /* Чотири колонки на великих екранах */
+    }
 }
 
 /* Зображення гри */

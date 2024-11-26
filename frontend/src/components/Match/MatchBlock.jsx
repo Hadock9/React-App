@@ -79,18 +79,20 @@ export function MatchBlock({ value }) {
 							{console.log(Match)}
 							<div className={style.MatchesBlock}>
 								<div className={style.MatchesBlockInfo}>
-									<div className={style.MatchesBlockTeam}>
+									<div
+										className={`${style.MatchesBlockTeam} w-full sm:w-[40%] md:w-[45%]`}
+									>
 										<div className={style.MatchesBlockCountry}>
 											<img
 												draggable='false'
-												className={style.MatchesBlockImgCountry}
+												className={`${style.MatchesBlockImgCountry} w-8 sm:w-8 md:w-12 lg:w-16`}
 												src={Match.Team1Country}
 												alt=''
 											/>
 										</div>
 										<img
 											draggable='false'
-											className={style.MatchesBlockImgLogo}
+											className={`${style.MatchesBlockImgLogo} w-12 sm:w-10 md:w-16 lg:w-20`}
 											src={Match.Team1Logo}
 											alt=''
 										/>
@@ -108,7 +110,9 @@ export function MatchBlock({ value }) {
 										<p className={style.MatchesBlockVs}>Vs</p>
 										<p className={style.MatchesBlockPlace}> {Match.Place}</p>
 									</div>
-									<div className={style.MatchesBlockTeam2}>
+									<div
+										className={`${style.MatchesBlockTeam2} w-full sm:w-[40%] md:w-[45%]`}
+									>
 										<div className={style.MatchesBlockCountry}>
 											<img
 												draggable='false'
