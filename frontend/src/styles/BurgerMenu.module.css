@@ -1,6 +1,8 @@
 /* Контейнер для бокового меню */
 .BurgerMenuContainer {
-    @apply w-1/5 h-full sticky top-0   mt-2 mr-2 rounded-r-lg select-none;
+    @apply w-1/5 h-full sticky top-0 mt-2 mr-2 rounded-r-lg select-none ;
+
+    
 }
 
 /* Секція, що прихована */
@@ -14,6 +16,8 @@
 }
 .AsideBlock:hover {
     @apply cursor-pointer bg-gray-300 rounded-r-lg select-none;
+
+    z-index: 10
 }
 /* Іконка для перегляду в боковому меню */
 .AsideBlockIconBrowse {
@@ -29,3 +33,5 @@
 .AsideBlockText {
     @apply w-4/5 h-16 flex items-center select-none;
 }
+
+

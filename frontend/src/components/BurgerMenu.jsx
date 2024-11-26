@@ -7,19 +7,25 @@ import {
 	History,
 	House,
 	Mail,
+	Gamepad2,
+	BookOpenText,
 } from 'lucide-react'
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useMenu } from '../context/MenuContext'
 import style from '../styles/BurgerMenu.module.css'
 const sideBarInfo = [
 	{ link: '/Home', icon: <House />, name: 'Головна' },
+	{ link: '/Games', icon: <Gamepad2 />, name: 'Ігри', isMobileOnly: true },
+	{ link: '/News', icon: <BookOpenText />, name: 'Новини', isMobileOnly: true },
 	{ link: '/Stake', icon: <History />, name: 'Історія ставок' },
 	{ link: '/Balance', icon: <CircleDollarSign />, name: 'Баланс' },
 	{ link: '/Bonuses', icon: <Gem />, name: 'Бонуси' },
 	{ link: '/Profile', icon: <CircleUserRound />, name: 'Мій профіль' },
 	{ link: '/Donate', icon: <Gift />, name: 'Підтримати' },
 	{ link: '/Notifications', icon: <Mail />, name: 'Повідомлення' },
+
+
 ]
 
 const Path = props => (
@@ -34,10 +40,22 @@ const Path = props => (
 
 function BurgerMenu() {
 	const { isOpen, setIsOpen } = useMenu()
+	const [isMobile, setIsMobile] = useState(window.innerWidth < 1280);
 
 	const toggleMenu = () => {
 		setIsOpen(prev => !prev)
 	}
+
+	useEffect(() => {
+		const handleResize = () => {
+			setIsMobile(window.innerWidth < 1280); 
+		};
+
+		window.addEventListener('resize', handleResize);
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	}, []);
 
 	const containerVariants = {
 		hidden: {
@@ -81,7 +99,7 @@ function BurgerMenu() {
 
 	return (
 		<motion.aside
-			initial='hidden' // Initial state
+			initial='hidden' 
 			variants={containerVariants}
 			animate={containerControls}
 			className={style.BurgerMenuContainer}
@@ -123,17 +141,19 @@ function BurgerMenu() {
 			</div>
 
 			{sideBarInfo.map((Item, index) => (
-				<motion.div
-					key={index}
-					initial={{ scale: 1 }}
-					whileHover={{ scale: 1.1 }}
-					whileTap={{ scale: 0.95 }}
-				>
-					<Link to={Item.link} className={style.AsideBlock}>
-						<div className={style.AsideBlockIcon}>{Item.icon}</div>
-						<AnimatedText>{Item.name}</AnimatedText>
-					</Link>
-				</motion.div>
+				(isMobile || !Item.isMobileOnly) && (
+					<motion.div
+						key={index}
+						initial={{ scale: 1 }}
+						whileHover={{ scale: 1.1 }}
+						whileTap={{ scale: 0.95 }}
+					>
+						<Link to={Item.link} className={style.AsideBlock}>
+							<div className={style.AsideBlockIcon}>{Item.icon}</div>
+							<AnimatedText>{Item.name}</AnimatedText>
+						</Link>
+					</motion.div>
+				)
 			))}
 		</motion.aside>
 	)
