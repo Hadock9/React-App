@@ -2,7 +2,6 @@ import { motion, useAnimationControls } from 'framer-motion'
 import {
 	CircleDollarSign,
 	CircleUserRound,
-	Gem,
 	Gift,
 	History,
 	House,
@@ -16,7 +15,6 @@ const sideBarInfo = [
 	{ link: '/Home', icon: <House />, name: 'Головна' },
 	{ link: '/Stake', icon: <History />, name: 'Історія ставок' },
 	{ link: '/Balance', icon: <CircleDollarSign />, name: 'Баланс' },
-	{ link: '/Bonuses', icon: <Gem />, name: 'Бонуси' },
 	{ link: '/Profile', icon: <CircleUserRound />, name: 'Мій профіль' },
 	{ link: '/Donate', icon: <Gift />, name: 'Підтримати' },
 	{ link: '/Notifications', icon: <Mail />, name: 'Повідомлення' },

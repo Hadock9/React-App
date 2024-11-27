@@ -114,6 +114,7 @@ const Comments = ({ id, urlFetch, urlPost }) => {
 	}
 
 	useEffect(() => {
+		SetComments(null)
 		if (Data) {
 			SetComments(
 				Data.map(comment => ({

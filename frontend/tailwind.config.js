@@ -4,7 +4,7 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
-				primary: '#2563eb', //[#f5ba1a]
+				primary: '#cb172a', //[#2563eb]
 			},
 			fontFamily: {
 				roboto: ['Roboto', 'sans-serif'],

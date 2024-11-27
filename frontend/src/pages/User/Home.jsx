@@ -2,7 +2,6 @@ import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import BurgerMenu from '../../components/BurgerMenu'
-import Transition from '../../components/transition'
 import { UkrainianWar } from '../../components/UserExpirience/BlockSaveUkraine'
 import MyCarousel from '../../components/UserExpirience/Carousel'
 import Footer from '../../components/UserExpirience/Footer'
@@ -195,4 +194,4 @@ function Home() {
 	)
 }
 
-export default Transition(Home)
+export default Home

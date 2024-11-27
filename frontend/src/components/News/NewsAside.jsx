@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import useFetchGet from '../../hooks/useFetchGet'
 import { NewsDate } from '../../js/TimeValidation'
@@ -39,8 +39,9 @@ const NewsAside = ({ url, title }) => {
 				>
 					<div className='flex '>
 						<Link
+							key={OneNews.gameId}
 							to={
-								'/Home/' +
+								'/Games/' +
 								OneNews.gameName.replaceAll(' ', '_').replaceAll('-', '_') +
 								`/Matches?game_id=${OneNews.gameId}`
 							}
@@ -54,14 +55,16 @@ const NewsAside = ({ url, title }) => {
 						</p>
 					</div>
 					<div>
-						<Link
-							to={`/News/${OneNews.gameName.replace(/[\s-]/g, '_')}?OneNews=${
-								OneNews.id
-							}`}
-							className='text-base underline'
-						>
-							{OneNews.title}
-						</Link>
+						<Suspense fallback={<MyLoader />}>
+							<Link
+								to={`/News/${OneNews.gameName.replace(/[\s-]/g, '_')}?OneNews=${
+									OneNews.id
+								}`}
+								className='text-base underline'
+							>
+								{OneNews.title}
+							</Link>
+						</Suspense>
 					</div>
 				</motion.div>
 			))}
