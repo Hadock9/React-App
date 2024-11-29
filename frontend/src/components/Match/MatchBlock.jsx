@@ -182,7 +182,7 @@ export function MatchBlock({ value }) {
 						<>
 							<motion.button
 								type='button'
-								className={getButtonClasses(currentPage === Data.totalPages)}
+								className={getButtonClasses(currentPage === 1)}
 								onClick={() => setCurrentPage(1)}
 								variants={buttonVariants}
 								whileHover='hover'
