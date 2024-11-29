@@ -1,10 +1,8 @@
-import { Edit } from 'lucide-react'
 import React from 'react'
 import {
 	Datagrid,
 	DateField,
 	DeleteButton,
-	EditButton,
 	ImageField,
 	List,
 	TextField,
@@ -20,7 +18,7 @@ const CommentsList = () => {
 				<TextField source='likes' />
 				<ImageField source='picture' />
 				<DateField source='publish_date' />
-				<EditButton icon={<Edit />} />
+
 				<DeleteButton />
 			</Datagrid>
 		</List>
