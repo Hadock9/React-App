@@ -186,36 +186,79 @@ export function Profile() {
             <UkrainianWar />
             <div className={rootstyle.Container}>
                 <main className={rootstyle.Main}>
-                    <div className='h-[85vh] flex justify-center items-center'>
-                        <form
-                            onSubmit={handleSave}
-                            className='flex w-[50%] justify-center rounded-2xl bg-gray-700 border border-black border-opacity-10 shadow-lg p-5'
-                        >
-                            <div className='flex flex-col w-full items-center'>
-                                <div className='flex w-full'>
-                                    <div className='flex grow basis-0 justify-center items-center p-5'>
-                                        <div className='h-[96px] w-[96px] flex justify-center items-center bg-white rounded-[50%]'>
-                                            {/* Зображення профілю */}
-                                            {formData.pictureSrc ? (
-                                                <img
-                                                    className='max-w-full h-auto rounded-full'
-                                                    src={formData.pictureSrc}
-                                                    alt=''
-                                                />
-                                            ) : (
-                                                <UserRound />
-                                            )}
+                    <motion.div
+                        initial={{ scale: 0.2 }}
+                        animate={{ scale: 1 }}
+                        transition={{ ease: 'easeIn', duration: 0.8 }}
+                    >
+                        <div className='h-[85vh] flex justify-center items-center'>
+                            <form
+                                onSubmit={handleSave}
+                                className='flex w-[50%] justify-center rounded-2xl bg-gray-800 border border-black border-opacity-10 shadow-lg p-5'
+                            >
+                                <div className='flex flex-col w-full items-center'>
+                                    <div className='flex w-full'>
+                                        <div className='flex grow basis-0 justify-center items-center py-5 pl-5'>
+                                            <div className='h-[96px] w-[96px] flex justify-center items-center bg-white rounded-[50%]'>
+                                                {/* Зображення профілю */}
+                                                {formData.pictureSrc ? (
+                                                    <img
+                                                        className='max-w-full h-auto rounded-full'
+                                                        src={formData.pictureSrc}
+                                                        alt=''
+                                                    />
+                                                ) : (
+                                                    <UserRound />
+                                                )}
+                                            </div>
+                                        </div>
+
+                                        <div className='flex flex-col grow-[3] basis-0 justify-center p-5'>
+                                            <label className='text-white text-xs font-light'>
+                                                ID
+                                            </label>
+                                            <input
+                                                className='w-full pl-2 h-10 text-white bg-gray-500 placeholder-gray-200 border-b border-white focus:outline-none mb-4 rounded-lg'
+                                                type='text'
+                                                value={formData.id}
+                                                readOnly
+                                            />
+                                            <div className='flex w-full gap-5'>
+                                                <div className='flex grow basis-0 flex-col'>
+                                                    <label className='text-white text-xs font-light'>
+                                                        Ел. Пошта
+                                                    </label>
+                                                    <input
+                                                        className='w-full pl-2 h-10 text-white  bg-gray-500 placeholder-gray-200 border-b border-white focus:outline-none mb-4 rounded-lg'
+                                                        type='email'
+                                                        name='email'
+                                                        value={formData.email}
+                                                        placeholder=''
+                                                        readOnly
+                                                    />
+                                                </div>
+                                                <div className='flex grow basis-0 flex-col'>
+                                                    <label className='text-white text-xs font-light'>
+                                                        Дата реєстрації
+                                                    </label>
+                                                    <input
+                                                        className='w-full pl-2 h-10 text-white  bg-gray-500 placeholder-gray-200 border-b border-white focus:outline-none mb-4 rounded-lg'
+                                                        type='text'
+                                                        name='created_at'
+                                                        value={formData.created_at}
+                                                        onChange={handleChange}
+                                                        readOnly
+                                                    />
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <div className='flex flex-col grow-[3] basis-0 justify-center p-5'>
-                                        <label className='text-white text-xs font-light'>ID</label>
-                                        <input
-                                            className='w-full pl-2 h-10 text-white bg-gray-500 placeholder-gray-200 border-b border-white focus:outline-none mb-4 rounded-lg'
-                                            type='text'
-                                            value={formData.id}
-                                            readOnly
-                                        />
+                                    <div className='w-full px-5'>
+                                        <hr class='border-gray-500 rounded-lg border-2 w-full'></hr>
+                                    </div>
+
+                                    <div className='flex flex-col w-full p-5'>
                                         <div className='flex flex-col'>
                                             {First_NameDirty && First_NameError && (
                                                 <motion.div
@@ -277,150 +320,116 @@ export function Profile() {
                                                 />
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-
-                                <div className='w-full px-5'>
-                                    <hr class='border-gray-500 rounded-lg border-2 w-full'></hr>
-                                </div>
-
-                                <div className='flex flex-col w-full p-5'>
-                                    {Date_of_birthDirty && Date_of_birthError && (
-                                        <motion.div
-                                            initial={{ x: -100, scale: 0 }}
-                                            animate={{ x: 0, scale: 1 }}
-                                            transition={{ ease: 'easeIn', duration: 0.5 }}
-                                            className='inline-block p-2 mb-2 text-xs  text-red-600 bg-red-100 border border-red-300 rounded-md'
-                                        >
-                                            {Date_of_birthError}
-                                        </motion.div>
-                                    )}
-
-                                    <div className='flex w-full gap-5'>
-                                        <div className='flex grow basis-0 flex-col'>
-                                            <label className='text-white text-xs font-light'>
-                                                Дата народження
-                                            </label>
-                                            <input
-                                                className='w-full pl-2 h-10 text-white  bg-gray-500 placeholder-gray-200 border-b border-white focus:outline-none mb-4 rounded-lg'
-                                                type='date'
-                                                name='date_of_birth'
-                                                onBlur={setDate_of_birthDirty}
-                                                value={formData.date_of_birth}
-                                                onChange={Date_of_birthHandler}
-                                                placeholder=' '
-                                                required
-                                            />
-                                        </div>
-                                        <div className='flex grow basis-0 flex-col'>
-                                            <label className='text-white text-xs font-light'>
-                                                Стать
-                                            </label>
-                                            <select
-                                                className='w-full pl-2 h-10 text-white  bg-gray-500 placeholder-gray-200 border-b border-white focus:outline-none mb-4 rounded-lg'
-                                                name='gender'
-                                                value={formData.gender}
-                                                onChange={handleChange}
-                                                required
+                                        {Date_of_birthDirty && Date_of_birthError && (
+                                            <motion.div
+                                                initial={{ x: -100, scale: 0 }}
+                                                animate={{ x: 0, scale: 1 }}
+                                                transition={{ ease: 'easeIn', duration: 0.5 }}
+                                                className='inline-block p-2 mb-2 text-xs  text-red-600 bg-red-100 border border-red-300 rounded-md'
                                             >
-                                                <option value=''>Виберіть стать</option>
-                                                <option value='Чоловіча'>Чоловіча</option>
-                                                <option value='Жіноча'>Жіноча</option>
-                                                <option value='Інша'>Інша</option>
-                                            </select>
-                                        </div>
-                                    </div>
+                                                {Date_of_birthError}
+                                            </motion.div>
+                                        )}
 
-                                    <div className='flex w-full gap-5'>
-                                        <div className='flex grow basis-0 flex-col'>
-                                            <label className='text-white text-xs font-light'>
-                                                Ел. Пошта
-                                            </label>
-                                            <input
-                                                className='w-full pl-2 h-10 text-white  bg-gray-500 placeholder-gray-200 border-b border-white focus:outline-none mb-4 rounded-lg'
-                                                type='email'
-                                                name='email'
-                                                value={formData.email}
-                                                placeholder=''
-                                                readOnly
-                                            />
+                                        <div className='flex w-full gap-5'>
+                                            <div className='flex grow basis-0 flex-col'>
+                                                <label className='text-white text-xs font-light'>
+                                                    Дата народження
+                                                </label>
+                                                <input
+                                                    className='w-full pl-2 h-10 text-white  bg-gray-500 placeholder-gray-200 border-b border-white focus:outline-none mb-4 rounded-lg'
+                                                    type='date'
+                                                    name='date_of_birth'
+                                                    onBlur={setDate_of_birthDirty}
+                                                    value={formData.date_of_birth}
+                                                    onChange={Date_of_birthHandler}
+                                                    placeholder=' '
+                                                    required
+                                                />
+                                            </div>
+                                            <div className='flex grow basis-0 flex-col'>
+                                                <label className='text-white text-xs font-light'>
+                                                    Стать
+                                                </label>
+                                                <select
+                                                    className='w-full pl-2 h-10 text-white  bg-gray-500 placeholder-gray-200 border-b border-white focus:outline-none mb-4 rounded-lg'
+                                                    name='gender'
+                                                    value={formData.gender}
+                                                    onChange={handleChange}
+                                                    required
+                                                >
+                                                    <option value=''>Виберіть стать</option>
+                                                    <option value='Чоловіча'>Чоловіча</option>
+                                                    <option value='Жіноча'>Жіноча</option>
+                                                    <option value='Інша'>Інша</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                        <div className='flex grow basis-0 flex-col'>
-                                            <label className='text-white text-xs font-light'>
-                                                Дата реєстрації
-                                            </label>
-                                            <input
-                                                className='w-full pl-2 h-10 text-white  bg-gray-500 placeholder-gray-200 border-b border-white focus:outline-none mb-4 rounded-lg'
-                                                type='text'
-                                                name='created_at'
-                                                value={formData.created_at}
-                                                onChange={handleChange}
-                                                readOnly
-                                            />
-                                        </div>
-                                    </div>
-                                    {PhoneDirty && PhoneError && (
-                                        <motion.div
-                                            initial={{ x: -100, scale: 0 }}
-                                            animate={{ x: 0, scale: 1 }}
-                                            transition={{ ease: 'easeIn', duration: 0.5 }}
-                                            className='inline-block p-2 mb-2 text-xs  text-red-600 bg-red-100 border border-red-300 rounded-md'
-                                        >
-                                            {PhoneError}
-                                        </motion.div>
-                                    )}
-                                    {CountryDirty && CountryError && (
-                                        <motion.div
-                                            initial={{ x: -100, scale: 0 }}
-                                            animate={{ x: 0, scale: 1 }}
-                                            transition={{ ease: 'easeIn', duration: 0.5 }}
-                                            className='inline-block p-2 mb-2 text-xs  text-red-600 bg-red-100 border border-red-300 rounded-md'
-                                        >
-                                            {CountryError}
-                                        </motion.div>
-                                    )}
+                                        {/* сюдаа */}
 
-                                    <div className='flex w-full gap-5'>
-                                        <div className='flex grow basis-0 flex-col'>
-                                            <label className='text-white text-xs font-light'>
-                                                Номер телефону
-                                            </label>
-                                            <input
-                                                className='w-full pl-2 h-10 text-white  bg-gray-500 placeholder-gray-200 border-b border-white focus:outline-none mb-4 rounded-lg'
-                                                type='tel'
-                                                name='phone'
-                                                value={formData.phone}
-                                                onBlur={setPhoneDirty}
-                                                onChange={PhoneHandler}
-                                                placeholder=' '
-                                                required
-                                            />
-                                        </div>
-                                        <div className='flex grow basis-0 flex-col'>
-                                            <label className='text-white text-xs font-light'>
-                                                Країна
-                                            </label>
+                                        {PhoneDirty && PhoneError && (
+                                            <motion.div
+                                                initial={{ x: -100, scale: 0 }}
+                                                animate={{ x: 0, scale: 1 }}
+                                                transition={{ ease: 'easeIn', duration: 0.5 }}
+                                                className='inline-block p-2 mb-2 text-xs  text-red-600 bg-red-100 border border-red-300 rounded-md'
+                                            >
+                                                {PhoneError}
+                                            </motion.div>
+                                        )}
+                                        {CountryDirty && CountryError && (
+                                            <motion.div
+                                                initial={{ x: -100, scale: 0 }}
+                                                animate={{ x: 0, scale: 1 }}
+                                                transition={{ ease: 'easeIn', duration: 0.5 }}
+                                                className='inline-block p-2 mb-2 text-xs  text-red-600 bg-red-100 border border-red-300 rounded-md'
+                                            >
+                                                {CountryError}
+                                            </motion.div>
+                                        )}
 
-                                            <CountrySelector
-                                                value={formData.country}
-                                                onChange={CountryHandler}
-                                            />
+                                        <div className='flex w-full gap-5'>
+                                            <div className='flex grow basis-0 flex-col'>
+                                                <label className='text-white text-xs font-light'>
+                                                    Номер телефону
+                                                </label>
+                                                <input
+                                                    className='w-full pl-2 h-10 text-white  bg-gray-500 placeholder-gray-200 border-b border-white focus:outline-none mb-4 rounded-lg'
+                                                    type='tel'
+                                                    name='phone'
+                                                    value={formData.phone}
+                                                    onBlur={setPhoneDirty}
+                                                    onChange={PhoneHandler}
+                                                    placeholder=' '
+                                                    required
+                                                />
+                                            </div>
+                                            <div className='flex grow basis-0 flex-col'>
+                                                <label className='text-white text-xs font-light'>
+                                                    Країна
+                                                </label>
+
+                                                <CountrySelector
+                                                    value={formData.country}
+                                                    onChange={CountryHandler}
+                                                />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <motion.button
-                                        whileTap={{ scale: 0.9 }}
-                                        initial={{ scale: 1 }}
-                                        type='submit'
-                                        disabled={!FormValid}
-                                        className={` w-[100%]  h-[44px] bg-primary text-white border-none cursor-pointer rounded-md transition-all duration-300
+                                        <motion.button
+                                            whileTap={{ scale: 0.9 }}
+                                            initial={{ scale: 1 }}
+                                            type='submit'
+                                            disabled={!FormValid}
+                                            className={` w-[100%]  h-[44px] bg-primary text-white border-none cursor-pointer rounded-md transition-all duration-300
 									disabled:bg-gray-300 disabled:cursor-not-allowed`}
-                                    >
-                                        Зберегти зміни {/* Кнопка для збереження змін */}
-                                    </motion.button>
+                                        >
+                                            Зберегти зміни {/* Кнопка для збереження змін */}
+                                        </motion.button>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
-                    </div>
+                            </form>
+                        </div>
+                    </motion.div>
                 </main>
             </div>
         </div>
