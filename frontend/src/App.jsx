@@ -20,7 +20,7 @@ import { Erorpage } from './pages/User/404'
 import Balance from './pages/User/Balance'
 import Home from './pages/User/Home'
 import Notifications from './pages/User/Notifications'
-import { Profile } from './pages/User/ProfileLegacy'
+import { Profile } from './pages/User/Profile'
 import Support from './pages/User/Support'
 import ProtectedRoute from './ProtectedRoute'
 
