@@ -199,12 +199,14 @@ export function Profile() {
                                             {formData.pictureSrc ? (
                                                 <img
                                                     className="max-w-full h-auto rounded-full"
-                                                    src={formData.pictureSrc}
+                                                    src={`http://localhost:4000${formData.pictureSrc}`} 
                                                     alt=""
                                                 />
                                             ) : (
-                                                <UserRound />
+                                                <UserRound width={46} height={46} />
                                             )}
+
+                                            <div>{/* Зображення профілю */}</div>
                                         </div>
                                     </div>
 

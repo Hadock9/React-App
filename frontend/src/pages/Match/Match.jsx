@@ -57,30 +57,35 @@ export function Match() {
 							<div className='flex justify-between w-full h-full bg-gray-700 rounded-t-lg'>
 								{/* Блок для команди 1 */}
 								<div
-									className='relative w-[40%] h-[260px] flex justify-center items-center px-5 rounded-tl-lg'
+									className='relative w-full sm:w-[45%] md:w-[40%] h-[260px] flex flex-col sm:flex-row justify-center items-center px-5 rounded-tr-lg'
 									style={{
-										backgroundImage: `linear-gradient(to right, rgba(57, 62, 70, 0.8), rgba(57, 62, 70, 0)), url(${match.Team1Country})`,
+										backgroundImage: `linear-gradient(to left, rgba(55, 65, 81, 0.8), rgba(55, 65, 81, 0)), url(${match.Team1Country})`,
 										backgroundSize: 'cover',
 										backgroundRepeat: 'no-repeat',
-										backgroundPosition: 'left',
+										backgroundPosition: 'right',
 									}}
 								>
+									{/* Логотип команди */}
 									<img
 										draggable='false'
 										className='h-[100px] w-[100px] object-contain mx-[10%]'
 										src={match.Team1Logo}
 										alt={match.Team1Name}
 									/>
-									<div className='flex items-center justify-center bg-gray-700 bg-opacity-60 rounded-full mr-5 w-[40%]'>
-										<p className='text-center font-semibold text-white text-[22px]'>
+
+									{/* Командна назва */}
+									<div className='flex items-center justify-center bg-gray-700 bg-opacity-60 rounded-full ml-5 w-[40%] sm:absolute sm:bottom-4 sm:w-[80%]'>
+										<p className='text-center font-semibold text-white text-[13px] sm:text-[15px]'>
 											{match.Team1Name}
 										</p>
 									</div>
+
+									{/* Коефіцієнт і рахунок */}
 									<div className='flex flex-col items-center justify-between font-bold text-white text-[22px] mt-2 h-[80%]'>
-										<div className='mt-4 p-2 rounded-full bg-gray-700 bg-opacity-60 w-12 h-12 flex justify-center items-center'>
+										<div className='mt-1 p-2 rounded-full bg-gray-700 bg-opacity-60 w-12 h-12 flex justify-center items-center text-[13px] sm:text-[15px]'>
 											<p>{match.Team1Coef}</p>
 										</div>
-										<div className='mt-4 p-2 rounded-full bg-gray-700 bg-opacity-60 w-12 h-12 flex justify-center items-center'>
+										<div className='relative top-[-17px] p-2 rounded-full bg-gray-700 bg-opacity-60 w-12 h-12 flex justify-center items-center'>
 											{match.Team1Score > match.Team2Score ? (
 												<p className='text-green-700'>{match.Team1Score}</p>
 											) : (
@@ -89,6 +94,8 @@ export function Match() {
 										</div>
 									</div>
 								</div>
+
+
 
 								{/* Блок для відображення результату матчу */}
 								<div className='flex flex-col items-center justify-center w-[20%] h-[260px] text-white text-[18px]'>
@@ -103,7 +110,7 @@ export function Match() {
 
 								{/* Блок для команди 2 */}
 								<div
-									className='relative w-[40%] h-[260px] flex flex-row-reverse justify-center items-center px-5 rounded-tr-lg'
+									className='relative w-full sm:w-[45%] md:w-[40%] h-[260px] flex flex-col sm:flex-row justify-center items-center px-5 rounded-tr-lg'
 									style={{
 										backgroundImage: `linear-gradient(to left, rgba(55, 65, 81, 0.8), rgba(55, 65, 81, 0)), url(${match.Team2Country})`,
 										backgroundSize: 'cover',
@@ -111,22 +118,27 @@ export function Match() {
 										backgroundPosition: 'right',
 									}}
 								>
+									{/* Логотип команди */}
 									<img
 										draggable='false'
 										className='h-[100px] w-[100px] object-contain mx-[10%]'
 										src={match.Team2Logo}
 										alt={match.Team2Name}
 									/>
-									<div className='flex items-center justify-center bg-gray-700 bg-opacity-60 rounded-full ml-5 w-[40%]'>
-										<p className='text-center font-semibold text-white text-[22px]'>
+
+									{/* Командна назва */}
+									<div className='flex items-center justify-center bg-gray-700 bg-opacity-60 rounded-full ml-5 w-[40%] sm:absolute sm:bottom-4 sm:w-[80%]'>
+										<p className='text-center font-semibold text-white text-[13px] sm:text-[15px]'>
 											{match.Team2Name}
 										</p>
 									</div>
+
+									{/* Коефіцієнт і рахунок */}
 									<div className='flex flex-col items-center justify-between font-bold text-white text-[22px] mt-2 h-[80%]'>
-										<div className='mt-4 p-2 rounded-full bg-gray-700 bg-opacity-60 w-12 h-12 flex justify-center items-center'>
+										<div className='mt-2 p-2 rounded-full bg-gray-700 bg-opacity-60 w-12 h-12 flex justify-center items-center text-[13px] sm:text-[15px]'>
 											<p>{match.Team2Coef}</p>
 										</div>
-										<div className='mt-4 p-2 rounded-full bg-gray-700 bg-opacity-60 w-12 h-12 flex justify-center items-center'>
+										<div className='relative top-[-17px] p-2 rounded-full bg-gray-700 bg-opacity-60 w-12 h-12 flex justify-center items-center'>
 											{match.Team2Score > match.Team1Score ? (
 												<p className='text-green-700'>{match.Team2Score}</p>
 											) : (
@@ -204,9 +216,8 @@ export function Match() {
 					</div>
 					<Comments
 						id={idMatch}
-						urlFetch={`http://localhost:4000/api/comments/match_comments/${idMatch}/${
-							isRegUser ? user.id : 0
-						}`}
+						urlFetch={`http://localhost:4000/api/comments/match_comments/${idMatch}/${isRegUser ? user.id : 0
+							}`}
 						urlPost={
 							'http://localhost:4000/api/comments/match_comments/comment'
 						}

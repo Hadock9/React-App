@@ -48,10 +48,6 @@ const Notifications = () => {
         return <MyLoader />
     }
 
-    if (error) {
-        return <div>Error fetching notifications. Please try again later.</div>
-    }
-
     return (
         <div className={rootstyle.wrapper}>
             <NavBar />

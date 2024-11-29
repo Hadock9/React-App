@@ -59,13 +59,13 @@ export default function StakeForm({
 						<div className='text-white text-lg'>{Match.TeamName}</div>
 					</div>
 
-					<form onSubmit={handleSubmit} className='flex gap-3'>
+					<form onSubmit={handleSubmit} className='flex flex-col gap-3 md:flex-row'>
 						<div className='flex flex-col items-center'>
 							<label className='text-white text-s font-light mb-1'>
 								Сума ставки
 							</label>
 							<input
-								className='text-end w-32 text-white text-3xl bg-transparent placeholder-gray-400 border-b border-white focus:outline-none'
+								className='text-end w-full md:w-32 text-white text-3xl bg-transparent placeholder-gray-400 border-b border-white focus:outline-none'
 								placeholder='0'
 								maxLength={6}
 								name='amount'
@@ -75,15 +75,18 @@ export default function StakeForm({
 								required
 							/>
 						</div>
+
 						<div className='flex items-end pb-1 text-white'>
 							<X />
 						</div>
+
 						<div className='flex flex-col items-center'>
 							<label className='text-white text-s font-light mb-1'>
 								Коефіцієнт
 							</label>
 							<div className='text-white text-3xl'>{Match.TeamCoef}</div>
 						</div>
+
 						<div className='flex text-white items-end pb-1'>
 							<Equal />
 						</div>
@@ -96,10 +99,15 @@ export default function StakeForm({
 								{(amount * Match.TeamCoef).toFixed(2)}₴
 							</div>
 						</div>
-						<div className='flex justify-center w-52'>
+
+						<div className='flex justify-center w-full md:w-52'>
 							<Mybutton ondisable={!isDisabled}>Submit</Mybutton>
 						</div>
 					</form>
+
+
+
+
 				</div>
 			) : (
 				<div>Завантаження даних про матч...</div>

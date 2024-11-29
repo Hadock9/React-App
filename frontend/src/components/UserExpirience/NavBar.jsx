@@ -47,6 +47,7 @@ function NavBar() {
                         </div>
                     </div>
                 </Link>
+                
 
                 <div className='flex self-center w-[30%] xl:flex hidden self-center flex-wrap gap-9 mt-10'>
                     {navBarInfo.map((item, index) => (
@@ -61,15 +62,15 @@ function NavBar() {
                 </div>
 
 
-                <div className='flex w-[200px] md:w-[300px] justify-center'>
+                <div className='flex w-[300px] justify-center'>
                     {isRegUser ? (
                         <div className='flex items-center gap-[10px]'>
                             <Link to='/profile'>
-                                <div className='flex items-center gap-[12px] hover:animate-pulse font-sans font-semibold hover:shadow-lg duration-700 h-[40px] md:h-[60px] px-[10px] md:px-[15px] rounded-xl'>
-                                    <div className='h-8 w-8 md:h-11 md:w-11 flex justify-center items-center'>
+                                <div className='flex items-center gap-[12px] hover:animate-pulse font-sans font-semibold hover:shadow-lg duration-700 h-[60px] px-[15px] rounded-xl'>
+                                    <div className='h-11 w-11 flex justify-center items-center '>
                                         <img
                                             className='w-[100%] h-auto rounded-full'
-                                            src={user.picture}
+                                            src={`http://localhost:4000${user.picture}`} 
                                             alt='user.picture'
                                         />
                                     </div>
@@ -79,7 +80,7 @@ function NavBar() {
                             <Link to='/Home'>
                                 <div
                                     onClick={logout}
-                                    className='hover:animate-pulse font-sans font-semibold hover:shadow-lg duration-700 h-[40px] md:h-[60px] px-[10px] md:px-[15px] text-rose-800 rounded-xl'
+                                    className='flex items-center hover:animate-pulse font-sans font-semibold hover:shadow-lg duration-700 h-[60px] px-[15px] text-rose-800 rounded-xl'
                                 >
                                     <p>Розлогінитися</p>
                                 </div>
