@@ -1,13 +1,5 @@
-import { Edit } from 'lucide-react'
 import React from 'react'
-import {
-	Datagrid,
-	DateField,
-	DeleteButton,
-	EditButton,
-	List,
-	TextField,
-} from 'react-admin'
+import { Datagrid, DateField, DeleteButton, List, TextField } from 'react-admin'
 const StakeList = props => {
 	return (
 		<List {...props}>
@@ -22,7 +14,7 @@ const StakeList = props => {
 				<TextField source='team_id' />
 				<TextField source='user_id' />
 				<DateField source='stake_time' />
-				<EditButton icon={<Edit />} />
+
 				<DeleteButton />
 			</Datagrid>
 		</List>
