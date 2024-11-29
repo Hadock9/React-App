@@ -68,7 +68,7 @@ function NavBar() {
 									<div className='h-11 w-11 flex justify-center items-center '>
 										<img
 											className='w-[100%] h-auto rounded-full'
-											src={`http://localhost:4000${user.picture}`}
+											src={user.picture}
 											alt='user.picture'
 										/>
 									</div>
