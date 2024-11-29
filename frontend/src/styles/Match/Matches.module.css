@@ -1,6 +1,6 @@
 /* Контейнер для блоку матчів */
 .MatchesBlock {
-    width: 100%;
+    width: 90%;
     height: 100%;
     /* #393e46; */
     /*  rgb(63 63 70); */
@@ -44,7 +44,7 @@
 
 /* Інформація про матч */
 .MatchesBlockInfo {
-    width: 55%;
+    width: 100%;
     height: 120px;
     display: flex;
     padding-top: 10px;
@@ -83,7 +83,7 @@
 
 /* Центр блоку матчів */
 .MatchesBlockCenter {
-    width: 20%;
+    width: 60%;
     justify-content: center;
     display: flex;
     flex-direction: column;
@@ -136,60 +136,66 @@
 /* Загальні стилі для мобільного */
 @media (max-width: 720px) {
 	.MatchesBlock {
+		max-width: 100%;
 		display: flex;
 		flex-direction: column;
-		width: 100%;
-		padding: 10px;
-		gap: 10px;
-		height: auto;
-		/* Зробимо висоту автоматичною для адаптації */
-		justify-content: center;
-		/* Вирівнювання по центру вертикально */
 		align-items: center;
-		/* Вирівнювання по центру горизонтально */
+		padding: 15px;
+		gap: 15px;
 	}
+
+	.MatchesBlockImgCountry,
+    .MatchesBlockImgLogo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
 	.MatchesBlockCoef p,
 	.MatchesBlockVsDateTime,
 	.MatchesBlockVs,
 	.MatchesBlockPlace {
-		font-size: 10px;
+		font-size: 14px;
 		text-align: center;
 	}
+
 
 	.MatchesSideText p {
 		margin-right: 20px;
 		font-size: 10px;
 	}
 
-	.MatchesBlockImgCountry {
-		width: 27;
-		height: 16px;
-	}
+    .MatchesBlockCountryLogoWrapper {
+        flex-direction: column;  /* Змінюємо на вертикальне розташування */
+        gap: 5px;  /* Відступ між зображеннями */
+    }
 
-	.MatchesBlockImgLogo {
-		width: 80px;
-		height: 80px;
-	}
+    .MatchesBlockImgCountry {
+        width: 20%;
+        height: 80%;
+    }
+
+    .MatchesBlockImgLogo {
+        width: 5rem;
+        height: 5rem;
+    }
 
 	.MatchesBlockTeam1Coef,
 	.MatchesBlockTeam2Coef {
 		width: auto;
 		height: auto;
 		text-align: center;
-		margin: 5px;
 	}
+
 
 	.MatchesSideBlockImg1,
 	.MatchesSideBlockImg {
-		width: 20px;
-		height: 20px;
-		margin-top: 10px;
+		width: 24px;
+		height: 24px;
 	}
 
 	.MatchesSideImg {
 		height: 20px;
-		width: 30px;
 	}
 
 	.MatchesBlockSide {
@@ -210,6 +216,13 @@
 		gap: 15px;
 	}
 
+	.MatchesBlockImgCountry,
+    .MatchesBlockImgLogo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
 	.MatchesBlockCoef p,
 	.MatchesBlockVsDateTime,
 	.MatchesBlockVs,
@@ -224,15 +237,20 @@
 		font-size: 10px;
 	}
 
-	.MatchesBlockImgCountry {
-		width: 27;
-		height: 16px;
-	}
+    .MatchesBlockCountryLogoWrapper {
+        flex-direction: column;  /* Змінюємо на вертикальне розташування */
+        gap: 5px;  /* Відступ між зображеннями */
+    }
 
-	.MatchesBlockImgLogo {
-		width: 80px;
-		height: 80px;
-	}
+    .MatchesBlockImgCountry {
+        width: 20%;
+        height: 100%;
+    }
+
+    .MatchesBlockImgLogo {
+        width: 8rem;
+        height: 8rem;
+    }
 
 	.MatchesBlockTeam1Coef,
 	.MatchesBlockTeam2Coef {
@@ -240,6 +258,7 @@
 		height: auto;
 		text-align: center;
 	}
+
 
 	.MatchesSideBlockImg1,
 	.MatchesSideBlockImg {
@@ -263,7 +282,7 @@
 	.MatchesBlock {
 		display: flex;
 		flex-direction: row;
-		max-width: 70%;
+		max-width: 100%;
 		padding: 20px;
 		align-items: center;
 		gap: 20px;
@@ -289,8 +308,8 @@
 
 	.MatchesBlockTeam1Coef,
 	.MatchesBlockTeam2Coef {
-		width: auto;
-		height: auto;
+		width: 20%;
+		height: 20%;
 	}
 
 	.MatchesSideBlockImg1,
