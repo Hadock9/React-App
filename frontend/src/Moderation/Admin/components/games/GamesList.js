@@ -1,9 +1,7 @@
-import { Edit } from 'lucide-react'
 import React from 'react'
 import {
 	Datagrid,
 	DeleteButton,
-	EditButton,
 	ImageField,
 	List,
 	TextField,
@@ -17,7 +15,6 @@ const GamesList = props => {
 				<TextField source='views' />
 				<ImageField source='ImageSrc' />
 
-				<EditButton icon={<Edit />} />
 				<DeleteButton />
 			</Datagrid>
 		</List>
