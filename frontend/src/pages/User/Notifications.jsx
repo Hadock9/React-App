@@ -227,12 +227,6 @@ const Notifications = () => {
 															className='w-12 h-12 rounded-full border-2 border-gray-700 mx-2'
 														/> */}
                                                             </div>
-
-                                                            <div className=''>
-                                                                {formatDate(
-                                                                    notification.created_at
-                                                                )}
-                                                            </div>
                                                         </div>
                                                         <div className='flex'>
                                                             <div className='font-semibold mr-1'>
